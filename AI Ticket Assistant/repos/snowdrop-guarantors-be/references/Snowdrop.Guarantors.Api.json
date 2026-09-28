@@ -1,0 +1,660 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Guarantors API",
+    "description": "Snowdrop Guarantors API",
+    "version": "v1"
+  },
+  "paths": {
+    "/guarantors/patient/{patientId}": {
+      "get": {
+        "tags": [
+          "PatientGuarantors"
+        ],
+        "summary": "Retrieves all guarantors for a specific patient",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "description": "Unique identifier for the patient",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of guarantors associated with the patient, including their current status",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientGuarantorResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientGuarantorResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientGuarantorResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PatientGuarantors"
+        ],
+        "summary": "Create a new guarantor for a specific patient",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "description": "Unique identifier for the patient",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Guarantor details including demographic and contact information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGuarantorRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGuarantorRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateGuarantorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The created guarantor's ID and Financial Account Number (FAN) on success, or Conflict status if the write operation fails",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateGuarantorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateGuarantorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateGuarantorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PatientGuarantors"
+        ],
+        "summary": "Update a guarantor for a specific patient",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Updated guarantor details including the guarantor ID and modified information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGuarantorRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGuarantorRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGuarantorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "A task representing the asynchronous operation"
+          }
+        }
+      }
+    },
+    "/guarantors/patient/{patientId}/delete/{guarantorId}": {
+      "delete": {
+        "tags": [
+          "PatientGuarantors"
+        ],
+        "summary": "Delete a guarantor for a specific patient",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "description": "Unique identifier for the patient",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "guarantorId",
+            "in": "path",
+            "description": "Unique identifier for the guarantor to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok status on successful deletion, or Conflict status if the guarantor is assigned to a payer portfolio"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateGuarantorRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "middleName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "suffixName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "socialSecurityNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "birthDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "sex": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SexType"
+              }
+            ]
+          },
+          "patientRelationship": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "address": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/GuarantorAddress"
+              }
+            ]
+          },
+          "contactInfo": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/GuarantorContactInfo"
+              }
+            ]
+          }
+        }
+      },
+      "CreateGuarantorResponse": {
+        "required": [
+          "guarantorId"
+        ],
+        "type": "object",
+        "properties": {
+          "guarantorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "guarantorFAN": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "Date": {
+        "title": "Sharp.Date",
+        "type": "string",
+        "format": "date",
+        "example": "2024-12-11"
+      },
+      "EmailUse": {
+        "type": "integer"
+      },
+      "GuarantorAddress": {
+        "type": "object",
+        "properties": {
+          "addressLine1": {
+            "type": "string"
+          },
+          "addressLine2": {
+            "type": "string"
+          },
+          "stateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "zipCode": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "county": {
+            "type": "string"
+          }
+        }
+      },
+      "GuarantorContactInfo": {
+        "type": "object",
+        "properties": {
+          "phoneType": {
+            "$ref": "#/components/schemas/PhoneType"
+          },
+          "phoneUse": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PhoneUse"
+              }
+            ]
+          },
+          "phoneNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "phoneExtension": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "emailProhibited": {
+            "type": "boolean"
+          },
+          "emailAddress": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "emailUse": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EmailUse"
+              }
+            ]
+          }
+        }
+      },
+      "GuarantorStatus": {
+        "type": "integer"
+      },
+      "PatientGuarantorResponse": {
+        "required": [
+          "organizationId",
+          "guarantorId",
+          "patientId"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/GuarantorStatus"
+          },
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "guarantorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "guarantorFAN": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "middleName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "suffixName": {
+            "type": "string"
+          },
+          "socialSecurityNumber": {
+            "type": "string"
+          },
+          "birthDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "sex": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SexType"
+              }
+            ]
+          },
+          "patientRelationship": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "address": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/GuarantorAddress"
+              }
+            ]
+          },
+          "contactInfo": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/GuarantorContactInfo"
+              }
+            ]
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "createdBy": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "lastModifiedBy": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "partition": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "eTag": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "timeToLive": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "PhoneType": {
+        "type": "integer"
+      },
+      "PhoneUse": {
+        "type": "integer"
+      },
+      "SexType": {
+        "type": "integer"
+      },
+      "UpdateGuarantorRequest": {
+        "required": [
+          "guarantorId"
+        ],
+        "type": "object",
+        "properties": {
+          "guarantorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "middleName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "suffixName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "socialSecurityNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "birthDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "sex": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SexType"
+              }
+            ]
+          },
+          "patientRelationship": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "address": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/GuarantorAddress"
+              }
+            ]
+          },
+          "contactInfo": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/GuarantorContactInfo"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PatientGuarantors"
+    }
+  ]
+}

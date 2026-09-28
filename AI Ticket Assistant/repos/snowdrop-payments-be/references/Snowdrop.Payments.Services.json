@@ -1,0 +1,6759 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Payments API",
+    "description": "Snowdrop Payments API"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/payments"
+    }
+  ],
+  "paths": {
+    "/patients/specifications/process/card/external": {
+      "post": {
+        "tags": [
+          "PatientSpecifications"
+        ],
+        "summary": "Saves a payment with information about an external credit card payment that was made.",
+        "description": "No WorldPay transaction is processed here. We only store the details about the transaction that they specify.",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The details about the external card payment and the allocation details.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientPaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientPaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientPaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientPaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalCardTransaction"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalCardTransaction"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalCardTransaction"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/specifications/process/check": {
+      "post": {
+        "tags": [
+          "PatientSpecifications"
+        ],
+        "summary": "Saves a payment with information about a check payment that was made.",
+        "description": "No WorldPay transaction is processed here. We only store the details about the transaction that they specify.",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The details about the check and the allocation details.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientCheckPaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientCheckPaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientCheckPaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientCheckPaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckTransaction"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckTransaction"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckTransaction"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/specifications/process/cash": {
+      "post": {
+        "tags": [
+          "PatientSpecifications"
+        ],
+        "summary": "Saves a payment with information about a cash payment that was made.",
+        "description": "No WorldPay transaction is processed here. We only store the details about the transaction that they specify.",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The details about the cash payment and the allocation details.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientCashPaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientCashPaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientCashPaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientCashPaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CashTransaction"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CashTransaction"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CashTransaction"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/specifications/process/creditforward": {
+      "post": {
+        "tags": [
+          "PatientSpecifications"
+        ],
+        "summary": "Saves a payment with information about a credit forward payment that was made.",
+        "description": "No transaction is processed here. We only store the details about the transaction that they specify.",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The details about the cash forward payment and the allocation details.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientCreditForwardPaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientCreditForwardPaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientCreditForwardPaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientCreditForwardPaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditForwardTransaction"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditForwardTransaction"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditForwardTransaction"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encounters/{locationId}/{dateOfService}/summary": {
+      "get": {
+        "tags": [
+          "PaymentEncounters"
+        ],
+        "summary": "Gets a summary of the total amount expected to be collected and the current payments amounts collected for a given Location and Date of Service.",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "The Location to get the payment summary for.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "The Date of Service to get the payment summary for.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A summary of encounter payments made for the Location and Date of Service.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyEncounterSummary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyEncounterSummary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DailyEncounterSummary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encounters/{locationId}/{patientId}/{dateOfService}/stripesummary": {
+      "get": {
+        "tags": [
+          "PaymentEncounters"
+        ],
+        "summary": "Gets the StripePaymentEncounterSummary matching the given criteria.",
+        "description": "The StripePaymentEncounterSummary has the data required to render the initial Intake Payment screen.",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "The LocationId Guid matching the Encounter.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "description": "The PatientId Guid matching the Encounter.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "The Date of Service matching the Encounter.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripePaymentEncounterSummary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripePaymentEncounterSummary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripePaymentEncounterSummary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encounters/{locationId}/{patientId}/{dateOfService}/{companyId}/stripesummary": {
+      "get": {
+        "tags": [
+          "PaymentEncounters"
+        ],
+        "summary": "Gets summary information for balances due and payment history made for a given Company having no Account in the encounter.",
+        "description": "The returned data should be enough to render the Payment Details UI will include summary information, balances due and previous payments and refunds.",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "The LocationId Guid matching the Encounter.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "description": "The PatientId Guid matching the Encounter.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "The Date of Service matching the Encounter.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "The CompanyId Guid to see balances due and payment history for.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeAccountSummary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeAccountSummary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeAccountSummary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encounters/{locationId}/{patientId}/{dateOfService}/{companyId}/{accountId}/stripesummary": {
+      "get": {
+        "tags": [
+          "PaymentEncounters"
+        ],
+        "summary": "Gets summary information for balances due and payment history made for a given Company and Stripe Account in the encounter.",
+        "description": "The returned data should be enough to render the Payment Details UI will include summary information, balances due and previous payments and refunds.",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "The LocationId Guid matching the Encounter.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "description": "The PatientId Guid matching the Encounter.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "The Date of Service matching the Encounter.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "The CompanyId Guid to see balances due and payment history for.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "accountId",
+            "in": "path",
+            "description": "The AccountId to see balances due and payment history for",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeAccountSummary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeAccountSummary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeAccountSummary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/specifications/{paymentSpecificationId}": {
+      "get": {
+        "tags": [
+          "PaymentSpecifications"
+        ],
+        "summary": "Gets the PaymentSpecification matching the specified criteria.",
+        "parameters": [
+          {
+            "name": "paymentSpecificationId",
+            "in": "path",
+            "description": "The PaymentSpecificationId for the payment.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentSpecification"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentSpecification"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentSpecification"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/specifications/{paymentSpecificationId}/setpayout": {
+      "post": {
+        "tags": [
+          "PaymentSpecifications"
+        ],
+        "summary": "Sets the payout details on a payment specification.",
+        "parameters": [
+          {
+            "name": "paymentSpecificationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetPaymentSpecificationPayoutDetailsRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetPaymentSpecificationPayoutDetailsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetPaymentSpecificationPayoutDetailsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetPaymentSpecificationPayoutDetailsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/receipts/email": {
+      "post": {
+        "tags": [
+          "Receipts"
+        ],
+        "summary": "Sends a payment receipt to the specified e-mail address.",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Specifies the payment and e-mail address.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendReceiptRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendReceiptRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendReceiptRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SendReceiptRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/receipts/{paymentSpecificationId}": {
+      "get": {
+        "tags": [
+          "Receipts"
+        ],
+        "summary": "Gets the raw receipt html.",
+        "parameters": [
+          {
+            "name": "paymentSpecificationId",
+            "in": "path",
+            "description": "The Id of the payment to get the receipt html for.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/devices/terminalconnectiontoken": {
+      "get": {
+        "tags": [
+          "StripeDevices"
+        ],
+        "summary": "Gets a connection token for communicating with payment terminal devices",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/devices/{readerId}": {
+      "get": {
+        "tags": [
+          "StripeDevices"
+        ],
+        "parameters": [
+          {
+            "name": "readerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReaderResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReaderResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReaderResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/devices/{readerId}/cancelaction": {
+      "post": {
+        "tags": [
+          "StripeDevices"
+        ],
+        "summary": "Cancels the pending action on a terminal device",
+        "parameters": [
+          {
+            "name": "readerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/stripe/devices/{readerId}/processpayment": {
+      "post": {
+        "tags": [
+          "StripeDevices"
+        ],
+        "summary": "Processes a payment intent on a terminal device",
+        "parameters": [
+          {
+            "name": "readerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessDevicePaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessDevicePaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessDevicePaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessDevicePaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericStatusResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericStatusResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericStatusResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReaderResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReaderResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReaderResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/devices/{readerId}/processsetup": {
+      "post": {
+        "tags": [
+          "StripeDevices"
+        ],
+        "summary": "Processes a setup intent on a terminal device",
+        "parameters": [
+          {
+            "name": "readerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessDeviceSetupRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessDeviceSetupRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessDeviceSetupRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessDeviceSetupRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericStatusResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericStatusResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenericStatusResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReaderResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReaderResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReaderResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/accounts/owner/{paymentAccountOwnerId}": {
+      "get": {
+        "tags": [
+          "StripePaymentAccounts"
+        ],
+        "summary": "Gets all active Stripe accounts for an owner",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "paymentAccountOwnerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentAccountsResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentAccountsResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentAccountsResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/accounts/setup": {
+      "post": {
+        "tags": [
+          "StripePaymentAccounts"
+        ],
+        "summary": "Creates a Stripe Account Setup for a person",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupPatientStripeCreateAccountRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupPatientStripeCreateAccountRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupPatientStripeCreateAccountRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupPatientStripeCreateAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/accounts/owner/{paymentAccountOwnerId}/account/{paymentAccountId}": {
+      "delete": {
+        "tags": [
+          "StripePaymentAccounts"
+        ],
+        "summary": "Deactivates a Stripe payment account",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "paymentAccountOwnerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "paymentAccountId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/accounts/attach": {
+      "post": {
+        "tags": [
+          "StripePaymentAccounts"
+        ],
+        "summary": "Attaches a Stripe Payment Method to a person's account \"wallet\"",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttachPatientStripeAccountRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttachPatientStripeAccountRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttachPatientStripeAccountRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttachPatientStripeAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/accounts/entity/{paymentAccountOwnerId}": {
+      "get": {
+        "tags": [
+          "StripePaymentAccountsEntities"
+        ],
+        "summary": "Gets all active Stripe accounts for an owner",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "paymentAccountOwnerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentAccountsResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentAccountsResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentAccountsResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/accounts/entity/setup": {
+      "post": {
+        "tags": [
+          "StripePaymentAccountsEntities"
+        ],
+        "summary": "Creates a Stripe Account Setup for an entity",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupEntityStripeCreateAccountRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupEntityStripeCreateAccountRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupEntityStripeCreateAccountRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupEntityStripeCreateAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/accounts/entity/owner/{paymentAccountOwnerId}/account/{paymentAccountId}": {
+      "delete": {
+        "tags": [
+          "StripePaymentAccountsEntities"
+        ],
+        "summary": "Deactivates a Stripe payment account",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "paymentAccountOwnerId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "paymentAccountId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/accounts/entity/attach": {
+      "post": {
+        "tags": [
+          "StripePaymentAccountsEntities"
+        ],
+        "summary": "Attaches a Stripe Payment Method to an entity's account \"wallet\"",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttachEntityStripeAccountRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttachEntityStripeAccountRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttachEntityStripeAccountRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AttachEntityStripeAccountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/payments/process/encounter/nonpayment": {
+      "post": {
+        "tags": [
+          "StripeEncounterPayments"
+        ],
+        "summary": "Flags that no payment was made for an encounter summary.",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The details about the non-payment.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcceptStripeNonPaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcceptStripeNonPaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcceptStripeNonPaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AcceptStripeNonPaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/payments/process/encounter/account": {
+      "post": {
+        "tags": [
+          "StripeEncounterPayments"
+        ],
+        "summary": "Processes a Stripe Transaction for a saved account.",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The details about the payment account to process from and the allocation details.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterSavedAccountStripePaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterSavedAccountStripePaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterSavedAccountStripePaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterSavedAccountStripePaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/payments/process/encounter/check": {
+      "post": {
+        "tags": [
+          "StripeEncounterPayments"
+        ],
+        "summary": "Saves a payment with information about a check payment that was made.",
+        "description": "No WorldPay transaction is processed here. We only store the details about the transaction that they specify.",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The details about the check and the allocation details.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterCheckStripePaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterCheckStripePaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterCheckStripePaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterCheckStripePaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckTransaction"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckTransaction"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CheckTransaction"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/payments/process/encounter/cash": {
+      "post": {
+        "tags": [
+          "StripeEncounterPayments"
+        ],
+        "summary": "Saves a payment with information about a cash payment that was made.",
+        "description": "No WorldPay transaction is processed here. We only store the details about the transaction that they specify.",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The details about the cash payment and the allocation details.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterCashStripePaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterCashStripePaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterCashStripePaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterCashStripePaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CashTransaction"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CashTransaction"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CashTransaction"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/payments/process/encounter/card/external": {
+      "post": {
+        "tags": [
+          "StripeEncounterPayments"
+        ],
+        "summary": "Saves a payment with information about an external credit card payment that was made.",
+        "description": "No WorldPay transaction is processed here. We only store the details about the transaction that they specify.",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The details about the external card payment and the allocation details.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterExternalCardStripePaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterExternalCardStripePaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterExternalCardStripePaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEncounterExternalCardStripePaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalCardTransaction"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalCardTransaction"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExternalCardTransaction"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/payments/process/encounter/refund": {
+      "post": {
+        "tags": [
+          "StripeEncounterPayments"
+        ],
+        "summary": "Attempts to refund a previous transaction.",
+        "description": "Any type of payment can be refunded, even those that are not Stripe transactions. Stripe transactions are refunded using the Stripe API.",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The details about the previous payment to refund.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundEncounterStripePaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundEncounterStripePaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundEncounterStripePaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundEncounterStripePaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionRefundResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionRefundResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionRefundResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/payments/process/encounter/setup": {
+      "post": {
+        "tags": [
+          "StripeEncounterPayments"
+        ],
+        "summary": "Sets up a Stripe encounter payment",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupEncounterStripePaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupEncounterStripePaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupEncounterStripePaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupEncounterStripePaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/payments/process/entity/setup": {
+      "post": {
+        "tags": [
+          "StripePaymentsEntities"
+        ],
+        "summary": "Sets up an Entity Stripe payment",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupEntityStripePaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupEntityStripePaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupEntityStripePaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupEntityStripePaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/payments/process/entity/account": {
+      "post": {
+        "tags": [
+          "StripePaymentsEntities"
+        ],
+        "summary": "Initiates a Stripe Entity payment with a saved payment account",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEntitySavedAccountStripePaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEntitySavedAccountStripePaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEntitySavedAccountStripePaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessEntitySavedAccountStripePaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/payments/process/entity/refund": {
+      "post": {
+        "tags": [
+          "StripePaymentsEntities"
+        ],
+        "summary": "Attempts to refund a previous transaction.",
+        "description": "Any type of payment can be refunded, even those that are not Stripe transactions. Stripe transactions are refunded using the Stripe API.",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The details about the previous payment to refund.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundStripePaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundStripePaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundStripePaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundStripePaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionRefundResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionRefundResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionRefundResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/payments/process/patient/setup": {
+      "post": {
+        "tags": [
+          "StripePaymentsPatients"
+        ],
+        "summary": "Sets up a Patient Stripe payment",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupPatientStripePaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupPatientStripePaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupPatientStripePaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupPatientStripePaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/payments/process/patient/account": {
+      "post": {
+        "tags": [
+          "StripePaymentsPatients"
+        ],
+        "summary": "Initiates a Stripe Patient payment with a saved payment account",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientSavedAccountStripePaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientSavedAccountStripePaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientSavedAccountStripePaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessPatientSavedAccountStripePaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stripe/payments/process/patient/refund": {
+      "post": {
+        "tags": [
+          "StripePaymentsPatients"
+        ],
+        "summary": "Attempts to refund a previous transaction.",
+        "description": "Any type of payment can be refunded, even those that are not Stripe transactions. Stripe transactions are refunded using the Stripe API.",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The details about the previous payment to refund.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundStripePaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundStripePaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundStripePaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefundStripePaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionRefundResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionRefundResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TransactionRefundResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AcceptStripeNonPaymentRequest": {
+        "required": [
+          "paymentEncounterIdentity",
+          "stripeAccountSummaryIdentity",
+          "underpaymentReasonId",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentEncounterIdentity": {
+            "$ref": "#/components/schemas/PaymentEncounterIdentity"
+          },
+          "stripeAccountSummaryIdentity": {
+            "$ref": "#/components/schemas/StripeAccountSummaryIdentity"
+          },
+          "underpaymentReasonId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AttachEntityStripeAccountRequest": {
+        "required": [
+          "paymentAccountOwnerId",
+          "accountType",
+          "paymentAccountId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentAccountOwnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "accountType": {
+            "$ref": "#/components/schemas/SavedAccountType"
+          },
+          "paymentAccountId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "AttachPatientStripeAccountRequest": {
+        "required": [
+          "paymentAccountOwnerId",
+          "paymentAccountOwnerType",
+          "accountType",
+          "paymentAccountId",
+          "firstName",
+          "lastName"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentAccountOwnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentAccountOwnerType": {
+            "$ref": "#/components/schemas/PaymentAccountOwnerType"
+          },
+          "accountType": {
+            "$ref": "#/components/schemas/SavedAccountType"
+          },
+          "paymentAccountId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "firstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "CashTransaction": {
+        "required": [
+          "paymentSpecificationId",
+          "paymentType",
+          "transactionAmount",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "transactionType": {
+            "$ref": "#/components/schemas/TransactionType"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CheckTransaction": {
+        "required": [
+          "paymentSpecificationId",
+          "paymentType",
+          "transactionAmount",
+          "checkNumber",
+          "checkDate",
+          "authorizationNumber",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "transactionType": {
+            "$ref": "#/components/schemas/TransactionType"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "checkNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "checkDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "authorizationNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CompanyIdentity": {
+        "required": [
+          "companyId"
+        ],
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "CreditCardType": {
+        "type": "integer"
+      },
+      "CreditForwardTransaction": {
+        "required": [
+          "paymentSpecificationId",
+          "transactionAmount",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "transactionType": {
+            "$ref": "#/components/schemas/TransactionType"
+          }
+        }
+      },
+      "DailyEncounterSummary": {
+        "required": [
+          "organizationId",
+          "identity",
+          "expectedCollection",
+          "collected",
+          "uncollected",
+          "pending"
+        ],
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "identity": {
+            "$ref": "#/components/schemas/DailyLocationIdentity"
+          },
+          "expectedCollection": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "collected": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "uncollected": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "pending": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "id": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "partition": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "DailyLocationIdentity": {
+        "required": [
+          "locationId",
+          "dateOfService"
+        ],
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          }
+        }
+      },
+      "Date": { },
+      "DivisionAllocation": {
+        "required": [
+          "divisionId",
+          "amountPaid"
+        ],
+        "type": "object",
+        "properties": {
+          "divisionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amountPaid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "ExternalCardTransaction": {
+        "required": [
+          "paymentSpecificationId",
+          "paymentType",
+          "transactionAmount",
+          "creditCardType",
+          "lastFour",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "transactionType": {
+            "$ref": "#/components/schemas/TransactionType"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "creditCardType": {
+            "$ref": "#/components/schemas/CreditCardType"
+          },
+          "lastFour": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "GenericStatusResponse": {
+        "required": [
+          "status",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "message": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ITransaction": {
+        "type": "object",
+        "properties": {
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "transactionType": {
+            "$ref": "#/components/schemas/TransactionType"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "LastTransaction": {
+        "required": [
+          "date",
+          "amount",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "amount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "NonPaymentRecord": {
+        "required": [
+          "underpaymentReasonId",
+          "createdDate",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "underpaymentReasonId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "OutstandingBalance": {
+        "required": [
+          "divisionId",
+          "dateOfService",
+          "dueToday",
+          "outstanding",
+          "amountPaid"
+        ],
+        "type": "object",
+        "properties": {
+          "divisionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "dueToday": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "outstanding": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "amountPaid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "remaining": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "OutstandingBalanceAllocation": {
+        "required": [
+          "allocationId",
+          "divisionId",
+          "dateOfService",
+          "amountPaid",
+          "uncollectedReasonId"
+        ],
+        "type": "object",
+        "properties": {
+          "allocationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "divisionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "amountPaid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "uncollectedReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "OutstandingBalanceAllocationRequest": {
+        "required": [
+          "divisionId",
+          "dateOfService",
+          "amountPaid",
+          "uncollectedReasonId"
+        ],
+        "type": "object",
+        "properties": {
+          "divisionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "amountPaid": {
+            "maximum": 99999.99,
+            "minimum": 0,
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "uncollectedReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "PaymentAccountIdentity": {
+        "type": "object"
+      },
+      "PaymentAccountOwnerType": {
+        "type": "integer"
+      },
+      "PaymentEncounterIdentity": {
+        "required": [
+          "locationId",
+          "patientId",
+          "dateOfService"
+        ],
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "isPast": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PaymentOrigin": {
+        "type": "object",
+        "properties": {
+          "paymentAccountOwnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentAccountOwnerType": {
+            "$ref": "#/components/schemas/PaymentAccountOwnerType"
+          }
+        }
+      },
+      "PaymentSpecification": {
+        "required": [
+          "organizationId",
+          "paymentSpecificationId",
+          "entityId",
+          "entityType",
+          "correlationId",
+          "paymentSource",
+          "stripeAccountSummaryIdentity",
+          "isEncounterPayment",
+          "paymentType",
+          "transactionAmount",
+          "userId",
+          "paymentEncounterIdentity",
+          "serviceTypeAllocations",
+          "outstandingBalanceAllocations",
+          "transaction",
+          "transactionRefund",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentAccountOwnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentAccountOwnerType": {
+            "$ref": "#/components/schemas/PaymentAccountOwnerType"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "entityId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "entityType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSource": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "stripeAccountSummaryIdentity": {
+            "$ref": "#/components/schemas/StripeAccountSummaryIdentity"
+          },
+          "isEncounterPayment": {
+            "type": "boolean"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "userId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "paymentEncounterIdentity": {
+            "$ref": "#/components/schemas/PaymentEncounterIdentity"
+          },
+          "serviceTypeAllocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ServiceTypeAllocation"
+            }
+          },
+          "outstandingBalanceAllocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/OutstandingBalanceAllocation"
+            }
+          },
+          "transaction": {
+            "$ref": "#/components/schemas/ITransaction"
+          },
+          "transactionRefund": {
+            "$ref": "#/components/schemas/TransactionRefund"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "feeAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentAccountIdentity": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PaymentAccountIdentity"
+              }
+            ]
+          },
+          "reserveWithoutDivisions": {
+            "type": "boolean",
+            "default": false
+          },
+          "successfullyProcessed": {
+            "type": "boolean"
+          },
+          "refunded": {
+            "type": "boolean"
+          },
+          "canRefund": {
+            "type": "boolean"
+          },
+          "lastFour": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "cardLogo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isStripeTransaction": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "partition": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PaymentSpecificationHeader": {
+        "required": [
+          "organizationId",
+          "paymentSpecificationId",
+          "totalAmount",
+          "paymentType",
+          "lastFour",
+          "cardLogo",
+          "userId",
+          "successfullyProcessed",
+          "refunded",
+          "canRefund",
+          "refundHeader",
+          "divisionAllocations",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "totalAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "lastFour": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "cardLogo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "successfullyProcessed": {
+            "type": "boolean"
+          },
+          "refunded": {
+            "type": "boolean"
+          },
+          "canRefund": {
+            "type": "boolean"
+          },
+          "refundHeader": {
+            "$ref": "#/components/schemas/RefundHeader"
+          },
+          "divisionAllocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/DivisionAllocation"
+            }
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PaymentType": {
+        "type": "integer"
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ProcessDevicePaymentRequest": {
+        "required": [
+          "paymentIntentId"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentIntentId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ProcessDeviceSetupRequest": {
+        "required": [
+          "setupIntentId"
+        ],
+        "type": "object",
+        "properties": {
+          "setupIntentId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ProcessEncounterCashStripePaymentRequest": {
+        "required": [
+          "cashTendered",
+          "paymentOrigin",
+          "paymentAccountIdentity",
+          "paymentEncounterIdentity",
+          "stripeAccountSummaryIdentity",
+          "serviceTypeAllocations",
+          "outstandingBalanceAllocations",
+          "reserveWithoutDivisions"
+        ],
+        "type": "object",
+        "properties": {
+          "cashTendered": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentOrigin": {
+            "$ref": "#/components/schemas/PaymentOrigin"
+          },
+          "paymentAccountIdentity": {
+            "$ref": "#/components/schemas/PaymentAccountIdentity"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "paymentEncounterIdentity": {
+            "$ref": "#/components/schemas/PaymentEncounterIdentity"
+          },
+          "stripeAccountSummaryIdentity": {
+            "$ref": "#/components/schemas/StripeAccountSummaryIdentity"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "serviceTypeAllocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ServiceTypeAllocationRequest"
+            }
+          },
+          "outstandingBalanceAllocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/OutstandingBalanceAllocationRequest"
+            }
+          },
+          "reserveWithoutDivisions": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ProcessEncounterCheckStripePaymentRequest": {
+        "required": [
+          "checkNumber",
+          "checkDate",
+          "authorizationNumber",
+          "paymentOrigin",
+          "paymentAccountIdentity",
+          "paymentEncounterIdentity",
+          "stripeAccountSummaryIdentity",
+          "serviceTypeAllocations",
+          "outstandingBalanceAllocations",
+          "reserveWithoutDivisions"
+        ],
+        "type": "object",
+        "properties": {
+          "checkNumber": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "checkDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "authorizationNumber": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentOrigin": {
+            "$ref": "#/components/schemas/PaymentOrigin"
+          },
+          "paymentAccountIdentity": {
+            "$ref": "#/components/schemas/PaymentAccountIdentity"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "paymentEncounterIdentity": {
+            "$ref": "#/components/schemas/PaymentEncounterIdentity"
+          },
+          "stripeAccountSummaryIdentity": {
+            "$ref": "#/components/schemas/StripeAccountSummaryIdentity"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "serviceTypeAllocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ServiceTypeAllocationRequest"
+            }
+          },
+          "outstandingBalanceAllocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/OutstandingBalanceAllocationRequest"
+            }
+          },
+          "reserveWithoutDivisions": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ProcessEncounterExternalCardStripePaymentRequest": {
+        "required": [
+          "paymentOrigin",
+          "paymentAccountIdentity",
+          "paymentEncounterIdentity",
+          "stripeAccountSummaryIdentity",
+          "serviceTypeAllocations",
+          "outstandingBalanceAllocations",
+          "reserveWithoutDivisions",
+          "creditCardType",
+          "lastFour"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentOrigin": {
+            "$ref": "#/components/schemas/PaymentOrigin"
+          },
+          "paymentAccountIdentity": {
+            "$ref": "#/components/schemas/PaymentAccountIdentity"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "paymentEncounterIdentity": {
+            "$ref": "#/components/schemas/PaymentEncounterIdentity"
+          },
+          "stripeAccountSummaryIdentity": {
+            "$ref": "#/components/schemas/StripeAccountSummaryIdentity"
+          },
+          "serviceTypeAllocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ServiceTypeAllocationRequest"
+            }
+          },
+          "outstandingBalanceAllocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/OutstandingBalanceAllocationRequest"
+            }
+          },
+          "reserveWithoutDivisions": {
+            "type": "boolean"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "creditCardType": {
+            "$ref": "#/components/schemas/CreditCardType"
+          },
+          "lastFour": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ProcessEncounterSavedAccountStripePaymentRequest": {
+        "required": [
+          "paymentOrigin",
+          "paymentAccountIdentity",
+          "paymentEncounterIdentity",
+          "stripeAccountSummaryIdentity",
+          "paymentAccountId",
+          "paymentSource",
+          "serviceTypeAllocations",
+          "outstandingBalanceAllocations",
+          "reserveWithoutDivisions",
+          "paymentPlanId"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentOrigin": {
+            "$ref": "#/components/schemas/PaymentOrigin"
+          },
+          "paymentAccountIdentity": {
+            "$ref": "#/components/schemas/PaymentAccountIdentity"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "paymentEncounterIdentity": {
+            "$ref": "#/components/schemas/PaymentEncounterIdentity"
+          },
+          "stripeAccountSummaryIdentity": {
+            "$ref": "#/components/schemas/StripeAccountSummaryIdentity"
+          },
+          "paymentAccountId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSource": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "serviceTypeAllocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ServiceTypeAllocationRequest"
+            }
+          },
+          "outstandingBalanceAllocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/OutstandingBalanceAllocationRequest"
+            }
+          },
+          "reserveWithoutDivisions": {
+            "type": "boolean"
+          },
+          "paymentPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "ProcessEntitySavedAccountStripePaymentRequest": {
+        "required": [
+          "paymentAccountIdentity",
+          "paymentOrigin",
+          "paymentAccountId",
+          "entityId",
+          "entityType",
+          "locationId",
+          "correlationId",
+          "paymentSource",
+          "transactionAmount",
+          "paymentType"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentAccountIdentity": {
+            "$ref": "#/components/schemas/PaymentAccountIdentity"
+          },
+          "paymentOrigin": {
+            "$ref": "#/components/schemas/PaymentOrigin"
+          },
+          "paymentAccountId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "entityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "entityType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "locationId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSource": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          }
+        }
+      },
+      "ProcessPatientCashPaymentRequest": {
+        "required": [
+          "cashTendered",
+          "paymentPlanId",
+          "patientId",
+          "locationId",
+          "correlationId",
+          "paymentSource",
+          "acceptorSummaryIdentity",
+          "transactionAmount",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "cashTendered": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "paymentAccountOwnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentAccountOwnerType": {
+            "$ref": "#/components/schemas/PaymentAccountOwnerType"
+          },
+          "patientId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSource": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "acceptorSummaryIdentity": {
+            "$ref": "#/components/schemas/CompanyIdentity"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ProcessPatientCheckPaymentRequest": {
+        "required": [
+          "checkNumber",
+          "checkDate",
+          "authorizationNumber",
+          "paymentPlanId",
+          "patientId",
+          "locationId",
+          "correlationId",
+          "paymentSource",
+          "acceptorSummaryIdentity",
+          "transactionAmount",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "checkNumber": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "checkDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "authorizationNumber": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "paymentAccountOwnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentAccountOwnerType": {
+            "$ref": "#/components/schemas/PaymentAccountOwnerType"
+          },
+          "patientId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSource": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "acceptorSummaryIdentity": {
+            "$ref": "#/components/schemas/CompanyIdentity"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ProcessPatientCreditForwardPaymentRequest": {
+        "required": [
+          "amountTendered",
+          "patientId",
+          "locationId",
+          "correlationId",
+          "paymentSource",
+          "acceptorSummaryIdentity",
+          "transactionAmount",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "amountTendered": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentAccountOwnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentAccountOwnerType": {
+            "$ref": "#/components/schemas/PaymentAccountOwnerType"
+          },
+          "patientId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSource": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "acceptorSummaryIdentity": {
+            "$ref": "#/components/schemas/CompanyIdentity"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ProcessPatientPaymentRequest": {
+        "required": [
+          "creditCardType",
+          "lastFour",
+          "paymentPlanId",
+          "patientId",
+          "locationId",
+          "correlationId",
+          "paymentSource",
+          "acceptorSummaryIdentity",
+          "transactionAmount",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "creditCardType": {
+            "$ref": "#/components/schemas/CreditCardType"
+          },
+          "lastFour": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "paymentAccountOwnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentAccountOwnerType": {
+            "$ref": "#/components/schemas/PaymentAccountOwnerType"
+          },
+          "patientId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSource": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "acceptorSummaryIdentity": {
+            "$ref": "#/components/schemas/CompanyIdentity"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ProcessPatientSavedAccountStripePaymentRequest": {
+        "required": [
+          "paymentAccountIdentity",
+          "paymentOrigin",
+          "paymentAccountId",
+          "patientId",
+          "locationId",
+          "correlationId",
+          "paymentSource",
+          "transactionAmount",
+          "paymentType",
+          "paymentPlanId"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentAccountIdentity": {
+            "$ref": "#/components/schemas/PaymentAccountIdentity"
+          },
+          "paymentOrigin": {
+            "$ref": "#/components/schemas/PaymentOrigin"
+          },
+          "paymentAccountId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSource": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "paymentPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "ReaderResponse": {
+        "required": [
+          "id",
+          "status",
+          "deviceType",
+          "ipAddress",
+          "serialNumber",
+          "action"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "deviceType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "ipAddress": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "serialNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "action": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ReaderResponseAction"
+              }
+            ]
+          }
+        }
+      },
+      "ReaderResponseAction": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "failureCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "failureMessage": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "RefundEncounterStripePaymentRequest": {
+        "required": [
+          "paymentEncounterIdentity",
+          "correlationId",
+          "paymentSpecificationId",
+          "refundReasonId",
+          "refundOriginalMethod"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentEncounterIdentity": {
+            "$ref": "#/components/schemas/PaymentEncounterIdentity"
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "refundReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "refundOriginalMethod": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RefundHeader": {
+        "required": [
+          "refundAmount",
+          "refundDate",
+          "userId",
+          "refundReasonId"
+        ],
+        "type": "object",
+        "properties": {
+          "refundAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "refundDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "refundReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "RefundStripePaymentRequest": {
+        "required": [
+          "paymentSpecificationId",
+          "refundReasonId",
+          "refundOriginalMethod",
+          "correlationId"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "refundReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "refundOriginalMethod": {
+            "type": "boolean"
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "SavedAccountType": {
+        "type": "integer"
+      },
+      "SaveEntityPaymentAccountDetails": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "SavePatientPaymentAccountDetails": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "SendReceiptRequest": {
+        "required": [
+          "paymentSpecificationId",
+          "emailAddress"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "emailAddress": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ServiceType": {
+        "required": [
+          "serviceTypeId",
+          "companyId",
+          "divisionId",
+          "coPay",
+          "additional",
+          "amountPaid"
+        ],
+        "type": "object",
+        "properties": {
+          "serviceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "divisionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "coPay": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "additional": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "amountPaid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "totalExpected": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "remaining": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "ServiceTypeAllocation": {
+        "required": [
+          "allocationId",
+          "serviceTypeId",
+          "divisionId",
+          "amountPaid",
+          "uncollectedReasonId",
+          "activities"
+        ],
+        "type": "object",
+        "properties": {
+          "allocationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "serviceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "divisionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amountPaid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "uncollectedReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "activities": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "ServiceTypeAllocationRequest": {
+        "required": [
+          "serviceTypeId",
+          "divisionId",
+          "amountPaid",
+          "uncollectedReasonId"
+        ],
+        "type": "object",
+        "properties": {
+          "serviceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "divisionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "amountPaid": {
+            "maximum": 99999.99,
+            "minimum": 0,
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "uncollectedReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "SetPaymentSpecificationPayoutDetailsRequest": {
+        "required": [
+          "payoutDate"
+        ],
+        "type": "object",
+        "properties": {
+          "payoutDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SetupEncounterStripePaymentRequest": {
+        "required": [
+          "patientId",
+          "paymentOrigin",
+          "savePaymentAccount",
+          "paymentSource",
+          "paymentType",
+          "paymentAccountIdentity",
+          "paymentEncounterIdentity",
+          "stripeAccountSummaryIdentity",
+          "serviceTypeAllocations",
+          "outstandingBalanceAllocations",
+          "reserveWithoutDivisions"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentOrigin": {
+            "$ref": "#/components/schemas/PaymentOrigin"
+          },
+          "savePaymentAccount": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SavePatientPaymentAccountDetails"
+              }
+            ]
+          },
+          "paymentSource": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "paymentAccountIdentity": {
+            "$ref": "#/components/schemas/PaymentAccountIdentity"
+          },
+          "paymentEncounterIdentity": {
+            "$ref": "#/components/schemas/PaymentEncounterIdentity"
+          },
+          "stripeAccountSummaryIdentity": {
+            "$ref": "#/components/schemas/StripeAccountSummaryIdentity"
+          },
+          "serviceTypeAllocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ServiceTypeAllocationRequest"
+            }
+          },
+          "outstandingBalanceAllocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/OutstandingBalanceAllocationRequest"
+            }
+          },
+          "reserveWithoutDivisions": {
+            "type": "boolean"
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "SetupEntityStripeCreateAccountRequest": {
+        "required": [
+          "paymentAccountOwnerId",
+          "accountType",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentAccountOwnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "accountType": {
+            "$ref": "#/components/schemas/SavedAccountType"
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "SetupEntityStripePaymentRequest": {
+        "required": [
+          "paymentAccountIdentity",
+          "paymentOrigin",
+          "savePaymentAccount",
+          "entityId",
+          "entityType",
+          "locationId",
+          "correlationId",
+          "paymentSource",
+          "transactionAmount",
+          "paymentType"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentAccountIdentity": {
+            "$ref": "#/components/schemas/PaymentAccountIdentity"
+          },
+          "paymentOrigin": {
+            "$ref": "#/components/schemas/PaymentOrigin"
+          },
+          "savePaymentAccount": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SaveEntityPaymentAccountDetails"
+              }
+            ]
+          },
+          "entityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "entityType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "locationId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSource": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          }
+        }
+      },
+      "SetupPatientStripeCreateAccountRequest": {
+        "required": [
+          "paymentAccountOwnerId",
+          "paymentAccountOwnerType",
+          "accountType",
+          "firstName",
+          "lastName"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentAccountOwnerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentAccountOwnerType": {
+            "$ref": "#/components/schemas/PaymentAccountOwnerType"
+          },
+          "accountType": {
+            "$ref": "#/components/schemas/SavedAccountType"
+          },
+          "firstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "SetupPatientStripePaymentRequest": {
+        "required": [
+          "paymentAccountIdentity",
+          "paymentOrigin",
+          "savePaymentAccount",
+          "patientId",
+          "locationId",
+          "correlationId",
+          "paymentSource",
+          "transactionAmount",
+          "paymentType",
+          "paymentPlanId"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentAccountIdentity": {
+            "$ref": "#/components/schemas/PaymentAccountIdentity"
+          },
+          "paymentOrigin": {
+            "$ref": "#/components/schemas/PaymentOrigin"
+          },
+          "savePaymentAccount": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SavePatientPaymentAccountDetails"
+              }
+            ]
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSource": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "paymentPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "StripeAccountPaymentHeader": {
+        "required": [
+          "stripeAccountSummaryIdentity",
+          "divisions",
+          "totalExpected",
+          "amountPaid",
+          "remainingBalance",
+          "totalOutstandingBalance",
+          "paymentSpecifications",
+          "nonPaymentRecord"
+        ],
+        "type": "object",
+        "properties": {
+          "stripeAccountSummaryIdentity": {
+            "$ref": "#/components/schemas/StripeAccountSummaryIdentity"
+          },
+          "divisions": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "totalExpected": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "amountPaid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "remainingBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "totalOutstandingBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentSpecifications": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/PaymentSpecificationHeader"
+            }
+          },
+          "nonPaymentRecord": {
+            "$ref": "#/components/schemas/NonPaymentRecord"
+          }
+        }
+      },
+      "StripeAccountSummary": {
+        "required": [
+          "identity",
+          "note",
+          "divisions",
+          "paymentSpecifications",
+          "serviceTypes",
+          "outstandingBalances",
+          "serviceTypeAllocationHistory",
+          "outstandingBalanceAllocationHistory",
+          "nonPaymentRecord"
+        ],
+        "type": "object",
+        "properties": {
+          "identity": {
+            "$ref": "#/components/schemas/StripeAccountSummaryIdentity"
+          },
+          "note": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "divisions": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "paymentSpecifications": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/PaymentSpecificationHeader"
+            }
+          },
+          "serviceTypes": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ServiceType"
+            }
+          },
+          "outstandingBalances": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/OutstandingBalance"
+            }
+          },
+          "serviceTypeAllocationHistory": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ServiceTypeAllocation"
+            }
+          },
+          "outstandingBalanceAllocationHistory": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/OutstandingBalanceAllocation"
+            }
+          },
+          "nonPaymentRecord": {
+            "$ref": "#/components/schemas/NonPaymentRecord"
+          },
+          "serviceTypesTotalExpected": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "serviceTypesCoPays": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "outstandingBalancesDueToday": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "totalOutstandingBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "totalExpected": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "serviceTypesAmountPaid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "outstandingBalancesAmountPaid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "amountPaid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "serviceTypesRemaining": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "outstandingBalancesRemaining": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "remainingBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "canAcceptNonPayment": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StripeAccountSummaryIdentity": {
+        "type": "object"
+      },
+      "StripePaymentAccountsResponse": {
+        "required": [
+          "paymentAccountId",
+          "accountType",
+          "cardType",
+          "accountLastFour",
+          "lastTransaction"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentAccountId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "accountType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "cardType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "accountLastFour": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastTransaction": {
+            "$ref": "#/components/schemas/LastTransaction"
+          }
+        }
+      },
+      "StripePaymentEncounterSummary": {
+        "required": [
+          "organizationId",
+          "paymentEncounterIdentity",
+          "collectionAmountFixed",
+          "divisions",
+          "totalExpected",
+          "amountPaid",
+          "remainingBalance",
+          "stripeAccountPaymentHeaders",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentEncounterIdentity": {
+            "$ref": "#/components/schemas/PaymentEncounterIdentity"
+          },
+          "collectionAmountFixed": {
+            "type": "boolean"
+          },
+          "divisions": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "totalExpected": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "amountPaid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "remainingBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "stripeAccountPaymentHeaders": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/StripeAccountPaymentHeader"
+            }
+          },
+          "lastPaymentUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "lastPaymentDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "StripeTransactionResponse": {
+        "required": [
+          "paymentSpecificationId",
+          "paymentId",
+          "transactionDateTime",
+          "status",
+          "paymentType",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "transactionDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "StripeTransactionSetupResponse": {
+        "required": [
+          "clientSecret",
+          "paymentSpecificationId",
+          "stripeId",
+          "success",
+          "error"
+        ],
+        "type": "object",
+        "properties": {
+          "clientSecret": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "stripeId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "TransactionRefund": {
+        "required": [
+          "paymentSpecificationId",
+          "patientId",
+          "correlationId",
+          "paymentSource",
+          "refundAmount",
+          "refundDate",
+          "refundReasonId",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "entityId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "entityType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSource": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "refundAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "refundDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "refundReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "userId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "TransactionRefundResponse": {
+        "required": [
+          "paymentSpecificationId",
+          "refundAmount",
+          "refundReasonId",
+          "success",
+          "responseMessage",
+          "refundDate"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "refundAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "refundReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "responseMessage": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "refundDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "TransactionType": {
+        "type": "integer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PatientSpecifications"
+    },
+    {
+      "name": "PaymentEncounters"
+    },
+    {
+      "name": "PaymentSpecifications"
+    },
+    {
+      "name": "Receipts"
+    },
+    {
+      "name": "StripeDevices"
+    },
+    {
+      "name": "StripePaymentAccounts"
+    },
+    {
+      "name": "StripePaymentAccountsEntities"
+    },
+    {
+      "name": "StripeEncounterPayments"
+    },
+    {
+      "name": "StripePaymentsEntities"
+    },
+    {
+      "name": "StripePaymentsPatients"
+    }
+  ]
+}

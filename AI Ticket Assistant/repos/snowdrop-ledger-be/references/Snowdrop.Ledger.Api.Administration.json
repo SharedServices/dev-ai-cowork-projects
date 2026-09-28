@@ -1,0 +1,2109 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Ledger Administration API",
+    "description": "Snowdrop Ledger Administration API"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/ledger/administration"
+    }
+  ],
+  "paths": {
+    "/vendor/bulk-actions/{bulkActionId}/requests": {
+      "post": {
+        "tags": [
+          "BulkActions"
+        ],
+        "parameters": [
+          {
+            "name": "bulkActionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkActionRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkActionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkActionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkActionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/vendor/charges/{chargeId}/evaluate": {
+      "get": {
+        "tags": [
+          "Charges"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityChargePreValidation"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityChargePreValidation"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityChargePreValidation"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vendor/charges/{chargeId}/evaluate/is-valid": {
+      "get": {
+        "tags": [
+          "Charges"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vendor/charges/{chargeId}/failure": {
+      "get": {
+        "tags": [
+          "Charges"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargePostingFailed"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargePostingFailed"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargePostingFailed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vendor/charges/{chargeId}/status.html": {
+      "get": {
+        "tags": [
+          "Charges"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/vendor/charges/{chargeId}/transactions.csv": {
+      "get": {
+        "tags": [
+          "Charges"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/vendor/charges/{chargeId}/requeue-posting/{eventNumber}": {
+      "post": {
+        "tags": [
+          "Charges"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "eventNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/vendor/charges/{chargeId}/recalculate-balance": {
+      "post": {
+        "tags": [
+          "Charges"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeBalanceRecalculatorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeBalanceRecalculatorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeBalanceRecalculatorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vendor/charges/{chargeId}/projections/snapshot": {
+      "get": {
+        "tags": [
+          "Charges"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/vendor/charges/{chargeId}/rebalance-respond": {
+      "post": {
+        "tags": [
+          "Charges"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeRebalanceResponse"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeRebalanceResponse"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeRebalanceResponse"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeRebalanceResponse"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/vendor/charges/{chargeId}/{chargeStatus}/{chargeSubStatus}/correct-posting": {
+      "post": {
+        "tags": [
+          "Charges"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "chargeStatus",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ChargeStatusType"
+            }
+          },
+          {
+            "name": "chargeSubStatus",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/ChargeSubStatusType"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "force",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/vendor/charges/{chargeId}/negate-batch": {
+      "post": {
+        "tags": [
+          "Charges"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "overrideNegate",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeBatchNegatorRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeBatchNegatorRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeBatchNegatorRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeBatchNegatorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeBatchNegatorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeBatchNegatorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeBatchNegatorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vendor/automation/expired-reallocation/runs/start": {
+      "get": {
+        "tags": [
+          "ExpiredFundReallocation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/vendor/automation/expired-reallocation/runs/companies/{companyId}/start": {
+      "get": {
+        "tags": [
+          "ExpiredFundReallocation"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpiredReservedFundConfigurationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpiredReservedFundConfigurationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpiredReservedFundConfigurationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vendor/automation/expired-reallocation/configuration": {
+      "get": {
+        "tags": [
+          "ExpiredFundReallocation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExpiredReservedFundConfigurationResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExpiredReservedFundConfigurationResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExpiredReservedFundConfigurationResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/vendor/automation/expired-reallocation/configuration/companies/{companyId}": {
+      "get": {
+        "tags": [
+          "ExpiredFundReallocation"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpiredReservedFundConfigurationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpiredReservedFundConfigurationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExpiredReservedFundConfigurationResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ExpiredFundReallocation"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExpiredReservedFundConfigurationRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExpiredReservedFundConfigurationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExpiredReservedFundConfigurationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExpiredReservedFundConfigurationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/vendor/patients/{patientId}/payments/{paymentId}/adjust/reserve-amount": {
+      "post": {
+        "tags": [
+          "Payments"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "paymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdjustReserveAmountRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdjustReserveAmountRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdjustReserveAmountRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdjustReserveAmountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActivityChargePreValidation": {
+        "required": [
+          "log"
+        ],
+        "type": "object",
+        "properties": {
+          "log": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "charge": {
+            "$ref": "#/components/schemas/ChargeCandidate"
+          },
+          "financials": {
+            "$ref": "#/components/schemas/ChargeFinancials"
+          },
+          "posting": {
+            "$ref": "#/components/schemas/ChargePostingResponse"
+          },
+          "guarantor": {
+            "$ref": "#/components/schemas/ChargeGuarantor"
+          },
+          "manufacturerAssociation": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ChargeManufacturerAssociation"
+              }
+            ]
+          },
+          "billingUnits": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "currentLedgerDates": {
+            "$ref": "#/components/schemas/LedgerStates"
+          },
+          "calculatedLedgerDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "errors": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ChargeError"
+            }
+          },
+          "selfPayAdjustmentReason": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SelfPayAdjustmentReason"
+              }
+            ]
+          },
+          "groupCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "reasonCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "decisionLog": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ChargeValidationDecision"
+              }
+            ]
+          },
+          "chargeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "applyInitialAdjustmentOnChargeCreation": {
+            "type": "boolean"
+          },
+          "isValid": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AdjustReserveAmountRequest": {
+        "required": [
+          "ledgerDate",
+          "amount",
+          "fromTransactionNumber",
+          "mode"
+        ],
+        "type": "object",
+        "properties": {
+          "ledgerDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "amount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "fromTransactionNumber": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/WriteMode"
+          }
+        }
+      },
+      "AllowedAmountDecision": {
+        "required": [
+          "payerId",
+          "payerReason",
+          "candidates",
+          "matchedContractId",
+          "matchedFeeScheduleId"
+        ],
+        "type": "object",
+        "properties": {
+          "payerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "payerReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "candidates": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ContractCandidateDecision"
+            }
+          },
+          "matchedContractId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "matchedFeeScheduleId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "BulkActionRequest": {
+        "required": [
+          "requestType",
+          "templateId",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "requestType": {
+            "$ref": "#/components/schemas/BulkActionRequestType"
+          },
+          "templateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "BulkActionRequestType": {
+        "type": "integer"
+      },
+      "ChargeAccount": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/ChargeAccountType"
+          },
+          "guarantorId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "snfId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "snfPatientId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "payerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "policyPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "policyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "manufacturer": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ChargeManufacturerAssociation"
+              }
+            ]
+          }
+        }
+      },
+      "ChargeAccountType": {
+        "type": "integer"
+      },
+      "ChargeBalanceRecalculatorResponse": {
+        "required": [
+          "chargeId",
+          "requestId"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeId": {
+            "$ref": "#/components/schemas/ChargeIdentity"
+          },
+          "requestId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "error": {
+            "type": "string"
+          },
+          "isValid": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ChargeBatchNegatorRequest": {
+        "type": "object",
+        "properties": {
+          "chargeBatchId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ledgerDate": {
+            "$ref": "#/components/schemas/Date"
+          }
+        }
+      },
+      "ChargeBatchNegatorResponse": {
+        "required": [
+          "chargeId",
+          "isValid"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isValid": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ChargeError"
+            }
+          }
+        }
+      },
+      "ChargeCandidate": {
+        "type": "object",
+        "properties": {
+          "chargeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "account": {
+            "$ref": "#/components/schemas/ChargeAccount"
+          },
+          "adjustment": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ChargeCandidateAdjustment"
+              }
+            ]
+          },
+          "resources": {
+            "$ref": "#/components/schemas/ChargeResources"
+          },
+          "service": {
+            "$ref": "#/components/schemas/ChargeService"
+          },
+          "source": {
+            "$ref": "#/components/schemas/ChargeSource"
+          },
+          "skipLedgerDateValidation": {
+            "type": "boolean"
+          },
+          "autoProgress": {
+            "type": "boolean"
+          },
+          "ledgerDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "dateRangeStart": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "dateRangeEnd": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "effectiveDateOfServiceEnd": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "selfPayDetail": {
+            "$ref": "#/components/schemas/TransactionSelfPayDetail"
+          },
+          "guarantor": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ChargeGuarantor"
+              }
+            ]
+          },
+          "manufacturerAssociation": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ChargeManufacturerAssociation"
+              }
+            ]
+          },
+          "transferReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "adjustToExpectedAllowed": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          }
+        }
+      },
+      "ChargeCandidateAdjustment": {
+        "type": "object",
+        "properties": {
+          "adjustmentTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isContractual": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ChargeError": {
+        "required": [
+          "code",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "code": {
+            "$ref": "#/components/schemas/ChargeErrorCode"
+          },
+          "message": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isException": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          }
+        }
+      },
+      "ChargeErrorCode": {
+        "type": "integer"
+      },
+      "ChargeFinancials": {
+        "type": "object",
+        "properties": {
+          "fee": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "allowed": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "guarantorBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "expectedAdjustmentApplied": {
+            "type": "boolean"
+          },
+          "initialAdjustmentApplied": {
+            "type": "boolean"
+          },
+          "manufacturerBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "ChargeGuarantor": {
+        "type": "object",
+        "properties": {
+          "sourcePortfolioPayer": {
+            "$ref": "#/components/schemas/PayerPortfolioDetail"
+          },
+          "guarantorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "guarantorIsPatient": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ChargeIdentity": { },
+      "ChargeManufacturerAssociation": {
+        "type": "object",
+        "properties": {
+          "manufacturerCopayProgramId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "manufacturerCopayAssistanceAwardId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "ChargeMasterCandidateDecision": {
+        "required": [
+          "chargeMasterId",
+          "name",
+          "isMatch",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeMasterId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isMatch": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ChargeMasterDecision": {
+        "required": [
+          "companyId",
+          "companyReason",
+          "candidates",
+          "matchedChargeMasterId",
+          "matchedChargeMasterName"
+        ],
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "companyReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "candidates": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ChargeMasterCandidateDecision"
+            }
+          },
+          "matchedChargeMasterId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "matchedChargeMasterName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ChargePostingFailed": {
+        "required": [
+          "chargeId",
+          "errors"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isPosted": {
+            "type": "boolean"
+          },
+          "sourceChargeEventId": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          },
+          "errors": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ChargeError"
+            }
+          },
+          "chargeStatus": {
+            "$ref": "#/components/schemas/ChargeStatusType"
+          },
+          "chargeSubStatus": {
+            "$ref": "#/components/schemas/ChargeSubStatusType"
+          }
+        }
+      },
+      "ChargePostingResponse": {
+        "type": "object",
+        "properties": {
+          "chargemasterId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "chargemasterCompanyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "chargemasterName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "contractId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "feeScheduleId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "ChargeRebalanceResponse": {
+        "required": [
+          "requestId",
+          "isValid"
+        ],
+        "type": "object",
+        "properties": {
+          "requestId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isValid": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ChargeResources": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "divisionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "facilityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "billingProviderId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "ChargeService": {
+        "type": "object",
+        "properties": {
+          "chargeCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modifierId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "ndc": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "billingUnits": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "activityCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "serviceTypeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "chargeMasterId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "chargeMasterCompanyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "chargeMasterOverridden": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ChargeSource": {
+        "type": "object",
+        "properties": {
+          "chargeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ChargeSourceType"
+          },
+          "renderedActivityId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "sourceChargeEventId": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          }
+        }
+      },
+      "ChargeSourceType": {
+        "type": "integer"
+      },
+      "ChargeStatusType": {
+        "type": "integer"
+      },
+      "ChargeSubStatusType": {
+        "type": "integer"
+      },
+      "ChargeValidationDecision": {
+        "required": [
+          "capturedAt",
+          "isCorrection",
+          "chargeMaster",
+          "allowedAmount"
+        ],
+        "type": "object",
+        "properties": {
+          "capturedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isCorrection": {
+            "type": "boolean"
+          },
+          "chargeMaster": {
+            "$ref": "#/components/schemas/ChargeMasterDecision"
+          },
+          "allowedAmount": {
+            "$ref": "#/components/schemas/AllowedAmountDecision"
+          }
+        }
+      },
+      "ContractCandidateDecision": {
+        "required": [
+          "contractId",
+          "name",
+          "isMatch",
+          "reason",
+          "feeSchedules"
+        ],
+        "type": "object",
+        "properties": {
+          "contractId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isMatch": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "feeSchedules": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/FeeScheduleCandidateDecision"
+            }
+          }
+        }
+      },
+      "Date": { },
+      "ExpiredReservedFundConfigurationRequest": {
+        "type": "object",
+        "properties": {
+          "runMode": {
+            "$ref": "#/components/schemas/RunMode"
+          },
+          "dateOfServiceLag": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "minimumAutomatedRunIntervalMinutes": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "isDivisionClearingEnabled": {
+            "type": "boolean"
+          },
+          "isServiceTypeClearingEnabled": {
+            "type": "boolean"
+          },
+          "isProviderClearingEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ExpiredReservedFundConfigurationResponse": {
+        "required": [
+          "companyId",
+          "runMode",
+          "dateOfServiceLag",
+          "isDivisionClearingEnabled",
+          "isServiceTypeClearingEnabled",
+          "isProviderClearingEnabled",
+          "minimumAutomatedRunIntervalMinutes"
+        ],
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "runMode": {
+            "$ref": "#/components/schemas/RunMode"
+          },
+          "dateOfServiceLag": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "isDivisionClearingEnabled": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "isServiceTypeClearingEnabled": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "isProviderClearingEnabled": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "minimumAutomatedRunIntervalMinutes": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "minimumDateOfServiceLag": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "FeeScheduleCandidateDecision": {
+        "required": [
+          "feeScheduleId",
+          "name",
+          "isMatch",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "feeScheduleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isMatch": {
+            "type": "boolean"
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "LedgerState": {
+        "required": [
+          "ledgerDate",
+          "closedTimestamp",
+          "closedByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "ledgerDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "closedTimestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "closedByUserId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "LedgerStates": {
+        "type": "object",
+        "properties": {
+          "chargeLedger": {
+            "$ref": "#/components/schemas/LedgerState"
+          },
+          "paymentLedger": {
+            "$ref": "#/components/schemas/LedgerState"
+          }
+        }
+      },
+      "PayerPortfolioDetail": {
+        "type": "object",
+        "properties": {
+          "payerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "RunMode": {
+        "type": "integer"
+      },
+      "SelfPayAdjustmentReason": {
+        "required": [
+          "selfPayAdjustmentReasonId"
+        ],
+        "type": "object",
+        "properties": {
+          "selfPayAdjustmentReasonId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isContractualAdjustment": {
+            "type": "boolean"
+          }
+        }
+      },
+      "TransactionSelfPayDetail": {
+        "required": [
+          "selfPayPayerId",
+          "portfolioId"
+        ],
+        "type": "object",
+        "properties": {
+          "isSelfPay": {
+            "type": "boolean"
+          },
+          "selfPayPayerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "WriteMode": {
+        "type": "integer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "BulkActions"
+    },
+    {
+      "name": "Charges"
+    },
+    {
+      "name": "ExpiredFundReallocation"
+    },
+    {
+      "name": "Payments"
+    }
+  ]
+}

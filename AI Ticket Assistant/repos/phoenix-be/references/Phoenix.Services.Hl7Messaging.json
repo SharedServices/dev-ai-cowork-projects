@@ -1,0 +1,451 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Phoenix Inbound HL7 API",
+    "description": "Phoenix Inbound HL7 API"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/phoenix/messaging/hl7"
+    }
+  ],
+  "paths": {
+    "/inbound": {
+      "post": {
+        "tags": [
+          "InboundHl7Message"
+        ],
+        "summary": "Submit a new HL7 message for processing",
+        "parameters": [
+          {
+            "name": "Org-Id",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "User-Id",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InboundHl7MessageRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InboundHl7MessageRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InboundHl7MessageRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InboundHl7MessageRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/InboundHl7MessageRequest"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InboundHl7MessageRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InboundHl7MessageRequest"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Request object was not properly populated",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/outbound/{dwellerId}": {
+      "get": {
+        "tags": [
+          "OutboundHl7Message"
+        ],
+        "summary": "Get the next outgoing HL7 message",
+        "parameters": [
+          {
+            "name": "Org-Id",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dwellerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OutboundMessage"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OutboundMessage"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OutboundMessage"
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "A valid request was made, but the queue was empty"
+          },
+          "400": {
+            "description": "The requested queue does not exist",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "OutboundHl7Message"
+        ],
+        "summary": "Acknowledge the receipt of an outgoing HL7 message",
+        "parameters": [
+          {
+            "name": "Org-Id",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "dwellerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "The requested queue does not exist, is empty, or the next message doesn't match the provided id",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ChannelDirections": {
+        "type": "integer"
+      },
+      "InboundHl7MessageRequest": {
+        "required": [
+          "dwellerInstanceId",
+          "messageId",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "dwellerInstanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "messageId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "message": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "MessageIdentity": {
+        "required": [
+          "organizationId",
+          "eventId"
+        ],
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "messageId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eventId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "MessageSender": {
+        "required": [
+          "userId",
+          "dwellerInstanceId",
+          "received",
+          "direction"
+        ],
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dwellerInstanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "received": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "direction": {
+            "$ref": "#/components/schemas/ChannelDirections"
+          },
+          "forced": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "OutboundMessage": {
+        "required": [
+          "id",
+          "sender",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/MessageIdentity"
+          },
+          "sender": {
+            "$ref": "#/components/schemas/MessageSender"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "InboundHl7Message"
+    },
+    {
+      "name": "OutboundHl7Message"
+    }
+  ]
+}

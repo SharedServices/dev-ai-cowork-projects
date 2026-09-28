@@ -1,0 +1,6474 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Charge Interventions API",
+    "description": "Snowdrop Charge Interventions API",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/chargeinterventions"
+    }
+  ],
+  "paths": {
+    "/accounts-receivable/patients/{patientId}/encounters/years": {
+      "get": {
+        "tags": [
+          "AccountsReceivable"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "pattern": "^-?(?:0|[1-9]\\d*)$",
+                    "type": [
+                      "integer",
+                      "string"
+                    ],
+                    "format": "int32"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "pattern": "^-?(?:0|[1-9]\\d*)$",
+                    "type": [
+                      "integer",
+                      "string"
+                    ],
+                    "format": "int32"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "pattern": "^-?(?:0|[1-9]\\d*)$",
+                    "type": [
+                      "integer",
+                      "string"
+                    ],
+                    "format": "int32"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts-receivable/patients/search": {
+      "post": {
+        "tags": [
+          "AccountsReceivable"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsReceivableWorkflowRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsReceivableWorkflowRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsReceivableWorkflowRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsReceivableWorkflowRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountsReceivableResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountsReceivableResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountsReceivableResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts-receivable/patients/count": {
+      "post": {
+        "tags": [
+          "AccountsReceivable"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsReceivableWorkflowRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsReceivableWorkflowRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsReceivableWorkflowRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsReceivableWorkflowRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "pattern": "^-?(?:0|[1-9]\\d*)$",
+                  "type": [
+                    "integer",
+                    "string"
+                  ],
+                  "format": "int32"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "pattern": "^-?(?:0|[1-9]\\d*)$",
+                  "type": [
+                    "integer",
+                    "string"
+                  ],
+                  "format": "int32"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "pattern": "^-?(?:0|[1-9]\\d*)$",
+                  "type": [
+                    "integer",
+                    "string"
+                  ],
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts-receivable/patients/search/{patientId}": {
+      "post": {
+        "tags": [
+          "AccountsReceivable"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsReceivablePatientWorkflowRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsReceivablePatientWorkflowRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsReceivablePatientWorkflowRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountsReceivablePatientWorkflowRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountsReceivablePatientResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountsReceivablePatientResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AccountsReceivablePatientResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts-receivable/actions/batch/create": {
+      "post": {
+        "tags": [
+          "AccountsReceivable"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBatchActionRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBatchActionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBatchActionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateBatchActionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts-receivable/patients/{patientId}/rebuild": {
+      "post": {
+        "tags": [
+          "AccountsReceivable"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/accounts-receivable/patients/{patientId}/charges/snooze": {
+      "post": {
+        "tags": [
+          "AccountsReceivable"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkSnoozeRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkSnoozeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkSnoozeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkSnoozeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkChargeActionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkChargeActionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkChargeActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts-receivable/patients/{patientId}/claims/snooze": {
+      "post": {
+        "tags": [
+          "AccountsReceivable"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkSnoozeRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkSnoozeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkSnoozeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkSnoozeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkClaimActionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkClaimActionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkClaimActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts-receivable/patients/{patientId}/charges/{chargeId}/unsnooze": {
+      "post": {
+        "tags": [
+          "AccountsReceivable"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts-receivable/patients/{patientId}/claims/{claimId}/unsnooze": {
+      "post": {
+        "tags": [
+          "AccountsReceivable"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "claimId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-rules": {
+      "get": {
+        "tags": [
+          "ARInterventionRule"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RuleSummary"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RuleSummary"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RuleSummary"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ARInterventionRule"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRuleRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRuleRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRuleRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRuleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-rules/{ruleId}": {
+      "get": {
+        "tags": [
+          "ARInterventionRule"
+        ],
+        "parameters": [
+          {
+            "name": "ruleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RuleDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RuleDetail"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RuleDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-rules/predefined": {
+      "post": {
+        "tags": [
+          "ARInterventionRule"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-rules/names/isunique": {
+      "get": {
+        "tags": [
+          "ARInterventionRule"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-rules/{ruleId}/name/update": {
+      "put": {
+        "tags": [
+          "ARInterventionRule"
+        ],
+        "parameters": [
+          {
+            "name": "ruleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRuleNameRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRuleNameRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRuleNameRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRuleNameRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-rules/{ruleId}/update": {
+      "put": {
+        "tags": [
+          "ARInterventionRule"
+        ],
+        "parameters": [
+          {
+            "name": "ruleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRuleRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRuleRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRuleRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRuleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-rules/{ruleId}/delete": {
+      "put": {
+        "tags": [
+          "ARInterventionRule"
+        ],
+        "parameters": [
+          {
+            "name": "ruleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-rules/interventionTypes/rules": {
+      "get": {
+        "tags": [
+          "ARInterventionRule"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InterventionTypeRules"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InterventionTypeRules"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InterventionTypeRules"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-interventions/charges/{chargeId}/interventions/resolve": {
+      "post": {
+        "tags": [
+          "ARInterventions"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveInterventionsRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveInterventionsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveInterventionsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveInterventionsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/ar-interventions/claims/{claimId}/interventions/resolve": {
+      "post": {
+        "tags": [
+          "ARInterventions"
+        ],
+        "parameters": [
+          {
+            "name": "claimId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveInterventionsRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveInterventionsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveInterventionsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveInterventionsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intervention-management/charges/{chargeId}/interventions/process": {
+      "post": {
+        "tags": [
+          "InterventionManagement"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intervention-management/claims/{claimId}/interventions/process": {
+      "post": {
+        "tags": [
+          "InterventionManagement"
+        ],
+        "parameters": [
+          {
+            "name": "claimId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intervention-management/charges/{chargeId}/interventions/create": {
+      "post": {
+        "tags": [
+          "InterventionManagement"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intervention-management/charges/{chargeId}/interventions/resolve": {
+      "post": {
+        "tags": [
+          "InterventionManagement"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intervention-management/claims/{claimId}/interventions/create": {
+      "post": {
+        "tags": [
+          "InterventionManagement"
+        ],
+        "parameters": [
+          {
+            "name": "claimId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intervention-management/claims/{claimId}/interventions/resolve": {
+      "post": {
+        "tags": [
+          "InterventionManagement"
+        ],
+        "parameters": [
+          {
+            "name": "claimId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionManagementRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/patients/{patientId}/chargebalances": {
+      "get": {
+        "tags": [
+          "PatientCharge"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientChargeBalance"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientChargeBalance"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientChargeBalance"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/{patientId}/chargebalances/download": {
+      "post": {
+        "tags": [
+          "PatientCharge"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-sequences": {
+      "get": {
+        "tags": [
+          "ARInterventionSequence"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SequenceHeader"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SequenceHeader"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SequenceHeader"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-sequences/predefined": {
+      "post": {
+        "tags": [
+          "ARInterventionSequence"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-sequences/predefined/disable": {
+      "post": {
+        "tags": [
+          "ARInterventionSequence"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-sequences/predefined/enable": {
+      "post": {
+        "tags": [
+          "ARInterventionSequence"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-sequences/{sequenceId}": {
+      "get": {
+        "tags": [
+          "ARInterventionSequence"
+        ],
+        "parameters": [
+          {
+            "name": "sequenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SequenceHeader"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SequenceHeader"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SequenceHeader"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-sequences/{sequenceId}/rules": {
+      "get": {
+        "tags": [
+          "ARInterventionSequence"
+        ],
+        "parameters": [
+          {
+            "name": "sequenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RuleSummary"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RuleSummary"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RuleSummary"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-sequences/{sequenceId}/behaviors": {
+      "get": {
+        "tags": [
+          "ARInterventionSequence"
+        ],
+        "parameters": [
+          {
+            "name": "sequenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-sequences/{sequenceId}/rules/reorder": {
+      "put": {
+        "tags": [
+          "ARInterventionSequence"
+        ],
+        "parameters": [
+          {
+            "name": "sequenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RuleOrder"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RuleOrder"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RuleOrder"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RuleOrder"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-sequences/{sequenceId}/enable": {
+      "put": {
+        "tags": [
+          "ARInterventionSequence"
+        ],
+        "parameters": [
+          {
+            "name": "sequenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-sequences/{sequenceId}/disable": {
+      "put": {
+        "tags": [
+          "ARInterventionSequence"
+        ],
+        "parameters": [
+          {
+            "name": "sequenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ar-intervention-sequences/{sequenceId}/download": {
+      "post": {
+        "tags": [
+          "ARInterventionSequence"
+        ],
+        "parameters": [
+          {
+            "name": "sequenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/signalr/chargeinterventions-hub/negotiate": {
+      "post": {
+        "tags": [
+          "Signalr"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/signalr/patients/{patientId}/users/add": {
+      "post": {
+        "tags": [
+          "Signalr"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/signalr/patients/{patientId}/users/remove": {
+      "post": {
+        "tags": [
+          "Signalr"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/claim-validation/validate": {
+      "post": {
+        "tags": [
+          "ClaimValidation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ARValidationRequest"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ARValidationRequest"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ARValidationRequest"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ARValidationRequest"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/claim-validation/generate-prequalification": {
+      "post": {
+        "tags": [
+          "ClaimValidation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/claim-validation/generate-prequalification/{setId}": {
+      "post": {
+        "tags": [
+          "ClaimValidation"
+        ],
+        "parameters": [
+          {
+            "name": "setId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/claim-validation/qualification/{attributeName}/{attributeValue}": {
+      "get": {
+        "tags": [
+          "ClaimValidation"
+        ],
+        "parameters": [
+          {
+            "name": "attributeName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attributeValue",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/claim-validation/qualification/{attributeName}": {
+      "get": {
+        "tags": [
+          "ClaimValidation"
+        ],
+        "parameters": [
+          {
+            "name": "attributeName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/claim-validation/qualification/claim/{claimId}": {
+      "get": {
+        "tags": [
+          "ClaimValidation"
+        ],
+        "parameters": [
+          {
+            "name": "claimId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/charge-validation/validate": {
+      "post": {
+        "tags": [
+          "ChargeValidation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ARValidationRequest"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ARValidationRequest"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ARValidationRequest"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ARValidationRequest"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/charge-validation/generate-prequalification": {
+      "post": {
+        "tags": [
+          "ChargeValidation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/charge-validation/generate-prequalification/{setId}": {
+      "post": {
+        "tags": [
+          "ChargeValidation"
+        ],
+        "parameters": [
+          {
+            "name": "setId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/charge-validation/qualification/{attributeName}/{attributeValue}": {
+      "get": {
+        "tags": [
+          "ChargeValidation"
+        ],
+        "parameters": [
+          {
+            "name": "attributeName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "attributeValue",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/charge-validation/qualification/{attributeName}": {
+      "get": {
+        "tags": [
+          "ChargeValidation"
+        ],
+        "parameters": [
+          {
+            "name": "attributeName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/charge-validation/qualification/charge/{chargeId}": {
+      "get": {
+        "tags": [
+          "ChargeValidation"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountBalanceBreakdownsResponse": {
+        "required": [
+          "accountBreakdowns"
+        ],
+        "type": "object",
+        "properties": {
+          "accountBreakdowns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountBreakdown"
+            }
+          }
+        }
+      },
+      "AccountBreakdown": {
+        "required": [
+          "displayName",
+          "lessThanThirtyDays",
+          "thirtyOneToSixtyDays",
+          "sixtyOneToNinetyDays",
+          "ninetyOneToOneTwentyDays",
+          "oneTwentyPlusDays"
+        ],
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lessThanThirtyDays": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "thirtyOneToSixtyDays": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "sixtyOneToNinetyDays": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "ninetyOneToOneTwentyDays": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "oneTwentyPlusDays": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "totalBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "AccountsReceivablePatient": {
+        "required": [
+          "patientId",
+          "startDate",
+          "endDate",
+          "balance",
+          "interventionStartDate",
+          "interventionEndDate",
+          "interventionBalance",
+          "patient",
+          "balanceBreakdown",
+          "failureSummary"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "endDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "interventionStartDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "interventionEndDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "interventionBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "patient": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PatientSummary"
+              }
+            ]
+          },
+          "balanceBreakdown": {
+            "$ref": "#/components/schemas/AccountBalanceBreakdownsResponse"
+          },
+          "failureSummary": {
+            "$ref": "#/components/schemas/FailureSummaryResponse"
+          }
+        }
+      },
+      "AccountsReceivablePatientChargeResponse": {
+        "required": [
+          "chargeId",
+          "activityId",
+          "chargeCode",
+          "ndc",
+          "units",
+          "dateOfService",
+          "locationId",
+          "billingProviderId",
+          "companyId",
+          "divisionId",
+          "portfolioId",
+          "billSentDate",
+          "icdCodes",
+          "modifiers",
+          "chargeStatus",
+          "chargeSubStatus",
+          "balance",
+          "isKidnapped",
+          "recentlyModifiedByUser",
+          "isOnSecondaryClaimOrLater",
+          "snoozed",
+          "claimGroupingHash",
+          "chargeAssembly",
+          "interventions",
+          "accounts"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "activityId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "chargeCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "ndc": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "units": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "billingProviderId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "companyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "divisionId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "portfolioId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "billSentDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "icdCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IcdCodeIdentity"
+            }
+          },
+          "modifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "chargeStatus": {
+            "type": "string"
+          },
+          "chargeSubStatus": {
+            "type": "string"
+          },
+          "balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "isKidnapped": {
+            "type": "boolean"
+          },
+          "recentlyModifiedByUser": {
+            "type": "boolean"
+          },
+          "isOnSecondaryClaimOrLater": {
+            "type": "boolean"
+          },
+          "snoozed": {
+            "type": "boolean"
+          },
+          "claimGroupingHash": {
+            "type": "string"
+          },
+          "chargeAssembly": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ChargeAssemblyResponse"
+              }
+            ]
+          },
+          "interventions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterventionWaypointResponse"
+            }
+          },
+          "accounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountSummaryItemResponse"
+            }
+          }
+        }
+      },
+      "AccountsReceivablePatientEncounterResponse": {
+        "required": [
+          "organizationId",
+          "patientId",
+          "dateOfService",
+          "locationId",
+          "encounterNumber",
+          "encounterStatus",
+          "locationName",
+          "invoices",
+          "unbilled"
+        ],
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "encounterNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "encounterStatus": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "locationName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "invoices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountsReceivablePatientInvoiceResponse"
+            }
+          },
+          "unbilled": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountsReceivablePatientUnbilledChargesResponse"
+            }
+          }
+        }
+      },
+      "AccountsReceivablePatientInvoiceResponse": {
+        "required": [
+          "invoiceType",
+          "invoiceId",
+          "dateRangeStart",
+          "dateRangeEnd",
+          "invoiceNumber",
+          "status",
+          "disposition",
+          "billingNpi",
+          "payerName",
+          "planName",
+          "guarantorName",
+          "position",
+          "totalBilled",
+          "invoiceBalance",
+          "ageBucket",
+          "policyNumber",
+          "recentlyModifiedByUser",
+          "snoozed",
+          "claimFrequency",
+          "icn",
+          "chargeAssembly",
+          "claimPhoneNumbers",
+          "interventions",
+          "charges"
+        ],
+        "type": "object",
+        "properties": {
+          "invoiceType": {
+            "$ref": "#/components/schemas/DetailedInvoiceType"
+          },
+          "invoiceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateRangeStart": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "dateRangeEnd": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "invoiceNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "disposition": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "billingNpi": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payerName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "planName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "guarantorName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "position": {
+            "type": "string"
+          },
+          "totalBilled": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "invoiceBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "ageBucket": {
+            "type": "string"
+          },
+          "policyNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "recentlyModifiedByUser": {
+            "type": "boolean"
+          },
+          "snoozed": {
+            "type": "boolean"
+          },
+          "claimFrequency": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "icn": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "chargeAssembly": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/InvoiceChargeAssemblyResponse"
+              }
+            ]
+          },
+          "claimPhoneNumbers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClaimSupportPhoneNumberResponse"
+            }
+          },
+          "interventions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterventionWaypointResponse"
+            }
+          },
+          "charges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountsReceivablePatientChargeResponse"
+            }
+          }
+        }
+      },
+      "AccountsReceivablePatientResponse": {
+        "required": [
+          "encounters",
+          "hasMoreResults",
+          "continuationToken"
+        ],
+        "type": "object",
+        "properties": {
+          "encounters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountsReceivablePatientEncounterResponse"
+            }
+          },
+          "hasMoreResults": {
+            "type": "boolean"
+          },
+          "continuationToken": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "AccountsReceivablePatientUnbilledChargesResponse": {
+        "required": [
+          "dateOfService",
+          "balance",
+          "ageBucket",
+          "status",
+          "payerName",
+          "planName",
+          "position",
+          "charges"
+        ],
+        "type": "object",
+        "properties": {
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "ageBucket": {
+            "$ref": "#/components/schemas/AgeBuckets"
+          },
+          "status": {
+            "type": "string"
+          },
+          "payerName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "planName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "position": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "charges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountsReceivablePatientChargeResponse"
+            }
+          }
+        }
+      },
+      "AccountsReceivablePatientWorkflowRequest": {
+        "type": "object",
+        "properties": {
+          "currentDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "interventionTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterventionType"
+            }
+          },
+          "qualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifierRequest"
+            }
+          },
+          "ageBuckets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgeBuckets"
+            }
+          },
+          "chargeCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "payers": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "plans": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "skilledNursingFacilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "manufacturerCopayPrograms": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "policies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "patientSkilledNursingFacilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "manufacturerCopayAwards": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "guarantors": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "closedEncounterSearchType": {
+            "$ref": "#/components/schemas/ClosedEncounterSearchType"
+          },
+          "closedEncounterYear": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "onlyCurrentUserItems": {
+            "type": "boolean"
+          },
+          "showSnoozedItems": {
+            "type": "boolean"
+          },
+          "continuation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "AccountsReceivableResponse": {
+        "required": [
+          "patients",
+          "hasMoreResults",
+          "continuationToken"
+        ],
+        "type": "object",
+        "properties": {
+          "patients": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AccountsReceivablePatient"
+            }
+          },
+          "hasMoreResults": {
+            "type": "boolean"
+          },
+          "continuationToken": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "AccountsReceivableWorkflowRequest": {
+        "type": "object",
+        "properties": {
+          "currentDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "showAllInterventionTypes": {
+            "type": "boolean"
+          },
+          "interventionTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterventionType"
+            }
+          },
+          "qualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifierRequest"
+            }
+          },
+          "alphaSplitStart": {
+            "maxLength": 1,
+            "minLength": 1,
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "char"
+          },
+          "alphaSplitEnd": {
+            "maxLength": 1,
+            "minLength": 1,
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "char"
+          },
+          "ageBuckets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AgeBuckets"
+            }
+          },
+          "chargeCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "patientSearch": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "payers": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "plans": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "skilledNursingFacilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "manufacturerCopayPrograms": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "onlyCurrentUserItems": {
+            "type": "boolean"
+          },
+          "showSnoozedItems": {
+            "type": "boolean"
+          },
+          "continuation": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "AccountSummaryItemResponse": {
+        "required": [
+          "payerDisplayName",
+          "planDisplayName",
+          "paid",
+          "balance"
+        ],
+        "type": "object",
+        "properties": {
+          "payerDisplayName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "planDisplayName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "AgeBuckets": {
+        "type": "integer"
+      },
+      "ARValidationRequest": {
+        "required": [
+          "patientId",
+          "itemId"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "itemId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ruleIds": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "AttributeQualifierRequest": {
+        "type": "object",
+        "properties": {
+          "attributeType": {
+            "$ref": "#/components/schemas/AttributeType"
+          },
+          "entityType": {
+            "$ref": "#/components/schemas/EntityType"
+          },
+          "setQualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SetQualifierRequest"
+            }
+          },
+          "elementQualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ElementQualifierRequest"
+            }
+          }
+        }
+      },
+      "AttributeQualifiers": {
+        "required": [
+          "attributeType"
+        ],
+        "type": "object",
+        "properties": {
+          "attributeType": {
+            "$ref": "#/components/schemas/AttributeType"
+          },
+          "setQualifiers": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/SetQualifier"
+            }
+          },
+          "elementQualifiers": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ElementQualifier"
+            }
+          },
+          "entityType": {
+            "$ref": "#/components/schemas/EntityType"
+          }
+        }
+      },
+      "AttributeType": {
+        "type": "integer"
+      },
+      "BehaviorCategory": {
+        "type": "integer"
+      },
+      "BulkChargeActionResponse": {
+        "required": [
+          "chargeResponses"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeResponses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChargeActionResponse"
+            }
+          }
+        }
+      },
+      "BulkClaimActionResponse": {
+        "required": [
+          "claimResponses"
+        ],
+        "type": "object",
+        "properties": {
+          "claimResponses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClaimActionResponse"
+            }
+          }
+        }
+      },
+      "BulkSnoozeRequest": {
+        "required": [
+          "items",
+          "snoozeReasonId",
+          "snoozeExpiryDate"
+        ],
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "snoozeReasonId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "snoozeExpiryDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "ChargeActionResponse": {
+        "required": [
+          "chargeId",
+          "statusCode"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "statusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          }
+        }
+      },
+      "ChargeAssemblyResponse": {
+        "required": [
+          "chargeAssemblyId",
+          "chargeAssemblyNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeAssemblyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "chargeAssemblyNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "ChargeManufacturerAssociation": {
+        "type": "object",
+        "properties": {
+          "manufacturerCopayProgramId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "manufacturerCopayAssistanceAwardId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "ChargeTransactionAccount": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/TransactionAccountType"
+          },
+          "guarantorId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "policyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "payerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "portfolioId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "policyPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "snfId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "snfPatientId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "manufacturer": {
+            "$ref": "#/components/schemas/ChargeManufacturerAssociation"
+          }
+        }
+      },
+      "ClaimActionResponse": {
+        "required": [
+          "claimId",
+          "statusCode"
+        ],
+        "type": "object",
+        "properties": {
+          "claimId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "statusCode": {
+            "$ref": "#/components/schemas/HttpStatusCode"
+          }
+        }
+      },
+      "ClaimSupportPhoneNumberResponse": {
+        "required": [
+          "phoneNumber",
+          "extension"
+        ],
+        "type": "object",
+        "properties": {
+          "phoneNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "extension": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ClosedEncounterSearchType": {
+        "type": "integer"
+      },
+      "CreateBatchActionRequest": {
+        "required": [
+          "arCorrelationId",
+          "patientId"
+        ],
+        "type": "object",
+        "properties": {
+          "arCorrelationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "charges": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "claims": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "bills": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "CreateRuleRequest": {
+        "required": [
+          "sequenceId",
+          "name",
+          "description",
+          "userGuidance",
+          "behaviorCategory",
+          "startDate",
+          "endDate",
+          "qualifiers",
+          "sameDateOfServiceQualifiers",
+          "episodeQualifier",
+          "behaviorConfiguration",
+          "qualificationConfiguration"
+        ],
+        "type": "object",
+        "properties": {
+          "sequenceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userGuidance": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "behaviorCategory": {
+            "$ref": "#/components/schemas/BehaviorCategory"
+          },
+          "startDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "qualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifiers"
+            }
+          },
+          "sameDateOfServiceQualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifiers"
+            }
+          },
+          "episodeQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EpisodeQualifier"
+              }
+            ]
+          },
+          "ruleAction": {
+            "$ref": "#/components/schemas/RuleAction"
+          },
+          "releaseType": {
+            "$ref": "#/components/schemas/ReleaseType"
+          },
+          "behaviorConfiguration": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": { }
+              }
+            }
+          },
+          "qualificationConfiguration": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": { }
+            }
+          },
+          "modifiedDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "Date": {
+        "title": "Sharp.Date",
+        "type": "string",
+        "format": "date"
+      },
+      "DetailedInvoiceType": {
+        "type": "integer"
+      },
+      "ElementQualifier": {
+        "required": [
+          "elementId",
+          "exclusionary"
+        ],
+        "type": "object",
+        "properties": {
+          "elementId": {
+            "type": "string"
+          },
+          "exclusionary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ElementQualifierRequest": {
+        "required": [
+          "elementId",
+          "exclusionary"
+        ],
+        "type": "object",
+        "properties": {
+          "elementId": {
+            "type": "string"
+          },
+          "exclusionary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EntityType": {
+        "type": "integer"
+      },
+      "EpisodeQualifier": {
+        "required": [
+          "allEpisodes",
+          "episodeTypes",
+          "phases",
+          "exclusionary"
+        ],
+        "type": "object",
+        "properties": {
+          "allEpisodes": {
+            "type": "boolean"
+          },
+          "episodeTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "exclusionary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "FailureSummaryResponse": {
+        "required": [
+          "failures"
+        ],
+        "type": "object",
+        "properties": {
+          "failures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterventionFailureCount"
+            }
+          }
+        }
+      },
+      "GuarantorBalance": {
+        "required": [
+          "guarantorId",
+          "name",
+          "balance"
+        ],
+        "type": "object",
+        "properties": {
+          "guarantorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "HttpStatusCode": {
+        "type": "integer"
+      },
+      "IcdCodeIdentity": {
+        "required": [
+          "code",
+          "icdCodeType"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "icdCodeType": {
+            "$ref": "#/components/schemas/IcdCodeType"
+          },
+          "isInvalidIcdCode": {
+            "type": "boolean"
+          }
+        }
+      },
+      "IcdCodeType": {
+        "type": "integer"
+      },
+      "InterventionFailureCount": {
+        "required": [
+          "interventionType",
+          "failureCount"
+        ],
+        "type": "object",
+        "properties": {
+          "interventionType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "failureCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "InterventionIdentity": {
+        "type": "object",
+        "properties": {
+          "interventionType": {
+            "$ref": "#/components/schemas/InterventionType"
+          },
+          "chargeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "claimId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "chargePaymentId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "ruleId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "chargeTransactionAccount": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ChargeTransactionAccount"
+              }
+            ]
+          }
+        }
+      },
+      "InterventionManagementRequest": {
+        "required": [
+          "interventionTypes"
+        ],
+        "type": "object",
+        "properties": {
+          "interventionTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterventionType"
+            }
+          }
+        }
+      },
+      "InterventionType": {
+        "type": "integer"
+      },
+      "InterventionTypeRules": {
+        "required": [
+          "interventionType"
+        ],
+        "type": "object",
+        "properties": {
+          "interventionType": {
+            "$ref": "#/components/schemas/InterventionType"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RuleHeader"
+            }
+          }
+        }
+      },
+      "InterventionWaypointResponse": {
+        "required": [
+          "behavior",
+          "ruleId",
+          "name",
+          "userGuidance"
+        ],
+        "type": "object",
+        "properties": {
+          "behavior": {
+            "$ref": "#/components/schemas/InterventionType"
+          },
+          "ruleId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userGuidance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "InvoiceChargeAssemblyResponse": {
+        "required": [
+          "chargeAssemblyId",
+          "chargeAssemblyNumber",
+          "payerAssemblyId",
+          "payerAssemblyNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeAssemblyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "chargeAssemblyNumber": {
+            "type": "string"
+          },
+          "payerAssemblyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payerAssemblyNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "ManufacturerBalance": {
+        "required": [
+          "manufacturerCopayProgramId",
+          "payerId",
+          "manufacturerCopayProgramName",
+          "manufacturerPayerName",
+          "balance"
+        ],
+        "type": "object",
+        "properties": {
+          "manufacturerCopayProgramId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "manufacturerCopayProgramName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "manufacturerPayerName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "Modifier": {
+        "required": [
+          "modifierId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "modifierId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "NetType": {
+        "type": "integer"
+      },
+      "PatientChargeBalance": {
+        "required": [
+          "chargeId",
+          "chargeCode",
+          "activityId",
+          "chargeStatus",
+          "chargeSubStatus",
+          "dateOfService",
+          "divisionId",
+          "facilityId",
+          "billingProviderId",
+          "billingUnits",
+          "ndc",
+          "billSentDate",
+          "guarantor",
+          "snf"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "chargeCode": {
+            "type": "string"
+          },
+          "activityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "chargeStatus": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "chargeSubStatus": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "divisionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "facilityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "billingProviderId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "billingUnits": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "ndc": {
+            "type": "string"
+          },
+          "billSentDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "modifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Modifier"
+            }
+          },
+          "policies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PolicyBalance"
+            }
+          },
+          "guarantor": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/GuarantorBalance"
+              }
+            ]
+          },
+          "snf": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SnfBalance"
+              }
+            ]
+          },
+          "manufacturerBalance": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ManufacturerBalance"
+              }
+            ]
+          }
+        }
+      },
+      "PatientSummary": {
+        "required": [
+          "firstName",
+          "lastName",
+          "dateOfBirth",
+          "financialAccountNumber",
+          "primaryPayerId",
+          "primaryPayerName",
+          "primaryPlanId",
+          "primaryPlanName",
+          "primaryResponsibleProviderId",
+          "primaryResponsibleProviderName"
+        ],
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "dateOfBirth": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "financialAccountNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryPayerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "primaryPayerName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "primaryPlanName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryResponsibleProviderId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "primaryResponsibleProviderName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "displayName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastNameFirstCharacter": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PolicyBalance": {
+        "required": [
+          "policyId",
+          "planId",
+          "payerId",
+          "payerName",
+          "planName",
+          "policyNumber",
+          "balance"
+        ],
+        "type": "object",
+        "properties": {
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "planId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "payerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "payerName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "planName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "policyNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "QualifierHeader": {
+        "required": [
+          "attributeType",
+          "id",
+          "isSet",
+          "exclusionary"
+        ],
+        "type": "object",
+        "properties": {
+          "attributeType": {
+            "$ref": "#/components/schemas/AttributeType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "isSet": {
+            "type": "boolean"
+          },
+          "exclusionary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ReleaseType": {
+        "type": "integer"
+      },
+      "ResolveInterventionsRequest": {
+        "type": "object",
+        "properties": {
+          "interventions": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/InterventionIdentity"
+            }
+          },
+          "interventionTypes": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/InterventionType"
+            }
+          }
+        }
+      },
+      "RuleAction": {
+        "type": "integer"
+      },
+      "RuleDetail": {
+        "required": [
+          "sequenceId",
+          "ruleId",
+          "name",
+          "description",
+          "userGuidance",
+          "behaviorCategory",
+          "startDate",
+          "endDate",
+          "qualifiers",
+          "sameDateOfServiceQualifiers",
+          "episodeQualifier",
+          "behaviorConfiguration",
+          "qualificationConfiguration",
+          "ruleAction",
+          "releaseType",
+          "netType",
+          "createdByUserId",
+          "createdDate",
+          "lastModifiedByUserId",
+          "lastModifiedDate"
+        ],
+        "type": "object",
+        "properties": {
+          "sequenceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ruleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userGuidance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "behaviorCategory": {
+            "$ref": "#/components/schemas/BehaviorCategory"
+          },
+          "startDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "qualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifiers"
+            }
+          },
+          "sameDateOfServiceQualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifiers"
+            }
+          },
+          "episodeQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EpisodeQualifier"
+              }
+            ]
+          },
+          "behaviorConfiguration": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": { }
+              }
+            }
+          },
+          "qualificationConfiguration": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": { }
+            }
+          },
+          "reviewRequired": {
+            "type": "boolean"
+          },
+          "ruleAction": {
+            "$ref": "#/components/schemas/RuleAction"
+          },
+          "releaseType": {
+            "$ref": "#/components/schemas/ReleaseType"
+          },
+          "netType": {
+            "$ref": "#/components/schemas/NetType"
+          },
+          "createdByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "RuleHeader": {
+        "required": [
+          "ruleId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "RuleOrder": {
+        "required": [
+          "ruleId",
+          "order"
+        ],
+        "type": "object",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "order": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "RuleSummary": {
+        "required": [
+          "ruleId",
+          "sequenceId",
+          "order",
+          "name",
+          "description",
+          "userGuidance",
+          "behaviorCategory",
+          "startDate",
+          "endDate",
+          "qualifiers",
+          "sameDateOfServiceQualifiers",
+          "releaseType",
+          "behaviorConfiguration"
+        ],
+        "type": "object",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "sequenceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "order": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userGuidance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "behaviorCategory": {
+            "$ref": "#/components/schemas/BehaviorCategory"
+          },
+          "startDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "qualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QualifierHeader"
+            }
+          },
+          "sameDateOfServiceQualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QualifierHeader"
+            }
+          },
+          "releaseType": {
+            "$ref": "#/components/schemas/ReleaseType"
+          },
+          "behaviorConfiguration": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": { }
+              }
+            }
+          }
+        }
+      },
+      "SequenceHeader": {
+        "required": [
+          "sequenceId",
+          "order",
+          "name",
+          "sequenceStatus",
+          "createdByUserId",
+          "createdDate",
+          "lastModifiedByUserId",
+          "lastModifiedDate"
+        ],
+        "type": "object",
+        "properties": {
+          "sequenceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "order": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RuleHeader"
+            }
+          },
+          "sequenceStatus": {
+            "$ref": "#/components/schemas/SequenceStatus"
+          },
+          "createdByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SequenceStatus": {
+        "type": "integer"
+      },
+      "SetQualifier": {
+        "required": [
+          "setType",
+          "setId",
+          "isFactorySet",
+          "exclusionary"
+        ],
+        "type": "object",
+        "properties": {
+          "setType": {
+            "type": "string"
+          },
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isFactorySet": {
+            "type": "boolean"
+          },
+          "exclusionary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SetQualifierRequest": {
+        "required": [
+          "setType",
+          "setId",
+          "isFactorySet",
+          "exclusionary"
+        ],
+        "type": "object",
+        "properties": {
+          "setType": {
+            "type": "string"
+          },
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isFactorySet": {
+            "type": "boolean"
+          },
+          "exclusionary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SnfBalance": {
+        "required": [
+          "snfPatientId",
+          "snfId",
+          "payerId",
+          "snfResidentNumber",
+          "snfFacilityName",
+          "snfPayerName",
+          "balance"
+        ],
+        "type": "object",
+        "properties": {
+          "snfPatientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "snfId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "snfResidentNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "snfFacilityName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "snfPayerName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "TransactionAccountType": {
+        "type": "integer"
+      },
+      "UpdateRuleNameRequest": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateRuleRequest": {
+        "required": [
+          "ruleId",
+          "name",
+          "description",
+          "userGuidance",
+          "behaviorCategory",
+          "startDate",
+          "endDate",
+          "qualifiers",
+          "sameDateOfServiceQualifiers",
+          "episodeQualifier",
+          "behaviorConfiguration",
+          "qualificationConfiguration"
+        ],
+        "type": "object",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userGuidance": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "behaviorCategory": {
+            "$ref": "#/components/schemas/BehaviorCategory"
+          },
+          "startDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "qualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifiers"
+            }
+          },
+          "sameDateOfServiceQualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifiers"
+            }
+          },
+          "episodeQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EpisodeQualifier"
+              }
+            ]
+          },
+          "ruleAction": {
+            "$ref": "#/components/schemas/RuleAction"
+          },
+          "releaseType": {
+            "$ref": "#/components/schemas/ReleaseType"
+          },
+          "behaviorConfiguration": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": { }
+              }
+            }
+          },
+          "qualificationConfiguration": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": { }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AccountsReceivable"
+    },
+    {
+      "name": "ARInterventionRule"
+    },
+    {
+      "name": "ARInterventions"
+    },
+    {
+      "name": "InterventionManagement"
+    },
+    {
+      "name": "PatientCharge"
+    },
+    {
+      "name": "ARInterventionSequence"
+    },
+    {
+      "name": "Signalr"
+    },
+    {
+      "name": "ClaimValidation"
+    },
+    {
+      "name": "ChargeValidation"
+    }
+  ]
+}

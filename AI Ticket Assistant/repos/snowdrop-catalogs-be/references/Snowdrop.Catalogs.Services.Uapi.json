@@ -1,0 +1,326 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Catalogs API V2 - UAPI",
+    "description": "Snowdrop Catalogs API V2 - UAPI",
+    "version": "v1"
+  },
+  "paths": {
+    "/34fa5de6-1206-4341-8384-ad330c717138/elements/add": {
+      "post": {
+        "tags": [
+          "Providers"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UapiCreateProviderRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UapiCreateProviderRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UapiCreateProviderRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Service Unavailable"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "UapiCreateProviderRequest": {
+        "required": [
+          "runId",
+          "actionId",
+          "elementName",
+          "effectiveDateBegin",
+          "firstName",
+          "middleName",
+          "lastName",
+          "suffix",
+          "specialtyId",
+          "addressLine1",
+          "addressLine2",
+          "addressStateId",
+          "addressCity",
+          "addressZipCode",
+          "addressCounty",
+          "contactPhoneNumber",
+          "contactPhoneNumberExtension",
+          "contactFaxNumber",
+          "contactFaxNumberExtension"
+        ],
+        "type": "object",
+        "properties": {
+          "runId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "actionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "elementName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "effectiveDateBegin": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "effectiveDateEnd": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "firstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "middleName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "suffix": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "specialtyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "addressLine1": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "addressLine2": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "addressStateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "addressCity": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "addressZipCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "addressCounty": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "contactPhoneNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "contactPhoneNumberExtension": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "contactFaxNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "contactFaxNumberExtension": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Providers"
+    }
+  ]
+}

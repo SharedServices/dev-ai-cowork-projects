@@ -1,0 +1,1565 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Notes Unlimited API",
+    "description": "Notes API exposed to Unlimited API (UAPI) callers on independent compute"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/notes/unlimitedapi"
+    }
+  ],
+  "paths": {
+    "/entitytype/{entityType}/entity/{entityId}": {
+      "get": {
+        "tags": [
+          "Notes"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NoteResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NoteResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NoteResponse"
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting requests because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Notes"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNoteRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNoteRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNoteRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNoteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteIdResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting requests because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entitytype/{entityType}/entity/{entityId}/acknowledgement-required": {
+      "get": {
+        "tags": [
+          "Notes"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NoteResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NoteResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/NoteResponse"
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting requests because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entitytype/{entityType}/entity/{entityId}/note/{noteId}": {
+      "get": {
+        "tags": [
+          "Notes"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "noteId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting requests because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Notes"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "noteId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNoteRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNoteRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNoteRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateNoteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteIdResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting requests because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Notes"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "noteId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "429": {
+            "description": "The datastore is rejecting requests because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entitytype/{entityType}/entity/{entityId}/bulk/create": {
+      "post": {
+        "tags": [
+          "Notes"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNoteRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNoteRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNoteRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateNoteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteCreatedResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteCreatedResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoteCreatedResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting requests because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entitytype/{entityType}/entity/{entityId}/note/{noteId}/move": {
+      "post": {
+        "tags": [
+          "Notes"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "noteId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MoveNoteRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MoveNoteRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MoveNoteRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MoveNoteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "429": {
+            "description": "The datastore is rejecting requests because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entitytype/{entityType}/entity/{entityId}/documents": {
+      "get": {
+        "tags": [
+          "Notes"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentsResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting requests because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entitytype/{entityType}/entity/{entityId}/documents/alerts": {
+      "get": {
+        "tags": [
+          "Notes"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentAlertsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentAlertsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentAlertsResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting requests because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateNoteRequest": {
+        "required": [
+          "text",
+          "context",
+          "effectiveness",
+          "audience"
+        ],
+        "type": "object",
+        "properties": {
+          "text": {
+            "description": "Text information for the note",
+            "$ref": "#/components/schemas/NoteText"
+          },
+          "context": {
+            "type": "string",
+            "description": "Optional context information"
+          },
+          "effectiveness": {
+            "description": "Effective date range for the note",
+            "$ref": "#/components/schemas/NoteEffectiveness"
+          },
+          "audience": {
+            "description": "Audience settings for the note",
+            "$ref": "#/components/schemas/NoteAudience"
+          }
+        },
+        "description": "Request to create a note"
+      },
+      "Date": { },
+      "DocumentAlertsResponse": {
+        "required": [
+          "documentTypes"
+        ],
+        "type": "object",
+        "properties": {
+          "documentTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentTypeAlertsCollection"
+            },
+            "description": "List of alerts"
+          }
+        },
+        "description": "Document alerts for an entity"
+      },
+      "DocumentsResponse": {
+        "required": [
+          "documents"
+        ],
+        "type": "object",
+        "properties": {
+          "documents": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentTypeResponse"
+            },
+            "description": "Collection of document information"
+          }
+        },
+        "description": "Documents for an entity"
+      },
+      "DocumentTypeAlerts": {
+        "type": "object",
+        "properties": {
+          "isMissingDocumentTypeAttentionNeeded": {
+            "type": "boolean",
+            "description": "Indicates that there are no attachments associated with the document type."
+          },
+          "isArchivedDocumentTypeAttentionNeeded": {
+            "type": "boolean",
+            "description": "Indicates that the only document(s) associated with the document type is archived."
+          },
+          "isDocumentTypeAttentionNeeded": {
+            "type": "boolean",
+            "description": "Indicates that the document type is overall in need of attention, based on the discrete flags."
+          }
+        },
+        "description": "Alert flags for a document type"
+      },
+      "DocumentTypeAlertsCollection": {
+        "required": [
+          "documentTypeId",
+          "alerts"
+        ],
+        "type": "object",
+        "properties": {
+          "documentTypeId": {
+            "type": "string",
+            "description": "Id of the document type (from catalogs)",
+            "format": "uuid"
+          },
+          "alerts": {
+            "description": "Alerts for the document type",
+            "$ref": "#/components/schemas/DocumentTypeAlerts"
+          }
+        },
+        "description": "Collection of document type alerts"
+      },
+      "DocumentTypeResponse": {
+        "required": [
+          "noteId",
+          "documentTypeId",
+          "latestAttachment",
+          "documentTypeAlerts",
+          "timeStamp"
+        ],
+        "type": "object",
+        "properties": {
+          "noteId": {
+            "type": "string",
+            "description": "Unique identifier to assign the new note",
+            "format": "uuid"
+          },
+          "documentTypeId": {
+            "type": "string",
+            "description": "Id of the document type (from catalogs)",
+            "format": "uuid"
+          },
+          "latestAttachment": {
+            "description": "Info on the most recent attachment",
+            "$ref": "#/components/schemas/LatestAttachment"
+          },
+          "documentTypeAlerts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DocumentTypeAlerts"
+            },
+            "description": "Document type alerts"
+          },
+          "timeStamp": {
+            "type": "string",
+            "description": "Timestamp of the response",
+            "format": "date-time"
+          }
+        },
+        "description": "API response containing document type information for a note"
+      },
+      "LatestAttachment": {
+        "required": [
+          "attachmentId",
+          "archivalDate",
+          "acquisitionTimestamp",
+          "acquisitionByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "attachmentId": {
+            "type": "string",
+            "description": "Unique identifier of the attachment",
+            "format": "uuid"
+          },
+          "archivalDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "If set, the date/time the attachment was archived",
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "acquisitionTimestamp": {
+            "type": "string",
+            "description": "Date/time the attachment was created",
+            "format": "date-time"
+          },
+          "acquisitionByUserId": {
+            "type": "string",
+            "description": "Id of the user who created the attachment",
+            "format": "uuid"
+          }
+        },
+        "description": "The latest attachment details"
+      },
+      "MoveNoteRequest": {
+        "required": [
+          "newEntityType",
+          "newEntityId"
+        ],
+        "type": "object",
+        "properties": {
+          "newEntityType": {
+            "type": "string"
+          },
+          "newEntityId": {
+            "type": "string"
+          }
+        }
+      },
+      "NoteAttachmentMetadataResponse": {
+        "required": [
+          "fileName",
+          "fileExtension",
+          "documentType"
+        ],
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string"
+          },
+          "fileExtension": {
+            "type": "string"
+          },
+          "documentType": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "NoteAttachmentResponse": {
+        "required": [
+          "noteAttachmentId",
+          "fileName",
+          "fileExtension",
+          "documentType",
+          "metadata",
+          "blobName",
+          "timeStamp",
+          "acquisitionUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "noteAttachmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "fileExtension": {
+            "type": "string"
+          },
+          "documentType": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/NoteAttachmentMetadataResponse"
+          },
+          "blobName": {
+            "type": "string"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "acquisitionUserId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "NoteAudience": {
+        "required": [
+          "requiresAcknowledgement"
+        ],
+        "type": "object",
+        "properties": {
+          "requiresAcknowledgement": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NoteComment": {
+        "required": [
+          "noteCommentId",
+          "text",
+          "date",
+          "createdByUserId",
+          "timeStamp",
+          "isDeleted"
+        ],
+        "type": "object",
+        "properties": {
+          "noteCommentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "text": {
+            "type": "string"
+          },
+          "date": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "createdByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NoteCreatedResponse": {
+        "required": [
+          "entityType",
+          "entityId",
+          "noteId"
+        ],
+        "type": "object",
+        "properties": {
+          "entityType": {
+            "type": "string"
+          },
+          "entityId": {
+            "type": "string"
+          },
+          "noteId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "NoteEffectiveness": {
+        "required": [
+          "effectiveDate",
+          "expirationDate"
+        ],
+        "type": "object",
+        "properties": {
+          "effectiveDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "expirationDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      },
+      "NoteIdResponse": {
+        "required": [
+          "noteId"
+        ],
+        "type": "object",
+        "properties": {
+          "noteId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "NoteResponse": {
+        "required": [
+          "entityType",
+          "entityId",
+          "noteId",
+          "context",
+          "effectiveness",
+          "audience",
+          "comments",
+          "attachments",
+          "created",
+          "createdByUserId",
+          "lastUpdatedByUserId",
+          "lastUpdated",
+          "isDeleted"
+        ],
+        "type": "object",
+        "properties": {
+          "entityType": {
+            "type": "string"
+          },
+          "entityId": {
+            "type": "string"
+          },
+          "noteId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "context": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "text": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "effectiveness": {
+            "$ref": "#/components/schemas/NoteEffectiveness"
+          },
+          "audience": {
+            "$ref": "#/components/schemas/NoteAudience"
+          },
+          "comments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NoteComment"
+            }
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NoteAttachmentResponse"
+            }
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastUpdatedByUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "lastUpdated": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "taggableNoteText": {
+            "$ref": "#/components/schemas/NoteText"
+          }
+        },
+        "description": "Represents a note associated with an entity, including its content, metadata, comments, and attachments."
+      },
+      "NoteText": {
+        "required": [
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "Primary text for the note"
+          },
+          "tags": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            },
+            "description": "Optional tags on the note text"
+          },
+          "nodeTree": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Json serialization of node tree"
+          }
+        },
+        "description": "Contains note primary text and tagging"
+      },
+      "Tag": {
+        "required": [
+          "tagId"
+        ],
+        "type": "object",
+        "properties": {
+          "tagId": {
+            "type": "string",
+            "description": "The identifier",
+            "format": "uuid"
+          }
+        },
+        "description": "Tag identifier"
+      },
+      "UpdateNoteRequest": {
+        "type": "object",
+        "properties": {
+          "context": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "text": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/NoteText"
+              }
+            ]
+          },
+          "effectiveness": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/NoteEffectiveness"
+              }
+            ]
+          },
+          "audience": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/NoteAudience"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Notes"
+    }
+  ]
+}

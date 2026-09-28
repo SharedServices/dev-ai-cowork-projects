@@ -1,0 +1,228 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Resources Ledger API",
+    "description": "Snowdrop Resources Ledger API",
+    "version": "v1"
+  },
+  "paths": {
+    "/snowdrop/resources/ledger/divisions/{divisionId}": {
+      "get": {
+        "tags": [
+          "Ledger"
+        ],
+        "summary": "Retrieves ledger information for a specific division.",
+        "parameters": [
+          {
+            "name": "divisionId",
+            "in": "path",
+            "description": "The unique identifier of the division.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A response containing the division's ledger information.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionLedgersResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionLedgersResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionLedgersResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Ledger"
+        ],
+        "summary": "Updates ledger information for a specific division.",
+        "parameters": [
+          {
+            "name": "divisionId",
+            "in": "path",
+            "description": "The unique identifier of the division.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The request containing updated ledger information.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DivisionLedgersPutRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DivisionLedgersPutRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DivisionLedgersPutRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DivisionLedgersPutRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "An OK result if the update is successful, or a BadRequest/Conflict result if validation fails.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionLedgersResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionLedgersResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionLedgersResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Date": {
+        "title": "Sharp.Date",
+        "type": "string",
+        "format": "date",
+        "example": "2024-12-11"
+      },
+      "DivisionLedgersPutRequest": {
+        "type": "object",
+        "properties": {
+          "chargeLedger": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/LedgerPutRequest"
+              }
+            ]
+          },
+          "paymentLedger": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/LedgerPutRequest"
+              }
+            ]
+          }
+        }
+      },
+      "DivisionLedgersResponse": {
+        "type": "object",
+        "properties": {
+          "chargeLedger": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/LedgerResponse"
+              }
+            ]
+          },
+          "paymentLedger": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/LedgerResponse"
+              }
+            ]
+          }
+        }
+      },
+      "LedgerPutRequest": {
+        "required": [
+          "ledgerDate"
+        ],
+        "type": "object",
+        "properties": {
+          "ledgerDate": {
+            "$ref": "#/components/schemas/Date"
+          }
+        }
+      },
+      "LedgerResponse": {
+        "type": "object",
+        "properties": {
+          "ledgerDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "closedTimestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "closedByUserId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Ledger"
+    }
+  ]
+}

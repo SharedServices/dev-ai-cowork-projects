@@ -1,0 +1,130 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Notes Api v2",
+    "description": "Snowdrop Notes Api v2"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/notes/v2/public"
+    }
+  ],
+  "paths": {
+    "/signalr/notes-v2-hub/negotiate": {
+      "post": {
+        "tags": [
+          "Signalr"
+        ],
+        "parameters": [
+          {
+            "name": "user",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/signalr/groups/entitytype/{entityType}/entity/{entityId}/users/add": {
+      "post": {
+        "tags": [
+          "Signalr"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/signalr/groups/entitytype/{entityType}/entity/{entityId}/users/remove": {
+      "post": {
+        "tags": [
+          "Signalr"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Signalr"
+    }
+  ]
+}

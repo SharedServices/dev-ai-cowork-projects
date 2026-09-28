@@ -1,0 +1,1294 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Snowdrop Command Center Public API",
+    "description": "Snowdrop Command Center Public API",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/commandcenter"
+    }
+  ],
+  "paths": {
+    "/bulkactions": {
+      "post": {
+        "tags": [
+          "BulkAction"
+        ],
+        "summary": "Upload a spread sheet with bulk action details",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.SubmitBulkActionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.SubmitBulkActionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.SubmitBulkActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "BulkAction"
+        ],
+        "summary": "Returns a list of in-process and completed bulk actions",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.BulkActionListProgressResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.BulkActionListProgressResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.BulkActionListProgressResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bulkactions/json": {
+      "post": {
+        "tags": [
+          "BulkAction"
+        ],
+        "summary": "Upload a spread sheet with bulk action details",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.SubmitBulkActionJsonRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.SubmitBulkActionJsonRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.SubmitBulkActionJsonRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.SubmitBulkActionJsonRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.SubmitBulkActionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.SubmitBulkActionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.SubmitBulkActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bulkactions/cancel": {
+      "post": {
+        "tags": [
+          "BulkAction"
+        ],
+        "summary": "Cancel a running bulk action",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.CancelBulkActionRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.CancelBulkActionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.CancelBulkActionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.CancelBulkActionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.CancelBulkActionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.CancelBulkActionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.CancelBulkActionResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bulkactions/all": {
+      "get": {
+        "tags": [
+          "BulkAction"
+        ],
+        "summary": "Returns a list of all actions ever initiated",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.BulkActionListProgressResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.BulkActionListProgressResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.BulkActionListProgressResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bulkactions/{bulkActionId}": {
+      "get": {
+        "tags": [
+          "BulkAction"
+        ],
+        "summary": "Get the details and status of a specific bulk action",
+        "parameters": [
+          {
+            "name": "bulkActionId",
+            "in": "path",
+            "description": "Id of the bulk action",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.BulkActionDetailResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.BulkActionDetailResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.BulkActionDetailResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bulkactions/{bulkActionId}/completion-report": {
+      "get": {
+        "tags": [
+          "BulkAction"
+        ],
+        "summary": "Get the completion report for a specific bulk action",
+        "parameters": [
+          {
+            "name": "bulkActionId",
+            "in": "path",
+            "description": "Id of the bulk action",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bulkactions/{bulkActionId}/spreadsheet": {
+      "get": {
+        "tags": [
+          "BulkAction"
+        ],
+        "summary": "Download the spread sheet that was uploaded for a specific bulk action",
+        "parameters": [
+          {
+            "name": "bulkActionId",
+            "in": "path",
+            "description": "Id of the bulk action",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/bulkactions/{bulkActionId}/json": {
+      "get": {
+        "tags": [
+          "BulkAction"
+        ],
+        "summary": "Download the spread sheet that was uploaded for a specific bulk action",
+        "parameters": [
+          {
+            "name": "bulkActionId",
+            "in": "path",
+            "description": "Id of the bulk action",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sqlactions/{actionId}": {
+      "get": {
+        "tags": [
+          "SqlAction"
+        ],
+        "summary": "Get the details and status of a specific sql action",
+        "parameters": [
+          {
+            "name": "actionId",
+            "in": "path",
+            "description": "Id of the sql action",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.BulkActionDetailResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.BulkActionDetailResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.BulkActionDetailResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sqlactions/{actionId}/completion-report": {
+      "get": {
+        "tags": [
+          "SqlAction"
+        ],
+        "summary": "Get the completion report for a specific bulk action",
+        "parameters": [
+          {
+            "name": "actionId",
+            "in": "path",
+            "description": "Id of the sql action",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/templates": {
+      "get": {
+        "tags": [
+          "Templates"
+        ],
+        "summary": "Return the list of available templates / bulk actions",
+        "parameters": [
+          {
+            "name": "includeVendorOnly",
+            "in": "query",
+            "description": "Indicates if vendor-only templates should be included in return",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.GetTemplatesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.GetTemplatesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.GetTemplatesResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/templates/{templateId}": {
+      "get": {
+        "tags": [
+          "Templates"
+        ],
+        "summary": "Return a specific template's content (a xlxs)",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "Unique identifier for template being requested",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tokens": {
+      "post": {
+        "tags": [
+          "Token"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.GenerateTokenRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.GenerateTokenRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.GenerateTokenRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.GenerateTokenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.GenerateTokenResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.GenerateTokenResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.GenerateTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tokentypes": {
+      "get": {
+        "tags": [
+          "TokenTypes"
+        ],
+        "summary": "Return the list of available token types",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.GetTokenTypesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.GetTokenTypesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.GetTokenTypesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/utilities/templates/{templateId}/hidden": {
+      "post": {
+        "tags": [
+          "Utilities"
+        ],
+        "summary": "Toggles a template's hidden property",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "Unique identifier for template being updated",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Microsoft.AspNetCore.Mvc.ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "Snowdrop.CommandCenter.API.BulkActionDetailResponse": {
+        "type": "object",
+        "properties": {
+          "bulkActionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "templateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "templateName": {
+            "type": "string",
+            "nullable": true
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/Snowdrop.CommandCenter.Contracts.BulkActionStatusEnum"
+          },
+          "runUserId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "cancelUserId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "cancellationReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "failureCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "successCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "actionType": {
+            "$ref": "#/components/schemas/Snowdrop.CommandCenter.Contracts.ActionType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.CommandCenter.API.BulkActionListProgressResponse": {
+        "type": "object",
+        "properties": {
+          "processing": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.BulkActionProgressLineResponse"
+            },
+            "nullable": true
+          },
+          "completed": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.BulkActionProgressLineResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.CommandCenter.API.BulkActionProgressLineResponse": {
+        "type": "object",
+        "properties": {
+          "templateName": {
+            "type": "string",
+            "nullable": true
+          },
+          "runUserId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "bulkActionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "failureCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "successCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "progress": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/Snowdrop.CommandCenter.Contracts.BulkActionStatusEnum"
+          },
+          "runTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "actionType": {
+            "$ref": "#/components/schemas/Snowdrop.CommandCenter.Contracts.ActionType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.CommandCenter.API.CancelBulkActionRequest": {
+        "type": "object",
+        "properties": {
+          "bulkActionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "cancelReason": {
+            "type": "string",
+            "nullable": true
+          },
+          "userName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.CommandCenter.API.CancelBulkActionResponse": {
+        "type": "object",
+        "properties": {
+          "bulkActionId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.CommandCenter.API.GenerateTokenRequest": {
+        "type": "object",
+        "properties": {
+          "tokenTypeId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.CommandCenter.API.GenerateTokenResponse": {
+        "type": "object",
+        "properties": {
+          "tokenId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "expirationDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.CommandCenter.API.GetTemplatesResponse": {
+        "type": "object",
+        "properties": {
+          "templates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.TemplateResponseItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.CommandCenter.API.GetTokenTypesResponse": {
+        "type": "object",
+        "properties": {
+          "types": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Snowdrop.CommandCenter.API.TokenTypesResponseItem"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.CommandCenter.API.SubmitBulkActionJsonRequest": {
+        "type": "object",
+        "properties": {
+          "templateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "jsonDocument": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.CommandCenter.API.SubmitBulkActionResponse": {
+        "type": "object",
+        "properties": {
+          "bulkActionId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.CommandCenter.API.TemplateResponseItem": {
+        "type": "object",
+        "properties": {
+          "templateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "templateName": {
+            "type": "string",
+            "nullable": true
+          },
+          "guidance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.CommandCenter.API.TokenTypesResponseItem": {
+        "type": "object",
+        "properties": {
+          "typeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.CommandCenter.Contracts.ActionType": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Snowdrop.CommandCenter.Contracts.BulkActionStatusEnum": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      }
+    }
+  }
+}

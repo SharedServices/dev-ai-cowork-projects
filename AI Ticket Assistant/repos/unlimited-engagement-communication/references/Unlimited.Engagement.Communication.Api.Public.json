@@ -1,0 +1,1053 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Unlimited Engagement Communication API",
+    "description": "Unlimited Engagement Communication API"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/engagement/communication/public"
+    }
+  ],
+  "paths": {
+    "/vendor/organization": {
+      "get": {
+        "tags": [
+          "Vendor"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgCommunicationSettingsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgCommunicationSettingsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrgCommunicationSettingsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Vendor"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "User-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrgCommunicationSettingsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrgCommunicationSettingsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/OrgCommunicationSettingsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/public/patient/{patientId}": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientCommunicationSettingsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientCommunicationSettingsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientCommunicationSettingsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/public/patient/{patientId}/brand/{brandId}": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "brandId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSingleBrandCommunicationSettingsRepsonse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSingleBrandCommunicationSettingsRepsonse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSingleBrandCommunicationSettingsRepsonse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "User-Id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "brandId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientBrandCommunicationSettingsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientBrandCommunicationSettingsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientBrandCommunicationSettingsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/public/patient/{patientId}/brand/{brandId}/selfselect": {
+      "put": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "User-Id",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "brandId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientSelfSelectCommunicationSettingsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientSelfSelectCommunicationSettingsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientSelfSelectCommunicationSettingsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/config/brands/{brandId}": {
+      "get": {
+        "tags": [
+          "Brand"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "brandId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrandCommunicationSettingsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrandCommunicationSettingsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BrandCommunicationSettingsResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Brand"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "User-Id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "brandId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BrandCommunicationSettingsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BrandCommunicationSettingsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BrandCommunicationSettingsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/config/quicklink": {
+      "post": {
+        "tags": [
+          "PortalQuickLink"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePortalQuickLinkRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePortalQuickLinkRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePortalQuickLinkRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePortalQuickLinkResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePortalQuickLinkResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePortalQuickLinkResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/config/quicklink/{brandId}/{linkId}": {
+      "get": {
+        "tags": [
+          "PortalQuickLink"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "brandId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "linkId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortalQuickLinkContextResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortalQuickLinkContextResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortalQuickLinkContextResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "BrandCommunicationSettingsRequest": {
+        "required": [
+          "statements",
+          "paymentPlans"
+        ],
+        "type": "object",
+        "properties": {
+          "statements": {
+            "$ref": "#/components/schemas/StatementEngagementSettingsRequest"
+          },
+          "paymentPlans": {
+            "$ref": "#/components/schemas/PaymentPlansEngagementSettingsRequest"
+          }
+        }
+      },
+      "BrandCommunicationSettingsResponse": {
+        "required": [
+          "statements",
+          "paymentPlans"
+        ],
+        "type": "object",
+        "properties": {
+          "statements": {
+            "$ref": "#/components/schemas/StatementsCommunicationSettingsResponse"
+          },
+          "paymentPlans": {
+            "$ref": "#/components/schemas/PaymentPlansCommunicationSettingsResponse"
+          }
+        }
+      },
+      "CreatePortalQuickLinkRequest": {
+        "required": [
+          "brandId",
+          "patientId",
+          "statementId"
+        ],
+        "type": "object",
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "statementId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "CreatePortalQuickLinkResponse": {
+        "required": [
+          "linkId",
+          "expiration"
+        ],
+        "type": "object",
+        "properties": {
+          "linkId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "expiration": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "MethodEnrollment": {
+        "type": "integer"
+      },
+      "OrgCommunicationSettingsRequest": {
+        "required": [
+          "textEnabled",
+          "emailEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "textEnabled": {
+            "type": "boolean"
+          },
+          "emailEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "OrgCommunicationSettingsResponse": {
+        "required": [
+          "textEnabled",
+          "emailEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "textEnabled": {
+            "type": "boolean"
+          },
+          "emailEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PatientBrandCommunicationSettingsRequest": {
+        "required": [
+          "statements",
+          "paymentPlans"
+        ],
+        "type": "object",
+        "properties": {
+          "statements": {
+            "$ref": "#/components/schemas/PatientStatementsCommunicationSettingsRequest"
+          },
+          "paymentPlans": {
+            "$ref": "#/components/schemas/PatientPaymentPlansCommunicationSettingsRequest"
+          }
+        }
+      },
+      "PatientBrandCommunicationSettingsResponse": {
+        "required": [
+          "brandId",
+          "brandName",
+          "lastChangedByPatient",
+          "statements",
+          "paymentPlans"
+        ],
+        "type": "object",
+        "properties": {
+          "brandId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "brandName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastChangedByPatient": {
+            "type": "boolean"
+          },
+          "statements": {
+            "$ref": "#/components/schemas/PatientStatementsCommunicationSettingsResponse"
+          },
+          "paymentPlans": {
+            "$ref": "#/components/schemas/PatientPaymentPlansCommunicationSettingsResponse"
+          }
+        }
+      },
+      "PatientCommunicationSettingsResponse": {
+        "required": [
+          "cellPhone",
+          "email",
+          "brandSettings"
+        ],
+        "type": "object",
+        "properties": {
+          "cellPhone": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "brandSettings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientBrandCommunicationSettingsResponse"
+            }
+          }
+        }
+      },
+      "PatientPaymentPlansCommunicationSettingsRequest": {
+        "required": [
+          "textEnabled",
+          "emailEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "textEnabled": {
+            "type": "boolean"
+          },
+          "emailEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PatientPaymentPlansCommunicationSettingsResponse": {
+        "required": [
+          "textEnabled",
+          "emailEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "textEnabled": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "emailEnabled": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          }
+        }
+      },
+      "PatientSelfSelectCommunicationSettingsRequest": {
+        "required": [
+          "statements",
+          "paymentPlans"
+        ],
+        "type": "object",
+        "properties": {
+          "statements": {
+            "$ref": "#/components/schemas/PatientSelfSelectStatementsCommunicationSettingsRequest"
+          },
+          "paymentPlans": {
+            "$ref": "#/components/schemas/PatientPaymentPlansCommunicationSettingsRequest"
+          }
+        }
+      },
+      "PatientSelfSelectStatementsCommunicationSettingsRequest": {
+        "required": [
+          "textEnabled",
+          "emailEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "textEnabled": {
+            "type": "boolean"
+          },
+          "emailEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PatientSimpleCommunicationSettingsResponse": {
+        "required": [
+          "statements",
+          "paymentPlans"
+        ],
+        "type": "object",
+        "properties": {
+          "statements": {
+            "$ref": "#/components/schemas/PatientStatementsCommunicationSettingsResponse"
+          },
+          "paymentPlans": {
+            "$ref": "#/components/schemas/PatientPaymentPlansCommunicationSettingsResponse"
+          }
+        }
+      },
+      "PatientSingleBrandCommunicationSettingsRepsonse": {
+        "required": [
+          "lastChangedByPatient",
+          "cellPhone",
+          "email",
+          "patientSettings",
+          "brandSettings",
+          "orgSettings"
+        ],
+        "type": "object",
+        "properties": {
+          "lastChangedByPatient": {
+            "type": "boolean"
+          },
+          "cellPhone": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "patientSettings": {
+            "$ref": "#/components/schemas/PatientSimpleCommunicationSettingsResponse"
+          },
+          "brandSettings": {
+            "$ref": "#/components/schemas/BrandCommunicationSettingsResponse"
+          },
+          "orgSettings": {
+            "$ref": "#/components/schemas/OrgCommunicationSettingsResponse"
+          }
+        }
+      },
+      "PatientStatementsCommunicationSettingsRequest": {
+        "required": [
+          "textEnabled",
+          "emailEnabled",
+          "paperMailEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "textEnabled": {
+            "type": "boolean"
+          },
+          "emailEnabled": {
+            "type": "boolean"
+          },
+          "paperMailEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PatientStatementsCommunicationSettingsResponse": {
+        "required": [
+          "textEnabled",
+          "emailEnabled",
+          "paperMailEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "textEnabled": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "emailEnabled": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "paperMailEnabled": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          }
+        }
+      },
+      "PaymentPlansCommunicationSettingsResponse": {
+        "required": [
+          "text",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "text": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/MethodEnrollment"
+              }
+            ]
+          },
+          "email": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/MethodEnrollment"
+              }
+            ]
+          }
+        }
+      },
+      "PaymentPlansEngagementSettingsRequest": {
+        "required": [
+          "text",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "text": {
+            "$ref": "#/components/schemas/MethodEnrollment"
+          },
+          "email": {
+            "$ref": "#/components/schemas/MethodEnrollment"
+          }
+        }
+      },
+      "PortalQuickLinkContextResponse": {
+        "required": [
+          "patientId",
+          "statementId"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "statementId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "StatementEngagementSettingsRequest": {
+        "required": [
+          "text",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "text": {
+            "$ref": "#/components/schemas/MethodEnrollment"
+          },
+          "email": {
+            "$ref": "#/components/schemas/MethodEnrollment"
+          }
+        }
+      },
+      "StatementsCommunicationSettingsResponse": {
+        "required": [
+          "text",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "text": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/MethodEnrollment"
+              }
+            ]
+          },
+          "email": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/MethodEnrollment"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Vendor"
+    },
+    {
+      "name": "Patient"
+    },
+    {
+      "name": "Brand"
+    },
+    {
+      "name": "PortalQuickLink"
+    }
+  ]
+}

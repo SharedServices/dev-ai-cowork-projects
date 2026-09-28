@@ -1,0 +1,1643 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Statements Public API",
+    "description": "Snowdrop Statements Public API",
+    "version": "v1"
+  },
+  "paths": {
+    "/history/patient/{patientId}": {
+      "get": {
+        "tags": [
+          "History"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatementHistoryResponseRecord"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatementHistoryResponseRecord"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatementHistoryResponseRecord"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/history/bill/{billId}": {
+      "get": {
+        "tags": [
+          "History"
+        ],
+        "parameters": [
+          {
+            "name": "billId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatementHistoryResponseRecord"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatementHistoryResponseRecord"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatementHistoryResponseRecord"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/history/guarantor/{guarantorId}/brand/{brandId}/{count}": {
+      "get": {
+        "tags": [
+          "History"
+        ],
+        "parameters": [
+          {
+            "name": "guarantorId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "brandId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "count",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatementHistoryResponseRecord"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatementHistoryResponseRecord"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatementHistoryResponseRecord"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/history/brand/{brandId}": {
+      "get": {
+        "tags": [
+          "History"
+        ],
+        "parameters": [
+          {
+            "name": "brandId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BrandStatementBatchRecord"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BrandStatementBatchRecord"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/BrandStatementBatchRecord"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/history/brand/{brandId}/batch/{batchId}": {
+      "get": {
+        "tags": [
+          "History"
+        ],
+        "parameters": [
+          {
+            "name": "brandId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "batchId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatementBatchDetailsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatementBatchDetailsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatementBatchDetailsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{patientId}/disablestatements": {
+      "post": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{patientId}/enablestatements": {
+      "post": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{patientId}": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/statement/batch/{statementBatchId}/download": {
+      "get": {
+        "tags": [
+          "Statement"
+        ],
+        "parameters": [
+          {
+            "name": "statementBatchId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/statement/{statementId}/download": {
+      "get": {
+        "tags": [
+          "Statement"
+        ],
+        "parameters": [
+          {
+            "name": "statementId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/statement/{statementId}": {
+      "get": {
+        "tags": [
+          "Statement"
+        ],
+        "parameters": [
+          {
+            "name": "statementId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatementDetailResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatementDetailResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatementDetailResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/statement/patient/{patientId}/{statementId}": {
+      "get": {
+        "tags": [
+          "Statement"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "statementId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatementDetailResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatementDetailResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatementDetailResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/statement/nextdetails/guarantor/{guarantorId}/brand/{brandId}": {
+      "get": {
+        "tags": [
+          "Statement"
+        ],
+        "parameters": [
+          {
+            "name": "guarantorId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "brandId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NextStatementDetailsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NextStatementDetailsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NextStatementDetailsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/statement-vendors": {
+      "get": {
+        "tags": [
+          "Vendors"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatementVendorsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatementVendorsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatementVendorsResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Bill": {
+        "required": [
+          "billId",
+          "createdDate",
+          "dateOfService",
+          "age",
+          "billNumber",
+          "chargedAmount",
+          "adjustedAmount",
+          "paidAmount",
+          "balanceAmount",
+          "charges"
+        ],
+        "type": "object",
+        "properties": {
+          "billId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "age": {
+            "$ref": "#/components/schemas/BillAge"
+          },
+          "billNumber": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          },
+          "chargedAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "adjustedAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paidAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "balanceAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "charges": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/Charge"
+            }
+          }
+        }
+      },
+      "BillAge": {
+        "type": "integer"
+      },
+      "BrandStatementBatchRecord": {
+        "required": [
+          "statementBatchId",
+          "runDate",
+          "batchType",
+          "runType",
+          "batchDescription",
+          "statementCount",
+          "isSampleRun",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "statementBatchId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "runDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "batchType": {
+            "$ref": "#/components/schemas/StatementBatchType"
+          },
+          "runType": {
+            "$ref": "#/components/schemas/StatementRunType"
+          },
+          "batchDescription": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "statementCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "isSampleRun": {
+            "type": "boolean"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatementBatchStatus"
+          }
+        }
+      },
+      "Charge": {
+        "required": [
+          "chargeId",
+          "chargeCode",
+          "chargeDate",
+          "activityId",
+          "amount",
+          "insurancePayments",
+          "guarantorPayments",
+          "insuranceAdjustments",
+          "guarantorAdjustments"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "chargeCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "chargeDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "activityId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "amount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "insurancePayments": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "guarantorPayments": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "insuranceAdjustments": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "guarantorAdjustments": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "Date": { },
+      "NextStatementDetailsResponse": {
+        "required": [
+          "previousStatementBalance",
+          "newCharges",
+          "paymentsApplied",
+          "currentBalance",
+          "paymentPlanEligibleBalances"
+        ],
+        "type": "object",
+        "properties": {
+          "previousStatementBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "newCharges": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentsApplied": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "currentBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentPlanEligibleBalances": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PaymentPlanEligibleBalancesResponse"
+              }
+            ]
+          }
+        }
+      },
+      "PatientResponse": {
+        "required": [
+          "patientId",
+          "statementsEnabled",
+          "disabledStatusUserId",
+          "disabledStatusDate"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "statementsEnabled": {
+            "type": "boolean"
+          },
+          "disabledStatusUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "disabledStatusDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "PaymentPlanEligibleBalancesResponse": {
+        "type": "object",
+        "properties": {
+          "zeroTo29Balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "thirtyTo59Balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "sixtyTo89Balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "ninetyTo119Balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "oneTwentyTo179Balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "oneEightyPlusBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "StatementBatchDetailsResponse": {
+        "required": [
+          "statementBatchId",
+          "runDate",
+          "batchType",
+          "batchDescription",
+          "status",
+          "runType",
+          "distributorId",
+          "statementCount",
+          "userId",
+          "isSampleRun",
+          "isSuperBatch",
+          "batches"
+        ],
+        "type": "object",
+        "properties": {
+          "statementBatchId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "runDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "batchType": {
+            "$ref": "#/components/schemas/StatementBatchType"
+          },
+          "batchDescription": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/StatementBatchStatus"
+              }
+            ]
+          },
+          "runType": {
+            "$ref": "#/components/schemas/StatementRunType"
+          },
+          "distributorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "statementCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "userId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "isSampleRun": {
+            "type": "boolean"
+          },
+          "isSuperBatch": {
+            "type": "boolean"
+          },
+          "batches": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/SubBatchDetail"
+            }
+          }
+        }
+      },
+      "StatementBatchStatus": {
+        "type": "integer"
+      },
+      "StatementBatchType": {
+        "type": "integer"
+      },
+      "StatementDetailResponse": {
+        "required": [
+          "statementId",
+          "statementTotal",
+          "statementNumber",
+          "date",
+          "guarantorFirst",
+          "guarantorLast",
+          "status",
+          "sampleRun",
+          "bills"
+        ],
+        "type": "object",
+        "properties": {
+          "statementId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "statementTotal": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "statementNumber": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "guarantorFirst": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "guarantorLast": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatementStatus"
+          },
+          "sampleRun": {
+            "type": "boolean"
+          },
+          "bills": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/Bill"
+            }
+          }
+        }
+      },
+      "StatementHistoryResponseRecord": {
+        "required": [
+          "statementId",
+          "date",
+          "statementNumber",
+          "guarantorLast",
+          "guarantorFirst",
+          "brandName",
+          "chargeTotal",
+          "balance",
+          "status",
+          "sampleRun",
+          "runType",
+          "isPaid",
+          "isNoMail"
+        ],
+        "type": "object",
+        "properties": {
+          "statementId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "statementNumber": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          },
+          "guarantorLast": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "guarantorFirst": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "brandName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "chargeTotal": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatementStatus"
+          },
+          "sampleRun": {
+            "type": "boolean"
+          },
+          "runType": {
+            "$ref": "#/components/schemas/StatementTiming"
+          },
+          "isPaid": {
+            "type": "boolean"
+          },
+          "isNoMail": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StatementRunType": {
+        "type": "integer"
+      },
+      "StatementStatus": {
+        "type": "integer"
+      },
+      "StatementTiming": {
+        "type": "integer"
+      },
+      "StatementVendor": {
+        "type": "object",
+        "properties": {
+          "vendorName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "applicationName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "displayName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "applicationId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "StatementVendorsResponse": {
+        "type": "object",
+        "properties": {
+          "statementVendors": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/StatementVendor"
+            }
+          }
+        }
+      },
+      "SubBatchDetail": {
+        "required": [
+          "subBatchId",
+          "batchDescription",
+          "statementCount",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "subBatchId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "batchDescription": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "statementCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatementBatchStatus"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "History"
+    },
+    {
+      "name": "Patient"
+    },
+    {
+      "name": "Statement"
+    },
+    {
+      "name": "Vendors"
+    }
+  ]
+}

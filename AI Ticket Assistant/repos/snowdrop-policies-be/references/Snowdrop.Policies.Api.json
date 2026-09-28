@@ -1,0 +1,4287 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "API",
+    "version": "v1"
+  },
+  "paths": {
+    "/policies/eligibility/verification": {
+      "post": {
+        "tags": [
+          "Eligibility"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePolicyEligibilityVerificationRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePolicyEligibilityVerificationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePolicyEligibilityVerificationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePolicyEligibilityVerificationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyEligibilityVerificationIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyEligibilityVerificationIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyEligibilityVerificationIdResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/eligibility/verification/{verificationId}": {
+      "put": {
+        "tags": [
+          "Eligibility"
+        ],
+        "parameters": [
+          {
+            "name": "verificationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePolicyEligibilityVerificationRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePolicyEligibilityVerificationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePolicyEligibilityVerificationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePolicyEligibilityVerificationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Eligibility"
+        ],
+        "parameters": [
+          {
+            "name": "verificationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyEligibilityVerificationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyEligibilityVerificationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyEligibilityVerificationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/eligibility/verification/policy/{policyId}": {
+      "get": {
+        "tags": [
+          "Eligibility"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PolicyEligibilityVerification"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PolicyEligibilityVerification"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PolicyEligibilityVerification"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/eligibility/verification/policy/{policyId}/limit/{limit}": {
+      "get": {
+        "tags": [
+          "Eligibility"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PolicyEligibilityVerification"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PolicyEligibilityVerification"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PolicyEligibilityVerification"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/eligibility/verification/policy/{policyId}/lastfour": {
+      "get": {
+        "tags": [
+          "Eligibility"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PolicyEligibilityVerification"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PolicyEligibilityVerification"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PolicyEligibilityVerification"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/eligibility/verification/testpdf/{verificationId}": {
+      "get": {
+        "tags": [
+          "Eligibility"
+        ],
+        "parameters": [
+          {
+            "name": "verificationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/eligibility/verification/async-rte-request": {
+      "post": {
+        "tags": [
+          "Eligibility"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsyncRteRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsyncRteRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsyncRteRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsyncRteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/eligibility/verification/rte-request": {
+      "post": {
+        "tags": [
+          "Eligibility"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RteRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RteRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RteRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyEligibilityVerificationIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyEligibilityVerificationIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyEligibilityVerificationIdResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/manufacturercopay/{patientId}": {
+      "post": {
+        "tags": [
+          "ManufacturerCopayAssistanceAward"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateManufacturerCopayAssistanceAwardRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateManufacturerCopayAssistanceAwardRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateManufacturerCopayAssistanceAwardRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateManufacturerCopayAssistanceAwardRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufacturerCopayAssistanceAwardIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufacturerCopayAssistanceAwardIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufacturerCopayAssistanceAwardIdResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ManufacturerCopayAssistanceAward"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ManufacturerCopayAssistanceAwardResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ManufacturerCopayAssistanceAwardResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ManufacturerCopayAssistanceAwardResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/manufacturercopay/counts": {
+      "get": {
+        "tags": [
+          "ManufacturerCopayAssistanceAward"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AwardCountResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AwardCountResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AwardCountResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/manufacturercopay/counts/program/{programId}": {
+      "get": {
+        "tags": [
+          "ManufacturerCopayAssistanceAward"
+        ],
+        "parameters": [
+          {
+            "name": "programId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AwardCountResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AwardCountResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AwardCountResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/manufacturercopay/counts/programs": {
+      "post": {
+        "tags": [
+          "ManufacturerCopayAssistanceAward"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgramsAwardCountRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgramsAwardCountRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgramsAwardCountRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgramsAwardCountRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AwardCountResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AwardCountResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AwardCountResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/manufacturercopay/{patientId}/award/{awardId}": {
+      "put": {
+        "tags": [
+          "ManufacturerCopayAssistanceAward"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "awardId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateManufacturerCopayAssistanceAwardRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateManufacturerCopayAssistanceAwardRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateManufacturerCopayAssistanceAwardRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateManufacturerCopayAssistanceAwardRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ManufacturerCopayAssistanceAward"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "awardId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufacturerCopayAssistanceAwardResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufacturerCopayAssistanceAwardResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ManufacturerCopayAssistanceAwardResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/medical-benefits/in-network-individual/deductible/verify": {
+      "post": {
+        "tags": [
+          "MedicalBenefits"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/medical-benefits/in-network-family/deductible/verify": {
+      "post": {
+        "tags": [
+          "MedicalBenefits"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/medical-benefits/out-of-network-individual/deductible/verify": {
+      "post": {
+        "tags": [
+          "MedicalBenefits"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/medical-benefits/out-of-network-family/deductible/verify": {
+      "post": {
+        "tags": [
+          "MedicalBenefits"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/medical-benefits/in-network-individual/out-of-pocket/verify": {
+      "post": {
+        "tags": [
+          "MedicalBenefits"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/medical-benefits/in-network-family/out-of-pocket/verify": {
+      "post": {
+        "tags": [
+          "MedicalBenefits"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/medical-benefits/out-of-network-individual/out-of-pocket/verify": {
+      "post": {
+        "tags": [
+          "MedicalBenefits"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/medical-benefits/out-of-network-family/out-of-pocket/verify": {
+      "post": {
+        "tags": [
+          "MedicalBenefits"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/medical-benefits/in-network-individual": {
+      "put": {
+        "tags": [
+          "MedicalBenefits"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/medical-benefits/in-network-family": {
+      "put": {
+        "tags": [
+          "MedicalBenefits"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/medical-benefits/out-of-network-individual": {
+      "put": {
+        "tags": [
+          "MedicalBenefits"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/medical-benefits/out-of-network-family": {
+      "put": {
+        "tags": [
+          "MedicalBenefits"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MedicalBenefitsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/patients/{patientId}/verifications/last": {
+      "get": {
+        "tags": [
+          "PatientPoliciesVerifications"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPoliciesVerificationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPoliciesVerificationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPoliciesVerificationResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/policies/patients/{patientId}/verifications": {
+      "get": {
+        "tags": [
+          "PatientPoliciesVerifications"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientPoliciesVerificationResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientPoliciesVerificationResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientPoliciesVerificationResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PatientPoliciesVerifications"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientPoliciesVerificationRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientPoliciesVerificationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientPoliciesVerificationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientPoliciesVerificationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/patients/{patientId}": {
+      "get": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPoliciesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPoliciesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPoliciesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/patients/{patientId}/{policyId}": {
+      "get": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPolicyResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPolicyResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/patients/{patientId}/preview": {
+      "get": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPoliciesPreviewResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPoliciesPreviewResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPoliciesPreviewResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/patients/{patientId}/order": {
+      "put": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientPoliciesOrderingByPayerTypeRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientPoliciesOrderingByPayerTypeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientPoliciesOrderingByPayerTypeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientPoliciesOrderingByPayerTypeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/{policyId}": {
+      "get": {
+        "tags": [
+          "Policies"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Policies"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "bogusData",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePolicyRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePolicyRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePolicyRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePolicyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyIdResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Policies"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePolicyRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePolicyRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePolicyRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePolicyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Policies"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/isprovisional": {
+      "get": {
+        "tags": [
+          "Policies"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies": {
+      "post": {
+        "tags": [
+          "Policies"
+        ],
+        "parameters": [
+          {
+            "name": "bogusData",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePolicyRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePolicyRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePolicyRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePolicyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyIdResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/out-of-network": {
+      "delete": {
+        "tags": [
+          "Policies"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PolicyIdResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/restore": {
+      "put": {
+        "tags": [
+          "Policies"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/tests/relationship/{relationshipId}": {
+      "get": {
+        "tags": [
+          "RecordProjectionTests"
+        ],
+        "parameters": [
+          {
+            "name": "relationshipId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/tests/plantype/{plantypeId}": {
+      "get": {
+        "tags": [
+          "RecordProjectionTests"
+        ],
+        "parameters": [
+          {
+            "name": "plantypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/tests/providers/{providerId}": {
+      "get": {
+        "tags": [
+          "RecordProjectionTests"
+        ],
+        "parameters": [
+          {
+            "name": "providerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringStringValueTuple"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringStringValueTuple"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringStringValueTuple"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/tests/servicetypes": {
+      "get": {
+        "tags": [
+          "RecordProjectionTests"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/tests/companyname/{companyId}": {
+      "get": {
+        "tags": [
+          "RecordProjectionTests"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/tests/plans/{planId}": {
+      "get": {
+        "tags": [
+          "RecordProjectionTests"
+        ],
+        "parameters": [
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringGuidNullableStringGuidNullableValueTuple"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringGuidNullableStringGuidNullableValueTuple"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringGuidNullableStringGuidNullableValueTuple"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/tests/patients/{patientId}": {
+      "get": {
+        "tags": [
+          "RecordProjectionTests"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringStringStringDateNullableValueTuple"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringStringStringDateNullableValueTuple"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StringStringStringDateNullableValueTuple"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/service-benefits/in-network": {
+      "put": {
+        "tags": [
+          "ServiceBenefits"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceBenefitsRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceBenefitsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceBenefitsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceBenefitsRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/{policyId}/service-benefits/out-of-network": {
+      "put": {
+        "tags": [
+          "ServiceBenefits"
+        ],
+        "parameters": [
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceBenefitsOutOfNetworkRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceBenefitsOutOfNetworkRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceBenefitsOutOfNetworkRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ServiceBenefitsOutOfNetworkRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/policies/support/sync/patient/{patientId}/policy/{policyId}": {
+      "post": {
+        "tags": [
+          "Support"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "policyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPoliciesResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPoliciesResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPoliciesResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AssistanceAwardDetails": {
+        "type": "object",
+        "properties": {
+          "assistanceNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "awardAmount": {
+            "type": "number",
+            "format": "double"
+          },
+          "awardDate": {
+            "type": "string"
+          },
+          "lookbackDays": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AsyncRteRequest": {
+        "type": "object",
+        "properties": {
+          "verificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "planId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "providerNpi": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerLastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "subscriberMemberId": {
+            "type": "string",
+            "nullable": true
+          },
+          "subscriberDob": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dateOfService": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "serviceTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "trustVerification": {
+            "type": "boolean"
+          },
+          "setDOSToTransmissionDate": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AwardCountResponse": {
+        "type": "object",
+        "properties": {
+          "awardCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "manufacturerCopayProgramId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CoverageOrderType": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "CreateManufacturerCopayAssistanceAwardRequest": {
+        "type": "object",
+        "properties": {
+          "manufacturerCopayProgramId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "type": "string"
+          },
+          "endDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "assistanceNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreatePolicyEligibilityVerificationRequest": {
+        "type": "object",
+        "properties": {
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/PolicyPlan"
+          },
+          "verificationStatus": {
+            "$ref": "#/components/schemas/EligibilityVerificationStatusType"
+          },
+          "practice": {
+            "$ref": "#/components/schemas/VerifyingPractice"
+          },
+          "dateOfService": {
+            "type": "string",
+            "nullable": true
+          },
+          "verificationDateOfService": {
+            "type": "string",
+            "nullable": true
+          },
+          "provider": {
+            "$ref": "#/components/schemas/VerifyingProvider"
+          },
+          "responsibleProvider": {
+            "$ref": "#/components/schemas/VerifyingProvider"
+          },
+          "callInformation": {
+            "$ref": "#/components/schemas/VerificationCallInformation"
+          },
+          "policyDetails": {
+            "$ref": "#/components/schemas/VerificationPolicyDetails"
+          },
+          "benefits": {
+            "$ref": "#/components/schemas/VerificationBenefits"
+          },
+          "physician": {
+            "$ref": "#/components/schemas/VerificationPrimaryCarePhysician"
+          },
+          "serviceBenefits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VerificationServiceBenefit"
+            },
+            "nullable": true
+          },
+          "notes": {
+            "$ref": "#/components/schemas/VerificationNotes"
+          },
+          "verificationType": {
+            "$ref": "#/components/schemas/EligibilityVerificationType"
+          },
+          "rteInformation": {
+            "$ref": "#/components/schemas/VerificationRteInformation"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreatePolicyRequest": {
+        "type": "object",
+        "properties": {
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payerType": {
+            "$ref": "#/components/schemas/PayerType"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "identification": {
+            "$ref": "#/components/schemas/PolicyIdentification"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/PolicyPlan"
+          },
+          "provisionalPlan": {
+            "$ref": "#/components/schemas/PolicyProvisionalPlan"
+          },
+          "policyHolder": {
+            "$ref": "#/components/schemas/PolicyHolder"
+          },
+          "pharmacyPolicy": {
+            "$ref": "#/components/schemas/PharmacyPolicy"
+          },
+          "effectiveness": {
+            "$ref": "#/components/schemas/PolicyEffectiveness"
+          },
+          "benefitsServices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceBenefits"
+            },
+            "nullable": true
+          },
+          "outOfNetworkBenefitsEnabled": {
+            "type": "boolean"
+          },
+          "benefitsServicesOutOfNetwork": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceBenefits"
+            },
+            "nullable": true
+          },
+          "medicareSecondaryAttributes": {
+            "$ref": "#/components/schemas/MedicareSecondaryAttributes"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeductibleResponse": {
+        "type": "object",
+        "properties": {
+          "remaining": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "DeductibleUpdatedFields": {
+        "type": "object",
+        "properties": {
+          "totalDeductibleUpdated": {
+            "type": "boolean"
+          },
+          "deductibleRemainingUpdated": {
+            "type": "boolean"
+          },
+          "deductibleMetUpdated": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EffectiveDateRange": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "string",
+            "nullable": true
+          },
+          "end": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EffectiveDollarAmount": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "verified": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "verifiedByUserId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EligibilityPolicyHolder": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "middleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "suffixName": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "nullable": true
+          },
+          "relationshipId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "relationshipString": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "stateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "zipCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "county": {
+            "type": "string",
+            "nullable": true
+          },
+          "socialSecurityNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "sex": {
+            "$ref": "#/components/schemas/NonPatientHolderSexType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EligibilityVerificationStatusType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "EligibilityVerificationType": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "InsuranceCardStatus": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/InsuranceCardStatusType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InsuranceCardStatusType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ManufacturerCopayAssistanceAwardIdResponse": {
+        "type": "object",
+        "properties": {
+          "manufacturerCopayAssistanceAwardId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ManufacturerCopayAssistanceAwardResponse": {
+        "type": "object",
+        "properties": {
+          "manufacturerCopayAssistanceAwardId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "manufacturerCopayProgramId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "type": "string"
+          },
+          "endDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "assistanceNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "MedicalBenefits": {
+        "type": "object",
+        "properties": {
+          "totalDeductible": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "totalOutOfPocket": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "deductibleRemaining": {
+            "$ref": "#/components/schemas/EffectiveDollarAmount"
+          },
+          "outOfPocketRemaining": {
+            "$ref": "#/components/schemas/EffectiveDollarAmount"
+          },
+          "deductibleMet": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "oopMet": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "periodMaximum": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "nextRecalculationDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "referralRequired": {
+            "type": "boolean"
+          },
+          "deductibleIncludedInOop": {
+            "type": "boolean"
+          },
+          "copayRequiredAfterOop": {
+            "type": "boolean"
+          },
+          "preExistingCondition": {
+            "type": "boolean"
+          },
+          "recalculationPeriod": {
+            "$ref": "#/components/schemas/RecalculationPeriodType"
+          },
+          "recalculationMonth": {
+            "$ref": "#/components/schemas/RecalculationMonthType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MedicalBenefitsDetail": {
+        "type": "object",
+        "properties": {
+          "totalDeductible": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "totalOutOfPocket": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "deductibleRemaining": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "outOfPocketRemaining": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "deductibleMet": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "oopMet": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "periodMaximum": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "deductibleIncludedInOop": {
+            "type": "boolean"
+          },
+          "copayRequiredAfterOop": {
+            "type": "boolean"
+          },
+          "preExistingCondition": {
+            "type": "boolean"
+          },
+          "recalculationPeriod": {
+            "$ref": "#/components/schemas/RecalculationPeriodType"
+          },
+          "recalculationMonth": {
+            "$ref": "#/components/schemas/RecalculationMonthType"
+          },
+          "referralRequired": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MedicalBenefitsRequest": {
+        "type": "object",
+        "properties": {
+          "benefits": {
+            "$ref": "#/components/schemas/MedicalBenefitsDetail"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MedicareSecondaryAttributes": {
+        "type": "object",
+        "properties": {
+          "mspInsuranceTypeId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NonPatientHolder": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "middleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "suffixName": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "stateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "zipCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "county": {
+            "type": "string",
+            "nullable": true
+          },
+          "policyHolderRelationshipId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "socialSecurityNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "sex": {
+            "$ref": "#/components/schemas/NonPatientHolderSexType"
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "NonPatientHolderSexType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "OopUpdatedFields": {
+        "type": "object",
+        "properties": {
+          "totalOopUpdated": {
+            "type": "boolean"
+          },
+          "oopRemainingUpdated": {
+            "type": "boolean"
+          },
+          "oopMetUpdated": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientAwardResponse": {
+        "type": "object",
+        "properties": {
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payerType": {
+            "$ref": "#/components/schemas/PayerType"
+          },
+          "program": {
+            "$ref": "#/components/schemas/PlanResponse"
+          },
+          "payer": {
+            "$ref": "#/components/schemas/PayerResponse"
+          },
+          "identification": {
+            "$ref": "#/components/schemas/PolicyIdentification"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PolicyStatus"
+          },
+          "effectiveness": {
+            "$ref": "#/components/schemas/PolicyEffectiveness"
+          },
+          "assistanceAwardDetails": {
+            "$ref": "#/components/schemas/AssistanceAwardDetails"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientPoliciesAlerts": {
+        "type": "object",
+        "properties": {
+          "activePolicyCountAttentionNeeded": {
+            "type": "boolean"
+          },
+          "activeInsuranceCardAttentionNeeded": {
+            "type": "boolean"
+          },
+          "activePolicyVerificationAgeAttentionNeeded": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientPoliciesOrderingByPayerTypeRequest": {
+        "type": "object",
+        "properties": {
+          "payerType": {
+            "$ref": "#/components/schemas/PayerType"
+          },
+          "order": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientPoliciesPreviewResponse": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "primary": {
+            "$ref": "#/components/schemas/PatientPolicyPreviewResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientPoliciesResponse": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "verification": {
+            "$ref": "#/components/schemas/PatientPolicyVerification"
+          },
+          "alerts": {
+            "$ref": "#/components/schemas/PatientPoliciesAlerts"
+          },
+          "policies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientPolicyResponse"
+            },
+            "nullable": true
+          },
+          "awards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientAwardResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientPoliciesVerificationRequest": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientPoliciesVerificationResponse": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientPolicyPreviewResponse": {
+        "type": "object",
+        "properties": {
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/PlanResponse"
+          },
+          "payer": {
+            "$ref": "#/components/schemas/PayerResponse"
+          },
+          "identification": {
+            "$ref": "#/components/schemas/PolicyIdentification"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientPolicyResponse": {
+        "type": "object",
+        "properties": {
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/PlanResponse"
+          },
+          "provisionalPlan": {
+            "$ref": "#/components/schemas/PolicyProvisionalPlan"
+          },
+          "payer": {
+            "$ref": "#/components/schemas/PayerResponse"
+          },
+          "identification": {
+            "$ref": "#/components/schemas/PolicyIdentification"
+          },
+          "deductible": {
+            "$ref": "#/components/schemas/DeductibleResponse"
+          },
+          "strengthMeter": {
+            "$ref": "#/components/schemas/PolicyStrengthMeter"
+          },
+          "insuranceCardStatus": {
+            "$ref": "#/components/schemas/InsuranceCardStatus"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PolicyStatus"
+          },
+          "effectiveness": {
+            "$ref": "#/components/schemas/PolicyEffectiveness"
+          },
+          "policyCoverageStatus": {
+            "$ref": "#/components/schemas/PolicyCoverageStatusType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientPolicyVerification": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PayerResponse": {
+        "type": "object",
+        "properties": {
+          "payerId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PayerType": {
+        "enum": [
+          0,
+          4,
+          5,
+          6
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "PharmacyPolicy": {
+        "type": "object",
+        "properties": {
+          "rxBinId": {
+            "type": "string",
+            "nullable": true
+          },
+          "rxGroupId": {
+            "type": "string",
+            "nullable": true
+          },
+          "rxPcnId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PlanResponse": {
+        "type": "object",
+        "properties": {
+          "planId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "legalName": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PolicyCoverageStatusType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "PolicyEffectiveness": {
+        "type": "object",
+        "properties": {
+          "dateRanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EffectiveDateRange"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PolicyEligibilityVerification": {
+        "type": "object",
+        "properties": {
+          "verificationType": {
+            "$ref": "#/components/schemas/EligibilityVerificationType"
+          },
+          "verificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/PolicyPlan"
+          },
+          "verificationStatus": {
+            "$ref": "#/components/schemas/EligibilityVerificationStatusType"
+          },
+          "practice": {
+            "$ref": "#/components/schemas/VerifyingPractice"
+          },
+          "dateOfService": {
+            "type": "string",
+            "nullable": true
+          },
+          "verificationDateOfService": {
+            "type": "string",
+            "nullable": true
+          },
+          "provider": {
+            "$ref": "#/components/schemas/VerifyingProvider"
+          },
+          "responsibleProvider": {
+            "$ref": "#/components/schemas/VerifyingProvider"
+          },
+          "callInformation": {
+            "$ref": "#/components/schemas/VerificationCallInformation"
+          },
+          "policyDetails": {
+            "$ref": "#/components/schemas/VerificationPolicyDetails"
+          },
+          "benefits": {
+            "$ref": "#/components/schemas/VerificationBenefits"
+          },
+          "physician": {
+            "$ref": "#/components/schemas/VerificationPrimaryCarePhysician"
+          },
+          "serviceBenefits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VerificationServiceBenefit"
+            },
+            "nullable": true
+          },
+          "notes": {
+            "$ref": "#/components/schemas/VerificationNotes"
+          },
+          "verificationPdf": {
+            "$ref": "#/components/schemas/VerificationPdfType"
+          },
+          "rteInformation": {
+            "$ref": "#/components/schemas/VerificationRteInformation"
+          },
+          "createdBy": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModified": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PolicyEligibilityVerificationIdResponse": {
+        "type": "object",
+        "properties": {
+          "verificationId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PolicyEligibilityVerificationResponse": {
+        "type": "object",
+        "properties": {
+          "verificationType": {
+            "$ref": "#/components/schemas/EligibilityVerificationType"
+          },
+          "verificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/PolicyPlan"
+          },
+          "verificationStatus": {
+            "$ref": "#/components/schemas/EligibilityVerificationStatusType"
+          },
+          "practice": {
+            "$ref": "#/components/schemas/VerifyingPractice"
+          },
+          "dateOfService": {
+            "type": "string",
+            "nullable": true
+          },
+          "verificationDateOfService": {
+            "type": "string",
+            "nullable": true
+          },
+          "provider": {
+            "$ref": "#/components/schemas/VerifyingProvider"
+          },
+          "responsibleProvider": {
+            "$ref": "#/components/schemas/VerifyingProvider"
+          },
+          "callInformation": {
+            "$ref": "#/components/schemas/VerificationCallInformation"
+          },
+          "policyDetails": {
+            "$ref": "#/components/schemas/VerificationPolicyDetails"
+          },
+          "benefits": {
+            "$ref": "#/components/schemas/VerificationBenefits"
+          },
+          "physician": {
+            "$ref": "#/components/schemas/VerificationPrimaryCarePhysician"
+          },
+          "serviceBenefits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VerificationServiceBenefit"
+            },
+            "nullable": true
+          },
+          "notes": {
+            "$ref": "#/components/schemas/VerificationNotes"
+          },
+          "verificationPdf": {
+            "$ref": "#/components/schemas/VerificationPdfType"
+          },
+          "rteInformation": {
+            "$ref": "#/components/schemas/VerificationRteInformation"
+          },
+          "createdBy": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastModifiedBy": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "created": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModified": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PolicyHolder": {
+        "type": "object",
+        "properties": {
+          "isPatient": {
+            "type": "boolean"
+          },
+          "nonPatientHolder": {
+            "$ref": "#/components/schemas/NonPatientHolder"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PolicyIdResponse": {
+        "type": "object",
+        "properties": {
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PolicyIdentification": {
+        "type": "object",
+        "properties": {
+          "policyNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "otherInsuredId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PolicyPlan": {
+        "type": "object",
+        "properties": {
+          "planId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PolicyProvisionalPlan": {
+        "type": "object",
+        "properties": {
+          "payerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "planName": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "extension": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "stateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "zipCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "county": {
+            "type": "string",
+            "nullable": true
+          },
+          "note": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PolicyResponse": {
+        "type": "object",
+        "properties": {
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payerType": {
+            "$ref": "#/components/schemas/PayerType"
+          },
+          "identification": {
+            "$ref": "#/components/schemas/PolicyIdentification"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/PlanResponse"
+          },
+          "payer": {
+            "$ref": "#/components/schemas/PayerResponse"
+          },
+          "cobra": {
+            "type": "boolean"
+          },
+          "selfFunded": {
+            "type": "boolean"
+          },
+          "coverageOrder": {
+            "$ref": "#/components/schemas/CoverageOrderType"
+          },
+          "medicareSecondaryAttributes": {
+            "$ref": "#/components/schemas/MedicareSecondaryAttributes"
+          },
+          "provisionalPlan": {
+            "$ref": "#/components/schemas/PolicyProvisionalPlan"
+          },
+          "policyHolder": {
+            "$ref": "#/components/schemas/PolicyHolder"
+          },
+          "pharmacyPolicy": {
+            "$ref": "#/components/schemas/PharmacyPolicy"
+          },
+          "effectiveness": {
+            "$ref": "#/components/schemas/PolicyEffectiveness"
+          },
+          "benefitsIndividual": {
+            "$ref": "#/components/schemas/MedicalBenefits"
+          },
+          "benefitsFamily": {
+            "$ref": "#/components/schemas/MedicalBenefits"
+          },
+          "benefitsServices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceBenefits"
+            },
+            "nullable": true
+          },
+          "outOfNetworkBenefitsEnabled": {
+            "type": "boolean"
+          },
+          "benefitsServicesOutOfNetwork": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceBenefits"
+            },
+            "nullable": true
+          },
+          "benefitsFamilyOutOfNetwork": {
+            "$ref": "#/components/schemas/MedicalBenefits"
+          },
+          "benefitsIndividualOutOfNetwork": {
+            "$ref": "#/components/schemas/MedicalBenefits"
+          },
+          "lastEligibilityVerification": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "policyCoverageStatus": {
+            "$ref": "#/components/schemas/PolicyCoverageStatusType"
+          },
+          "insuranceCardStatus": {
+            "$ref": "#/components/schemas/InsuranceCardStatus"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PolicyStatus"
+          },
+          "strengthMeter": {
+            "$ref": "#/components/schemas/PolicyStrengthMeter"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PolicyStatus": {
+        "type": "object",
+        "properties": {
+          "statusType": {
+            "$ref": "#/components/schemas/PolicyStatusType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PolicyStatusType": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "PolicyStrengthMeter": {
+        "type": "object",
+        "properties": {
+          "planAssigned": {
+            "type": "boolean"
+          },
+          "policyNumber": {
+            "type": "boolean"
+          },
+          "policyHolder": {
+            "type": "boolean"
+          },
+          "insuranceCard": {
+            "type": "boolean"
+          },
+          "policyEffectiveDates": {
+            "type": "boolean"
+          },
+          "strength": {
+            "type": "string",
+            "nullable": true,
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PrimaryOrSecondaryType": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ProgramsAwardCountRequest": {
+        "type": "object",
+        "properties": {
+          "manufacturerCopayProgramIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "RecalculationMonthType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "RecalculationPeriodType": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "RteRequest": {
+        "type": "object",
+        "properties": {
+          "validationId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "payerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "planId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "providerNpi": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerLastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "subscriberMemberId": {
+            "type": "string",
+            "nullable": true
+          },
+          "subscriberDob": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dateOfService": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "serviceTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServiceBenefitAuthorizationType": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "ServiceBenefitUpdatedFields": {
+        "type": "object",
+        "properties": {
+          "serviceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "hasCoverageUpdated": {
+            "type": "boolean"
+          },
+          "coInsuranceUpdated": {
+            "type": "boolean"
+          },
+          "coPayUpdated": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServiceBenefits": {
+        "type": "object",
+        "properties": {
+          "serviceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "coInsurancePercentage": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "copay": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "authorizationRequired": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "hasNoCoverage": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServiceBenefitsOutOfNetworkRequest": {
+        "type": "object",
+        "properties": {
+          "outOfNetworkBenefitsEnabled": {
+            "type": "boolean"
+          },
+          "benefits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceBenefits"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ServiceBenefitsRequest": {
+        "type": "object",
+        "properties": {
+          "benefits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceBenefits"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StringGuidNullableStringGuidNullableValueTuple": {
+        "type": "object",
+        "properties": {
+          "item1": {
+            "type": "string",
+            "nullable": true
+          },
+          "item2": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "item3": {
+            "type": "string",
+            "nullable": true
+          },
+          "item4": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StringStringStringDateNullableValueTuple": {
+        "type": "object",
+        "properties": {
+          "item1": {
+            "type": "string",
+            "nullable": true
+          },
+          "item2": {
+            "type": "string",
+            "nullable": true
+          },
+          "item3": {
+            "type": "string",
+            "nullable": true
+          },
+          "item4": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StringStringValueTuple": {
+        "type": "object",
+        "properties": {
+          "item1": {
+            "type": "string",
+            "nullable": true
+          },
+          "item2": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateManufacturerCopayAssistanceAwardRequest": {
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "assistanceNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdatePolicyEligibilityVerificationRequest": {
+        "type": "object",
+        "properties": {
+          "plan": {
+            "$ref": "#/components/schemas/PolicyPlan"
+          },
+          "verificationStatus": {
+            "$ref": "#/components/schemas/EligibilityVerificationStatusType"
+          },
+          "practice": {
+            "$ref": "#/components/schemas/VerifyingPractice"
+          },
+          "dateOfService": {
+            "type": "string",
+            "nullable": true
+          },
+          "verificationDateOfService": {
+            "type": "string",
+            "nullable": true
+          },
+          "provider": {
+            "$ref": "#/components/schemas/VerifyingProvider"
+          },
+          "responsibleProvider": {
+            "$ref": "#/components/schemas/VerifyingProvider"
+          },
+          "callInformation": {
+            "$ref": "#/components/schemas/VerificationCallInformation"
+          },
+          "policyDetails": {
+            "$ref": "#/components/schemas/VerificationPolicyDetails"
+          },
+          "benefits": {
+            "$ref": "#/components/schemas/VerificationBenefits"
+          },
+          "physician": {
+            "$ref": "#/components/schemas/VerificationPrimaryCarePhysician"
+          },
+          "serviceBenefits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VerificationServiceBenefit"
+            },
+            "nullable": true
+          },
+          "notes": {
+            "$ref": "#/components/schemas/VerificationNotes"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdatePolicyRequest": {
+        "type": "object",
+        "properties": {
+          "identification": {
+            "$ref": "#/components/schemas/PolicyIdentification"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/PolicyPlan"
+          },
+          "provisionalPlan": {
+            "$ref": "#/components/schemas/PolicyProvisionalPlan"
+          },
+          "policyHolder": {
+            "$ref": "#/components/schemas/PolicyHolder"
+          },
+          "pharmacyPolicy": {
+            "$ref": "#/components/schemas/PharmacyPolicy"
+          },
+          "effectiveness": {
+            "$ref": "#/components/schemas/PolicyEffectiveness"
+          },
+          "medicareSecondaryAttributes": {
+            "$ref": "#/components/schemas/MedicareSecondaryAttributes"
+          },
+          "coverageOrder": {
+            "$ref": "#/components/schemas/CoverageOrderType"
+          },
+          "cobra": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "selfFunded": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerificationBenefits": {
+        "type": "object",
+        "properties": {
+          "totalDeductible": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "deductibleMet": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "deductibleRemaining": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "totalOop": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "oopMet": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "oopRemaining": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "periodMaximum": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "recalculationPeriod": {
+            "$ref": "#/components/schemas/RecalculationPeriodType"
+          },
+          "recalculationMonth": {
+            "$ref": "#/components/schemas/RecalculationMonthType"
+          },
+          "deductibleIncludedInOop": {
+            "type": "boolean"
+          },
+          "copayRequiredAfterOop": {
+            "type": "boolean"
+          },
+          "preExistingCondition": {
+            "type": "boolean"
+          },
+          "referralRequired": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerificationCallInformation": {
+        "type": "object",
+        "properties": {
+          "payerRepresentative": {
+            "type": "string",
+            "nullable": true
+          },
+          "confirmationNumber": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerificationNotes": {
+        "type": "object",
+        "properties": {
+          "notes": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerificationPdfType": {
+        "type": "object",
+        "properties": {
+          "noteId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "attachmentId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerificationPolicyDetails": {
+        "type": "object",
+        "properties": {
+          "policyHolderSameAsPatient": {
+            "type": "boolean"
+          },
+          "eligibilityPolicyHolder": {
+            "$ref": "#/components/schemas/EligibilityPolicyHolder"
+          },
+          "policyNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "groupNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "primaryOrSecondary": {
+            "$ref": "#/components/schemas/PrimaryOrSecondaryType"
+          },
+          "mspInsuranceType": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "inNetwork": {
+            "type": "boolean"
+          },
+          "startDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "endDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "neverActive": {
+            "type": "boolean"
+          },
+          "cobra": {
+            "type": "boolean"
+          },
+          "selfFunded": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerificationPrimaryCarePhysician": {
+        "type": "object",
+        "properties": {
+          "npi": {
+            "type": "string",
+            "nullable": true
+          },
+          "physicianName": {
+            "type": "string",
+            "nullable": true
+          },
+          "physicianSpecialty": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerificationRteInformation": {
+        "type": "object",
+        "properties": {
+          "rteResponse": {
+            "type": "string",
+            "nullable": true
+          },
+          "rteResult": {
+            "$ref": "#/components/schemas/VerificationRteResult"
+          },
+          "rteRequestNoteId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "rteRequestAttachmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "rteResponseNoteId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "rteResponseAttachmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "updatedFields": {
+            "$ref": "#/components/schemas/VerificationRteUpdatedFields"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerificationRteResult": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "VerificationRteUpdatedFields": {
+        "type": "object",
+        "properties": {
+          "deductibleUpdatedFields": {
+            "$ref": "#/components/schemas/DeductibleUpdatedFields"
+          },
+          "oopUpdatedFields": {
+            "$ref": "#/components/schemas/OopUpdatedFields"
+          },
+          "serviceBenefitsUpdatedFields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceBenefitUpdatedFields"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerificationServiceBenefit": {
+        "type": "object",
+        "properties": {
+          "serviceType": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "serviceTypeName": {
+            "type": "string",
+            "nullable": true
+          },
+          "coverage": {
+            "type": "boolean"
+          },
+          "coinsurance": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "copay": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "authorization": {
+            "$ref": "#/components/schemas/ServiceBenefitAuthorizationType"
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerifyingPractice": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "companyName": {
+            "type": "string",
+            "nullable": true
+          },
+          "companyTin": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerifyingProvider": {
+        "type": "object",
+        "properties": {
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "providerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerNpi": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

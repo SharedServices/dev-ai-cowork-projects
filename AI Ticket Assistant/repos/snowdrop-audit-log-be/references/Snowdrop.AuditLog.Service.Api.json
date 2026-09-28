@@ -1,0 +1,677 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Audit Log API",
+    "description": "Snowdrop Audit Log API"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/auditlog/api"
+    }
+  ],
+  "paths": {
+    "/{entityType}/{entityId}/summary": {
+      "get": {
+        "tags": [
+          "AuditLog"
+        ],
+        "summary": "Get a brief summary of events for an entity",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditLogSummary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditLogSummary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditLogSummary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Entity type is unknown or provided entity has no events",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{entityType}/{entityId}/details": {
+      "get": {
+        "tags": [
+          "AuditLog"
+        ],
+        "summary": "Get full audit log details for an entity",
+        "description": "The response will contain a null continuationToken property when there are no more results",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SortOrder"
+            }
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditLogDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditLogDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditLogDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Entity type is unknown",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{entityType}/{entityId}/search": {
+      "get": {
+        "tags": [
+          "AuditLog"
+        ],
+        "summary": "Get audit log details by search criteria",
+        "description": "The response will contain a null continuationToken property when there are no more results",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "query",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "sortOrder",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/SortOrder"
+            }
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditLogDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditLogDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuditLogDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Entity type is unknown",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Client sent an invalid combination of search parameters",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{entityType}/related": {
+      "get": {
+        "tags": [
+          "AuditLog"
+        ],
+        "summary": "Get any related entity types and display names for the provided entity type",
+        "description": "Returns an empty list if the entity type is known but has no known related entitites",
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RelatedEntity"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RelatedEntity"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RelatedEntity"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Entity type is unknown",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/lookup/guid/{lookupValue}": {
+      "get": {
+        "tags": [
+          "GuidLookup"
+        ],
+        "summary": "Get details about a GUID",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "lookupValue",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidLookupResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidLookupResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuidLookupResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "No details could be found for the requested GUID",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AuditLogDetails": {
+        "required": [
+          "auditLogEntries",
+          "continuationToken"
+        ],
+        "type": "object",
+        "properties": {
+          "auditLogEntries": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/AuditLogEntry"
+            }
+          },
+          "continuationToken": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "AuditLogEntry": {
+        "required": [
+          "eventSummary",
+          "data"
+        ],
+        "type": "object",
+        "properties": {
+          "eventSummary": {
+            "$ref": "#/components/schemas/EventSummary"
+          },
+          "data": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AuditLogDetails/properties/auditLogEntries/items/properties/data/additionalProperties"
+                }
+              }
+            }
+          }
+        }
+      },
+      "AuditLogSummary": {
+        "required": [
+          "firstEvent",
+          "mostRecent"
+        ],
+        "type": "object",
+        "properties": {
+          "firstEvent": {
+            "$ref": "#/components/schemas/EventSummary"
+          },
+          "mostRecent": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/EventSummary"
+            }
+          }
+        }
+      },
+      "EventSummary": {
+        "required": [
+          "name",
+          "timestamp",
+          "userId",
+          "number"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "number": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          }
+        }
+      },
+      "GuidLookupResult": {
+        "required": [
+          "entityLabel",
+          "entityType",
+          "kingdom",
+          "sourceStream",
+          "link"
+        ],
+        "type": "object",
+        "properties": {
+          "entityLabel": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "entityType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "kingdom": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "sourceStream": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "link": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "RelatedEntity": {
+        "required": [
+          "entityType",
+          "displayName"
+        ],
+        "type": "object",
+        "properties": {
+          "entityType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "displayName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "SortOrder": {
+        "type": "integer",
+        "default": 1
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AuditLog"
+    },
+    {
+      "name": "GuidLookup"
+    }
+  ]
+}

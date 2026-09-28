@@ -1,0 +1,332 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Custom Fields Public API",
+    "description": "Snowdrop Custom Fields Public API"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/custom-fields/public"
+    }
+  ],
+  "paths": {
+    "/entities/{entityId}/systems/{systemId}/sections/{sectionId}/fields": {
+      "get": {
+        "tags": [
+          "CustomFields"
+        ],
+        "summary": "Gets fields with values for a section",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "systemId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "sectionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FieldValueResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FieldValueResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FieldValueResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entities/{entityId}/systems/{systemId}/sections/{sectionId}/setfields": {
+      "post": {
+        "tags": [
+          "CustomFields"
+        ],
+        "summary": "Sets field values for a section",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "user-id",
+            "in": "header",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "systemId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "sectionId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetFieldValuesForSectionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetFieldValuesForSectionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetFieldValuesForSectionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FieldSize": {
+        "type": "integer"
+      },
+      "FieldType": {
+        "type": "integer"
+      },
+      "FieldValueRequest": {
+        "required": [
+          "fieldId",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "fieldId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "value": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "FieldValueResponse": {
+        "required": [
+          "fieldId",
+          "labelName",
+          "size",
+          "value",
+          "options"
+        ],
+        "type": "object",
+        "properties": {
+          "fieldId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "labelName": {
+            "type": "string"
+          },
+          "size": {
+            "$ref": "#/components/schemas/FieldSize"
+          },
+          "value": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "options": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/IFieldTypeOptions"
+              }
+            ]
+          }
+        }
+      },
+      "IFieldTypeOptions": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/FieldType"
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "SetFieldValuesForSectionRequest": {
+        "required": [
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldValueRequest"
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "CustomFields"
+    }
+  ]
+}

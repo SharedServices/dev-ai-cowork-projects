@@ -1,0 +1,501 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Plans Search API",
+    "description": "Snowdrop Plans Search API",
+    "version": "v1"
+  },
+  "paths": {
+    "/plans/search": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "Query for specific plans by query parameter",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Arbitrary text for fee text searching",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includeInactive",
+            "in": "query",
+            "description": "True to inactive plans",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Maximum number of plans to return",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32",
+              "default": 50
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of plans to skip to allow paged queries",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/plans/search/by-payer-types": {
+      "post": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "Get plans by payer types",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Arbitrary text for fee text searching",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includeInactive",
+            "in": "query",
+            "description": "True to inactive plans",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Maximum number of plans to return",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32",
+              "default": 50
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of plans to skip to allow paged queries",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Payer types to filter on",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayerTypesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayerTypesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayerTypesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/plans/search/all": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "Get all plans",
+        "parameters": [
+          {
+            "name": "includeInactive",
+            "in": "query",
+            "description": "True to inactive plans",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Maximum number of plans to return",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32",
+              "default": 50
+            }
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "Number of plans to skip to allow paged queries",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Date": {
+        "title": "Sharp.Date",
+        "type": "string",
+        "format": "date",
+        "example": "2024-12-11"
+      },
+      "PayerTypesRequest": {
+        "required": [
+          "payerTypes"
+        ],
+        "type": "object",
+        "properties": {
+          "payerTypes": {
+            "type": "array",
+            "items": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        }
+      },
+      "PlanSearchResult": {
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "payerType": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "payerTypeName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "planId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "planSharpId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payerName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "planName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "addressLine1": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "addressLine2": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "addressCity": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "addressStateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "addressZipCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "keywordsExact": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "keywordsFuzzy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isPlanInactive": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "isPlanDeleted": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "isPayerDeleted": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "payerCreated": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "planCreated": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "policyCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "SearchHit": {
+        "required": [
+          "score"
+        ],
+        "type": "object",
+        "properties": {
+          "score": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "plan": {
+            "$ref": "#/components/schemas/PlanSearchResult"
+          }
+        }
+      },
+      "SearchResponse": {
+        "required": [
+          "results"
+        ],
+        "type": "object",
+        "properties": {
+          "totalsHits": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          },
+          "includedHits": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SearchHit"
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Search"
+    }
+  ]
+}

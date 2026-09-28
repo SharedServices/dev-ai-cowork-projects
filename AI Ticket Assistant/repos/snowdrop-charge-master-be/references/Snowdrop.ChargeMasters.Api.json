@@ -1,0 +1,1247 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Charge Masters",
+    "description": "Charge Masters API",
+    "version": "v1"
+  },
+  "paths": {
+    "/charge-masters/companies/{companyId}/{chargeMasterId}/export": {
+      "get": {
+        "tags": [
+          "ChargeMasterExports"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "chargeMasterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/charge-masters/companies/{companyId}/{chargeMasterId}/export/{fileName}": {
+      "get": {
+        "tags": [
+          "ChargeMasterExports"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "chargeMasterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "fileName",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/charge-masters/companies/{companyId}/import": {
+      "post": {
+        "tags": [
+          "ChargeMasterImports"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/charge-masters/companies/{companyId}/import/{chargeMasterId}": {
+      "post": {
+        "tags": [
+          "ChargeMasterImports"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "chargeMasterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ImportResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/charge-masters": {
+      "get": {
+        "tags": [
+          "ChargeMasters"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChargeMasterWithCompanyNameResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChargeMasterWithCompanyNameResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChargeMasterWithCompanyNameResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/charge-masters/companies/{companyId}": {
+      "get": {
+        "tags": [
+          "ChargeMasters"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChargeMasterResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChargeMasterResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ChargeMasterResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "ChargeMasters"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterCreateRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterCreateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterCreateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterCreateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeMasterIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeMasterIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeMasterIdResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/charge-masters/companies/{companyId}/by-name": {
+      "post": {
+        "tags": [
+          "ChargeMasters"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterSearchByNameRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterSearchByNameRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterSearchByNameRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterSearchByNameRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeMasterSearchByNameResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeMasterSearchByNameResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeMasterSearchByNameResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/charge-masters/companies/{companyId}/{chargeMasterId}": {
+      "get": {
+        "tags": [
+          "ChargeMasters"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "chargeMasterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeMasterResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeMasterResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeMasterResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ChargeMasters"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "chargeMasterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterUpdateRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterUpdateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterUpdateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ChargeMasters"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "chargeMasterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/charge-masters/companies/{companyId}/{chargeMasterId}/fees": {
+      "put": {
+        "tags": [
+          "ChargeMasters"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "chargeMasterId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterFeesUpdateRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterFeesUpdateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterFeesUpdateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChargeMasterFeesUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/charge-masters/companies/{companyId}/order": {
+      "put": {
+        "tags": [
+          "ChargeMasters"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionOrderingRequestBase"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionOrderingRequestBase"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionOrderingRequestBase"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionOrderingRequestBase"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/charge-masters/template": {
+      "get": {
+        "tags": [
+          "ChargeMasterTemplates"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileStreamResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ChargeMasterCreateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 120,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "effectiveStartDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "effectiveEndDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "fees": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/FeeRequest"
+            }
+          }
+        }
+      },
+      "ChargeMasterFeesUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "fees": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/FeeRequest"
+            }
+          }
+        }
+      },
+      "ChargeMasterIdResponse": {
+        "required": [
+          "chargeMasterId"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeMasterId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "ChargeMasterResponse": {
+        "type": "object",
+        "properties": {
+          "chargeMasterId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "effectiveStartDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "effectiveEndDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "fees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FeeResponse"
+            }
+          }
+        }
+      },
+      "ChargeMasterSearchByNameRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ChargeMasterSearchByNameResponse": {
+        "required": [
+          "chargeMasterId"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeMasterId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "ChargeMasterUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 120,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "effectiveStartDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "effectiveEndDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      },
+      "ChargeMasterWithCompanyNameResponse": {
+        "type": "object",
+        "properties": {
+          "chargeMasterId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "companyName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "effectiveStartDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "effectiveEndDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      },
+      "CollectionOrderingRequestBase": {
+        "type": "object",
+        "properties": {
+          "order": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "Date": {
+        "title": "Sharp.Date",
+        "type": "string",
+        "format": "date",
+        "example": "2024-12-11"
+      },
+      "EntityTagHeaderValue": {
+        "type": "object",
+        "properties": {
+          "tag": {
+            "$ref": "#/components/schemas/StringSegment"
+          },
+          "isWeak": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ErrorCodes": {
+        "type": "integer"
+      },
+      "FeeRequest": {
+        "type": "object",
+        "properties": {
+          "chargeCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modifier": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "ndc": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "activityCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "amount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "FeeResponse": {
+        "type": "object",
+        "properties": {
+          "chargeCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modifier": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "ndc": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "activityCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "amount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "FeeScheduleImportError": {
+        "required": [
+          "rowNumber",
+          "errorCode",
+          "error"
+        ],
+        "type": "object",
+        "properties": {
+          "rowNumber": {
+            "type": "string"
+          },
+          "errorCode": {
+            "$ref": "#/components/schemas/ErrorCodes"
+          },
+          "error": {
+            "type": "string"
+          }
+        }
+      },
+      "FileStreamResult": {
+        "type": "object",
+        "properties": {
+          "fileStream": {
+            "$ref": "#/components/schemas/Stream"
+          },
+          "contentType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "fileDownloadName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastModified": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "entityTag": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EntityTagHeaderValue"
+              }
+            ]
+          },
+          "enableRangeProcessing": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ImportResponse": {
+        "required": [
+          "chargemasterId",
+          "importId",
+          "importedFeeCount",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "chargemasterId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "importId": {
+            "type": "string"
+          },
+          "importedFeeCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/FeeScheduleImportError"
+            }
+          }
+        }
+      },
+      "Stream": {
+        "type": "string",
+        "format": "binary"
+      },
+      "StringSegment": {
+        "type": "object",
+        "properties": {
+          "buffer": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "offset": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "length": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "value": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "hasValue": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "ChargeMasterExports"
+    },
+    {
+      "name": "ChargeMasterImports"
+    },
+    {
+      "name": "ChargeMasters"
+    },
+    {
+      "name": "ChargeMasterTemplates"
+    }
+  ]
+}

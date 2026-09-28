@@ -1,0 +1,1249 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Sets Admin API",
+    "description": "Snowdrop Sets Admin API",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/sets/administration"
+    }
+  ],
+  "paths": {
+    "/companies": {
+      "post": {
+        "tags": [
+          "Companies"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanySetConfigurationRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanySetConfigurationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanySetConfigurationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CompanySetConfigurationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payers": {
+      "post": {
+        "tags": [
+          "Payers"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayerSetConfigurationRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayerSetConfigurationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayerSetConfigurationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayerSetConfigurationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sets/duplicates": {
+      "post": {
+        "tags": [
+          "Sets"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateNameSearchRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateNameSearchRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateNameSearchRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateNameSearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DuplicateNameSearchResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DuplicateNameSearchResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DuplicateNameSearchResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sets": {
+      "post": {
+        "tags": [
+          "Sets"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSetRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSetRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSetRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sets/profile": {
+      "put": {
+        "tags": [
+          "Sets"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSetProfileRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSetProfileRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSetProfileRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSetProfileRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sets/values": {
+      "put": {
+        "tags": [
+          "Sets"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSetValuesRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSetValuesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSetValuesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSetValuesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sets/import": {
+      "post": {
+        "tags": [
+          "Sets"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportSetValuesRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportSetValuesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportSetValuesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImportSetValuesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetApiResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/sets/{domain}/{entityType}/displayset": {
+      "get": {
+        "tags": [
+          "Sets"
+        ],
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SetDomain"
+            }
+          },
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisplaySet"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisplaySet"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisplaySet"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Sets"
+        ],
+        "parameters": [
+          {
+            "name": "domain",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SetDomain"
+            }
+          },
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisplaySetRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisplaySetRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisplaySetRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisplaySetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CompanySetConfigurationRequest": {
+        "required": [
+          "setId",
+          "companies",
+          "divisions"
+        ],
+        "type": "object",
+        "properties": {
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "companies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "divisions": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "CreateSetRequest": {
+        "required": [
+          "setTypeIdentity",
+          "name",
+          "description",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "setTypeIdentity": {
+            "$ref": "#/components/schemas/SetTypeIdentity"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 75,
+            "minLength": 0,
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "DisplaySet": {
+        "required": [
+          "organizationId",
+          "setTypeIdentity",
+          "setIdentity"
+        ],
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "setTypeIdentity": {
+            "$ref": "#/components/schemas/SetTypeIdentity"
+          },
+          "setIdentity": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SetIdentity"
+              }
+            ]
+          },
+          "pinnedValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PinnedValue"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "partition": {
+            "type": "string"
+          }
+        }
+      },
+      "DisplaySetRequest": {
+        "required": [
+          "setId",
+          "isFactorySet",
+          "pinnedValues"
+        ],
+        "type": "object",
+        "properties": {
+          "setId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "isFactorySet": {
+            "type": "boolean"
+          },
+          "pinnedValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SetValueIdentity"
+            }
+          }
+        }
+      },
+      "DuplicateNameSearchRequest": {
+        "required": [
+          "setTypeIdentity",
+          "name",
+          "excludedSetId"
+        ],
+        "type": "object",
+        "properties": {
+          "setTypeIdentity": {
+            "$ref": "#/components/schemas/SetTypeIdentity"
+          },
+          "name": {
+            "type": "string"
+          },
+          "excludedSetId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "DuplicateNameSearchResponse": {
+        "required": [
+          "nameAlreadyInUse",
+          "usingSetId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "nameAlreadyInUse": {
+            "type": "boolean"
+          },
+          "usingSetId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "ImportingSourceSet": {
+        "required": [
+          "setId",
+          "isFactory"
+        ],
+        "type": "object",
+        "properties": {
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isFactory": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ImportSetValuesRequest": {
+        "required": [
+          "setId",
+          "setTypeIdentity",
+          "importExcelBase64",
+          "sourceSets",
+          "replaceEntireSet"
+        ],
+        "type": "object",
+        "properties": {
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "setTypeIdentity": {
+            "$ref": "#/components/schemas/SetTypeIdentity"
+          },
+          "importExcelBase64": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "sourceSets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ImportingSourceSet"
+            }
+          },
+          "replaceEntireSet": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PayerHeader": {
+        "required": [
+          "payerId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "payerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PayerSetConfigurationRequest": {
+        "required": [
+          "setId",
+          "payers",
+          "plans"
+        ],
+        "type": "object",
+        "properties": {
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PayerHeader"
+            }
+          },
+          "plans": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanHeader"
+            }
+          }
+        }
+      },
+      "PinnedValue": {
+        "required": [
+          "value",
+          "displayOrder"
+        ],
+        "type": "object",
+        "properties": {
+          "value": {
+            "$ref": "#/components/schemas/SetValueIdentity"
+          },
+          "displayOrder": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "PlanHeader": {
+        "required": [
+          "planId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "planId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "SetApiResponse": {
+        "required": [
+          "setId"
+        ],
+        "type": "object",
+        "properties": {
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "SetDomain": {
+        "type": "integer"
+      },
+      "SetIdentity": {
+        "type": "object",
+        "properties": {
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isFactory": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SetTypeIdentity": {
+        "required": [
+          "domain",
+          "entityType"
+        ],
+        "type": "object",
+        "properties": {
+          "domain": {
+            "$ref": "#/components/schemas/SetDomain"
+          },
+          "entityType": {
+            "type": "string"
+          }
+        }
+      },
+      "SetValue": {
+        "required": [
+          "setValueIdentity"
+        ],
+        "type": "object",
+        "properties": {
+          "setValueIdentity": {
+            "$ref": "#/components/schemas/SetValueIdentity"
+          },
+          "data": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SetValueIdentity": {
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string"
+          },
+          "hyphenatedItemId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "UpdateSetProfileRequest": {
+        "required": [
+          "setId",
+          "setTypeIdentity",
+          "name",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "setTypeIdentity": {
+            "$ref": "#/components/schemas/SetTypeIdentity"
+          },
+          "name": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 75,
+            "minLength": 0,
+            "type": "string"
+          }
+        }
+      },
+      "UpdateSetValuesRequest": {
+        "required": [
+          "setId",
+          "setTypeIdentity",
+          "setValues"
+        ],
+        "type": "object",
+        "properties": {
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "setTypeIdentity": {
+            "$ref": "#/components/schemas/SetTypeIdentity"
+          },
+          "setValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SetValue"
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Companies"
+    },
+    {
+      "name": "Payers"
+    },
+    {
+      "name": "Sets"
+    }
+  ]
+}

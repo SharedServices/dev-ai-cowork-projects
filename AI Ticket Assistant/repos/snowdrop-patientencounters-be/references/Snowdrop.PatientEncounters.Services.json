@@ -1,0 +1,2249 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop PatientEncounters API",
+    "description": "Snowdrop PatientEncounters API",
+    "version": "v1"
+  },
+  "paths": {
+    "/encounter-numbers/generate": {
+      "post": {
+        "tags": [
+          "PatientEncounterNumber"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/encounters/{patientId}/{date}": {
+      "get": {
+        "tags": [
+          "PatientEncounters"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientEncounterHeader"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientEncounterHeader"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientEncounterHeader"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encounters/{patientId}/search": {
+      "post": {
+        "tags": [
+          "PatientEncounters"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientEncounterSearchCriteria"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientEncounterSearchCriteria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientEncounterSearchCriteria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientEncounterSearchCriteria"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientEncounterHeader"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientEncounterHeader"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientEncounterHeader"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encounters/{patientId}/{dateOfService}/search": {
+      "get": {
+        "tags": [
+          "PatientEncounters"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientEncounter"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientEncounter"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientEncounter"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encounters/{locationId}/{patientId}/{dateOfService}": {
+      "get": {
+        "tags": [
+          "PatientEncounters"
+        ],
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounter"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounter"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encounters/{locationId}/{patientId}/{dateOfService}/encounternumber": {
+      "get": {
+        "tags": [
+          "PatientEncounters"
+        ],
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounter"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounter"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounter"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encounters/{locationId}/{patientId}/{dateOfService}/referrals/add": {
+      "put": {
+        "tags": [
+          "PatientEncounters"
+        ],
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encounters/{locationId}/{patientId}/{dateOfService}/referrals/{referralId}/remove": {
+      "put": {
+        "tags": [
+          "PatientEncounters"
+        ],
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "referralId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encountersearch/parameters": {
+      "post": {
+        "tags": [
+          "PatientEncounterSearch"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterSearchParameters"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterSearchParameters"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterSearchParameters"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterSearchParameters"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounterSearchResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounterSearchResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounterSearchResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encountersearch": {
+      "post": {
+        "tags": [
+          "PatientEncounterSearch"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterSearchCriteria"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterSearchCriteria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterSearchCriteria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterSearchCriteria"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounterSearchResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounterSearchResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounterSearchResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encountersearch/download": {
+      "post": {
+        "tags": [
+          "PatientEncounterSearch"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterSearchCriteria"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterSearchCriteria"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterSearchCriteria"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterSearchCriteria"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileContentResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileContentResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FileContentResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/encountersearch/{locationId}/{patientId}/{dateOfService}/preview": {
+      "get": {
+        "tags": [
+          "PatientEncounterSearch"
+        ],
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounterPreview"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounterPreview"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientEncounterPreview"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AttributeQualifier": {
+        "required": [
+          "elementQualifier",
+          "setQualifier"
+        ],
+        "type": "object",
+        "properties": {
+          "elementQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ElementQualifier"
+              }
+            ]
+          },
+          "setQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SetQualifier"
+              }
+            ]
+          }
+        }
+      },
+      "ChargeStatus": {
+        "type": "integer"
+      },
+      "Date": {
+        "title": "Sharp.Date",
+        "type": "string",
+        "format": "date",
+        "example": "2024-12-11"
+      },
+      "ElementQualifier": {
+        "required": [
+          "elementId"
+        ],
+        "type": "object",
+        "properties": {
+          "elementId": {
+            "type": "string"
+          }
+        }
+      },
+      "EncounterSearchCriteria": {
+        "required": [
+          "encounterSearchId",
+          "sortBy",
+          "continuationToken"
+        ],
+        "type": "object",
+        "properties": {
+          "encounterSearchId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "sortBy": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EncounterSearchSortBy"
+              }
+            ]
+          },
+          "continuationToken": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "EncounterSearchParameters": {
+        "required": [
+          "encounterNumber",
+          "patientFAN",
+          "patientFirstName",
+          "patientLastName",
+          "dateOfBirth",
+          "dateOfServiceFrom",
+          "dateOfServiceTo",
+          "dateLastFiledFrom",
+          "dateLastFiledTo",
+          "payerPosition",
+          "outstandingBalanceMin",
+          "outstandingBalanceMax",
+          "activityCode",
+          "chargeCode"
+        ],
+        "type": "object",
+        "properties": {
+          "encounterNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "statuses": {
+            "type": "array",
+            "items": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          "patientFAN": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "patientFirstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "patientLastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "dateOfBirth": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "dateOfServiceFrom": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "dateOfServiceTo": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "dateLastFiledFrom": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "dateLastFiledTo": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "locationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "providerIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "payerPosition": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "payerIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "planIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "outstandingBalanceMin": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "outstandingBalanceMax": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "invoiceStatuses": {
+            "type": "array",
+            "items": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          "activityCode": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AttributeQualifier"
+              }
+            ]
+          },
+          "activityStatuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RenderedActivityStatus"
+            }
+          },
+          "chargeCode": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AttributeQualifier"
+              }
+            ]
+          },
+          "chargeStatuses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChargeStatus"
+            }
+          }
+        }
+      },
+      "EncounterSearchSortBy": {
+        "required": [
+          "column",
+          "order"
+        ],
+        "type": "object",
+        "properties": {
+          "column": {
+            "type": "string"
+          },
+          "order": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityTagHeaderValue": {
+        "type": "object",
+        "properties": {
+          "tag": {
+            "$ref": "#/components/schemas/StringSegment"
+          },
+          "isWeak": {
+            "type": "boolean"
+          }
+        }
+      },
+      "FileContentResult": {
+        "type": "object",
+        "properties": {
+          "fileContents": {
+            "type": "string",
+            "format": "byte"
+          },
+          "contentType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "fileDownloadName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastModified": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "entityTag": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EntityTagHeaderValue"
+              }
+            ]
+          },
+          "enableRangeProcessing": {
+            "type": "boolean"
+          }
+        }
+      },
+      "GridElement": {
+        "required": [
+          "currentValue",
+          "displayValue"
+        ],
+        "type": "object",
+        "properties": {
+          "currentValue": {
+            "type": "string"
+          },
+          "displayValue": {
+            "type": "string"
+          }
+        }
+      },
+      "InvoiceSummary": {
+        "required": [
+          "invoiceNumber",
+          "invoiceStatus",
+          "invoiceStatusName"
+        ],
+        "type": "object",
+        "properties": {
+          "invoiceNumber": {
+            "type": "string"
+          },
+          "invoiceStatus": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "invoiceStatusName": {
+            "type": "string"
+          }
+        }
+      },
+      "PatientEncounter": {
+        "required": [
+          "organizationId",
+          "patientEncounterId",
+          "patientEncounterNumber",
+          "patientEncounterStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientEncounterId": {
+            "$ref": "#/components/schemas/PatientEncounterIdentity"
+          },
+          "patientEncounterNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "patientEncounterStatus": {
+            "$ref": "#/components/schemas/PatientEncounterStatus"
+          },
+          "intakeStatusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "referrals": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "scheduledActivityGroups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScheduledActivityGroup"
+            }
+          },
+          "renderedActivityGroups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RenderedActivityGroup"
+            }
+          }
+        }
+      },
+      "PatientEncounterHeader": {
+        "required": [
+          "patientEncounterNumber",
+          "patientId",
+          "locationId",
+          "dateOfService",
+          "patientEncounterStatus",
+          "intakeStatusId",
+          "providerIds",
+          "scheduledActivityCount",
+          "provisionalActivityCount",
+          "renderedActivityCount",
+          "chargedActivityCount",
+          "billedActivityCount"
+        ],
+        "type": "object",
+        "properties": {
+          "patientEncounterNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "patientEncounterStatus": {
+            "$ref": "#/components/schemas/PatientEncounterStatus"
+          },
+          "intakeStatusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "providerIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "scheduledActivityCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "provisionalActivityCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "renderedActivityCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "chargedActivityCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "billedActivityCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "PatientEncounterIdentity": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          }
+        }
+      },
+      "PatientEncounterPreview": {
+        "required": [
+          "encounterNumber",
+          "status",
+          "statusName",
+          "patientId",
+          "patientFAN",
+          "patientFirstName",
+          "patientLastName",
+          "dateOfBirth",
+          "dateOfService",
+          "locationId",
+          "locationName"
+        ],
+        "type": "object",
+        "properties": {
+          "encounterNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "statusName": {
+            "type": "string"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientFAN": {
+            "type": "string"
+          },
+          "patientFirstName": {
+            "type": "string"
+          },
+          "patientLastName": {
+            "type": "string"
+          },
+          "dateOfBirth": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationName": {
+            "type": "string"
+          },
+          "payerSummaries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PayerSummary"
+            }
+          }
+        }
+      },
+      "PatientEncounterSearchCriteria": {
+        "required": [
+          "startDate",
+          "endDate"
+        ],
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      },
+      "PatientEncounterSearchGridResult": {
+        "required": [
+          "encounterNumber",
+          "status",
+          "patient",
+          "dateOfBirth",
+          "dateOfService",
+          "dateLastFiled",
+          "location",
+          "provider",
+          "insuranceBalance",
+          "otherBalance",
+          "patientBalance",
+          "insurance",
+          "other"
+        ],
+        "type": "object",
+        "properties": {
+          "encounterNumber": {
+            "$ref": "#/components/schemas/GridElement"
+          },
+          "status": {
+            "$ref": "#/components/schemas/GridElement"
+          },
+          "patient": {
+            "$ref": "#/components/schemas/GridElement"
+          },
+          "dateOfBirth": {
+            "$ref": "#/components/schemas/GridElement"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/GridElement"
+          },
+          "dateLastFiled": {
+            "$ref": "#/components/schemas/GridElement"
+          },
+          "location": {
+            "$ref": "#/components/schemas/GridElement"
+          },
+          "provider": {
+            "$ref": "#/components/schemas/GridElement"
+          },
+          "insuranceBalance": {
+            "$ref": "#/components/schemas/GridElement"
+          },
+          "otherBalance": {
+            "$ref": "#/components/schemas/GridElement"
+          },
+          "patientBalance": {
+            "$ref": "#/components/schemas/GridElement"
+          },
+          "insurance": {
+            "$ref": "#/components/schemas/GridElement"
+          },
+          "other": {
+            "$ref": "#/components/schemas/GridElement"
+          }
+        }
+      },
+      "PatientEncounterSearchResult": {
+        "required": [
+          "searchParameters",
+          "sortBy",
+          "count",
+          "continuationToken"
+        ],
+        "type": "object",
+        "properties": {
+          "searchParameters": {
+            "$ref": "#/components/schemas/EncounterSearchParameters"
+          },
+          "sortBy": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EncounterSearchSortBy"
+              }
+            ]
+          },
+          "encounters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientEncounterSearchGridResult"
+            }
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "continuationToken": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PatientEncounterStatus": {
+        "type": "object"
+      },
+      "PayerSummary": {
+        "required": [
+          "payerId",
+          "payerName",
+          "planId",
+          "planName",
+          "guarantorId",
+          "guarantorName",
+          "paid",
+          "balance"
+        ],
+        "type": "object",
+        "properties": {
+          "payerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "payerName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "planId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "planName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "guarantorId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "guarantorName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "invoiceSummaries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InvoiceSummary"
+            }
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "RenderedActivity": {
+        "required": [
+          "renderedActivityId",
+          "activityTypeId",
+          "activityTypeDescription",
+          "appointmentTypeId",
+          "dateOfRecord",
+          "attendingProviderId",
+          "orderingProviderId",
+          "supportingProviders",
+          "supervisingProviderId",
+          "modifiers",
+          "ndc",
+          "diagnosisCodes",
+          "units",
+          "activityStatus",
+          "scheduledActivityId",
+          "createdDate",
+          "isArchived"
+        ],
+        "type": "object",
+        "properties": {
+          "renderedActivityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "activityTypeDescription": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "appointmentTypeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "dateOfRecord": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "attendingProviderId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "orderingProviderId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "supportingProviders": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "supervisingProviderId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "modifiers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ndc": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "diagnosisCodes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "units": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Units"
+              }
+            ]
+          },
+          "activityStatus": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "scheduledActivityId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isArchived": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RenderedActivityGroup": {
+        "required": [
+          "providerId",
+          "appointmentTypeId"
+        ],
+        "type": "object",
+        "properties": {
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointmentTypeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "renderedActivities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RenderedActivity"
+            }
+          }
+        }
+      },
+      "RenderedActivityStatus": {
+        "type": "integer"
+      },
+      "ScheduledActivity": {
+        "required": [
+          "scheduledActivityId",
+          "duration",
+          "activityTypeId",
+          "appointmentTypeId",
+          "providerId",
+          "appointmentTime",
+          "facilityId",
+          "isCancelled",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "scheduledActivityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "duration": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          },
+          "activityTypeId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "appointmentTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointmentTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "facilityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isCancelled": {
+            "type": "boolean"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ScheduledActivityGroup": {
+        "required": [
+          "providerId",
+          "appointmentTypeId",
+          "order"
+        ],
+        "type": "object",
+        "properties": {
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointmentTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "order": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "scheduledActivities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScheduledActivity"
+            }
+          }
+        }
+      },
+      "SetQualifier": {
+        "required": [
+          "setId"
+        ],
+        "type": "object",
+        "properties": {
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "StringSegment": {
+        "type": "object",
+        "properties": {
+          "buffer": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "offset": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "length": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "value": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "hasValue": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Units": {
+        "required": [
+          "unitsOfMeasure",
+          "quantity"
+        ],
+        "type": "object",
+        "properties": {
+          "unitsOfMeasure": {
+            "type": "string"
+          },
+          "quantity": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PatientEncounterNumber"
+    },
+    {
+      "name": "PatientEncounters"
+    },
+    {
+      "name": "PatientEncounterSearch"
+    }
+  ]
+}

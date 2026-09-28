@@ -1,0 +1,6304 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Scheduling API",
+    "description": "Snowdrop Scheduling API"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/scheduling"
+    }
+  ],
+  "paths": {
+    "/patients/{patientId}": {
+      "get": {
+        "tags": [
+          "Patients"
+        ],
+        "summary": "Get a Patient",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientInformation"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientInformation"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientInformation"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/{patientId}/schedule": {
+      "get": {
+        "tags": [
+          "Patients"
+        ],
+        "summary": "Get a Patient's Schedule",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSchedule"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSchedule"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSchedule"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/{patientId}/schedule/{dateOfService}": {
+      "get": {
+        "tags": [
+          "Patients"
+        ],
+        "summary": "Get a Patient's Schedule for a Date",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSchedule"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSchedule"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSchedule"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/{patientId}/schedule/{dateOfService}/nextappointment": {
+      "get": {
+        "tags": [
+          "Patients"
+        ],
+        "summary": "Get a Patient's Next Appointment following a Date",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSchedule"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSchedule"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSchedule"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resource/locations/{locationId}": {
+      "get": {
+        "tags": [
+          "Resources"
+        ],
+        "summary": "Get Resources for an Organization Location",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ScheduleResource"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ScheduleResource"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ScheduleResource"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resource/{resourceId}": {
+      "get": {
+        "tags": [
+          "Resources"
+        ],
+        "summary": "Get Resource Schedule Header",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceScheduleHeader"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceScheduleHeader"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceScheduleHeader"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resource/{resourceId}/schedules": {
+      "post": {
+        "tags": [
+          "Resources"
+        ],
+        "summary": "Get Resource Schedules for an Organization Resource",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetResourceSchedulesRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetResourceSchedulesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetResourceSchedulesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetResourceSchedulesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resource Schedules",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceScheduleResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceScheduleResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceScheduleResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resource/{resourceId}/locations/{locationId}/dates/{dateOfService}": {
+      "get": {
+        "tags": [
+          "Resources"
+        ],
+        "summary": "Get a Resource Schedule",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceScheduleResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceScheduleResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceScheduleResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Resources"
+        ],
+        "summary": "Set a Resource Schedule",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetResourceScheduleRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetResourceScheduleRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetResourceScheduleRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetResourceScheduleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceScheduleResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceScheduleResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceScheduleResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resource/{resourceId}/locations/{locationId}/resources": {
+      "put": {
+        "tags": [
+          "Resources"
+        ],
+        "summary": "Set Resource Schedules",
+        "parameters": [
+          {
+            "name": "resourceId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetResourceSchedulesRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetResourceSchedulesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetResourceSchedulesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetResourceSchedulesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Resource Schedule",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceScheduleResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceScheduleResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResourceScheduleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/resource/locations/{locationId}/dates/{dateOfService}": {
+      "get": {
+        "tags": [
+          "Resources"
+        ],
+        "summary": "Get Schedule Resources",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceScheduleResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceScheduleResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResourceScheduleResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appointment-validation-rules/behaviors": {
+      "get": {
+        "tags": [
+          "AppointmentValidationRule"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appointment-validation-rules": {
+      "get": {
+        "tags": [
+          "AppointmentValidationRule"
+        ],
+        "summary": "Get Rules",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RuleSummary"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RuleSummary"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RuleSummary"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AppointmentValidationRule"
+        ],
+        "summary": "Creates a new Rule",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRuleRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRuleRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRuleRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateRuleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appointment-validation-rules/{ruleId}": {
+      "get": {
+        "tags": [
+          "AppointmentValidationRule"
+        ],
+        "summary": "Gets the Rule",
+        "parameters": [
+          {
+            "name": "ruleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RuleDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RuleDetail"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RuleDetail"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appointment-validation-rules/names/isunique": {
+      "get": {
+        "tags": [
+          "AppointmentValidationRule"
+        ],
+        "summary": "Is Rule Name Unique",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appointment-validation-rules/{ruleId}/update": {
+      "put": {
+        "tags": [
+          "AppointmentValidationRule"
+        ],
+        "summary": "Edit Rule",
+        "parameters": [
+          {
+            "name": "ruleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRuleRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRuleRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRuleRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateRuleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appointment-validation-rules/{ruleId}/delete": {
+      "put": {
+        "tags": [
+          "AppointmentValidationRule"
+        ],
+        "summary": "Archive Rule",
+        "parameters": [
+          {
+            "name": "ruleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appointment-validation-rules/ruleactions": {
+      "get": {
+        "tags": [
+          "AppointmentValidationRule"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appointment-validation-rules/qualifiers": {
+      "get": {
+        "tags": [
+          "AppointmentValidationRule"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/appointment-validation-rules/behaviors/manualreview/releaseactions": {
+      "get": {
+        "tags": [
+          "AppointmentValidationRule"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/locations/{locationId}/dates/{dateOfService}": {
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Get a Schedule",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleHeader"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleHeader"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleHeader"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Get a Schedule with Resource Filter",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetScheduleRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetScheduleRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetScheduleRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/GetScheduleRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleHeader"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleHeader"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleHeader"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/locations/{locationId}/dates/{dateOfService}/appointments/{appointmentId}": {
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Get an Appointment by AppointmentId",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appointmentId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Update an Appointment",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appointmentId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppointmentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppointmentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppointmentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateAppointmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/locations/{locationId}/dates/{dateOfService}/appointments": {
+      "post": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Add an Appointment to a Schedule",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAppointmentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAppointmentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAppointmentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAppointmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/locations/{locationId}/dates/{dateOfService}/appointments/{appointmentId}/cancel": {
+      "put": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Cancel an Appointment",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appointmentId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelAppointmentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelAppointmentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelAppointmentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelAppointmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppointmentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/locations/{locationId}/dates/{dateOfService}/appointments/validate": {
+      "post": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Validate a Schedule Template Appointment",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleTemplateValidationRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleTemplateValidationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleTemplateValidationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleTemplateValidationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleTemplateValidationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleTemplateValidationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleTemplateValidationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/schedule/locations/{locationId}/dates/{dateOfService}/appointments/validate-rules": {
+      "post": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Validate a Schedule Appointment for Rules",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleRuleValidationRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleRuleValidationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleRuleValidationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ScheduleRuleValidationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RuleValidationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RuleValidationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RuleValidationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scheduling-validation-sequences/behaviors": {
+      "get": {
+        "tags": [
+          "AppointmentValidationSequence"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/KeyValuePairOfintAndstring"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scheduling-validation-sequences": {
+      "get": {
+        "tags": [
+          "AppointmentValidationSequence"
+        ],
+        "summary": "Get Sequences",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SequenceHeader"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SequenceHeader"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SequenceHeader"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "AppointmentValidationSequence"
+        ],
+        "summary": "Creates a new Sequence",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSequenceRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSequenceRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSequenceRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSequenceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scheduling-validation-sequences/{sequenceId}": {
+      "get": {
+        "tags": [
+          "AppointmentValidationSequence"
+        ],
+        "summary": "Gets the Sequence",
+        "parameters": [
+          {
+            "name": "sequenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SequenceHeader"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SequenceHeader"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SequenceHeader"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scheduling-validation-sequences/{sequenceId}/rules": {
+      "get": {
+        "tags": [
+          "AppointmentValidationSequence"
+        ],
+        "summary": "Get Rules",
+        "parameters": [
+          {
+            "name": "sequenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RuleSummary"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RuleSummary"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RuleSummary"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scheduling-validation-sequences/names/isunique": {
+      "get": {
+        "tags": [
+          "AppointmentValidationSequence"
+        ],
+        "summary": "Is Sequence Name Unique",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scheduling-validation-sequences/{sequenceId}/update": {
+      "put": {
+        "tags": [
+          "AppointmentValidationSequence"
+        ],
+        "summary": "Edit Sequence",
+        "parameters": [
+          {
+            "name": "sequenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSequenceRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSequenceRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSequenceRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSequenceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scheduling-validation-sequences/{sequenceId}/archive": {
+      "put": {
+        "tags": [
+          "AppointmentValidationSequence"
+        ],
+        "summary": "Archive Sequence",
+        "parameters": [
+          {
+            "name": "sequenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scheduling-validation-sequences/{sequenceId}/restore": {
+      "put": {
+        "tags": [
+          "AppointmentValidationSequence"
+        ],
+        "summary": "Restore Sequence",
+        "parameters": [
+          {
+            "name": "sequenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scheduling-validation-sequences/reorder": {
+      "put": {
+        "tags": [
+          "AppointmentValidationSequence"
+        ],
+        "summary": "Reorder Sequences",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SequenceOrder"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SequenceOrder"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SequenceOrder"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SequenceOrder"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scheduling-validation-sequences/{sequenceId}/rules/reorder": {
+      "put": {
+        "tags": [
+          "AppointmentValidationSequence"
+        ],
+        "summary": "Reorder Rules",
+        "parameters": [
+          {
+            "name": "sequenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RuleOrder"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RuleOrder"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RuleOrder"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RuleOrder"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/scheduling-validation-sequences/{sequenceId}/download": {
+      "post": {
+        "tags": [
+          "AppointmentValidationSequence"
+        ],
+        "parameters": [
+          {
+            "name": "sequenceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/signalr/scheduling-hub/negotiate": {
+      "post": {
+        "tags": [
+          "Signalr"
+        ],
+        "summary": "Negotiate SignalR Response",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Negotiation Response"
+          }
+        }
+      }
+    },
+    "/signalr/schedule/location/{locationId}/users/add": {
+      "post": {
+        "tags": [
+          "Signalr"
+        ],
+        "summary": "Watch Group",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/signalr/schedule/patient/{patientId}/users/add": {
+      "post": {
+        "tags": [
+          "Signalr"
+        ],
+        "summary": "Watch Patient Group",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/signalr/schedule/location/{locationId}/users/remove": {
+      "post": {
+        "tags": [
+          "Signalr"
+        ],
+        "summary": "Unwatch Group",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/signalr/schedule/patient/{patientId}/users/remove": {
+      "post": {
+        "tags": [
+          "Signalr"
+        ],
+        "summary": "Unwatch Patient Group",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/templates": {
+      "get": {
+        "tags": [
+          "Templates"
+        ],
+        "summary": "Get the Published Templates",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TemplateHeader"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TemplateHeader"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TemplateHeader"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/templates/{templateId}": {
+      "get": {
+        "tags": [
+          "Templates"
+        ],
+        "summary": "Get a Published Template",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplateResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplateResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplateResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddAppointmentRequest": {
+        "required": [
+          "patientId",
+          "appointmentTypeId",
+          "resourceType",
+          "resourceId",
+          "resourceTypeId",
+          "startTime",
+          "duration",
+          "appointmentDescription",
+          "correlationId",
+          "templateId",
+          "overbookReasonId",
+          "treatmentPlanId"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointmentTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceType": {
+            "$ref": "#/components/schemas/AppointmentResourceType"
+          },
+          "resourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "duration": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          },
+          "appointmentDescription": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "templateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "overbookReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "treatmentPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "AppointmentBookingFailedReason": {
+        "type": "integer"
+      },
+      "AppointmentHeader": {
+        "required": [
+          "locationId",
+          "dateOfService",
+          "appointmentId",
+          "patientId",
+          "firstName",
+          "middleName",
+          "lastName",
+          "suffixName",
+          "birthDate",
+          "appointmentTypeId",
+          "appointmentTypeName",
+          "appointmentTypeColor",
+          "resourceType",
+          "resourceId",
+          "resourceTypeId",
+          "resourceName",
+          "resourceColor",
+          "startTime",
+          "duration",
+          "overbooked",
+          "assignedRegionId",
+          "appointmentDescription",
+          "overbookReasonId",
+          "overbookReasonDisplay",
+          "treatmentPlan"
+        ],
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "appointmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "middleName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "suffixName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "birthDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "appointmentTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointmentTypeName": {
+            "type": "string"
+          },
+          "appointmentTypeColor": {
+            "type": "string"
+          },
+          "resourceType": {
+            "$ref": "#/components/schemas/AppointmentResourceType"
+          },
+          "resourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "resourceColor": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "duration": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          },
+          "overbooked": {
+            "type": "boolean"
+          },
+          "assignedRegionId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "appointmentDescription": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "overbookReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "overbookReasonDisplay": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "treatmentPlan": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TreatmentPlan"
+              }
+            ]
+          }
+        }
+      },
+      "AppointmentRegionResponse": {
+        "required": [
+          "appointmentRegionId",
+          "name",
+          "color",
+          "schedulingLane",
+          "startTime",
+          "endTime",
+          "appointmentTypeId",
+          "isAppointmentTypeSet",
+          "appointmentTypeElementIds",
+          "userGuidanceNote"
+        ],
+        "type": "object",
+        "properties": {
+          "appointmentRegionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "color": {
+            "type": "string"
+          },
+          "schedulingLane": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "appointmentTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isAppointmentTypeSet": {
+            "type": "boolean"
+          },
+          "appointmentTypeElementIds": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "userGuidanceNote": {
+            "type": "string"
+          }
+        }
+      },
+      "AppointmentResourceType": {
+        "type": "integer"
+      },
+      "AppointmentResponse": {
+        "required": [
+          "locationId",
+          "dateOfService",
+          "appointmentId",
+          "patientId",
+          "fan",
+          "firstName",
+          "middleName",
+          "lastName",
+          "suffixName",
+          "primaryPhone",
+          "extension",
+          "birthDate",
+          "appointmentTypeId",
+          "appointmentTypeName",
+          "appointmentTypeColor",
+          "resourceType",
+          "resourceId",
+          "resourceTypeId",
+          "resourceName",
+          "resourceColor",
+          "startTime",
+          "duration",
+          "canceled",
+          "cancellationReasonId",
+          "overbooked",
+          "assignedRegionId",
+          "overbookReasonId",
+          "overbookReasonDisplay",
+          "appointmentDescription",
+          "createdDate",
+          "createdUser",
+          "lastModifiedDate",
+          "userId",
+          "treatmentPlan"
+        ],
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "appointmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fan": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "firstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "middleName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "suffixName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primaryPhone": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "extension": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "birthDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "appointmentTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointmentTypeName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "appointmentTypeColor": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "resourceType": {
+            "$ref": "#/components/schemas/AppointmentResourceType"
+          },
+          "resourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "resourceColor": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "duration": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          },
+          "canceled": {
+            "type": "boolean"
+          },
+          "cancellationReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "overbooked": {
+            "type": "boolean"
+          },
+          "assignedRegionId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "overbookReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "overbookReasonDisplay": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "appointmentDescription": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdUser": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "userId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "treatmentPlan": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TreatmentPlan"
+              }
+            ]
+          },
+          "modelError": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "AttributeQualifiers": {
+        "required": [
+          "attributeType"
+        ],
+        "type": "object",
+        "properties": {
+          "attributeType": {
+            "$ref": "#/components/schemas/AttributeType"
+          },
+          "entityType": {
+            "$ref": "#/components/schemas/EntityType"
+          },
+          "nullQualifier": {
+            "type": "boolean"
+          },
+          "setQualifiers": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/SetQualifier"
+            }
+          },
+          "elementQualifiers": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ElementQualifier"
+            }
+          }
+        }
+      },
+      "AttributeType": {
+        "type": "integer"
+      },
+      "CancelAppointmentRequest": {
+        "required": [
+          "cancellationReasonId",
+          "correlationId",
+          "templateId"
+        ],
+        "type": "object",
+        "properties": {
+          "cancellationReasonId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "templateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "CreateRuleRequest": {
+        "required": [
+          "sequenceId",
+          "name",
+          "description",
+          "userGuidance",
+          "behaviorCategory",
+          "startDate",
+          "endDate",
+          "qualifiers",
+          "sameDateOfServiceQualifiers",
+          "episodeQualifier",
+          "ruleAction",
+          "releaseType",
+          "behaviorConfiguration",
+          "qualificationConfiguration"
+        ],
+        "type": "object",
+        "properties": {
+          "sequenceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userGuidance": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "behaviorCategory": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "startDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "qualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifiers"
+            }
+          },
+          "sameDateOfServiceQualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifiers"
+            }
+          },
+          "episodeQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EpisodeQualifier"
+              }
+            ]
+          },
+          "ruleAction": {
+            "$ref": "#/components/schemas/RuleAction"
+          },
+          "releaseType": {
+            "$ref": "#/components/schemas/ReleaseType"
+          },
+          "behaviorConfiguration": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateRuleRequest/properties/behaviorConfiguration/additionalProperties"
+                }
+              }
+            }
+          },
+          "qualificationConfiguration": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CreateRuleRequest/properties/behaviorConfiguration/additionalProperties"
+              }
+            }
+          }
+        }
+      },
+      "CreateSequenceRequest": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Date": { },
+      "ElementQualifier": {
+        "required": [
+          "elementId",
+          "exclusionary"
+        ],
+        "type": "object",
+        "properties": {
+          "elementId": {
+            "type": "string"
+          },
+          "exclusionary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EntityType": {
+        "type": "integer"
+      },
+      "EpisodeQualifier": {
+        "required": [
+          "allEpisodes",
+          "episodeTypes",
+          "phases",
+          "exclusionary"
+        ],
+        "type": "object",
+        "properties": {
+          "allEpisodes": {
+            "type": "boolean"
+          },
+          "episodeTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "exclusionary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "GetResourceSchedulesRequest": {
+        "required": [
+          "startDate",
+          "endDate"
+        ],
+        "type": "object",
+        "properties": {
+          "startDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "endDate": {
+            "$ref": "#/components/schemas/Date"
+          }
+        }
+      },
+      "GetScheduleRequest": {
+        "required": [
+          "resourceTypeIds",
+          "resourceIds"
+        ],
+        "type": "object",
+        "properties": {
+          "resourceTypeIds": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "resourceIds": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "KeyValuePairOfintAndstring": {
+        "required": [
+          "key",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "value": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "NetType": {
+        "type": "integer"
+      },
+      "PatientAppointment": {
+        "required": [
+          "locationId",
+          "dateOfService",
+          "appointmentId",
+          "appointmentTypeId",
+          "appointmentTypeName",
+          "appointmentTypeColor",
+          "resourceType",
+          "resourceId",
+          "resourceTypeId",
+          "resourceName",
+          "resourceColor",
+          "startTime",
+          "duration",
+          "appointmentDescription",
+          "treatmentPlanId"
+        ],
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "appointmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointmentTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointmentTypeName": {
+            "type": "string"
+          },
+          "appointmentTypeColor": {
+            "type": "string"
+          },
+          "resourceType": {
+            "$ref": "#/components/schemas/AppointmentResourceType"
+          },
+          "resourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "resourceColor": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "duration": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          },
+          "appointmentDescription": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "treatmentPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "PatientInformation": {
+        "required": [
+          "patientId",
+          "fan",
+          "firstName",
+          "middleName",
+          "lastName",
+          "suffixName",
+          "birthDate",
+          "primaryPhone",
+          "extension"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fan": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "middleName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "suffixName": {
+            "type": "string"
+          },
+          "birthDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "primaryPhone": {
+            "type": "string"
+          },
+          "extension": {
+            "type": "string"
+          }
+        }
+      },
+      "PatientSchedule": {
+        "required": [
+          "patientId",
+          "fan",
+          "firstName",
+          "middleName",
+          "lastName",
+          "suffixName",
+          "birthDate",
+          "primaryPhone",
+          "extension",
+          "appointments"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fan": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "middleName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "suffixName": {
+            "type": "string"
+          },
+          "birthDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "primaryPhone": {
+            "type": "string"
+          },
+          "extension": {
+            "type": "string"
+          },
+          "appointments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PatientAppointment"
+            }
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "QualifierHeader": {
+        "required": [
+          "attributeType",
+          "id",
+          "isSet",
+          "exclusionary"
+        ],
+        "type": "object",
+        "properties": {
+          "attributeType": {
+            "$ref": "#/components/schemas/AttributeType"
+          },
+          "id": {
+            "type": "string"
+          },
+          "isSet": {
+            "type": "boolean"
+          },
+          "exclusionary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ReleaseType": {
+        "type": "integer"
+      },
+      "ResourceScheduleHeader": {
+        "required": [
+          "lastAppliedTemplateDate"
+        ],
+        "type": "object",
+        "properties": {
+          "lastAppliedTemplateDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      },
+      "ResourceScheduleResponse": {
+        "required": [
+          "resourceId",
+          "resourceType",
+          "resourceTypeId",
+          "locationId",
+          "dateOfService",
+          "templateId"
+        ],
+        "type": "object",
+        "properties": {
+          "resourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceType": {
+            "$ref": "#/components/schemas/TemplateResourceType"
+          },
+          "resourceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "templateId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "ResourceTemplateDate": {
+        "required": [
+          "dateOfService",
+          "oldTemplateId",
+          "templateId"
+        ],
+        "type": "object",
+        "properties": {
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "oldTemplateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "templateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "RuleAction": {
+        "type": "integer"
+      },
+      "RuleDetail": {
+        "required": [
+          "sequenceId",
+          "ruleId",
+          "name",
+          "description",
+          "userGuidance",
+          "behaviorCategory",
+          "startDate",
+          "endDate",
+          "qualifiers",
+          "sameDateOfServiceQualifiers",
+          "episodeQualifier",
+          "behaviorConfiguration",
+          "qualificationConfiguration",
+          "ruleAction",
+          "releaseType",
+          "netType",
+          "createdByUserId",
+          "createdDate",
+          "lastModifiedByUserId",
+          "lastModifiedDate"
+        ],
+        "type": "object",
+        "properties": {
+          "sequenceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ruleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userGuidance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "behaviorCategory": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "startDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "qualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifiers"
+            }
+          },
+          "sameDateOfServiceQualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifiers"
+            }
+          },
+          "episodeQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EpisodeQualifier"
+              }
+            ]
+          },
+          "behaviorConfiguration": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/RuleDetail/properties/behaviorConfiguration/additionalProperties"
+                }
+              }
+            }
+          },
+          "qualificationConfiguration": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/RuleDetail/properties/behaviorConfiguration/additionalProperties"
+              }
+            }
+          },
+          "reviewRequired": {
+            "type": "boolean"
+          },
+          "ruleAction": {
+            "$ref": "#/components/schemas/RuleAction"
+          },
+          "releaseType": {
+            "$ref": "#/components/schemas/ReleaseType"
+          },
+          "netType": {
+            "$ref": "#/components/schemas/NetType"
+          },
+          "createdByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "RuleHeader": {
+        "required": [
+          "ruleId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "RuleOrder": {
+        "required": [
+          "ruleId",
+          "order"
+        ],
+        "type": "object",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "order": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "RuleSummary": {
+        "required": [
+          "ruleId",
+          "sequenceId",
+          "order",
+          "name",
+          "description",
+          "userGuidance",
+          "behaviorCategory",
+          "startDate",
+          "endDate",
+          "qualifiers",
+          "sameDateOfServiceQualifiers",
+          "releaseType",
+          "behaviorConfiguration"
+        ],
+        "type": "object",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "sequenceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "order": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userGuidance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "behaviorCategory": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "startDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "qualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QualifierHeader"
+            }
+          },
+          "sameDateOfServiceQualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QualifierHeader"
+            }
+          },
+          "releaseType": {
+            "$ref": "#/components/schemas/ReleaseType"
+          },
+          "behaviorConfiguration": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas//items/properties/behaviorConfiguration/additionalProperties"
+                }
+              }
+            }
+          }
+        }
+      },
+      "RuleValidationResponse": {
+        "required": [
+          "validation",
+          "errors"
+        ],
+        "type": "object",
+        "properties": {
+          "validation": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "ScheduleHeader": {
+        "required": [
+          "locationId",
+          "dateOfService",
+          "appointments"
+        ],
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "appointments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppointmentHeader"
+            }
+          }
+        }
+      },
+      "ScheduleResource": {
+        "required": [
+          "resourceType",
+          "resourceTypeId",
+          "resourceTypeName",
+          "resourceId",
+          "resourceName",
+          "resourceInitials",
+          "resourceColor",
+          "effectiveDateBegin",
+          "effectiveDateEnd",
+          "notes",
+          "hasSchedulingEntitlement"
+        ],
+        "type": "object",
+        "properties": {
+          "resourceType": {
+            "$ref": "#/components/schemas/AppointmentResourceType"
+          },
+          "resourceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceTypeName": {
+            "type": "string"
+          },
+          "resourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceName": {
+            "type": "string"
+          },
+          "resourceInitials": {
+            "type": "string"
+          },
+          "resourceColor": {
+            "type": "string"
+          },
+          "effectiveDateBegin": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "effectiveDateEnd": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "notes": {
+            "type": "string"
+          },
+          "hasSchedulingEntitlement": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ScheduleRuleValidationRequest": {
+        "required": [
+          "appointmentId",
+          "patientId",
+          "appointmentTypeId",
+          "resourceType",
+          "resourceTypeId",
+          "resourceId",
+          "startTime",
+          "duration",
+          "treatmentPlanId"
+        ],
+        "type": "object",
+        "properties": {
+          "appointmentId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointmentTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceType": {
+            "$ref": "#/components/schemas/AppointmentResourceType"
+          },
+          "resourceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "duration": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          },
+          "treatmentPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "ScheduleTemplateValidationRequest": {
+        "required": [
+          "appointmentId",
+          "appointmentTypeId",
+          "resourceId",
+          "startTime",
+          "duration",
+          "templateId"
+        ],
+        "type": "object",
+        "properties": {
+          "appointmentId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "appointmentTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "duration": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          },
+          "templateId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "ScheduleTemplateValidationResponse": {
+        "required": [
+          "isValid",
+          "reason"
+        ],
+        "type": "object",
+        "properties": {
+          "isValid": {
+            "type": "boolean"
+          },
+          "reason": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AppointmentBookingFailedReason"
+              }
+            ]
+          }
+        }
+      },
+      "SequenceHeader": {
+        "required": [
+          "sequenceId",
+          "order",
+          "name",
+          "sequenceStatus",
+          "createdByUserId",
+          "createdDate",
+          "lastModifiedByUserId",
+          "lastModifiedDate"
+        ],
+        "type": "object",
+        "properties": {
+          "sequenceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "order": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RuleHeader"
+            }
+          },
+          "sequenceStatus": {
+            "$ref": "#/components/schemas/SequenceStatus"
+          },
+          "createdByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastModifiedByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastModifiedDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SequenceOrder": {
+        "required": [
+          "sequenceId",
+          "status",
+          "order"
+        ],
+        "type": "object",
+        "properties": {
+          "sequenceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/SequenceStatus"
+          },
+          "order": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "SequenceStatus": {
+        "type": "integer"
+      },
+      "SetQualifier": {
+        "required": [
+          "setType",
+          "setId",
+          "isFactorySet",
+          "exclusionary"
+        ],
+        "type": "object",
+        "properties": {
+          "setType": {
+            "type": "string"
+          },
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isFactorySet": {
+            "type": "boolean"
+          },
+          "exclusionary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SetResourceScheduleRequest": {
+        "required": [
+          "resourceType",
+          "resourceTypeId",
+          "oldTemplateId",
+          "templateId"
+        ],
+        "type": "object",
+        "properties": {
+          "resourceType": {
+            "$ref": "#/components/schemas/TemplateResourceType"
+          },
+          "resourceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "oldTemplateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "templateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "SetResourceSchedulesRequest": {
+        "required": [
+          "resourceType",
+          "resourceTypeId",
+          "templateDates"
+        ],
+        "type": "object",
+        "properties": {
+          "resourceType": {
+            "$ref": "#/components/schemas/TemplateResourceType"
+          },
+          "resourceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "templateDates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ResourceTemplateDate"
+            }
+          }
+        }
+      },
+      "TemplateHeader": {
+        "required": [
+          "isActive",
+          "templateId",
+          "name",
+          "description",
+          "startTime",
+          "endTime",
+          "allowOverbook",
+          "isOverbookReasonRequired",
+          "hasPendingUpdates",
+          "isUpdating",
+          "lastPublishedDate"
+        ],
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "templateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "allowOverbook": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "isOverbookReasonRequired": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "hasPendingUpdates": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "isUpdating": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "lastPublishedDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "TemplateResourceType": {
+        "type": "integer"
+      },
+      "TemplateResponse": {
+        "required": [
+          "isActive",
+          "templateId",
+          "name",
+          "description",
+          "startTime",
+          "endTime",
+          "lastPublishedDate",
+          "allowOverbook",
+          "isOverbookReasonRequired",
+          "hasPendingUpdates",
+          "isUpdating",
+          "appointmentRegions",
+          "timeBlocks"
+        ],
+        "type": "object",
+        "properties": {
+          "isActive": {
+            "type": "boolean"
+          },
+          "templateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "lastPublishedDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "allowOverbook": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "isOverbookReasonRequired": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "hasPendingUpdates": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "isUpdating": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "appointmentRegions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppointmentRegionResponse"
+            }
+          },
+          "timeBlocks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TimeBlockResponse"
+            }
+          }
+        }
+      },
+      "TimeBlockResponse": {
+        "required": [
+          "timeBlockId",
+          "startTime",
+          "endTime",
+          "blockTypeId",
+          "blockTypeName",
+          "userGuidanceNote"
+        ],
+        "type": "object",
+        "properties": {
+          "timeBlockId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "endTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "blockTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "blockTypeName": {
+            "type": "string"
+          },
+          "userGuidanceNote": {
+            "type": "string"
+          }
+        }
+      },
+      "TreatmentPlan": {
+        "required": [
+          "treatmentPlanId",
+          "treatmentPlanName"
+        ],
+        "type": "object",
+        "properties": {
+          "treatmentPlanId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "treatmentPlanName": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateAppointmentRequest": {
+        "required": [
+          "locationId",
+          "dateOfService",
+          "appointmentTypeId",
+          "resourceType",
+          "resourceId",
+          "resourceTypeId",
+          "startTime",
+          "duration",
+          "appointmentDescription",
+          "correlationId",
+          "oldTemplateId",
+          "templateId",
+          "overbookReasonId",
+          "treatmentPlanId"
+        ],
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "appointmentTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceType": {
+            "$ref": "#/components/schemas/AppointmentResourceType"
+          },
+          "resourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resourceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "time"
+          },
+          "duration": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          },
+          "appointmentDescription": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "correlationId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "oldTemplateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "templateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "overbookReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "treatmentPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "UpdateRuleRequest": {
+        "required": [
+          "ruleId",
+          "name",
+          "description",
+          "userGuidance",
+          "behaviorCategory",
+          "startDate",
+          "endDate",
+          "qualifiers",
+          "sameDateOfServiceQualifiers",
+          "episodeQualifier",
+          "ruleAction",
+          "releaseType",
+          "behaviorConfiguration",
+          "qualificationConfiguration"
+        ],
+        "type": "object",
+        "properties": {
+          "ruleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "userGuidance": {
+            "maxLength": 250,
+            "minLength": 0,
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "behaviorCategory": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "startDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "qualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifiers"
+            }
+          },
+          "sameDateOfServiceQualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifiers"
+            }
+          },
+          "episodeQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EpisodeQualifier"
+              }
+            ]
+          },
+          "ruleAction": {
+            "$ref": "#/components/schemas/RuleAction"
+          },
+          "releaseType": {
+            "$ref": "#/components/schemas/ReleaseType"
+          },
+          "behaviorConfiguration": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/UpdateRuleRequest/properties/behaviorConfiguration/additionalProperties"
+                }
+              }
+            }
+          },
+          "qualificationConfiguration": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/UpdateRuleRequest/properties/behaviorConfiguration/additionalProperties"
+              }
+            }
+          }
+        }
+      },
+      "UpdateSequenceRequest": {
+        "required": [
+          "sequenceId",
+          "name",
+          "enabled"
+        ],
+        "type": "object",
+        "properties": {
+          "sequenceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "enabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ValidationError": {
+        "required": [
+          "error",
+          "guidance",
+          "blocking",
+          "previous",
+          "minimum"
+        ],
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "guidance": {
+            "type": "string"
+          },
+          "blocking": {
+            "type": "boolean"
+          },
+          "previous": {
+            "type": "boolean"
+          },
+          "minimum": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Patients"
+    },
+    {
+      "name": "Resources"
+    },
+    {
+      "name": "AppointmentValidationRule"
+    },
+    {
+      "name": "Schedule"
+    },
+    {
+      "name": "AppointmentValidationSequence"
+    },
+    {
+      "name": "Signalr"
+    },
+    {
+      "name": "Templates"
+    }
+  ]
+}

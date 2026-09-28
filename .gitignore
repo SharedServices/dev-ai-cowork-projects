@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+*.sqlite
+*.vsidx
+/.vs
+/AI Ticket Assistant/tickets
+/AI Ticket Assistant/documents/testing
+/AI Ticket Assistant/documents/workspace-plan.md
+/AI Ticket Assistant/.vs

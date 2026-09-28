@@ -1,0 +1,3867 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Unlimited Engagement Patient Portal API",
+    "description": "Unlimited Engagement Patient Portal API"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/patient-portal/public"
+    }
+  ],
+  "paths": {
+    "/communication/settings": {
+      "get": {
+        "tags": [
+          "Communication"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSingleBrandCommunicationSettingsRepsonse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSingleBrandCommunicationSettingsRepsonse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientSingleBrandCommunicationSettingsRepsonse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Communication"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientSelfSelectCommunicationSettingsRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientSelfSelectCommunicationSettingsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientSelfSelectCommunicationSettingsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientSelfSelectCommunicationSettingsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/insecure/config/{prefix}": {
+      "get": {
+        "tags": [
+          "Insecure"
+        ],
+        "parameters": [
+          {
+            "name": "prefix",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfigResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfigResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConfigResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/insecure/login": {
+      "post": {
+        "tags": [
+          "Insecure"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LimitedLoginResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LimitedLoginResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LimitedLoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/insecure/quicklogin": {
+      "post": {
+        "tags": [
+          "Insecure"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuickLoginRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuickLoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuickLoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/QuickLoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuickLoginResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuickLoginResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuickLoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/paymenthistory": {
+      "get": {
+        "tags": [
+          "PaymentHistory"
+        ],
+        "summary": "Get the payment history for the current user",
+        "parameters": [
+          {
+            "name": "paymentYear",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentHistoryResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentHistoryResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentHistoryResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/paymenthistory/{paymentId}/receipt": {
+      "get": {
+        "tags": [
+          "PaymentHistory"
+        ],
+        "summary": "Get a receipt for a payment as raw html",
+        "parameters": [
+          {
+            "name": "paymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/paymenthistory/{paymentId}/receipt/send": {
+      "post": {
+        "tags": [
+          "PaymentHistory"
+        ],
+        "summary": "Email a receipt to the provided address",
+        "parameters": [
+          {
+            "name": "paymentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentReceiptRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentReceiptRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentReceiptRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaymentReceiptRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-plan/template": {
+      "get": {
+        "tags": [
+          "PaymentPlan"
+        ],
+        "summary": "Get all active payment plan templates for a brand",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentPlanTemplateResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentPlanTemplateResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentPlanTemplateResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-plan/template/{templateId}": {
+      "get": {
+        "tags": [
+          "PaymentPlan"
+        ],
+        "summary": "Get the specified payment plan template",
+        "parameters": [
+          {
+            "name": "templateId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentPlanTemplateResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentPlanTemplateResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentPlanTemplateResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-plan/plan": {
+      "get": {
+        "tags": [
+          "PaymentPlan"
+        ],
+        "summary": "Get payment plans for the patient in the context of the current brand",
+        "parameters": [
+          {
+            "name": "withSchedule",
+            "in": "query",
+            "description": "If true, include the plans' schedules",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "activeOnly",
+            "in": "query",
+            "description": "If true, only include plans where bool PatientPaymentPlanResponse.IsActive is true",
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PaymentPlan"
+        ],
+        "summary": "Add a new patient payment plan or update an existing one",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortalPaymentPlanRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortalPaymentPlanRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortalPaymentPlanRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortalPaymentPlanRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-plan/balance": {
+      "get": {
+        "tags": [
+          "PaymentPlan"
+        ],
+        "summary": "Get balance information for the patient in the context of the current brand's active payment plan",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientBalanceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientBalanceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientBalanceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-plan/plan/{planId}": {
+      "get": {
+        "tags": [
+          "PaymentPlan"
+        ],
+        "summary": "Get the specified payment plan",
+        "parameters": [
+          {
+            "name": "planId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PaymentPlan"
+        ],
+        "summary": "Terminate the payment plan (sets status to Terminated)",
+        "parameters": [
+          {
+            "name": "planId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "terminationReason",
+            "in": "query",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-plan/plan/{planId}/validate": {
+      "get": {
+        "tags": [
+          "PaymentPlan"
+        ],
+        "summary": "Get a slimmed-down detail for the payment plan for validation purposes by the FE",
+        "parameters": [
+          {
+            "name": "planId",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimPaymentPlanResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimPaymentPlanResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SlimPaymentPlanResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payment-plan/plan/proposePlan": {
+      "post": {
+        "tags": [
+          "PaymentPlan"
+        ],
+        "summary": "Propose a new or updated plan and schedule",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortalPaymentPlanRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortalPaymentPlanRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortalPaymentPlanRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PortalPaymentPlanRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPaymentPlanResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments/process/account": {
+      "post": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Make a payment with an existing saved account",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountPaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountPaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountPaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AccountPaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments/process/card/setup": {
+      "post": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Begin the workflow to make an ad-hoc credit card payment",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupCardPaymentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupCardPaymentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupCardPaymentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetupCardPaymentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments/process/card/note": {
+      "post": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Add a note for a credit card payment after completion of the iframe workflow",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CardPaymentNoteRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CardPaymentNoteRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CardPaymentNoteRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CardPaymentNoteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/payments/accounts/{accountId}": {
+      "delete": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Deactivate a payment account",
+        "parameters": [
+          {
+            "name": "accountId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments/accounts/setup/card": {
+      "post": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Begin the workflow to set up a credit card account",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StripeTransactionSetupResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments/accounts": {
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Get a list of payment accounts for the current user",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentAccountsResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentAccountsResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentAccountsResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments/balance/unapplied": {
+      "get": {
+        "tags": [
+          "Payments"
+        ],
+        "summary": "Get unapplied payment balance",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnappliedBalanceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnappliedBalanceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnappliedBalanceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/statements": {
+      "get": {
+        "tags": [
+          "Statements"
+        ],
+        "summary": "Get statement history",
+        "parameters": [
+          {
+            "name": "count",
+            "in": "query",
+            "description": "Maximum number of statements to return; defaults to 6",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatementHistoryResponseRecord"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatementHistoryResponseRecord"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StatementHistoryResponseRecord"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/statements/{statementId}/download": {
+      "get": {
+        "tags": [
+          "Statements"
+        ],
+        "summary": "Download a statement",
+        "parameters": [
+          {
+            "name": "statementId",
+            "in": "path",
+            "description": "Id of the statement to download",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/statements/next": {
+      "get": {
+        "tags": [
+          "Statements"
+        ],
+        "summary": "Get next statement details",
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NextStatementDetailsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NextStatementDetailsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NextStatementDetailsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/verify/start": {
+      "post": {
+        "tags": [
+          "Verify"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string",
+                "format": "uuid"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StartVerifyResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StartVerifyResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StartVerifyResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/verify/login": {
+      "post": {
+        "tags": [
+          "Verify"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifiedLoginRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifiedLoginRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifiedLoginRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifiedLoginRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerifiedLoginResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerifiedLoginResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerifiedLoginResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AccountPaymentRequest": {
+        "required": [
+          "transactionAmount",
+          "paymentAccountId"
+        ],
+        "type": "object",
+        "properties": {
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentAccountId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "note": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "BrandCommunicationSettingsResponse": {
+        "required": [
+          "statements",
+          "paymentPlans"
+        ],
+        "type": "object",
+        "properties": {
+          "statements": {
+            "$ref": "#/components/schemas/StatementsCommunicationSettingsResponse"
+          },
+          "paymentPlans": {
+            "$ref": "#/components/schemas/PaymentPlansCommunicationSettingsResponse"
+          }
+        }
+      },
+      "CardPaymentNoteRequest": {
+        "type": "object",
+        "properties": {
+          "note": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "ConfigResponse": {
+        "required": [
+          "title",
+          "helpPhone",
+          "brandName",
+          "brandId",
+          "theme",
+          "logoUrl",
+          "clinicalPortalUrl",
+          "displayClinicalPortalUrl",
+          "savedAccountPolicy",
+          "displaySavedAccountPolicy",
+          "paymentPolicy",
+          "displayPaymentPolicy",
+          "messageBannerHeader",
+          "messageBanner",
+          "displayMessageBanner",
+          "displayNoteToOffice",
+          "displayPaymentPlans",
+          "displayPaymentPlanPolicy",
+          "paymentPlanPolicy",
+          "displayPaymentPlanCancellationPolicy",
+          "paymentPlanCancellationPolicy"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "helpPhone": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "brandName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "brandId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "theme": {
+            "$ref": "#/components/schemas/ThemeResponse"
+          },
+          "logoUrl": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "clinicalPortalUrl": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "displayClinicalPortalUrl": {
+            "type": "boolean"
+          },
+          "savedAccountPolicy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "displaySavedAccountPolicy": {
+            "type": "boolean"
+          },
+          "paymentPolicy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "displayPaymentPolicy": {
+            "type": "boolean"
+          },
+          "messageBannerHeader": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "messageBanner": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "displayMessageBanner": {
+            "type": "boolean"
+          },
+          "displayNoteToOffice": {
+            "type": "boolean"
+          },
+          "displayPaymentPlans": {
+            "type": "boolean"
+          },
+          "displayPaymentPlanPolicy": {
+            "type": "boolean"
+          },
+          "paymentPlanPolicy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "displayPaymentPlanCancellationPolicy": {
+            "type": "boolean"
+          },
+          "paymentPlanCancellationPolicy": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "Date": { },
+      "LastTransaction": {
+        "required": [
+          "date",
+          "amount",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "amount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "LimitedLoginResponse": {
+        "type": "object"
+      },
+      "LoginRequest": {
+        "required": [
+          "sitePrefix",
+          "dateOfBirth",
+          "accountNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "sitePrefix": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "accountNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "captchaToken": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "MethodEnrollment": {
+        "type": "integer"
+      },
+      "NextStatementDetailsResponse": {
+        "required": [
+          "previousStatementBalance",
+          "newCharges",
+          "paymentsApplied",
+          "currentBalance",
+          "paymentPlanEligibleBalances"
+        ],
+        "type": "object",
+        "properties": {
+          "previousStatementBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "newCharges": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentsApplied": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "currentBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentPlanEligibleBalances": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PaymentPlanEligibleBalancesResponse"
+              }
+            ]
+          }
+        }
+      },
+      "OrgCommunicationSettingsResponse": {
+        "required": [
+          "textEnabled",
+          "emailEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "textEnabled": {
+            "type": "boolean"
+          },
+          "emailEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PatientBalanceResponse": {
+        "required": [
+          "totalPlanCurrentBalance",
+          "statementCurrentBalance"
+        ],
+        "type": "object",
+        "properties": {
+          "totalPlanCurrentBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "statementCurrentBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "nonPlanBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "description": "Calculated value reflecting any non-plan balance the patient may have",
+            "format": "double"
+          }
+        },
+        "description": "Information about the statement vs. payment plan(s) balances"
+      },
+      "PatientPaymentPlanResponse": {
+        "type": "object",
+        "properties": {
+          "patientPaymentPlanId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parentPaymentPlanTemplateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "parentPaymentPlanTemplateName": {
+            "type": "string"
+          },
+          "brandId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "brandName": {
+            "type": "string"
+          },
+          "brandLogoUrl": {
+            "type": "string"
+          },
+          "guarantorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "endDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "duration": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "defaultPaymentMethodId": {
+            "type": "string"
+          },
+          "defaultPaymentAccountInfo": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/StripePaymentAccountsResponse"
+              }
+            ]
+          },
+          "startingBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "currentBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "delinquentAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "periodicPaymentAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdById": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "terminationReason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/PaymentPlanStatus"
+          },
+          "isActive": {
+            "type": "boolean"
+          },
+          "paymentSchedule": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PaymentPlanPaymentResponse"
+            }
+          },
+          "isSelf": {
+            "type": "boolean"
+          },
+          "updatedDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "updatedById": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "autoLastPaid": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "paymentGraceDays": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "terminationDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "terminationUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "frequency": {
+            "$ref": "#/components/schemas/PaymentPlanFrequency"
+          },
+          "splitPaymentsEvenly": {
+            "type": "boolean"
+          },
+          "nextPaymentDate": {
+            "$ref": "#/components/schemas/Date"
+          }
+        }
+      },
+      "PatientPaymentPlansCommunicationSettingsRequest": {
+        "required": [
+          "textEnabled",
+          "emailEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "textEnabled": {
+            "type": "boolean"
+          },
+          "emailEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PatientPaymentPlansCommunicationSettingsResponse": {
+        "required": [
+          "textEnabled",
+          "emailEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "textEnabled": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "emailEnabled": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          }
+        }
+      },
+      "PatientSelfSelectCommunicationSettingsRequest": {
+        "required": [
+          "statements",
+          "paymentPlans"
+        ],
+        "type": "object",
+        "properties": {
+          "statements": {
+            "$ref": "#/components/schemas/PatientSelfSelectStatementsCommunicationSettingsRequest"
+          },
+          "paymentPlans": {
+            "$ref": "#/components/schemas/PatientPaymentPlansCommunicationSettingsRequest"
+          }
+        }
+      },
+      "PatientSelfSelectStatementsCommunicationSettingsRequest": {
+        "required": [
+          "textEnabled",
+          "emailEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "textEnabled": {
+            "type": "boolean"
+          },
+          "emailEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PatientSimpleCommunicationSettingsResponse": {
+        "required": [
+          "statements",
+          "paymentPlans"
+        ],
+        "type": "object",
+        "properties": {
+          "statements": {
+            "$ref": "#/components/schemas/PatientStatementsCommunicationSettingsResponse"
+          },
+          "paymentPlans": {
+            "$ref": "#/components/schemas/PatientPaymentPlansCommunicationSettingsResponse"
+          }
+        }
+      },
+      "PatientSingleBrandCommunicationSettingsRepsonse": {
+        "required": [
+          "lastChangedByPatient",
+          "cellPhone",
+          "email",
+          "patientSettings",
+          "brandSettings",
+          "orgSettings"
+        ],
+        "type": "object",
+        "properties": {
+          "lastChangedByPatient": {
+            "type": "boolean"
+          },
+          "cellPhone": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "email": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "patientSettings": {
+            "$ref": "#/components/schemas/PatientSimpleCommunicationSettingsResponse"
+          },
+          "brandSettings": {
+            "$ref": "#/components/schemas/BrandCommunicationSettingsResponse"
+          },
+          "orgSettings": {
+            "$ref": "#/components/schemas/OrgCommunicationSettingsResponse"
+          }
+        }
+      },
+      "PatientStatementsCommunicationSettingsResponse": {
+        "required": [
+          "textEnabled",
+          "emailEnabled",
+          "paperMailEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "textEnabled": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "emailEnabled": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "paperMailEnabled": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          }
+        }
+      },
+      "PaymentDetailResponse": {
+        "required": [
+          "paymentMethodId",
+          "defermentReasonId",
+          "amountPaid",
+          "datePaid",
+          "paymentType",
+          "transactionType",
+          "lastFour",
+          "cardType",
+          "paymentSpecificationId"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentMethodId": {
+            "type": "string"
+          },
+          "defermentReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "amountPaid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "datePaid": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "transactionType": {
+            "$ref": "#/components/schemas/TransactionType"
+          },
+          "lastFour": {
+            "type": "string"
+          },
+          "cardType": {
+            "type": "string"
+          },
+          "paymentSpecificationId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "PaymentHistory": {
+        "required": [
+          "paymentId",
+          "paidOn",
+          "paymentType",
+          "paymentStatus",
+          "lastFour",
+          "cardLogo",
+          "amount"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paidOn": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "paymentStatus": {
+            "$ref": "#/components/schemas/PaymentStatus"
+          },
+          "lastFour": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "cardLogo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "amount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "PaymentHistoryResponse": {
+        "required": [
+          "histories"
+        ],
+        "type": "object",
+        "properties": {
+          "histories": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/PaymentHistory"
+            }
+          }
+        }
+      },
+      "PaymentPlanEligibleBalancesResponse": {
+        "type": "object",
+        "properties": {
+          "zeroTo29Balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "thirtyTo59Balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "sixtyTo89Balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "ninetyTo119Balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "oneTwentyTo179Balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "oneEightyPlusBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "PaymentPlanFrequency": {
+        "type": "integer"
+      },
+      "PaymentPlanPaymentResponse": {
+        "required": [
+          "paymentPlanPaymentId",
+          "dateDue",
+          "amountDue",
+          "startingBalance",
+          "status",
+          "updatedDate",
+          "paymentDetails"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentPlanPaymentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateDue": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "amountDue": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "startingBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PaymentPlanPaymentStatus"
+          },
+          "updatedDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "amountPaid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "amountRemaining": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentDetails": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/PaymentDetailResponse"
+            }
+          }
+        }
+      },
+      "PaymentPlanPaymentStatus": {
+        "type": "integer"
+      },
+      "PaymentPlansCommunicationSettingsResponse": {
+        "required": [
+          "text",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "text": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/MethodEnrollment"
+              }
+            ]
+          },
+          "email": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/MethodEnrollment"
+              }
+            ]
+          }
+        }
+      },
+      "PaymentPlanSelfSelectAgeOptions": {
+        "type": "integer"
+      },
+      "PaymentPlanStatus": {
+        "type": "integer"
+      },
+      "PaymentPlanTemplateResponse": {
+        "type": "object",
+        "properties": {
+          "paymentPlanTemplateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "duration": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "minimum": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "maximum": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "selfSelectAgeOption": {
+            "$ref": "#/components/schemas/PaymentPlanSelfSelectAgeOptions"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdById": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "updatedDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "updatedById": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "frequency": {
+            "$ref": "#/components/schemas/PaymentPlanFrequency"
+          },
+          "splitPaymentsEvenly": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PaymentReceiptRequest": {
+        "required": [
+          "emailAddress"
+        ],
+        "type": "object",
+        "properties": {
+          "emailAddress": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PaymentStatus": {
+        "type": "integer"
+      },
+      "PaymentType": {
+        "type": "integer"
+      },
+      "PortalPaymentPlanRequest": {
+        "required": [
+          "startDate",
+          "defaultPaymentMethodId",
+          "startingBalance",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "patientPaymentPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Unique identifier",
+            "format": "uuid"
+          },
+          "startDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "Date the payment plan starts",
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "duration": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "description": "Duration in months",
+            "format": "int32"
+          },
+          "defaultPaymentMethodId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Method used for payment"
+          },
+          "startingBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "description": "Starting balance for the plan",
+            "format": "double"
+          },
+          "periodicPaymentAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "description": "Amount of the periodic payment. Currently, this is assumed to be per-month.",
+            "format": "double"
+          },
+          "status": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "description": "One of the PaymentPlanStatus values",
+                "$ref": "#/components/schemas/PaymentPlanStatus"
+              }
+            ]
+          },
+          "parentPaymentPlanTemplateId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "Reference back to the template this plan was derived from",
+            "format": "uuid"
+          },
+          "paymentGraceDays": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "description": "Number of days after a payment's due date that a missing payment will not be marked as delinquent",
+            "format": "int32"
+          },
+          "frequency": {
+            "description": "One of the values in the enumeration PaymentPlanFrequency",
+            "$ref": "#/components/schemas/PaymentPlanFrequency"
+          },
+          "splitPaymentsEvenly": {
+            "type": "boolean",
+            "description": "Should payments be as evenly divided as possible?"
+          }
+        },
+        "description": "Customized version specific to UE Patient Portal instead of PatientPaymentPlanRequest"
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "QuickLoginRequest": {
+        "required": [
+          "quickLinkId",
+          "sitePrefix"
+        ],
+        "type": "object",
+        "properties": {
+          "quickLinkId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "sitePrefix": {
+            "type": "string"
+          }
+        }
+      },
+      "QuickLoginResponse": {
+        "type": "object"
+      },
+      "SetupCardPaymentRequest": {
+        "required": [
+          "transactionAmount"
+        ],
+        "type": "object",
+        "properties": {
+          "transactionAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "savePaymentAccount": {
+            "type": "boolean"
+          },
+          "paymentPlanId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "SlimPaymentPlanResponse": {
+        "type": "object",
+        "properties": {
+          "patientPaymentPlanId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "brandId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "guarantorId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "endDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "duration": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "startingBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "currentBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "delinquentAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "periodicPaymentAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PaymentPlanStatus"
+          },
+          "frequency": {
+            "$ref": "#/components/schemas/PaymentPlanFrequency"
+          },
+          "splitPaymentsEvenly": {
+            "type": "boolean"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StartVerifyResponse": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "$ref": "#/components/schemas/Status"
+          },
+          "errorMessage": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "referenceId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "expirationSeconds": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "StatementHistoryResponseRecord": {
+        "required": [
+          "statementId",
+          "date",
+          "statementNumber",
+          "guarantorLast",
+          "guarantorFirst",
+          "brandName",
+          "chargeTotal",
+          "balance",
+          "status",
+          "sampleRun",
+          "runType",
+          "isPaid",
+          "isNoMail"
+        ],
+        "type": "object",
+        "properties": {
+          "statementId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "statementNumber": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          },
+          "guarantorLast": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "guarantorFirst": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "brandName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "chargeTotal": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "balance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "status": {
+            "$ref": "#/components/schemas/StatementStatus"
+          },
+          "sampleRun": {
+            "type": "boolean"
+          },
+          "runType": {
+            "$ref": "#/components/schemas/StatementTiming"
+          },
+          "isPaid": {
+            "type": "boolean"
+          },
+          "isNoMail": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StatementsCommunicationSettingsResponse": {
+        "required": [
+          "text",
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "text": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/MethodEnrollment"
+              }
+            ]
+          },
+          "email": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/MethodEnrollment"
+              }
+            ]
+          }
+        }
+      },
+      "StatementStatus": {
+        "type": "integer"
+      },
+      "StatementTiming": {
+        "type": "integer"
+      },
+      "Status": {
+        "type": "integer"
+      },
+      "StripePaymentAccountsResponse": {
+        "required": [
+          "paymentAccountId",
+          "accountType",
+          "cardType",
+          "accountLastFour",
+          "lastTransaction"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentAccountId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "accountType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "cardType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "accountLastFour": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastTransaction": {
+            "$ref": "#/components/schemas/LastTransaction"
+          }
+        }
+      },
+      "StripeTransactionResponse": {
+        "required": [
+          "paymentSpecificationId",
+          "paymentId",
+          "transactionDateTime",
+          "status",
+          "paymentType",
+          "success"
+        ],
+        "type": "object",
+        "properties": {
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "transactionDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "StripeTransactionSetupResponse": {
+        "required": [
+          "clientSecret",
+          "paymentSpecificationId",
+          "stripeId",
+          "success",
+          "error"
+        ],
+        "type": "object",
+        "properties": {
+          "clientSecret": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "paymentSpecificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "stripeId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "error": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ThemeResponse": {
+        "required": [
+          "name",
+          "primary",
+          "accent"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "primary": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "accent": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TransactionType": {
+        "type": "integer"
+      },
+      "UnappliedBalanceResponse": {
+        "required": [
+          "unappliedBalance"
+        ],
+        "type": "object",
+        "properties": {
+          "unappliedBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "VerifiedLoginRequest": {
+        "required": [
+          "referenceId",
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "referenceId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "code": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "VerifiedLoginResponse": {
+        "type": "object"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Communication"
+    },
+    {
+      "name": "Insecure"
+    },
+    {
+      "name": "PaymentHistory"
+    },
+    {
+      "name": "PaymentPlan"
+    },
+    {
+      "name": "Payments"
+    },
+    {
+      "name": "Statements"
+    },
+    {
+      "name": "Verify"
+    }
+  ]
+}

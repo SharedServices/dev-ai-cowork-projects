@@ -1,0 +1,812 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop.Unlimited.Connectors Api",
+    "description": "Snowdrop.Unlimited.Connectors Api service",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/unlimited-connectors/public"
+    }
+  ],
+  "paths": {
+    "/administration/connectors": {
+      "get": {
+        "tags": [
+          "Administration"
+        ],
+        "summary": "Gets the full list of connectors, merging the static registry with the organization's persisted statuses.",
+        "description": "All known connectors with their current status for the organization.",
+        "parameters": [
+          {
+            "name": "user-id",
+            "in": "header",
+            "description": "The requesting user.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All known connectors with their current status for the organization.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Connector"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Connector"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Connector"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/administration/connector/{id}": {
+      "get": {
+        "tags": [
+          "Administration"
+        ],
+        "summary": "Gets a single connector, merging the static registry with the organization's persisted status.",
+        "description": "The connector, or 404 if id is not a known connector.",
+        "parameters": [
+          {
+            "name": "user-id",
+            "in": "header",
+            "description": "The requesting user.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The connector's internal identifier.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The connector, or 404 if id is not a known connector.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Connector"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Connector"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Connector"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Administration"
+        ],
+        "summary": "Updates a connector's status for the organization, publishing a `ConnectorStatusUpdated` event when the status changes.",
+        "description": "The updated connector, or 404 if id is not a known connector.",
+        "parameters": [
+          {
+            "name": "user-id",
+            "in": "header",
+            "description": "The user making the change; recorded on the published event.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The connector's internal identifier.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The new status to apply.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateConnectorStatusRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateConnectorStatusRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateConnectorStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The updated connector, or 404 if id is not a known connector.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Connector"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Connector"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Connector"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Connectors": {
+      "get": {
+        "tags": [
+          "Connectors"
+        ],
+        "summary": "Gets the connectors enabled for the organization, as a slim summary (id, name, description only).",
+        "description": "The enabled connectors for the organization.",
+        "parameters": [
+          {
+            "name": "user-id",
+            "in": "header",
+            "description": "The requesting user.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The enabled connectors for the organization.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConnectorSummary"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConnectorSummary"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ConnectorSummary"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/RxVantage/start-auth": {
+      "post": {
+        "tags": [
+          "RxVantage"
+        ],
+        "summary": "Builds the URL to start RxVantage authentication for a facility.",
+        "description": "The RxVantage authentication URL, or 404 if the facility is unknown.",
+        "parameters": [
+          {
+            "name": "user-id",
+            "in": "header",
+            "description": "The user starting authentication.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The facility, user details, and callback URL for the auth flow.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartAuthRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartAuthRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartAuthRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The RxVantage authentication URL, or 404 if the facility is unknown.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StartAuthResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StartAuthResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StartAuthResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/RxVantage/start-component": {
+      "post": {
+        "tags": [
+          "RxVantage"
+        ],
+        "summary": "Obtains tokens — by exchanging the single-use access code or by refreshing an existing refresh token — and returns the configuration needed to render the RxVantage widget.",
+        "description": "Tokens and default widget filters, 400 if neither credential is supplied or the facility is unknown, 401 if the exchange is unauthorized, or 502 on an upstream RxVantage error.",
+        "parameters": [
+          {
+            "name": "user-id",
+            "in": "header",
+            "description": "The user starting the component.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The facility, an access code or refresh token, and optional search text.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartComponentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartComponentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/StartComponentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Tokens and default widget filters, 400 if neither credential is supplied or the facility is unknown, 401 if the exchange is unauthorized, or 502 on an upstream RxVantage error.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StartComponentResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StartComponentResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StartComponentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/RxVantage/refresh-token": {
+      "post": {
+        "tags": [
+          "RxVantage"
+        ],
+        "summary": "Refreshes an RxVantage access token using a previously issued refresh token.",
+        "description": "The refreshed tokens, 401 if the refresh token is unauthorized, or 502 on an upstream RxVantage error.",
+        "parameters": [
+          {
+            "name": "user-id",
+            "in": "header",
+            "description": "The requesting user.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The refresh token to exchange.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RefreshTokenRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The refreshed tokens, 401 if the refresh token is unauthorized, or 502 on an upstream RxVantage error.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TokenResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Configurability": {
+        "type": "integer"
+      },
+      "Connector": {
+        "required": [
+          "id",
+          "name",
+          "description",
+          "status",
+          "vendorOnly",
+          "configurability",
+          "legalese"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ConnectorStatus"
+          },
+          "vendorOnly": {
+            "type": "boolean"
+          },
+          "configurability": {
+            "$ref": "#/components/schemas/Configurability"
+          },
+          "legalese": {
+            "type": "string"
+          }
+        }
+      },
+      "ConnectorStatus": {
+        "type": "integer"
+      },
+      "ConnectorSummary": {
+        "required": [
+          "id",
+          "name",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "description": "Slim, consumer-facing connector shape returned by GET /connectors."
+      },
+      "FilterLocation": {
+        "required": [
+          "lat",
+          "lng",
+          "radius",
+          "address"
+        ],
+        "type": "object",
+        "properties": {
+          "lat": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "lng": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?(?:[eE][+-]?\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "radius": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "address": {
+            "type": "string"
+          }
+        }
+      },
+      "RefreshTokenRequest": {
+        "required": [
+          "refreshToken"
+        ],
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "type": "string"
+          }
+        }
+      },
+      "RoleFunction": {
+        "required": [
+          "label",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "StartAuthRequest": {
+        "required": [
+          "name",
+          "email",
+          "facilityId",
+          "callbackUrl"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "facilityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "callbackUrl": {
+            "type": "string",
+            "format": "uri"
+          }
+        }
+      },
+      "StartAuthResponse": {
+        "required": [
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "StartComponentRequest": {
+        "required": [
+          "facilityId"
+        ],
+        "type": "object",
+        "properties": {
+          "accessCode": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "The single-use access code to exchange for tokens. Supply this or string? StartComponentRequest.RefreshToken."
+          },
+          "refreshToken": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "description": "A previously issued refresh token to exchange for tokens. Used when string? StartComponentRequest.AccessCode is absent."
+          },
+          "facilityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "searchText": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "StartComponentResponse": {
+        "required": [
+          "accessToken",
+          "refreshToken",
+          "expiresAt",
+          "rxvantageApiUrl",
+          "defaultFilters"
+        ],
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          },
+          "rxvantageApiUrl": {
+            "type": "string"
+          },
+          "defaultFilters": {
+            "$ref": "#/components/schemas/WidgetFilters"
+          }
+        }
+      },
+      "TokenResponse": {
+        "required": [
+          "accessToken",
+          "refreshToken",
+          "expiresAt"
+        ],
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "type": "string"
+          },
+          "refreshToken": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          }
+        }
+      },
+      "UpdateConnectorStatusRequest": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/ConnectorStatus"
+          }
+        }
+      },
+      "WidgetFilters": {
+        "required": [
+          "searchText",
+          "roleFunction",
+          "location"
+        ],
+        "type": "object",
+        "properties": {
+          "searchText": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "roleFunction": {
+            "$ref": "#/components/schemas/RoleFunction"
+          },
+          "location": {
+            "$ref": "#/components/schemas/FilterLocation"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Administration",
+      "description": "Tenant administration of connectors — the full view (status, vendor-only, configurability, legalese) used to enable/disable connectors for an organization."
+    },
+    {
+      "name": "Connectors",
+      "description": "Slim, consumer-facing view of connectors — only enabled connectors, without status/vendorOnly/configurability."
+    },
+    {
+      "name": "RxVantage",
+      "description": "RxVantage connector authentication and widget component flow — starts auth, exchanges the single-use access code, and refreshes tokens."
+    }
+  ]
+}

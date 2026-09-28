@@ -1,0 +1,519 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Ledger Internal API",
+    "description": "Snowdrop Ledger Internal API"
+  },
+  "servers": [
+    {
+      "url": ""
+    }
+  ],
+  "paths": {
+    "/charges/{chargeId}/remittances/{remittanceId}": {
+      "get": {
+        "tags": [
+          "Charges"
+        ],
+        "parameters": [
+          {
+            "name": "chargeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "remittanceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "disputeTransactionNumber",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeRemittanceDetail"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeRemittanceDetail"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ChargeRemittanceDetail"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payers/{payerId}/contracts/{contractId}/allowed": {
+      "post": {
+        "tags": [
+          "Payers"
+        ],
+        "parameters": [
+          {
+            "name": "payerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "contractId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayerContractAllowedRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayerContractAllowedRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayerContractAllowedRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PayerContractAllowedRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ActivityDetailAllowed"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ActivityDetailAllowed"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ActivityDetailAllowed"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittances/validate": {
+      "post": {
+        "tags": [
+          "Remittances"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemittanceClaimPaymentPosted"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemittanceClaimPaymentPosted"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemittanceClaimPaymentPosted"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RemittanceClaimPaymentPosted"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemitValidationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemitValidationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemitValidationResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActivityDetail": {
+        "required": [
+          "chargeCode",
+          "modifierId",
+          "ndc",
+          "activityCode",
+          "dateOfService"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modifierId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "ndc": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "activityCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "dateOfService": {
+            "$ref": "#/components/schemas/Date"
+          }
+        }
+      },
+      "ActivityDetailAllowed": {
+        "required": [
+          "activityDetail",
+          "successful",
+          "allowed"
+        ],
+        "type": "object",
+        "properties": {
+          "activityDetail": {
+            "$ref": "#/components/schemas/ActivityDetail"
+          },
+          "successful": {
+            "type": "boolean"
+          },
+          "allowed": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "ChargeRemittanceDetail": {
+        "required": [
+          "remittanceId",
+          "claimId",
+          "claimPaymentId",
+          "chargePaymentId",
+          "checkDate",
+          "checkNumber",
+          "depositDate",
+          "icn",
+          "isCrossover",
+          "sourceEventNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "claimId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "claimPaymentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "chargePaymentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "checkDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "checkNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "depositDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "icn": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isCrossover": {
+            "type": "boolean"
+          },
+          "sourceEventNumber": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          }
+        }
+      },
+      "Date": { },
+      "Exception": {
+        "type": "object",
+        "properties": {
+          "targetSite": {
+            "$ref": "#/components/schemas/MethodBase"
+          },
+          "message": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "type": [
+              "null",
+              "object"
+            ]
+          },
+          "innerException": {
+            "$ref": "#/components/schemas/Exception"
+          },
+          "helpLink": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "source": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "hResult": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "stackTrace": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "MethodBase": { },
+      "PayerContractAllowedRequest": {
+        "required": [
+          "activityDetails"
+        ],
+        "type": "object",
+        "properties": {
+          "activityDetails": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ActivityDetail"
+            }
+          }
+        }
+      },
+      "RemittanceClaimPaymentPosted": {
+        "required": [
+          "remittanceId"
+        ],
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "RemitValidationMessage": {
+        "required": [
+          "remittanceId",
+          "chargeId",
+          "message"
+        ],
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "chargeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "message": {
+            "type": "string"
+          },
+          "exception": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Exception"
+              }
+            ]
+          }
+        }
+      },
+      "RemitValidationResult": {
+        "required": [
+          "isValid",
+          "messages"
+        ],
+        "type": "object",
+        "properties": {
+          "isValid": {
+            "type": "boolean"
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RemitValidationMessage"
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Charges"
+    },
+    {
+      "name": "Payers"
+    },
+    {
+      "name": "Remittances"
+    }
+  ]
+}

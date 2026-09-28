@@ -1,0 +1,3193 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Payer Portfolios API V2",
+    "description": "Snowdrop Payer Portfolios API V2",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/payer-portfolios/v2"
+    }
+  ],
+  "paths": {
+    "/patients/{patientId}/portfolios/{portfolioId}": {
+      "get": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "portfolioId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfolioWorkspaceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfolioWorkspaceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfolioWorkspaceResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/{patientId}/portfolios/recent": {
+      "get": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfolioWorkspaceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfolioWorkspaceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfolioWorkspaceResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/{patientId}/portfolios/active": {
+      "get": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PortfolioResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PortfolioResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PortfolioResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/{patientId}/portfolios/grid": {
+      "get": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPortfoliosResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPortfoliosResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientPortfoliosResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/portfolios": {
+      "post": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddPortfolioRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddPortfolioRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddPortfolioRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddPortfolioRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfolioResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfolioResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PortfolioResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/portfolios/effectiveness/validate": {
+      "post": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateEffectivenessRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateEffectivenessRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateEffectivenessRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateEffectivenessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EffectivenessValidationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EffectivenessValidationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EffectivenessValidationResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/portfolios/bulk/effectiveness/validate": {
+      "post": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkValidateEffectivenessRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkValidateEffectivenessRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkValidateEffectivenessRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkValidateEffectivenessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkValidateEffectivenessResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkValidateEffectivenessResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkValidateEffectivenessResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/portfolios/effectiveness": {
+      "put": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEffectivenessRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEffectivenessRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEffectivenessRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEffectivenessRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/portfolios/policies": {
+      "put": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePoliciesRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePoliciesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePoliciesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePoliciesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/portfolios/guarantor": {
+      "put": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGuarantorRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGuarantorRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGuarantorRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateGuarantorRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/portfolios/hold": {
+      "put": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateHoldStatusRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateHoldStatusRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateHoldStatusRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateHoldStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/portfolios/bulk": {
+      "post": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkUpdateRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkUpdateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkUpdateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/BulkUpdateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkUpdateAcceptedResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkUpdateAcceptedResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkUpdateAcceptedResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/portfolios/discard": {
+      "put": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDiscardStatusRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDiscardStatusRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDiscardStatusRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDiscardStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/portfolios/resume": {
+      "put": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateResumeDateRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateResumeDateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateResumeDateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateResumeDateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdatePortfolioResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/portfolios/alternates": {
+      "post": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlternatePortfolioRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlternatePortfolioRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlternatePortfolioRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlternatePortfolioRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlternatePortfolioResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlternatePortfolioResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlternatePortfolioResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/portfolios/alternates/{alternatePortfolioId}": {
+      "put": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "alternatePortfolioId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlternatePortfolioRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlternatePortfolioRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlternatePortfolioRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlternatePortfolioRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlternatePortfolioResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlternatePortfolioResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AlternatePortfolioResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/{patientId}/portfolios/alternates/{alternatePortfolioId}": {
+      "delete": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "alternatePortfolioId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/patients/{patientId}/portfolios/export": {
+      "get": {
+        "tags": [
+          "Patients"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/portfolio-types": {
+      "get": {
+        "tags": [
+          "PortfolioTypes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PortfolioTypeResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PortfolioTypeResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PortfolioTypeResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddPortfolioRequest": {
+        "required": [
+          "patientId",
+          "effectiveStartDate",
+          "effectiveEndDate",
+          "orderedPolicies",
+          "selfPayPayerId",
+          "guarantorId",
+          "guarantorIsPatient"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "effectiveStartDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "effectiveEndDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "orderedPolicies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "selfPayPayerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "guarantorId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "guarantorIsPatient": {
+            "type": "boolean"
+          },
+          "alternatePortfolios": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "previousPortfolioId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "previousPortfolioEndDate": { },
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "AlternatePortfolioInformation": {
+        "required": [
+          "alternatePortfolioId",
+          "alternatePortfolioTypeId"
+        ],
+        "type": "object",
+        "properties": {
+          "alternatePortfolioId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "alternatePortfolioTypeId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "AlternatePortfolioRequest": {
+        "required": [
+          "patientId",
+          "orderedPolicies",
+          "selfPayPayerId",
+          "alternatePortfolioTypeId",
+          "parentPortfolioId"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "orderedPolicies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "selfPayPayerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "alternatePortfolioTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parentPortfolioId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "AlternatePortfolioResponse": {
+        "required": [
+          "portfolioId",
+          "alternatePortfolioTypeId",
+          "policies",
+          "selfPayPayer",
+          "guarantor",
+          "isLocked"
+        ],
+        "type": "object",
+        "properties": {
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "alternatePortfolioTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "policies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PolicyListItemResponse"
+            }
+          },
+          "selfPayPayer": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SelfPayInformation"
+              }
+            ]
+          },
+          "guarantor": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/GuarantorResponse"
+              }
+            ]
+          },
+          "isLocked": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AwardDetails": {
+        "required": [
+          "assistanceNumber",
+          "awardAmount",
+          "awardDate",
+          "lookbackDays"
+        ],
+        "type": "object",
+        "properties": {
+          "assistanceNumber": {
+            "type": "string"
+          },
+          "awardAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "awardDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "lookbackDays": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "BulkEntityChange": {
+        "type": "object",
+        "properties": {
+          "operationType": {
+            "$ref": "#/components/schemas/BulkOperationType"
+          },
+          "value": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": { }
+              }
+            }
+          }
+        }
+      },
+      "BulkEntityUpdate": {
+        "required": [
+          "patientId",
+          "portfolioId",
+          "changes"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "changes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkEntityChange"
+            }
+          }
+        }
+      },
+      "BulkOperationType": {
+        "type": "integer"
+      },
+      "BulkUpdateAcceptedResponse": {
+        "required": [
+          "correlationId",
+          "totalUpdates"
+        ],
+        "type": "object",
+        "properties": {
+          "correlationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "totalUpdates": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "BulkUpdateRequest": {
+        "required": [
+          "updates"
+        ],
+        "type": "object",
+        "properties": {
+          "updates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkEntityUpdate"
+            }
+          }
+        }
+      },
+      "BulkValidateEffectivenessItem": {
+        "required": [
+          "portfolioId"
+        ],
+        "type": "object",
+        "properties": {
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "effectiveStartDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "effectiveEndDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      },
+      "BulkValidateEffectivenessRequest": {
+        "required": [
+          "patientId",
+          "portfolios"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkValidateEffectivenessItem"
+            }
+          }
+        }
+      },
+      "BulkValidateEffectivenessResponse": {
+        "required": [
+          "invalidPortfolios"
+        ],
+        "type": "object",
+        "properties": {
+          "datesValid": {
+            "type": "boolean"
+          },
+          "invalidPortfolios": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "CoveredServiceCriteriaOfGuid": {
+        "required": [
+          "elementId",
+          "setId",
+          "isFactorySet"
+        ],
+        "type": "object",
+        "properties": {
+          "elementId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "setId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "isFactorySet": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CoveredServiceCriteriaOfIcdCodeIdentity": {
+        "required": [
+          "elementId",
+          "setId",
+          "isFactorySet"
+        ],
+        "type": "object",
+        "properties": {
+          "elementId": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/IcdCodeIdentity"
+              }
+            ]
+          },
+          "setId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "isFactorySet": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CoveredServiceCriteriaOfstring": {
+        "required": [
+          "elementId",
+          "setId",
+          "isFactorySet"
+        ],
+        "type": "object",
+        "properties": {
+          "elementId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "setId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "isFactorySet": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Date": {
+        "title": "Sharp.Date",
+        "type": "string",
+        "format": "date",
+        "example": "2024-12-11"
+      },
+      "EffectiveDateRange": {
+        "required": [
+          "start",
+          "end"
+        ],
+        "type": "object",
+        "properties": {
+          "start": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "end": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      },
+      "EffectivenessValidationResponse": {
+        "required": [
+          "datesValid"
+        ],
+        "type": "object",
+        "properties": {
+          "datesValid": {
+            "type": "boolean"
+          }
+        }
+      },
+      "GuarantorResponse": {
+        "required": [
+          "guarantorId",
+          "guarantorIsPatient",
+          "firstName",
+          "middleName",
+          "lastName",
+          "financialAccountNumber",
+          "dateOfBirth",
+          "patientRelationship"
+        ],
+        "type": "object",
+        "properties": {
+          "guarantorId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "guarantorIsPatient": {
+            "type": "boolean"
+          },
+          "firstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "middleName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "financialAccountNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "dateOfBirth": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "patientRelationship": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "IcdCodeIdentity": {
+        "required": [
+          "code",
+          "icdCodeType"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "icdCodeType": {
+            "$ref": "#/components/schemas/IcdCodeType"
+          },
+          "isInvalidIcdCode": {
+            "type": "boolean"
+          }
+        }
+      },
+      "IcdCodeType": {
+        "type": "integer"
+      },
+      "PatientPortfoliosResponse": {
+        "required": [
+          "patientId",
+          "firstName",
+          "middleName",
+          "lastName",
+          "dateOfBirth",
+          "financialAccountNumber",
+          "portfolios"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "firstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "middleName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "dateOfBirth": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "financialAccountNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "portfolios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PortfolioResponse"
+            }
+          }
+        }
+      },
+      "PayerName": {
+        "required": [
+          "payerId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "payerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PayerType": {
+        "type": "integer"
+      },
+      "PlanName": {
+        "required": [
+          "planId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "planId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "name": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PolicyEffectiveness": {
+        "required": [
+          "dateRanges"
+        ],
+        "type": "object",
+        "properties": {
+          "dateRanges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EffectiveDateRange"
+            }
+          }
+        }
+      },
+      "PolicyIdentificationResponse": {
+        "required": [
+          "policyNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "policyNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "PolicyListItemResponse": {
+        "required": [
+          "policyId",
+          "plan",
+          "payer",
+          "payerType",
+          "provisionalPlan",
+          "effectiveness",
+          "identification",
+          "status",
+          "awardDetails",
+          "coveredServices",
+          "cpid"
+        ],
+        "type": "object",
+        "properties": {
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "plan": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PlanName"
+              }
+            ]
+          },
+          "payer": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PayerName"
+              }
+            ]
+          },
+          "payerType": {
+            "$ref": "#/components/schemas/PayerType"
+          },
+          "provisionalPlan": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ProvisionalPlan"
+              }
+            ]
+          },
+          "effectiveness": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PolicyEffectiveness"
+              }
+            ]
+          },
+          "identification": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PolicyIdentificationResponse"
+              }
+            ]
+          },
+          "status": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PolicyStatusResponse"
+              }
+            ]
+          },
+          "awardDetails": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AwardDetails"
+              }
+            ]
+          },
+          "coveredServices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProgramCoveredService"
+            }
+          },
+          "cpid": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "strengthMeter": {
+            "$ref": "#/components/schemas/PolicyStrengthMeter"
+          }
+        }
+      },
+      "PolicyResponse": {
+        "required": [
+          "policyIndex",
+          "policyId",
+          "planName",
+          "payerName",
+          "policyNumber",
+          "payerType"
+        ],
+        "type": "object",
+        "properties": {
+          "policyIndex": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "policyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "planName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payerName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "policyNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payerType": {
+            "$ref": "#/components/schemas/PayerType"
+          }
+        }
+      },
+      "PolicyStatus": {
+        "type": "integer"
+      },
+      "PolicyStatusResponse": {
+        "required": [
+          "statusType"
+        ],
+        "type": "object",
+        "properties": {
+          "statusType": {
+            "$ref": "#/components/schemas/PolicyStatus"
+          }
+        }
+      },
+      "PolicyStrengthMeter": {
+        "required": [
+          "strength"
+        ],
+        "type": "object",
+        "properties": {
+          "strength": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PortfolioResponse": {
+        "required": [
+          "portfolioId",
+          "portfolioType",
+          "effectiveStartDate",
+          "effectiveEndDate",
+          "guarantorFirstName",
+          "guarantorMiddleName",
+          "guarantorLastName",
+          "guarantorRelationship",
+          "policies",
+          "selfPayPayer",
+          "guarantorIsPatient",
+          "resumeDate",
+          "status",
+          "isLocked",
+          "alternatePortfolios"
+        ],
+        "type": "object",
+        "properties": {
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolioType": {
+            "$ref": "#/components/schemas/PortfolioTypeResponse"
+          },
+          "effectiveStartDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "effectiveEndDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "guarantorFirstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "guarantorMiddleName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "guarantorLastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "guarantorRelationship": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "policies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PolicyResponse"
+            }
+          },
+          "selfPayPayer": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "guarantorIsPatient": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "resumeDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/PortfolioStatus"
+          },
+          "isLocked": {
+            "type": "boolean"
+          },
+          "alternatePortfolios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlternatePortfolioInformation"
+            }
+          },
+          "portfolioName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "PortfolioStatus": {
+        "type": "integer"
+      },
+      "PortfolioType": {
+        "type": "integer"
+      },
+      "PortfolioTypeResponse": {
+        "required": [
+          "portfolioType",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "portfolioType": {
+            "$ref": "#/components/schemas/PortfolioType"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "PortfolioWorkspaceResponse": {
+        "required": [
+          "portfolioId",
+          "portfolioType",
+          "effectiveStartDate",
+          "effectiveEndDate",
+          "policies",
+          "selfPayPayer",
+          "guarantor",
+          "resumeDate",
+          "status",
+          "isLocked",
+          "parentPortfolioId",
+          "alternatePortfolioTypeId",
+          "alternatePortfolios"
+        ],
+        "type": "object",
+        "properties": {
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolioType": {
+            "$ref": "#/components/schemas/PortfolioTypeResponse"
+          },
+          "effectiveStartDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "effectiveEndDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "policies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PolicyListItemResponse"
+            }
+          },
+          "selfPayPayer": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SelfPayInformation"
+              }
+            ]
+          },
+          "guarantor": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/GuarantorResponse"
+              }
+            ]
+          },
+          "resumeDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/PortfolioStatus"
+          },
+          "isLocked": {
+            "type": "boolean"
+          },
+          "parentPortfolioId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "alternatePortfolioTypeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "alternatePortfolios": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AlternatePortfolioResponse"
+            }
+          },
+          "portfolioName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ProgramCoveredService": {
+        "required": [
+          "chargeCode",
+          "activityCode",
+          "modifier",
+          "ndc",
+          "diagnosisCode"
+        ],
+        "type": "object",
+        "properties": {
+          "chargeCode": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CoveredServiceCriteriaOfstring"
+              }
+            ]
+          },
+          "activityCode": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CoveredServiceCriteriaOfstring"
+              }
+            ]
+          },
+          "modifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CoveredServiceCriteriaOfGuid"
+              }
+            ]
+          },
+          "ndc": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CoveredServiceCriteriaOfstring"
+              }
+            ]
+          },
+          "diagnosisCode": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CoveredServiceCriteriaOfIcdCodeIdentity"
+              }
+            ]
+          }
+        }
+      },
+      "ProvisionalPlan": {
+        "required": [
+          "payerName",
+          "planName"
+        ],
+        "type": "object",
+        "properties": {
+          "payerName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "planName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "SelfPayInformation": {
+        "required": [
+          "payerId",
+          "payerName"
+        ],
+        "type": "object",
+        "properties": {
+          "payerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "payerName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "UpdateDiscardStatusRequest": {
+        "required": [
+          "patientId",
+          "portfolioId",
+          "isDiscarded"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isDiscarded": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateEffectivenessRequest": {
+        "required": [
+          "patientId",
+          "portfolioId",
+          "effectiveStartDate",
+          "effectiveEndDate"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "effectiveStartDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "effectiveEndDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      },
+      "UpdateGuarantorRequest": {
+        "required": [
+          "patientId",
+          "portfolioId",
+          "guarantorId",
+          "guarantorIsPatient"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "guarantorId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "guarantorIsPatient": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateHoldStatusRequest": {
+        "required": [
+          "patientId",
+          "portfolioId",
+          "resumeDate",
+          "holdReasonId"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resumeDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "holdReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "isUnderPermanentHold": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdatePoliciesRequest": {
+        "required": [
+          "patientId",
+          "portfolioId",
+          "orderedPolicies",
+          "selfPayPayerId"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "orderedPolicies": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "selfPayPayerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "UpdatePortfolioResponse": {
+        "required": [
+          "portfolioId",
+          "portfolioType",
+          "effectiveStartDate",
+          "effectiveEndDate",
+          "policies",
+          "selfPayPayer",
+          "guarantor",
+          "resumeDate",
+          "status",
+          "isLocked"
+        ],
+        "type": "object",
+        "properties": {
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolioType": {
+            "$ref": "#/components/schemas/PortfolioTypeResponse"
+          },
+          "effectiveStartDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "effectiveEndDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "policies": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PolicyListItemResponse"
+            }
+          },
+          "selfPayPayer": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SelfPayInformation"
+              }
+            ]
+          },
+          "guarantor": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/GuarantorResponse"
+              }
+            ]
+          },
+          "resumeDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/PortfolioStatus"
+          },
+          "isLocked": {
+            "type": "boolean"
+          },
+          "portfolioName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateResumeDateRequest": {
+        "required": [
+          "patientId",
+          "portfolioId",
+          "resumeDate"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolioId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resumeDate": {
+            "$ref": "#/components/schemas/Date"
+          }
+        }
+      },
+      "ValidateEffectivenessRequest": {
+        "required": [
+          "patientId",
+          "portfolioId",
+          "effectiveStartDate",
+          "effectiveEndDate"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "portfolioId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "effectiveStartDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "effectiveEndDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Patients"
+    },
+    {
+      "name": "PortfolioTypes"
+    }
+  ]
+}

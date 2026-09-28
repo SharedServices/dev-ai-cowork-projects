@@ -1,0 +1,1266 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Interventions Unlimited API",
+    "description": "Intervention write operations exposed to Unlimited API (UAPI) v2.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/interventions-unlimitedapi"
+    }
+  ],
+  "paths": {
+    "/interventions-unlimitedapi": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterventionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterventionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterventionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting writes because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions-unlimitedapi/{interventionId}/progress": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressInterventionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressInterventionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressInterventionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting writes because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions-unlimitedapi/{interventionId}/resolve": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveInterventionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveInterventionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveInterventionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting writes because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions-unlimitedapi/{interventionId}/reference-date": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionReferenceDateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionReferenceDateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionReferenceDateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting writes because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions-unlimitedapi/{interventionId}/description": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionDescriptionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionDescriptionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionDescriptionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting writes because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions-unlimitedapi/{interventionId}/escalate": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EscalateInterventionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EscalateInterventionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EscalateInterventionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting writes because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions-unlimitedapi/{interventionId}/comment": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddInterventionCommentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddInterventionCommentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddInterventionCommentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "The datastore is rejecting writes because of load. The request was not applied. Retry after the interval given in the Retry-After header. This service does no rate limiting of its own, so a 429 never indicates a caller quota.",
+            "headers": {
+              "Retry-After": {
+                "description": "Whole seconds to wait before retrying. Taken from the datastore's own retry hint when it supplies one, otherwise a configured fallback. Always at least 1.",
+                "required": true,
+                "schema": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
+            "content": {
+              "application/problem+json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "type": {
+                      "type": "string"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "detail": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddInterventionCommentRequest": {
+        "required": [
+          "comment"
+        ],
+        "type": "object",
+        "properties": {
+          "comment": {
+            "$ref": "#/components/schemas/TaggableInputRequest"
+          }
+        }
+      },
+      "CreateInterventionRequest": {
+        "required": [
+          "interventionTypeId",
+          "priority",
+          "assignedToUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "interventionId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "entityIdentity": {
+            "$ref": "#/components/schemas/EntityIdentity"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          },
+          "userGuidance": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          },
+          "interventionTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/InterventionPriority"
+          },
+          "assignedToUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "progressionStatusId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "referenceDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "referenceDateType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "snooze": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SnoozeInterventionRequest"
+              }
+            ]
+          },
+          "uniqueKey": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "alertOnResolution": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relatedEntities": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/EntityIdentity"
+            }
+          },
+          "additionalAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "internalAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Date": { },
+      "EntityIdentity": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "EscalateInterventionRequest": {
+        "required": [
+          "priority"
+        ],
+        "type": "object",
+        "properties": {
+          "priority": {
+            "$ref": "#/components/schemas/InterventionPriority"
+          },
+          "comment": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          }
+        }
+      },
+      "InterventionPriority": {
+        "type": "integer"
+      },
+      "MentionRequest": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "mentionId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ProgressInterventionRequest": {
+        "required": [
+          "progressionStatusId"
+        ],
+        "type": "object",
+        "properties": {
+          "progressionStatusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "snoozeUntilDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "snoozeReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "comment": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          },
+          "withoutSnoozeClear": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ResolveInterventionRequest": {
+        "required": [
+          "resolutionTypeId"
+        ],
+        "type": "object",
+        "properties": {
+          "comment": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          },
+          "resolutionTypeId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "SnoozeInterventionRequest": {
+        "required": [
+          "snoozeUntilDate",
+          "snoozeReasonId",
+          "comment"
+        ],
+        "type": "object",
+        "properties": {
+          "snoozeUntilDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "snoozeReasonId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comment": {
+            "$ref": "#/components/schemas/TaggableInputRequest"
+          }
+        }
+      },
+      "TaggableInputRequest": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "mentions": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/MentionRequest"
+            }
+          },
+          "tags": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "nodeTree": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "UpdateInterventionDescriptionRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          }
+        }
+      },
+      "UpdateInterventionReferenceDateRequest": {
+        "required": [
+          "referenceDate"
+        ],
+        "type": "object",
+        "properties": {
+          "referenceDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "referenceDateType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "InterventionsWrite"
+    }
+  ]
+}

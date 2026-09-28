@@ -1,0 +1,1299 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Snowdrop Functional Security Administration",
+    "description": "Services to manage security permission sets"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/security-functional"
+    }
+  ],
+  "paths": {
+    "/snowdrop/security-functional/permissions/admin/empty": {
+      "get": {
+        "tags": [
+          "PermissionsAdmin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSet"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSet"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSet"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/snowdrop/security-functional/permissions/admin": {
+      "get": {
+        "tags": [
+          "PermissionsAdmin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSetHeaderCollection"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSetHeaderCollection"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSetHeaderCollection"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PermissionsAdmin"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePermissionSetResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePermissionSetResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePermissionSetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/snowdrop/security-functional/permissions/admin/{permissionSetId}": {
+      "post": {
+        "tags": [
+          "PermissionsAdmin"
+        ],
+        "parameters": [
+          {
+            "name": "permissionSetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePermissionSetResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePermissionSetResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePermissionSetResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PermissionsAdmin"
+        ],
+        "parameters": [
+          {
+            "name": "permissionSetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePermissionSetRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePermissionSetRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePermissionSetRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePermissionSetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PermissionsAdmin"
+        ],
+        "parameters": [
+          {
+            "name": "permissionSetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/snowdrop/security-functional/permissions/admin/ping": {
+      "get": {
+        "tags": [
+          "PermissionsAdmin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/snowdrop/security-functional/permissions/me": {
+      "get": {
+        "tags": [
+          "Permissions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PermittedPermissionSetResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PermittedPermissionSetResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PermittedPermissionSetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/snowdrop/security-functional/permissions/mine": {
+      "get": {
+        "tags": [
+          "Permissions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PermittedPermissionSetResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PermittedPermissionSetResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PermittedPermissionSetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/snowdrop/security-functional/permissions/mine-only": {
+      "get": {
+        "tags": [
+          "Permissions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PermittedPermissionSetResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PermittedPermissionSetResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PermittedPermissionSetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/snowdrop/security-functional/permissions/me/details": {
+      "get": {
+        "tags": [
+          "Permissions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetailsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetailsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetailsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/snowdrop/security-functional/permissions/mine/details": {
+      "get": {
+        "tags": [
+          "Permissions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetailsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetailsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserDetailsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/snowdrop/security-functional/permissions/{permissionSetId}": {
+      "get": {
+        "tags": [
+          "Permissions"
+        ],
+        "parameters": [
+          {
+            "name": "permissionSetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSet"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSet"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSet"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/snowdrop/security-functional/permissions/ping": {
+      "get": {
+        "tags": [
+          "Permissions"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/snowdrop/security-functional/permissions/standard/empty": {
+      "get": {
+        "tags": [
+          "PermissionsStandard"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSet"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSet"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSet"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/snowdrop/security-functional/permissions/standard": {
+      "get": {
+        "tags": [
+          "PermissionsStandard"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSetHeaderCollection"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSetHeaderCollection"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppliedPermissionSetHeaderCollection"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PermissionsStandard"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePermissionSetResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePermissionSetResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePermissionSetResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/snowdrop/security-functional/permissions/standard/{permissionSetId}": {
+      "post": {
+        "tags": [
+          "PermissionsStandard"
+        ],
+        "parameters": [
+          {
+            "name": "permissionSetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreatePermissionSetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePermissionSetResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePermissionSetResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreatePermissionSetResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PermissionsStandard"
+        ],
+        "parameters": [
+          {
+            "name": "permissionSetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePermissionSetRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePermissionSetRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePermissionSetRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePermissionSetRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PermissionsStandard"
+        ],
+        "parameters": [
+          {
+            "name": "permissionSetId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/snowdrop/security-functional/permissions/standard/ping": {
+      "get": {
+        "tags": [
+          "PermissionsStandard"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AppliedPermissionAction": {
+        "required": [
+          "securableId"
+        ],
+        "type": "object",
+        "properties": {
+          "securableId": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "securableIdentity": {
+            "$ref": "#/components/schemas/SecurableIdentity"
+          },
+          "globalAdminAlwaysPermitted": {
+            "type": "boolean"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "isReadonly": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AppliedPermissionContent": {
+        "required": [
+          "securableId"
+        ],
+        "type": "object",
+        "properties": {
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppliedPermissionAction"
+            },
+            "nullable": true
+          },
+          "securableId": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "securableIdentity": {
+            "$ref": "#/components/schemas/SecurableIdentity"
+          },
+          "globalAdminAlwaysPermitted": {
+            "type": "boolean"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "isReadonly": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AppliedPermissionSection": {
+        "required": [
+          "securableId"
+        ],
+        "type": "object",
+        "properties": {
+          "subSections": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppliedPermissionContent"
+            },
+            "nullable": true
+          },
+          "actions": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "securableId": {
+            "type": "string",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "securableIdentity": {
+            "$ref": "#/components/schemas/SecurableIdentity"
+          },
+          "globalAdminAlwaysPermitted": {
+            "type": "boolean"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "isReadonly": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AppliedPermissionSet": {
+        "required": [
+          "permissionSetId"
+        ],
+        "type": "object",
+        "properties": {
+          "permissionSetId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "isCustom": {
+            "type": "boolean"
+          },
+          "type": {
+            "$ref": "#/components/schemas/SecurableType"
+          },
+          "createdDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "createdByUserId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "lastUpdatedDateTime": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "lastUpdatedByUserId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppliedPermissionSection"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "AppliedPermissionSetHeader": {
+        "required": [
+          "roles"
+        ],
+        "type": "object",
+        "properties": {
+          "permissionSetId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "isCustom": {
+            "type": "boolean"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "lastUpdatedDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdatedByUserId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "AppliedPermissionSetHeaderCollection": {
+        "type": "object",
+        "properties": {
+          "permissionSets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppliedPermissionSetHeader"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "CreatePermissionSetRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PermissionSection"
+            },
+            "nullable": true
+          },
+          "isCustom": {
+            "type": "boolean"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreatePermissionSetResponse": {
+        "required": [
+          "permissionSetId"
+        ],
+        "type": "object",
+        "properties": {
+          "permissionSetId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "PermissionAction": {
+        "required": [
+          "securableId",
+          "isEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "securableId": {
+            "type": "string",
+            "nullable": true
+          },
+          "securableIdentity": {
+            "$ref": "#/components/schemas/SecurableIdentity"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PermissionContent": {
+        "required": [
+          "securableId",
+          "isEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PermissionAction"
+            },
+            "nullable": true
+          },
+          "securableId": {
+            "type": "string",
+            "nullable": true
+          },
+          "securableIdentity": {
+            "$ref": "#/components/schemas/SecurableIdentity"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PermissionSection": {
+        "required": [
+          "securableId",
+          "isEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "subSections": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "content": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PermissionContent"
+            },
+            "nullable": true
+          },
+          "actions": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          },
+          "securableId": {
+            "type": "string",
+            "nullable": true
+          },
+          "securableIdentity": {
+            "$ref": "#/components/schemas/SecurableIdentity"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PermissionSet": {
+        "required": [
+          "permissionSetId"
+        ],
+        "type": "object",
+        "properties": {
+          "permissionSetId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "$ref": "#/components/schemas/SecurableType"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          },
+          "isCustom": {
+            "type": "boolean"
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PermissionSection"
+            },
+            "nullable": true
+          },
+          "createdDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "lastUpdatedDateTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastUpdatedByUserId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "PermittedPermissionSetResponse": {
+        "type": "object",
+        "properties": {
+          "securableIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "SecurableIdentity": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "nullable": true
+          },
+          "key": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "nullable": true
+      },
+      "SecurableType": {
+        "type": "integer"
+      },
+      "UpdatePermissionSetRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "sections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PermissionSection"
+            },
+            "nullable": true
+          },
+          "isCustom": {
+            "type": "boolean"
+          },
+          "isEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UserDetails": {
+        "type": "object",
+        "properties": {
+          "groups": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "permissionSets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PermissionSet"
+            },
+            "nullable": true
+          },
+          "roles": {
+            "$ref": "#/components/schemas/UserRoleMembershipOfUserRole"
+          }
+        },
+        "nullable": true
+      },
+      "UserDetailsResponse": {
+        "type": "object",
+        "properties": {
+          "cached": {
+            "$ref": "#/components/schemas/UserDetails"
+          },
+          "direct": {
+            "$ref": "#/components/schemas/UserDetails"
+          }
+        }
+      },
+      "UserRole": {
+        "type": "object",
+        "properties": {
+          "userRoleId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isSystemGenerated": {
+            "type": "boolean"
+          },
+          "isArchived": {
+            "type": "boolean"
+          },
+          "securityGroups": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "permissionSets": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "audienceSegments": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          }
+        }
+      },
+      "UserRoleMembershipOfUserRole": {
+        "type": "object",
+        "properties": {
+          "directlyAssigned": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserRole"
+            },
+            "nullable": true
+          },
+          "groupInherited": {
+            "type": "array",
+            "items": { },
+            "nullable": true
+          }
+        },
+        "nullable": true
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "PermissionsAdmin"
+    },
+    {
+      "name": "Permissions"
+    },
+    {
+      "name": "PermissionsStandard"
+    }
+  ]
+}

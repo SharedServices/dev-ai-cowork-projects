@@ -1,0 +1,3094 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Resources API",
+    "description": "Snowdrop Resources API",
+    "version": "v1"
+  },
+  "paths": {
+    "/companies": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Get a list of all companies for the organization",
+        "parameters": [
+          {
+            "name": "includeInactive",
+            "in": "query",
+            "description": "If true include inactive companes",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompanyHeader"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompanyHeader"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompanyHeader"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companies/paymentseligible": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Gets a list of companies (and their divisions) including their Stripe payments eligibility",
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentsEligibleCompanyResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentsEligibleCompanyResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentsEligibleCompanyResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companies/{companyId}/time": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Gets the current time information for a specific company based on its configured time zone",
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "The unique identifier of the company",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Company time information including current date and time in the company's time zone",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyTime"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyTime"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyTime"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companies/{companyId}": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Gets detailed information for a specific company",
+        "operationId": "GetCompany",
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "The unique identifier of the company",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companies/divisions": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Gets all divisions across all companies in the organization",
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all division headers sorted by name",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DivisionHeaderResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DivisionHeaderResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DivisionHeaderResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companies/{companyId}/divisions": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Gets all divisions for a specific company",
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "The unique identifier of the company",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of division headers for the specified company sorted by name",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DivisionHeaderResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DivisionHeaderResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DivisionHeaderResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companies/{companyId}/locations": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Gets all distinct location IDs associated with a company's divisions",
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "The unique identifier of the company",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A distinct list of location IDs from all divisions, including merchant locations",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/companies/{companyId}/divisions/{divisionId}": {
+      "get": {
+        "tags": [
+          "Companies"
+        ],
+        "summary": "Gets detailed information for a specific division within a company",
+        "operationId": "GetDivision",
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "The unique identifier of the company",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "divisionId",
+            "in": "path",
+            "description": "The unique identifier of the division",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Detailed division information including locations and settings",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DivisionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/facilities": {
+      "get": {
+        "tags": [
+          "Facilities"
+        ],
+        "summary": "Gets all facilities for the organization.",
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of facilities.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FacilityHeader"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FacilityHeader"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FacilityHeader"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/facilities/{facilityId}": {
+      "get": {
+        "tags": [
+          "Facilities"
+        ],
+        "summary": "Gets a specific facility by ID.",
+        "operationId": "GetFacility",
+        "parameters": [
+          {
+            "name": "facilityId",
+            "in": "path",
+            "description": "The unique identifier of the facility.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the facility.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Facility"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Facility"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Facility"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "If the facility ID is invalid.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "If the facility is not found.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/facility-resources": {
+      "get": {
+        "tags": [
+          "FacilityResources"
+        ],
+        "summary": "Gets all facility resources for the organization.",
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of facility resources.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FacilityResourceHeader"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FacilityResourceHeader"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FacilityResourceHeader"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/facility-resources/{facilityResourceId}": {
+      "get": {
+        "tags": [
+          "FacilityResources"
+        ],
+        "summary": "Gets a specific facility resource by ID.",
+        "parameters": [
+          {
+            "name": "facilityResourceId",
+            "in": "path",
+            "description": "The unique identifier of the facility resource.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the facility resource.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacilityResourceData"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacilityResourceData"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FacilityResourceData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "If the facility resource ID is invalid.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "If the facility resource is not found.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/human-resources": {
+      "get": {
+        "tags": [
+          "HumanResources"
+        ],
+        "summary": "Gets all human resources for the organization.",
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of human resources.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HumanResourceHeader"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HumanResourceHeader"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/HumanResourceHeader"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/human-resources/{humanResourceId}": {
+      "get": {
+        "tags": [
+          "HumanResources"
+        ],
+        "summary": "Gets a specific human resource by ID.",
+        "parameters": [
+          {
+            "name": "humanResourceId",
+            "in": "path",
+            "description": "The unique identifier of the human resource.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the human resource.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/HumanResourceData"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HumanResourceData"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HumanResourceData"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "If the human resource ID is invalid.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "If the human resource is not found.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/monthlyclose/{companyId}": {
+      "get": {
+        "tags": [
+          "MonthlyClose"
+        ],
+        "summary": "Gets the monthly close view for a specific company.",
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "The unique identifier of the company.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The monthly close view containing close history and status.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MonthlyCloseViewApiResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MonthlyCloseViewApiResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MonthlyCloseViewApiResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/monthlyclose/{companyId}/availablemonths": {
+      "get": {
+        "tags": [
+          "MonthlyClose"
+        ],
+        "summary": "Gets the list of available months that can be closed for a specific company.",
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "The unique identifier of the company.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of available months with their close eligibility status.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvailableMonth"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvailableMonth"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/AvailableMonth"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/monthlyclose/{companyId}/validate-ledgerdate": {
+      "post": {
+        "tags": [
+          "MonthlyClose"
+        ],
+        "summary": "Validates whether a ledger date is valid based on the company's monthly close history.",
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "The unique identifier of the company.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The ledger date validation request containing the date to validate.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LedgerDateValidationRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LedgerDateValidationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LedgerDateValidationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LedgerDateValidationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "A validation response indicating whether the date is valid and the earliest allowed date.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LedgerDateValidationResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LedgerDateValidationResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LedgerDateValidationResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/monthlyclose/{companyId}/closemonth": {
+      "post": {
+        "tags": [
+          "MonthlyClose"
+        ],
+        "summary": "Closes a specific month for a company.",
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "description": "The unique identifier of the company.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The close month request containing the month and year to close.",
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloseMonthRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloseMonthRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloseMonthRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CloseMonthRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "The month was successfully closed."
+          }
+        }
+      }
+    },
+    "/devices/payments": {
+      "get": {
+        "tags": [
+          "PaymentDevices"
+        ],
+        "summary": "Gets all payment devices for the organization.",
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of payment devices.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentDeviceHeader"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentDeviceHeader"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PaymentDeviceHeader"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/devices/payments/{deviceId}": {
+      "get": {
+        "tags": [
+          "PaymentDevices"
+        ],
+        "summary": "Gets a specific payment device by ID.",
+        "operationId": "GetPaymentDevice",
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "description": "The unique identifier of the payment device.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the payment device.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDevice"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDevice"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PaymentDevice"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "If the device ID is invalid.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "If the payment device is not found.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers": {
+      "get": {
+        "tags": [
+          "Providers"
+        ],
+        "summary": "Gets all providers for the organization.",
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of providers.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProviderHeaderResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProviderHeaderResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProviderHeaderResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/providers/{providerId}": {
+      "get": {
+        "tags": [
+          "Providers"
+        ],
+        "summary": "Gets a specific provider by ID.",
+        "operationId": "GetProvider",
+        "parameters": [
+          {
+            "name": "providerId",
+            "in": "path",
+            "description": "The unique identifier of the provider.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the provider.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProviderResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProviderResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProviderResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "If the provider ID is invalid.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "If the provider is not found.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/devices/payments/stripe/{deviceId}/lastlocation/{locationId}": {
+      "post": {
+        "tags": [
+          "StripePaymentDevices"
+        ],
+        "summary": "Sets the last location a device was used at for a user.",
+        "parameters": [
+          {
+            "name": "deviceId",
+            "in": "path",
+            "description": "The unique identifier of the payment device.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "The unique identifier of the location.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "No content on success."
+          }
+        }
+      }
+    },
+    "/devices/payments/stripe/location/{locationId}": {
+      "get": {
+        "tags": [
+          "StripePaymentDevices"
+        ],
+        "summary": "Gets a list of payment eligible Stripe payment devices for a specific location.",
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "description": "The unique identifier of the location.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of Stripe payment devices for the location.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentDeviceResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentDeviceResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/StripePaymentDeviceResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/time-zones": {
+      "get": {
+        "tags": [
+          "TimeZones"
+        ],
+        "summary": "Gets all supported time zones for the US.",
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the list of supported time zones.",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TimeZoneHeader"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TimeZoneHeader"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TimeZoneHeader"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/printers/zebra": {
+      "get": {
+        "tags": [
+          "ZebraPrinters"
+        ],
+        "summary": "GetZebraPrinters: returns printers associated with an org-id.\nBlob format: JSON array of { \"name\": \"...\", \"serialNumber\": \"...\" } stored at:\n  container: SNOWDROP_RESOURCES_ZEBRA_PRINTERS_CONTAINER\n  blobName:  zebraprinters.json",
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ZebraPrinterInfo"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ZebraPrinterInfo"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ZebraPrinterInfo"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AcceptorStatus": {
+        "type": "integer"
+      },
+      "AcceptorType": {
+        "type": "integer"
+      },
+      "Address": {
+        "required": [
+          "addressLine1",
+          "addressLine2",
+          "city",
+          "stateId",
+          "zipCode"
+        ],
+        "type": "object",
+        "properties": {
+          "addressLine1": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "addressLine2": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "city": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "stateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "zipCode": {
+            "type": "string"
+          }
+        }
+      },
+      "AvailableMonth": {
+        "type": "object",
+        "properties": {
+          "monthYear": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/MonthYear"
+              }
+            ]
+          },
+          "canClose": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ClosedMonthResponse": {
+        "required": [
+          "month",
+          "year",
+          "closedBy",
+          "closedOn"
+        ],
+        "type": "object",
+        "properties": {
+          "month": {
+            "$ref": "#/components/schemas/Month"
+          },
+          "year": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "closedBy": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "closedOn": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "CloseMonthRequest": {
+        "type": "object",
+        "properties": {
+          "month": {
+            "$ref": "#/components/schemas/Month"
+          },
+          "year": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "CompanyHeader": {
+        "required": [
+          "companyId",
+          "name",
+          "taxId",
+          "applyExpectedAdjustmentOnChargeCreation",
+          "autoReconcileOnZeroPayments",
+          "merchantAcceptors",
+          "active"
+        ],
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "taxId": {
+            "type": "string"
+          },
+          "applyExpectedAdjustmentOnChargeCreation": {
+            "type": "boolean"
+          },
+          "autoReconcileOnZeroPayments": {
+            "type": "boolean"
+          },
+          "merchantAcceptors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MerchantAcceptorHeader"
+            }
+          },
+          "active": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CompanyResponse": {
+        "required": [
+          "companyId",
+          "name",
+          "taxId",
+          "legalName",
+          "npi",
+          "divisions",
+          "merchantAccount",
+          "merchantAcceptors",
+          "applyExpectedAdjustmentOnChargeCreation",
+          "autoReconcileOnZeroPayments",
+          "remittanceInformation",
+          "stripeConfiguration",
+          "stripeAgreementAccepted",
+          "skipStripeAgreement",
+          "active",
+          "createdDate",
+          "time"
+        ],
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "taxId": {
+            "type": "string"
+          },
+          "legalName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "npi": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "divisions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DivisionResponse"
+            }
+          },
+          "merchantAccount": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/MerchantAccount"
+              }
+            ]
+          },
+          "merchantAcceptors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MerchantAcceptor"
+            }
+          },
+          "applyExpectedAdjustmentOnChargeCreation": {
+            "type": "boolean"
+          },
+          "autoReconcileOnZeroPayments": {
+            "type": "boolean"
+          },
+          "remittanceInformation": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/RemittanceInformation"
+              }
+            ]
+          },
+          "stripeConfiguration": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/StripeConfiguration"
+              }
+            ]
+          },
+          "stripeAgreementAccepted": {
+            "type": "boolean"
+          },
+          "skipStripeAgreement": {
+            "type": "boolean"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "time": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CompanyTime"
+              }
+            ]
+          }
+        }
+      },
+      "CompanyTime": {
+        "required": [
+          "today",
+          "timeZoneId",
+          "baseUtcOffset"
+        ],
+        "type": "object",
+        "properties": {
+          "today": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "timeZoneId": {
+            "type": "string"
+          },
+          "baseUtcOffset": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          }
+        }
+      },
+      "Date": {
+        "title": "Sharp.Date",
+        "type": "string",
+        "format": "date",
+        "example": "2024-12-11"
+      },
+      "DivisionAddress": {
+        "required": [
+          "addressLine1",
+          "addressLine2",
+          "city",
+          "stateId",
+          "zipCode",
+          "country"
+        ],
+        "type": "object",
+        "properties": {
+          "addressLine1": {
+            "type": "string"
+          },
+          "addressLine2": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "stateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "zipCode": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          }
+        }
+      },
+      "DivisionHeaderResponse": {
+        "required": [
+          "companyId",
+          "divisionId",
+          "name",
+          "specialtyId",
+          "locations",
+          "merchantLocations"
+        ],
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "divisionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "specialtyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "locations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "merchantLocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/MerchantLocation"
+            }
+          }
+        }
+      },
+      "DivisionResponse": {
+        "required": [
+          "divisionId",
+          "name",
+          "npi",
+          "specialtyId",
+          "acceptorId",
+          "locations",
+          "merchantLocations",
+          "createdDate",
+          "address",
+          "stripeConfiguration"
+        ],
+        "type": "object",
+        "properties": {
+          "divisionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "npi": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "specialtyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "acceptorId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "locations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "merchantLocations": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/MerchantLocation"
+            }
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "address": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/DivisionAddress"
+              }
+            ]
+          },
+          "stripeConfiguration": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/StripeConfiguration"
+              }
+            ]
+          }
+        }
+      },
+      "Facility": {
+        "required": [
+          "organizationId",
+          "facilityId",
+          "name",
+          "claimPrefix",
+          "npi",
+          "placeOfServiceId",
+          "cliaNumber",
+          "legalName",
+          "address",
+          "locations",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": "string"
+          },
+          "facilityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "claimPrefix": {
+            "type": "string"
+          },
+          "npi": {
+            "type": "string"
+          },
+          "placeOfServiceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "cliaNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "legalName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string"
+          },
+          "partition": {
+            "type": "string"
+          }
+        }
+      },
+      "FacilityHeader": {
+        "required": [
+          "facilityId",
+          "name",
+          "address",
+          "locations"
+        ],
+        "type": "object",
+        "properties": {
+          "facilityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "FacilityResourceData": {
+        "required": [
+          "facilityResourceId",
+          "name",
+          "resourceTypeId",
+          "locationIds",
+          "schedulingNotes"
+        ],
+        "type": "object",
+        "properties": {
+          "facilityResourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "resourceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "schedulingNotes": {
+            "type": "string"
+          }
+        }
+      },
+      "FacilityResourceHeader": {
+        "required": [
+          "facilityResourceId",
+          "name",
+          "resourceTypeId",
+          "locationIds"
+        ],
+        "type": "object",
+        "properties": {
+          "facilityResourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "resourceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "HumanResourceData": {
+        "required": [
+          "humanResourceId",
+          "name",
+          "resourceTypeId",
+          "locationIds",
+          "schedulingNotes"
+        ],
+        "type": "object",
+        "properties": {
+          "humanResourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "resourceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "schedulingNotes": {
+            "type": "string"
+          }
+        }
+      },
+      "HumanResourceHeader": {
+        "required": [
+          "humanResourceId",
+          "name",
+          "resourceTypeId",
+          "locationIds"
+        ],
+        "type": "object",
+        "properties": {
+          "humanResourceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "resourceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "LedgerDateValidationRequest": {
+        "required": [
+          "ledgerDate"
+        ],
+        "type": "object",
+        "properties": {
+          "ledgerDate": {
+            "$ref": "#/components/schemas/Date"
+          }
+        }
+      },
+      "LedgerDateValidationResponse": {
+        "required": [
+          "isValid",
+          "earliestValidDate",
+          "ledgerDate"
+        ],
+        "type": "object",
+        "properties": {
+          "isValid": {
+            "type": "boolean"
+          },
+          "earliestValidDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "ledgerDate": {
+            "$ref": "#/components/schemas/Date"
+          }
+        }
+      },
+      "MerchantAcceptor": {
+        "required": [
+          "acceptorId",
+          "name",
+          "acceptorType",
+          "acceptorStatus",
+          "idleMessage"
+        ],
+        "type": "object",
+        "properties": {
+          "acceptorId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "acceptorType": {
+            "$ref": "#/components/schemas/AcceptorType"
+          },
+          "acceptorStatus": {
+            "$ref": "#/components/schemas/AcceptorStatus"
+          },
+          "idleMessage": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "MerchantAcceptorHeader": {
+        "required": [
+          "acceptorId",
+          "name",
+          "acceptorType"
+        ],
+        "type": "object",
+        "properties": {
+          "acceptorId": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "acceptorType": {
+            "$ref": "#/components/schemas/AcceptorType"
+          }
+        }
+      },
+      "MerchantAccount": {
+        "required": [
+          "accountId",
+          "accountToken",
+          "terminalId"
+        ],
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "type": "string"
+          },
+          "accountToken": {
+            "type": "string"
+          },
+          "terminalId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "MerchantLocation": {
+        "required": [
+          "locationId",
+          "acceptorId"
+        ],
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "acceptorId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "Month": {
+        "type": "integer"
+      },
+      "MonthlyCloseViewApiResponse": {
+        "required": [
+          "organizationId",
+          "companyId",
+          "averageDaysToCloseMonth",
+          "sixMonthCloseHistory"
+        ],
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "averageDaysToCloseMonth": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "sixMonthCloseHistory": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClosedMonthResponse"
+            }
+          }
+        }
+      },
+      "MonthYear": {
+        "required": [
+          "month",
+          "year"
+        ],
+        "type": "object",
+        "properties": {
+          "month": {
+            "$ref": "#/components/schemas/Month"
+          },
+          "year": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "PaymentDevice": {
+        "required": [
+          "organizationId",
+          "deviceId",
+          "laneId",
+          "deviceName",
+          "assetTag",
+          "serialNumber",
+          "modelNumber",
+          "terminalId",
+          "registrationStatus",
+          "locations",
+          "companyId",
+          "merchantAccountId",
+          "merchantAccountToken",
+          "acceptorId",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": "string"
+          },
+          "deviceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "laneId": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "deviceName": {
+            "type": "string"
+          },
+          "assetTag": {
+            "type": "string"
+          },
+          "serialNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modelNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "terminalId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "registrationStatus": {
+            "$ref": "#/components/schemas/PaymentDeviceRegistrationStatus"
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "companyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "merchantAccountId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "merchantAccountToken": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "acceptorId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "registrationError": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "id": {
+            "type": "string"
+          },
+          "partition": {
+            "type": "string"
+          }
+        }
+      },
+      "PaymentDeviceHeader": {
+        "type": "object",
+        "properties": {
+          "deviceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "laneId": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "deviceName": {
+            "type": "string"
+          },
+          "assetTag": {
+            "type": "string"
+          },
+          "serialNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "registrationStatus": {
+            "$ref": "#/components/schemas/PaymentDeviceRegistrationStatus"
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "companyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "acceptorId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PaymentDeviceRegistrationStatus": {
+        "type": "integer"
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ProviderCatalogElements": {
+        "required": [
+          "npi",
+          "firstName",
+          "middleName",
+          "lastName",
+          "suffix",
+          "specialtyId"
+        ],
+        "type": "object",
+        "properties": {
+          "npi": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "middleName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "suffix": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "specialtyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "ProviderHeaderResponse": {
+        "required": [
+          "providerId",
+          "locations",
+          "catalogElements"
+        ],
+        "type": "object",
+        "properties": {
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "catalogElements": {
+            "$ref": "#/components/schemas/ProviderCatalogElements"
+          }
+        }
+      },
+      "ProviderResponse": {
+        "required": [
+          "organizationId",
+          "providerId",
+          "locations",
+          "createdDate",
+          "catalogElements"
+        ],
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": "string"
+          },
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "catalogElements": {
+            "$ref": "#/components/schemas/ProviderCatalogElements"
+          }
+        }
+      },
+      "RemittanceInformation": {
+        "required": [
+          "submittedByLastName",
+          "submittedByFirstName",
+          "phoneNumber",
+          "addressLine1",
+          "addressLine2",
+          "city",
+          "stateId",
+          "zipCode",
+          "country"
+        ],
+        "type": "object",
+        "properties": {
+          "submittedByLastName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "submittedByFirstName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "phoneNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "addressLine1": {
+            "type": "string"
+          },
+          "addressLine2": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "city": {
+            "type": "string"
+          },
+          "stateId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "zipCode": {
+            "type": "string"
+          },
+          "country": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "StripeConfiguration": {
+        "type": "object"
+      },
+      "StripePaymentDeviceResponse": {
+        "type": "object",
+        "properties": {
+          "deviceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "deviceName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "assetTag": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "terminalId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastUsed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "StripePaymentsEligibleCompanyDivisionResponse": {
+        "required": [
+          "divisionId",
+          "divisionName",
+          "stripeConfiguration"
+        ],
+        "type": "object",
+        "properties": {
+          "divisionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "divisionName": {
+            "type": "string"
+          },
+          "stripeConfiguration": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/StripePaymentsEligibleConfigurationResponse"
+              }
+            ]
+          }
+        }
+      },
+      "StripePaymentsEligibleCompanyResponse": {
+        "required": [
+          "companyId",
+          "companyName",
+          "active",
+          "stripeConfiguration",
+          "divisions"
+        ],
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "companyName": {
+            "type": "string"
+          },
+          "active": {
+            "type": "boolean"
+          },
+          "stripeConfiguration": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/StripePaymentsEligibleConfigurationResponse"
+              }
+            ]
+          },
+          "divisions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StripePaymentsEligibleCompanyDivisionResponse"
+            }
+          }
+        }
+      },
+      "StripePaymentsEligibleConfigurationResponse": {
+        "required": [
+          "accountId",
+          "chargesEnabled"
+        ],
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "type": "string"
+          },
+          "chargesEnabled": {
+            "type": "boolean"
+          }
+        }
+      },
+      "TimeZoneHeader": {
+        "required": [
+          "id",
+          "baseUtcOffset",
+          "displayName",
+          "shortDisplayName"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "baseUtcOffset": {
+            "pattern": "^-?(\\d+\\.)?\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,7})?$",
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "shortDisplayName": {
+            "type": "string"
+          }
+        }
+      },
+      "ZebraPrinterInfo": {
+        "required": [
+          "name",
+          "serialNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "serialNumber": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Companies"
+    },
+    {
+      "name": "Facilities"
+    },
+    {
+      "name": "FacilityResources"
+    },
+    {
+      "name": "HumanResources"
+    },
+    {
+      "name": "MonthlyClose"
+    },
+    {
+      "name": "PaymentDevices"
+    },
+    {
+      "name": "Providers"
+    },
+    {
+      "name": "StripePaymentDevices"
+    },
+    {
+      "name": "TimeZones"
+    },
+    {
+      "name": "ZebraPrinters"
+    }
+  ]
+}

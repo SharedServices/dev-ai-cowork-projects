@@ -1,0 +1,321 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Policy Authorizations UAPI v2 API",
+    "description": "Snowdrop Policy Authorizations UAPI v2 API"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/policyauthorizations/uapi"
+    }
+  ],
+  "paths": {
+    "/patients/{patientId}/authorizations/{authorizationId}/simplified-update": {
+      "put": {
+        "tags": [
+          "SimplifiedAuthorizationUpdates"
+        ],
+        "summary": "Simplified UAPI v2 endpoint that updates authorization details individually. Rolls up the\ndata elements previously spread across the details/update, update and dosage-amounts\nendpoints. Any field omitted from the payload is left unchanged; a field present with an\nexplicit null clears its value (except the required authorization number, which is never cleared).",
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "authorizationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimplifiedUpdateAuthorizationRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimplifiedUpdateAuthorizationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimplifiedUpdateAuthorizationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SimplifiedUpdateAuthorizationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AttributeQualifier": {
+        "type": "object",
+        "properties": {
+          "setQualifier": {
+            "$ref": "#/components/schemas/SetQualifier"
+          },
+          "elementQualifier": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "Date": { },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "SetQualifier": {
+        "required": [
+          "setId",
+          "isFactorySet"
+        ],
+        "type": "object",
+        "properties": {
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isFactorySet": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SimplifiedUpdateAuthorizationRequest": {
+        "type": "object",
+        "properties": {
+          "authorizationNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "activityQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AttributeQualifier"
+              }
+            ]
+          },
+          "modifierQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AttributeQualifier"
+              }
+            ]
+          },
+          "diagnosisQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AttributeQualifier"
+              }
+            ]
+          },
+          "renderingProviderQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AttributeQualifier"
+              }
+            ]
+          },
+          "divisionQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AttributeQualifier"
+              }
+            ]
+          },
+          "facilityQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AttributeQualifier"
+              }
+            ]
+          },
+          "startDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "allowedUnits": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "allowedVisits": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "approvedDosageAmount": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "maximumDosageAmount": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SimplifiedAuthorizationUpdates"
+    }
+  ]
+}

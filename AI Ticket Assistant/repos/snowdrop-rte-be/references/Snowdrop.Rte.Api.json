@@ -1,0 +1,449 @@
+{
+  "openapi": "3.0.4",
+  "info": {
+    "title": "Snowdrop RTE API",
+    "description": "Snowdrop RTE API",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/rte"
+    }
+  ],
+  "paths": {
+    "/rte/createrequest": {
+      "post": {
+        "tags": [
+          "Rte"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.RteRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.RteRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.RteRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.RteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.RteResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.RteResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.RteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/rte/createasyncrequest": {
+      "post": {
+        "tags": [
+          "Rte"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.AsyncRteRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.AsyncRteRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.AsyncRteRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.AsyncRteRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Microsoft.AspNetCore.Mvc.ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "Snowdrop.Rte.Api.Model.AsyncRteRequest": {
+        "type": "object",
+        "properties": {
+          "verificationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "planId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "providerNpi": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerLastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "subscriberMemberId": {
+            "type": "string",
+            "nullable": true
+          },
+          "subscriberDob": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dateOfService": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "serviceTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          },
+          "setDosToTransmissionDate": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.Rte.Api.Model.DeductibleInformation": {
+        "type": "object",
+        "properties": {
+          "totalDeductible": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "deductibleRemaining": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "deductibleMet": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.Rte.Api.Model.OopInformation": {
+        "type": "object",
+        "properties": {
+          "totalOop": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "oopRemaining": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "oopMet": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.Rte.Api.Model.RteRequest": {
+        "type": "object",
+        "properties": {
+          "validationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "planId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "providerNpi": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerFirstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "providerLastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "subscriberMemberId": {
+            "type": "string",
+            "nullable": true
+          },
+          "subscriberDob": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dateOfService": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "serviceTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.Rte.Api.Model.RteResponse": {
+        "type": "object",
+        "properties": {
+          "policyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "policyStatus": {
+            "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.RteStatus"
+          },
+          "providerNpi": {
+            "type": "string",
+            "nullable": true
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "requestJson": {
+            "type": "string",
+            "nullable": true
+          },
+          "responseJson": {
+            "type": "string",
+            "nullable": true
+          },
+          "deductibleInformation": {
+            "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.DeductibleInformation"
+          },
+          "oopInformation": {
+            "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.OopInformation"
+          },
+          "serviceBenefits": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Snowdrop.Rte.Api.Model.ServiceBenefit"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Snowdrop.Rte.Api.Model.RteStatus": {
+        "enum": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Snowdrop.Rte.Api.Model.ServiceBenefit": {
+        "type": "object",
+        "properties": {
+          "serviceTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "hasCoverage": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "coInsurance": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "coPay": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

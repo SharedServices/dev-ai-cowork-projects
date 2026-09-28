@@ -1,0 +1,56 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Snowdrop Functional Security Authorization",
+    "description": "Service to restrict user access to system functions"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/security-functional/internal"
+    }
+  ],
+  "paths": {
+    "/functional-internal/auth/authenticate": {
+      "get": {
+        "tags": [
+          "Authorization"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/auth/authenticate": {
+      "get": {
+        "tags": [
+          "Authorization"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/functional-internal/auth/ping": {
+      "get": {
+        "tags": [
+          "Authorization"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": { },
+  "tags": [
+    {
+      "name": "Authorization"
+    }
+  ]
+}

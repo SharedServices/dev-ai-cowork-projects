@@ -1,0 +1,2472 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "API",
+    "version": "v1"
+  },
+  "paths": {
+    "/intake/activities/{id}": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activity"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activity"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Activity"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Activities"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateActivityRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateActivityRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateActivityRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateActivityRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityIdResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Activities"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateActivityRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateActivityRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateActivityRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateActivityRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityIdResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/activities": {
+      "post": {
+        "tags": [
+          "Activities"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateActivityRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateActivityRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateActivityRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateActivityRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityIdResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/activities/{id}/dateofservice": {
+      "put": {
+        "tags": [
+          "Activities"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RescheduleActivityRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RescheduleActivityRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RescheduleActivityRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RescheduleActivityRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intake/activities/{id}/appointment": {
+      "put": {
+        "tags": [
+          "Activities"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeActivityAppointmentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeActivityAppointmentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeActivityAppointmentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeActivityAppointmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityIdResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/activities/{id}/location": {
+      "put": {
+        "tags": [
+          "Activities"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeActivityLocationRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeActivityLocationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeActivityLocationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangeActivityLocationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intake/activities/{id}/cancel": {
+      "put": {
+        "tags": [
+          "Activities"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intake/activities/{id}/uphold": {
+      "put": {
+        "tags": [
+          "Activities"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intake/activities/hello-world": {
+      "get": {
+        "tags": [
+          "Activities"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intake/encounters/{locationId}/{patientId}/{dateOfService}": {
+      "get": {
+        "tags": [
+          "Encounters"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EncounterResponseWithPatient"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EncounterResponseWithPatient"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EncounterResponseWithPatient"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/encounters/{locationId}/{patientId}/{dateOfService}/summary": {
+      "get": {
+        "tags": [
+          "Encounters"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EncounterResponseWithPatient"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EncounterResponseWithPatient"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EncounterResponseWithPatient"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/encounters/{locationId}/{patientId}/{dateOfService}/status": {
+      "put": {
+        "tags": [
+          "Encounters"
+        ],
+        "parameters": [
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "dateOfService",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterStatusRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterStatusRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterStatusRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EncounterStatusRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intake/encounters/hello-world": {
+      "get": {
+        "tags": [
+          "Encounters"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intake/locations/{locationId}/stats": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationStatsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationStatsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocationStatsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/locations/{locationId}/reservation-settings": {
+      "post": {
+        "tags": [
+          "Locations"
+        ],
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationSettings"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationSettings"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationSettings"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReservationSettings"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationSettings"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationSettings"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationSettings"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationSettings"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationSettings"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReservationSettings"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/intake/locations/hello-world": {
+      "get": {
+        "tags": [
+          "Locations"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intake/schedules/{locationId}/today": {
+      "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/schedules/{locationId}/today/arrival-volume": {
+      "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrivalVolumeResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrivalVolumeResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ArrivalVolumeResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/schedules/{locationId}/today/status-counts": {
+      "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusCountResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusCountResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusCountResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/schedules/{locationId}/{date}": {
+      "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/schedules/hello-world": {
+      "get": {
+        "tags": [
+          "Schedules"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intake/utilities/thread-pool/minimums": {
+      "get": {
+        "tags": [
+          "Utilities"
+        ],
+        "parameters": [
+          {
+            "name": "requestedWorkerThreads",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "requestedCompletionThreads",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/utilities/encounters/{locationId}/{date}/{patientId}/rebuild": {
+      "get": {
+        "tags": [
+          "Utilities"
+        ],
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/utilities/schedules/{locationId}/{date}/rebuild": {
+      "get": {
+        "tags": [
+          "Utilities"
+        ],
+        "parameters": [
+          {
+            "name": "locationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "date",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ScheduleResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/utilities/hello-world": {
+      "get": {
+        "tags": [
+          "Utilities"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intake/work/workflows/{workflowId}": {
+      "get": {
+        "tags": [
+          "Workflow"
+        ],
+        "parameters": [
+          {
+            "name": "workflowId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Workflow"
+        ],
+        "parameters": [
+          {
+            "name": "workflowId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowIdResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Workflow"
+        ],
+        "parameters": [
+          {
+            "name": "workflowId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Workflow"
+        ],
+        "parameters": [
+          {
+            "name": "workflowId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/intake/work/workflows/{workflowId}/stats": {
+      "get": {
+        "tags": [
+          "Workflow"
+        ],
+        "parameters": [
+          {
+            "name": "workflowId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/work/workflows": {
+      "get": {
+        "tags": [
+          "Workflow"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkflowResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkflowResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkflowResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Workflow"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/WorkflowRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowIdResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowIdResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WorkflowIdResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/work/workflows/stats": {
+      "get": {
+        "tags": [
+          "Workflow"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkflowWithStatsResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkflowWithStatsResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/WorkflowWithStatsResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intake/work/workflows/hello-world": {
+      "get": {
+        "tags": [
+          "Workflow"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Activity": {
+        "type": "object",
+        "properties": {
+          "activityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "type": "string"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointment": {
+            "$ref": "#/components/schemas/ActivityAppointment"
+          },
+          "duration": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "activityStatusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "activityTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "facilityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCanceled": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActivityAppointment": {
+        "type": "object",
+        "properties": {
+          "time": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActivityIdResponse": {
+        "type": "object",
+        "properties": {
+          "activityId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ActivityResponse": {
+        "type": "object",
+        "properties": {
+          "activityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "activityCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "notFoundFromCatalogs": {
+            "type": "boolean"
+          },
+          "errorFromCatalogs": {
+            "type": "boolean"
+          },
+          "dateOfService": {
+            "type": "string"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointment": {
+            "$ref": "#/components/schemas/ActivityAppointment"
+          },
+          "duration": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "activityStatusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "activityTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "facilityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCanceled": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Address": {
+        "type": "object",
+        "properties": {
+          "AddressId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "addressType": {
+            "$ref": "#/components/schemas/AddressType"
+          },
+          "addressLine1": {
+            "type": "string",
+            "nullable": true
+          },
+          "addressLine2": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "stateId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "zipCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "county": {
+            "type": "string",
+            "nullable": true
+          },
+          "mailType": {
+            "$ref": "#/components/schemas/MailType"
+          },
+          "isRecurring": {
+            "type": "boolean"
+          },
+          "fromMonth": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "toMonth": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "effective": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "AddressType": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Appointment": {
+        "type": "object",
+        "properties": {
+          "appointmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "time": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "primaryActivityTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointmentTypeId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "activityIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "isDeleted": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ArrivalVolumeResponse": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "type": "string"
+          },
+          "appointmentsPerHour": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChangeActivityAppointmentRequest": {
+        "type": "object",
+        "properties": {
+          "appointment": {
+            "$ref": "#/components/schemas/ActivityAppointment"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ChangeActivityLocationRequest": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContactPoint": {
+        "type": "object",
+        "properties": {
+          "ContactPointId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "contactPointType": {
+            "$ref": "#/components/schemas/ContactPointType"
+          },
+          "phoneType": {
+            "$ref": "#/components/schemas/PhoneType"
+          },
+          "number": {
+            "type": "string",
+            "nullable": true
+          },
+          "extension": {
+            "type": "string",
+            "nullable": true
+          },
+          "isTextAllowed": {
+            "type": "boolean"
+          },
+          "isVoicemailAllowed": {
+            "type": "boolean"
+          },
+          "emailAddress": {
+            "type": "string",
+            "nullable": true
+          },
+          "isEmailAllowed": {
+            "type": "boolean"
+          },
+          "use": {
+            "$ref": "#/components/schemas/ContactUse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ContactPointType": {
+        "enum": [
+          "Phone",
+          "Email",
+          "Fax"
+        ],
+        "type": "string"
+      },
+      "ContactUse": {
+        "enum": [
+          0,
+          1
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "CreateActivityRequest": {
+        "type": "object",
+        "properties": {
+          "activityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "type": "string"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointment": {
+            "$ref": "#/components/schemas/ActivityAppointment"
+          },
+          "duration": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "activityStatusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "activityTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "facilityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCanceled": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Demographics": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "middleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "suffixName": {
+            "type": "string",
+            "nullable": true
+          },
+          "preferredName": {
+            "type": "string",
+            "nullable": true
+          },
+          "birthDate": {
+            "type": "string",
+            "nullable": true
+          },
+          "socialSecurityNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "verification": {
+            "$ref": "#/components/schemas/DemographicsVerification"
+          }
+        },
+        "additionalProperties": false
+      },
+      "DemographicsVerification": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EncounterAlerts": {
+        "type": "object",
+        "properties": {
+          "showDemographicsAlert": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "showPoliciesAlert": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasRecentPolicyValidation": {
+            "type": "boolean",
+            "readOnly": true
+          },
+          "hasActivePolicy": {
+            "type": "boolean",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EncounterBalance": {
+        "type": "object",
+        "properties": {
+          "totalDue": {
+            "type": "number",
+            "format": "double"
+          },
+          "amountPaid": {
+            "type": "number",
+            "format": "double"
+          },
+          "totalRemaining": {
+            "type": "number",
+            "format": "double"
+          },
+          "hasUnderpaidBalancesRemaining": {
+            "type": "boolean"
+          },
+          "hasNonPaymentApplied": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EncounterResponseSansActivitiesWithPatient": {
+        "type": "object",
+        "properties": {
+          "patient": {
+            "$ref": "#/components/schemas/PatientResponse"
+          },
+          "alerts": {
+            "$ref": "#/components/schemas/EncounterAlerts"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-span",
+            "nullable": true
+          },
+          "appointmentTypeId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "activityCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "appointmentCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "appointments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Appointment"
+            },
+            "nullable": true
+          },
+          "encounterId": {
+            "type": "string"
+          },
+          "encounterStatusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "balance": {
+            "$ref": "#/components/schemas/EncounterBalance"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EncounterResponseWithPatient": {
+        "type": "object",
+        "properties": {
+          "patient": {
+            "$ref": "#/components/schemas/PatientResponse"
+          },
+          "alerts": {
+            "$ref": "#/components/schemas/EncounterAlerts"
+          },
+          "nextEncounter": {
+            "$ref": "#/components/schemas/EncounterSlimResponse"
+          },
+          "previousEncounter": {
+            "$ref": "#/components/schemas/EncounterSlimResponse"
+          },
+          "activities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActivityResponse"
+            },
+            "nullable": true
+          },
+          "appointments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Appointment"
+            }
+          },
+          "encounterId": {
+            "type": "string"
+          },
+          "encounterStatusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "balance": {
+            "$ref": "#/components/schemas/EncounterBalance"
+          },
+          "appointmentTypeId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-span",
+            "nullable": true
+          },
+          "activityCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "appointmentCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EncounterSlimResponse": {
+        "type": "object",
+        "properties": {
+          "encounterId": {
+            "type": "string"
+          },
+          "dateOfService": {
+            "type": "string"
+          },
+          "startTime": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "appointmentTypeIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "EncounterStatusRequest": {
+        "type": "object",
+        "properties": {
+          "statusId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LocationStatisticsResponse": {
+        "type": "object",
+        "properties": {
+          "arrivals": {
+            "$ref": "#/components/schemas/ArrivalVolumeResponse"
+          },
+          "statusCounts": {
+            "$ref": "#/components/schemas/StatusCountResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "LocationStatsResponse": {
+        "type": "object",
+        "properties": {
+          "statistics": {
+            "$ref": "#/components/schemas/LocationStatisticsResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "MailType": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "PatientProfileStrength": {
+        "type": "object",
+        "properties": {
+          "hasFirstName": {
+            "type": "boolean"
+          },
+          "hasLastName": {
+            "type": "boolean"
+          },
+          "hasDateOfBirth": {
+            "type": "boolean"
+          },
+          "hasPhoneNumber": {
+            "type": "boolean"
+          },
+          "hasAddress": {
+            "type": "boolean"
+          },
+          "hasFacility": {
+            "type": "boolean"
+          },
+          "hasSex": {
+            "type": "boolean"
+          },
+          "hasPersonalContact": {
+            "type": "boolean"
+          },
+          "profileStrength": {
+            "type": "number",
+            "format": "double",
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientResponse": {
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "demographics": {
+            "$ref": "#/components/schemas/Demographics"
+          },
+          "financialAccountNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "primaryPhone": {
+            "$ref": "#/components/schemas/Phone"
+          },
+          "primaryAddress": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "primaryEmail": {
+            "$ref": "#/components/schemas/ContactPoint"
+          },
+          "primaryResponsibleProvider": {
+            "type": "string",
+            "nullable": true
+          },
+          "primaryInsurancePlan": {
+            "type": "string",
+            "nullable": true
+          },
+          "primaryInsurancePayer": {
+            "type": "string",
+            "nullable": true
+          },
+          "secondaryInsurancePlan": {
+            "type": "string",
+            "nullable": true
+          },
+          "secondaryInsurancePayer": {
+            "type": "string",
+            "nullable": true
+          },
+          "tertiaryInsurancePlan": {
+            "type": "string",
+            "nullable": true
+          },
+          "tertiaryInsurancePayer": {
+            "type": "string",
+            "nullable": true
+          },
+          "profileStrength": {
+            "$ref": "#/components/schemas/PatientProfileStrength"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Phone": {
+        "type": "object",
+        "properties": {
+          "phoneType": {
+            "$ref": "#/components/schemas/PhoneType"
+          },
+          "number": {
+            "type": "string",
+            "nullable": true
+          },
+          "use": {
+            "$ref": "#/components/schemas/ContactUse"
+          },
+          "extension": {
+            "type": "string",
+            "nullable": true
+          },
+          "isTextAllowed": {
+            "type": "boolean"
+          },
+          "isVoicemailAllowed": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "PhoneType": {
+        "enum": [
+          0,
+          1,
+          2
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "RescheduleActivityRequest": {
+        "type": "object",
+        "properties": {
+          "dateOfService": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ReservationSettings": {
+        "type": "object",
+        "properties": {
+          "reserveWithoutDivisions": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ScheduleResponse": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "encounterCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "encounters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EncounterResponseSansActivitiesWithPatient"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "StatusCountResponse": {
+        "type": "object",
+        "properties": {
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "type": "string"
+          },
+          "statusCounts": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateActivityRequest": {
+        "type": "object",
+        "properties": {
+          "activityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "dateOfService": {
+            "type": "string"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointment": {
+            "$ref": "#/components/schemas/ActivityAppointment"
+          },
+          "duration": {
+            "type": "string",
+            "format": "date-span"
+          },
+          "activityStatusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "activityTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "facilityId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "notes": {
+            "type": "string",
+            "nullable": true
+          },
+          "isCanceled": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WorkflowIdResponse": {
+        "type": "object",
+        "properties": {
+          "workflowId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WorkflowRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "isFavorite": {
+            "type": "boolean"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WorkflowResponse": {
+        "type": "object",
+        "properties": {
+          "workflowId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "isFavorite": {
+            "type": "boolean"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      },
+      "WorkflowWithStatsResponse": {
+        "type": "object",
+        "properties": {
+          "workflowId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "statistics": {
+            "$ref": "#/components/schemas/LocationStatisticsResponse"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "isFavorite": {
+            "type": "boolean"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

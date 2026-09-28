@@ -1,0 +1,5494 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Interventions API",
+    "description": "Snowdrop Interventions API",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/interventions"
+    }
+  ],
+  "paths": {
+    "/interventions/{interventionId}/attachments": {
+      "get": {
+        "tags": [
+          "AttachmentsRead"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Attachment"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Attachment"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Attachment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/attachment/{attachmentId}": {
+      "get": {
+        "tags": [
+          "AttachmentsRead"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "AttachmentsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/attachment/{attachmentId}/download": {
+      "get": {
+        "tags": [
+          "AttachmentsRead"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/singleattachment": {
+      "post": {
+        "tags": [
+          "AttachmentsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/multipleattachments": {
+      "post": {
+        "tags": [
+          "AttachmentsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/bulk/create": {
+      "post": {
+        "tags": [
+          "AttachmentsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterventionWithExistingAttachmentBulkRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterventionWithExistingAttachmentBulkRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterventionWithExistingAttachmentBulkRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/bulk/create/existing": {
+      "post": {
+        "tags": [
+          "AttachmentsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterventionWithExistingAttachmentsBulkRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterventionWithExistingAttachmentsBulkRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterventionWithExistingAttachmentsBulkRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/stream": {
+      "post": {
+        "tags": [
+          "AttachmentsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/stream/{attachmentId}": {
+      "post": {
+        "tags": [
+          "AttachmentsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/stream/{attachmentId}/{index}": {
+      "put": {
+        "tags": [
+          "AttachmentsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/order": {
+      "put": {
+        "tags": [
+          "AttachmentsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionAttachmentOrderingRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionAttachmentOrderingRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionAttachmentOrderingRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/metadata/{attachmentId}": {
+      "put": {
+        "tags": [
+          "AttachmentsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionAttachmentMetadataRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionAttachmentMetadataRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/InterventionAttachmentMetadataRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}": {
+      "get": {
+        "tags": [
+          "InterventionsRead"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/aggregate": {
+      "get": {
+        "tags": [
+          "InterventionsRead"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/search/unique-key": {
+      "get": {
+        "tags": [
+          "InterventionsRead"
+        ],
+        "parameters": [
+          {
+            "name": "uniqueKey",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UniqueKeySearchResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UniqueKeySearchResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UniqueKeySearchResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/entities/{entityType}/{entityId}": {
+      "get": {
+        "tags": [
+          "InterventionsRead"
+        ],
+        "parameters": [
+          {
+            "name": "entityType",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "entityId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "maxCount",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32",
+              "default": 50
+            }
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityInterventionsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityInterventionsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EntityInterventionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/unread-mentions": {
+      "get": {
+        "tags": [
+          "InterventionsRead"
+        ],
+        "parameters": [
+          {
+            "name": "maxCount",
+            "in": "query",
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32",
+              "default": 50
+            }
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserUnreadMentionsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserUnreadMentionsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserUnreadMentionsResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/search": {
+      "post": {
+        "tags": [
+          "InterventionsRead"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterventionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterventionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateInterventionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/alerts/on-resolution/add": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAlertOnResolutionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAlertOnResolutionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAlertOnResolutionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/alerts/on-resolution/replace": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetAlertOnResolutionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetAlertOnResolutionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetAlertOnResolutionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/comment": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddInterventionCommentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddInterventionCommentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddInterventionCommentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/entity": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionEntityRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionEntityRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionEntityRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/assign": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignInterventionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignInterventionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AssignInterventionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/escalate": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EscalateInterventionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EscalateInterventionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/EscalateInterventionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/progress": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressInterventionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressInterventionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressInterventionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/reference-date": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionReferenceDateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionReferenceDateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionReferenceDateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/reopen": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReopenInterventionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReopenInterventionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReopenInterventionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/resolve": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveInterventionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveInterventionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResolveInterventionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/snooze": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SnoozeInterventionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SnoozeInterventionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SnoozeInterventionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/clear-snooze": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/additional-attributes/replace-all": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionAdditionalAttributesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionAdditionalAttributesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionAdditionalAttributesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/additional-attributes/set-single": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionAdditionalAttributeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionAdditionalAttributeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionAdditionalAttributeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/internal-attributes/replace-all": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionInternalAttributesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionInternalAttributesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionInternalAttributesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/internal-attributes/set-single": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionInternalAttributeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionInternalAttributeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetInterventionInternalAttributeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/description": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionDescriptionRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionDescriptionRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionDescriptionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/user-guidance": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionUserGuidanceRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionUserGuidanceRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateInterventionUserGuidanceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/mentions/{mentionId}/mark-read": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "mentionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/tags/{tagId}": {
+      "delete": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "tagId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/{interventionId}/tags/disable": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "minLength": 28,
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisableTagsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisableTagsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisableTagsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/interventions/services/end-expired-snoozes": {
+      "post": {
+        "tags": [
+          "InterventionsWrite"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/interventions/utilities/identities/{organizationId}/{interventionId}/assign": {
+      "get": {
+        "tags": [
+          "Utility"
+        ],
+        "parameters": [
+          {
+            "name": "organizationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/interventions/utilities/related-entities/{organizationId}/{interventionId}/assign": {
+      "get": {
+        "tags": [
+          "Utility"
+        ],
+        "parameters": [
+          {
+            "name": "organizationId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "interventionId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddAlertOnResolutionRequest": {
+        "type": "object",
+        "properties": {
+          "alertOnResolution": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "AddInterventionCommentRequest": {
+        "required": [
+          "comment"
+        ],
+        "type": "object",
+        "properties": {
+          "comment": {
+            "$ref": "#/components/schemas/TaggableInputRequest"
+          }
+        }
+      },
+      "AdditionalValue": {
+        "required": [
+          "key",
+          "value",
+          "createdByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "createdByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AssignInterventionRequest": {
+        "required": [
+          "assignedToUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "assignedToUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "comment": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          }
+        }
+      },
+      "Assignment": {
+        "required": [
+          "comment"
+        ],
+        "type": "object",
+        "properties": {
+          "assignmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "assignedToUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "comment": {
+            "$ref": "#/components/schemas/TaggableInput"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Attachment": {
+        "required": [
+          "attachmentId",
+          "metadata",
+          "blobNames",
+          "acquisitionUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "attachmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "metadata": {
+            "$ref": "#/components/schemas/AttachmentMetadata"
+          },
+          "blobNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "acquisitionUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "AttachmentInfoRequest": {
+        "required": [
+          "fileName",
+          "blobName"
+        ],
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string"
+          },
+          "blobName": {
+            "type": "string"
+          }
+        }
+      },
+      "AttachmentMetadata": {
+        "required": [
+          "fileNames",
+          "documentType"
+        ],
+        "type": "object",
+        "properties": {
+          "fileNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "documentType": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "BulkAttachmentRequest": {
+        "required": [
+          "attachmentId",
+          "documentType",
+          "attachmentInfos"
+        ],
+        "type": "object",
+        "properties": {
+          "attachmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "documentType": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "attachmentInfos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttachmentInfoRequest"
+            }
+          }
+        }
+      },
+      "BulkExistingAttachment": {
+        "required": [
+          "attachmentId",
+          "documentType",
+          "fileNames"
+        ],
+        "type": "object",
+        "properties": {
+          "attachmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "documentType": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fileNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CatalogCriteriaPayload": {
+        "type": "object",
+        "properties": {
+          "elementId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "exclusionary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CommentRecord": {
+        "required": [
+          "commentId",
+          "comment",
+          "createdByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "commentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comment": {
+            "$ref": "#/components/schemas/TaggableInput"
+          },
+          "createdByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CreateInterventionRequest": {
+        "required": [
+          "interventionTypeId",
+          "priority",
+          "assignedToUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "interventionId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "entityIdentity": {
+            "$ref": "#/components/schemas/EntityIdentity"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          },
+          "userGuidance": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          },
+          "interventionTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/InterventionPriority"
+          },
+          "assignedToUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "progressionStatusId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "referenceDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "referenceDateType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "snooze": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SnoozeInterventionRequest"
+              }
+            ]
+          },
+          "uniqueKey": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "alertOnResolution": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relatedEntities": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/EntityIdentity"
+            }
+          },
+          "additionalAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "internalAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CreateInterventionWithExistingAttachmentBulkRequest": {
+        "required": [
+          "attachmentRequest",
+          "interventionTypeId",
+          "priority",
+          "assignedToUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "attachmentRequest": {
+            "$ref": "#/components/schemas/BulkAttachmentRequest"
+          },
+          "interventionId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "entityIdentity": {
+            "$ref": "#/components/schemas/EntityIdentity"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          },
+          "userGuidance": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          },
+          "interventionTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/InterventionPriority"
+          },
+          "assignedToUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "progressionStatusId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "referenceDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "referenceDateType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "snooze": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SnoozeInterventionRequest"
+              }
+            ]
+          },
+          "uniqueKey": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "alertOnResolution": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relatedEntities": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/EntityIdentity"
+            }
+          },
+          "additionalAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "internalAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "CreateInterventionWithExistingAttachmentsBulkRequest": {
+        "required": [
+          "interventionId",
+          "attachmentRequests",
+          "interventionTypeId",
+          "priority",
+          "assignedToUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "interventionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "attachmentRequests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BulkExistingAttachment"
+            }
+          },
+          "entityIdentity": {
+            "$ref": "#/components/schemas/EntityIdentity"
+          },
+          "description": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          },
+          "userGuidance": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          },
+          "interventionTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/InterventionPriority"
+          },
+          "assignedToUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "progressionStatusId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "referenceDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "referenceDateType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "snooze": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SnoozeInterventionRequest"
+              }
+            ]
+          },
+          "uniqueKey": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "alertOnResolution": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relatedEntities": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/EntityIdentity"
+            }
+          },
+          "additionalAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "internalAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Date": { },
+      "DisableTagsRequest": {
+        "type": "object",
+        "properties": {
+          "tagIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "EntityIdentity": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityInterventionsResponse": {
+        "required": [
+          "resultCount",
+          "continuationToken",
+          "results"
+        ],
+        "type": "object",
+        "properties": {
+          "resultCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "continuationToken": {
+            "type": "string"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterventionProjection"
+            }
+          }
+        }
+      },
+      "EscalateInterventionRequest": {
+        "required": [
+          "priority"
+        ],
+        "type": "object",
+        "properties": {
+          "priority": {
+            "$ref": "#/components/schemas/InterventionPriority"
+          },
+          "comment": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          }
+        }
+      },
+      "Escalation": {
+        "required": [
+          "comment",
+          "escalatedByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "escalationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comment": {
+            "$ref": "#/components/schemas/TaggableInput"
+          },
+          "escalatedByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "InterventionAttachmentMetadataRequest": {
+        "required": [
+          "fileName",
+          "documentType"
+        ],
+        "type": "object",
+        "properties": {
+          "fileName": {
+            "type": "string"
+          },
+          "documentType": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "InterventionAttachmentOrderingRequest": {
+        "type": "object",
+        "properties": {
+          "interventionAttachmentsOrder": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "InterventionPriority": {
+        "type": "integer"
+      },
+      "InterventionProjection": {
+        "type": "object",
+        "properties": {
+          "associatedEntityTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "associatedEntityTypeIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "mentionedUserIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "unreadMentionedUserIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "tagIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "interventionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "interventionIdentity": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int64"
+          },
+          "entityIdentity": {
+            "$ref": "#/components/schemas/EntityIdentity"
+          },
+          "status": {
+            "$ref": "#/components/schemas/InterventionStatus"
+          },
+          "progressionStatusId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "interventionTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "priority": {
+            "$ref": "#/components/schemas/InterventionPriority"
+          },
+          "description": {
+            "$ref": "#/components/schemas/TaggableInput"
+          },
+          "userGuidance": {
+            "$ref": "#/components/schemas/TaggableInput"
+          },
+          "assignedToUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "referenceDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "referenceDateType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "snooze": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Snooze"
+              }
+            ]
+          },
+          "alertOnResolution": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relatedEntities": {
+            "$ref": "#/components/schemas/OrderableCollectionOfstringAndRelatedEntity"
+          },
+          "assignments": {
+            "$ref": "#/components/schemas/OrderableCollectionOfGuidAndAssignment"
+          },
+          "escalations": {
+            "$ref": "#/components/schemas/OrderableCollectionOfGuidAndEscalation"
+          },
+          "progressions": {
+            "$ref": "#/components/schemas/OrderableCollectionOfGuidAndProgression"
+          },
+          "snoozes": {
+            "$ref": "#/components/schemas/OrderableCollectionOfGuidAndSnooze"
+          },
+          "resolutions": {
+            "$ref": "#/components/schemas/OrderableCollectionOfGuidAndResolution"
+          },
+          "reopenings": {
+            "$ref": "#/components/schemas/OrderableCollectionOfGuidAndReopening"
+          },
+          "additionalAttributes": {
+            "$ref": "#/components/schemas/OrderableCollectionOfstringAndAdditionalValue"
+          },
+          "internalAttributes": {
+            "$ref": "#/components/schemas/OrderableCollectionOfstringAndAdditionalValue"
+          },
+          "comments": {
+            "$ref": "#/components/schemas/OrderableCollectionOfGuidAndCommentRecord"
+          },
+          "attachments": {
+            "$ref": "#/components/schemas/OrderableCollectionOfGuidAndAttachment"
+          },
+          "mentions": {
+            "$ref": "#/components/schemas/OrderableCollectionOfGuidAndMentionReadable"
+          },
+          "tags": {
+            "$ref": "#/components/schemas/OrderableCollectionOfGuidAndTagDisableable"
+          },
+          "uniqueKey": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "createdByRuleName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "updatedByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "updatedTimeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdTimeStamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "InterventionStatus": {
+        "type": "integer"
+      },
+      "Mention": {
+        "required": [
+          "mentionId",
+          "userId"
+        ],
+        "type": "object",
+        "properties": {
+          "mentionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "MentionReadable": {
+        "required": [
+          "mentionId",
+          "userId",
+          "source",
+          "timeStamp"
+        ],
+        "type": "object",
+        "properties": {
+          "mentionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "source": {
+            "$ref": "#/components/schemas/MentionSource"
+          },
+          "sourceId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "isRead": {
+            "type": "boolean"
+          },
+          "readTimeStamp": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "MentionRequest": {
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "mentionId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "MentionSource": {
+        "type": "integer"
+      },
+      "OrderableCollectionOfGuidAndAssignment": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Assignment"
+            }
+          },
+          "order": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relativeAddSequence": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "OrderableCollectionOfGuidAndAttachment": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Attachment"
+            }
+          },
+          "order": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relativeAddSequence": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "OrderableCollectionOfGuidAndCommentRecord": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "$ref": "#/components/schemas/CommentRecord"
+            }
+          },
+          "order": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relativeAddSequence": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "OrderableCollectionOfGuidAndEscalation": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Escalation"
+            }
+          },
+          "order": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relativeAddSequence": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "OrderableCollectionOfGuidAndMentionReadable": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "$ref": "#/components/schemas/MentionReadable"
+            }
+          },
+          "order": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relativeAddSequence": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "OrderableCollectionOfGuidAndProgression": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Progression"
+            }
+          },
+          "order": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relativeAddSequence": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "OrderableCollectionOfGuidAndReopening": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Reopening"
+            }
+          },
+          "order": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relativeAddSequence": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "OrderableCollectionOfGuidAndResolution": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Resolution"
+            }
+          },
+          "order": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relativeAddSequence": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "OrderableCollectionOfGuidAndSnooze": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Snooze"
+            }
+          },
+          "order": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relativeAddSequence": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "OrderableCollectionOfGuidAndTagDisableable": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "$ref": "#/components/schemas/TagDisableable"
+            }
+          },
+          "order": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "relativeAddSequence": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "OrderableCollectionOfstringAndAdditionalValue": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "$ref": "#/components/schemas/AdditionalValue"
+            }
+          },
+          "order": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "relativeAddSequence": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "OrderableCollectionOfstringAndRelatedEntity": {
+        "type": "object",
+        "properties": {
+          "collection": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "$ref": "#/components/schemas/RelatedEntity"
+            }
+          },
+          "order": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "relativeAddSequence": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          "count": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ProgressInterventionRequest": {
+        "required": [
+          "progressionStatusId"
+        ],
+        "type": "object",
+        "properties": {
+          "progressionStatusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "snoozeUntilDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "snoozeReasonId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "comment": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          },
+          "withoutSnoozeClear": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Progression": {
+        "required": [
+          "progressionStatusId",
+          "progressedByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "progressionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "progressionStatusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comment": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInput"
+              }
+            ]
+          },
+          "progressedByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "RelatedEntity": {
+        "required": [
+          "entityId",
+          "entityType",
+          "createdByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "entityId": {
+            "type": "string"
+          },
+          "entityType": {
+            "type": "string"
+          },
+          "createdByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Reopening": {
+        "required": [
+          "comment",
+          "reopenedByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "progressionStatusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "reopeningId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comment": {
+            "$ref": "#/components/schemas/TaggableInput"
+          },
+          "reopenedByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ReopenInterventionRequest": {
+        "required": [
+          "progressionStatusId"
+        ],
+        "type": "object",
+        "properties": {
+          "progressionStatusId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comment": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          }
+        }
+      },
+      "Resolution": {
+        "required": [
+          "resolutionTypeId",
+          "comment",
+          "resolvedByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "resolutionId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "resolutionTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comment": {
+            "$ref": "#/components/schemas/TaggableInput"
+          },
+          "resolvedByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "ResolveInterventionRequest": {
+        "required": [
+          "resolutionTypeId"
+        ],
+        "type": "object",
+        "properties": {
+          "comment": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          },
+          "resolutionTypeId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "SearchRequest": {
+        "type": "object",
+        "properties": {
+          "maxCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "continuationToken": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "interventionTypes": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/CatalogCriteriaPayload"
+            }
+          },
+          "progressionStatuses": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/CatalogCriteriaPayload"
+            }
+          },
+          "priorities": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/InterventionPriority"
+            }
+          },
+          "associatedEntityTypes": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "associatedEntities": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/EntityIdentity"
+            }
+          },
+          "assignedToUserIds": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": [
+                "null",
+                "string"
+              ],
+              "format": "uuid"
+            }
+          },
+          "entityType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "excludeSnoozed": {
+            "type": "boolean"
+          },
+          "showResolved": {
+            "type": "boolean"
+          },
+          "currentDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "mentionedUserIds": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "tags": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/CatalogCriteriaPayload"
+            }
+          }
+        }
+      },
+      "SetAlertOnResolutionRequest": {
+        "type": "object",
+        "properties": {
+          "alertOnResolution": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "SetInterventionAdditionalAttributeRequest": {
+        "required": [
+          "key",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "SetInterventionAdditionalAttributesRequest": {
+        "type": "object",
+        "properties": {
+          "additionalAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SetInterventionEntityRequest": {
+        "required": [
+          "entityIdentity"
+        ],
+        "type": "object",
+        "properties": {
+          "entityIdentity": {
+            "$ref": "#/components/schemas/EntityIdentity"
+          }
+        }
+      },
+      "SetInterventionInternalAttributeRequest": {
+        "required": [
+          "key",
+          "value"
+        ],
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "SetInterventionInternalAttributesRequest": {
+        "type": "object",
+        "properties": {
+          "internalAttributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Snooze": {
+        "required": [
+          "snoozeUntilDate",
+          "snoozeReasonId",
+          "comment",
+          "snoozedByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "snoozeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "snoozeUntilDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "snoozeReasonId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comment": {
+            "$ref": "#/components/schemas/TaggableInput"
+          },
+          "snoozedByUserId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "snoozedByProgressionId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "SnoozeInterventionRequest": {
+        "required": [
+          "snoozeUntilDate",
+          "snoozeReasonId",
+          "comment"
+        ],
+        "type": "object",
+        "properties": {
+          "snoozeUntilDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "snoozeReasonId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "comment": {
+            "$ref": "#/components/schemas/TaggableInputRequest"
+          }
+        }
+      },
+      "Tag": {
+        "required": [
+          "tagId"
+        ],
+        "type": "object",
+        "properties": {
+          "tagId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "TagDisableable": {
+        "required": [
+          "tagId"
+        ],
+        "type": "object",
+        "properties": {
+          "tagId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isDisabled": {
+            "type": "boolean"
+          },
+          "disabledTimestamp": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "TaggableInput": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "mentions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Mention"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            }
+          },
+          "nodeTree": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "TaggableInputRequest": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "mentions": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/MentionRequest"
+            }
+          },
+          "tags": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "nodeTree": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "UniqueKeySearchResponse": {
+        "required": [
+          "uniqueKey",
+          "interventionId",
+          "found"
+        ],
+        "type": "object",
+        "properties": {
+          "uniqueKey": {
+            "type": "string"
+          },
+          "interventionId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "found": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateInterventionDescriptionRequest": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          }
+        }
+      },
+      "UpdateInterventionReferenceDateRequest": {
+        "required": [
+          "referenceDate"
+        ],
+        "type": "object",
+        "properties": {
+          "referenceDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "referenceDateType": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "UpdateInterventionUserGuidanceRequest": {
+        "type": "object",
+        "properties": {
+          "userGuidance": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/TaggableInputRequest"
+              }
+            ]
+          }
+        }
+      },
+      "UserUnreadMentionsResponse": {
+        "required": [
+          "resultCount",
+          "continuationToken",
+          "results"
+        ],
+        "type": "object",
+        "properties": {
+          "resultCount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "continuationToken": {
+            "type": "string"
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterventionProjection"
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "AttachmentsRead"
+    },
+    {
+      "name": "AttachmentsWrite"
+    },
+    {
+      "name": "InterventionsRead"
+    },
+    {
+      "name": "InterventionsWrite"
+    },
+    {
+      "name": "Utility"
+    }
+  ]
+}

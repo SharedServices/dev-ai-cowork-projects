@@ -1,0 +1,3833 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Episodes API",
+    "description": "Snowdrop Episodes API",
+    "version": "v1"
+  },
+  "servers": [
+    {
+      "url": "https://api.unlimitedfinancials.ninja/snowdrop/episodes"
+    }
+  ],
+  "paths": {
+    "/crosswalk/rom/upload": {
+      "post": {
+        "tags": [
+          "Crosswalk"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "$ref": "#/components/schemas/IFormFile"
+                  }
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/crosswalk/rom/download": {
+      "get": {
+        "tags": [
+          "Crosswalk"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/crosswalk/rom": {
+      "get": {
+        "tags": [
+          "Crosswalk"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RomDiagnosisCrosswalk"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RomDiagnosisCrosswalk"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RomDiagnosisCrosswalk"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episodes/{patientId}/{episodeTypeId}/{currentDate}/active/count": {
+      "get": {
+        "tags": [
+          "Episodes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "episodeTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "currentDate",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "pattern": "^-?(?:0|[1-9]\\d*)$",
+                  "type": [
+                    "integer",
+                    "string"
+                  ],
+                  "format": "int32"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "pattern": "^-?(?:0|[1-9]\\d*)$",
+                  "type": [
+                    "integer",
+                    "string"
+                  ],
+                  "format": "int32"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "pattern": "^-?(?:0|[1-9]\\d*)$",
+                  "type": [
+                    "integer",
+                    "string"
+                  ],
+                  "format": "int32"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episodes/{patientId}/{currentDate}/active": {
+      "get": {
+        "tags": [
+          "Episodes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "currentDate",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientActiveEpisodeSummary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientActiveEpisodeSummary"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PatientActiveEpisodeSummary"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episodes/search": {
+      "post": {
+        "tags": [
+          "Episodes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchEpisodesRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchEpisodesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchEpisodesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchEpisodesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpisodeSearchResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpisodeSearchResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpisodeSearchResponse"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episodes/{patientId}/{episodeId}/{currentDate}": {
+      "get": {
+        "tags": [
+          "Episodes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "patientId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "episodeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "currentDate",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EpisodeResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EpisodeResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EpisodeResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episodes/validate": {
+      "post": {
+        "tags": [
+          "Episodes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateEpisodeRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateEpisodeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateEpisodeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateEpisodeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateEpisodeResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateEpisodeResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateEpisodeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episodes": {
+      "post": {
+        "tags": [
+          "Episodes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEpisodeRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEpisodeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEpisodeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEpisodeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateEpisodeResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateEpisodeResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateEpisodeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episodes/dates": {
+      "put": {
+        "tags": [
+          "Episodes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeDatesRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeDatesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeDatesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeDatesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditEpisodeResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditEpisodeResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditEpisodeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episodes/diagnosis-codes": {
+      "post": {
+        "tags": [
+          "Episodes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeDiagnosisCodesRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeDiagnosisCodesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeDiagnosisCodesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeDiagnosisCodesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episodes/details": {
+      "post": {
+        "tags": [
+          "Episodes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeDetailsRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeDetailsRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeDetailsRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeDetailsRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episodes/phases": {
+      "post": {
+        "tags": [
+          "Episodes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodePhasesRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodePhasesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodePhasesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodePhasesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episodes/terminate": {
+      "post": {
+        "tags": [
+          "Episodes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TerminateEpisodeRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TerminateEpisodeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TerminateEpisodeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/TerminateEpisodeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditEpisodeResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditEpisodeResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditEpisodeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episodes/restore": {
+      "post": {
+        "tags": [
+          "Episodes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestoreEpisodeRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestoreEpisodeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestoreEpisodeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RestoreEpisodeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditEpisodeResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditEpisodeResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EditEpisodeResponse"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episodes/phases/remittance-update": {
+      "post": {
+        "tags": [
+          "Episodes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessRemittancePhaseChangeRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessRemittancePhaseChangeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessRemittancePhaseChangeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProcessRemittancePhaseChangeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessRemittancePhaseChangeResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessRemittancePhaseChangeResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProcessRemittancePhaseChangeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episode-types/search": {
+      "post": {
+        "tags": [
+          "EpisodeTypes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchValidEpisodeTypesRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchValidEpisodeTypesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchValidEpisodeTypesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchValidEpisodeTypesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episode-types/active": {
+      "get": {
+        "tags": [
+          "EpisodeTypes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpisodeTypeHeaderResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpisodeTypeHeaderResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpisodeTypeHeaderResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episode-types": {
+      "get": {
+        "tags": [
+          "EpisodeTypes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpisodeTypeGridItemResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpisodeTypeGridItemResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/EpisodeTypeGridItemResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "EpisodeTypes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEpisodeTypeRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEpisodeTypeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEpisodeTypeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateEpisodeTypeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateEpisodeTypeResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateEpisodeTypeResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateEpisodeTypeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episode-types/{episodeTypeId}": {
+      "get": {
+        "tags": [
+          "EpisodeTypes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "episodeTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/EpisodeTypeResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EpisodeTypeResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EpisodeTypeResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episode-types/duplicate-check": {
+      "post": {
+        "tags": [
+          "EpisodeTypes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateNameSearchRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateNameSearchRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateNameSearchRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DuplicateNameSearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DuplicateNameSearchResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DuplicateNameSearchResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DuplicateNameSearchResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episode-types/name": {
+      "put": {
+        "tags": [
+          "EpisodeTypes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypeNameRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypeNameRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypeNameRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypeNameRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episode-types/qualifiers": {
+      "put": {
+        "tags": [
+          "EpisodeTypes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypePlanQualifiersRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypePlanQualifiersRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypePlanQualifiersRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypePlanQualifiersRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episode-types/phases": {
+      "put": {
+        "tags": [
+          "EpisodeTypes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypePhasesRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypePhasesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypePhasesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypePhasesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episode-types/termination-criteria": {
+      "put": {
+        "tags": [
+          "EpisodeTypes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypeTerminationCriteriaRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypeTerminationCriteriaRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypeTerminationCriteriaRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypeTerminationCriteriaRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/episode-types/status": {
+      "put": {
+        "tags": [
+          "EpisodeTypes"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypeStatusRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypeStatusRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypeStatusRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateEpisodeTypeStatusRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/signalr/episodes-hub/negotiate": {
+      "post": {
+        "tags": [
+          "Signalr"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "user",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/signalr/episode-types/{episodeTypeId}/users/add": {
+      "post": {
+        "tags": [
+          "Signalr"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "episodeTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/signalr/episode-types/{episodeTypeId}/users/remove": {
+      "post": {
+        "tags": [
+          "Signalr"
+        ],
+        "parameters": [
+          {
+            "name": "org-id-req",
+            "in": "header",
+            "description": "Organization Id Request",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "episodeTypeId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AttributeQualifier": {
+        "required": [
+          "elementQualifier",
+          "setQualifier",
+          "exclusionary"
+        ],
+        "type": "object",
+        "properties": {
+          "elementQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ElementQualifier"
+              }
+            ]
+          },
+          "setQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SetQualifier"
+              }
+            ]
+          },
+          "exclusionary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "AttributeQualifierView": {
+        "required": [
+          "elementQualifier",
+          "setQualifier",
+          "exclusionary"
+        ],
+        "type": "object",
+        "properties": {
+          "elementQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ElementQualifierView"
+              }
+            ]
+          },
+          "setQualifier": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/SetQualifierView"
+              }
+            ]
+          },
+          "exclusionary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CreateEpisodeRequest": {
+        "required": [
+          "patientId",
+          "episodeTypeId",
+          "startDate",
+          "providerId",
+          "locationId",
+          "diagnosisCodes",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "diagnosisCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IcdCodeIdentity"
+            }
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EpisodePhase"
+            }
+          }
+        }
+      },
+      "CreateEpisodeResponse": {
+        "required": [
+          "episodeId",
+          "episodeStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeStatus": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateEpisodeTypeRequest": {
+        "required": [
+          "name",
+          "createdDate"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CreateEpisodeTypeResponse": {
+        "required": [
+          "episodeTypeId"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "Date": {
+        "title": "Sharp.Date",
+        "type": "string",
+        "format": "date",
+        "example": "2024-12-11"
+      },
+      "DiagnosisCodeHeader": {
+        "required": [
+          "icdCodeIdentity",
+          "shortDescription"
+        ],
+        "type": "object",
+        "properties": {
+          "icdCodeIdentity": {
+            "$ref": "#/components/schemas/IcdCodeIdentity"
+          },
+          "shortDescription": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "DuplicateNameSearchRequest": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "episodeTypeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "DuplicateNameSearchResponse": {
+        "required": [
+          "nameAlreadyExists"
+        ],
+        "type": "object",
+        "properties": {
+          "nameAlreadyExists": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EditEpisodeResponse": {
+        "required": [
+          "episodeId",
+          "episodeStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeStatus": {
+            "type": "string"
+          }
+        }
+      },
+      "ElementQualifier": {
+        "required": [
+          "elementId"
+        ],
+        "type": "object",
+        "properties": {
+          "elementId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "ElementQualifierView": {
+        "required": [
+          "elementId",
+          "elementName"
+        ],
+        "type": "object",
+        "properties": {
+          "elementId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "elementName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "EpisodeHeaderResponse": {
+        "required": [
+          "episodeId",
+          "episodeTypeId",
+          "episodeTypeName",
+          "startDate",
+          "endDate",
+          "terminationReason",
+          "episodeStatus",
+          "phases",
+          "scheduledTerminationReason",
+          "scheduledTerminationDate",
+          "createdDate",
+          "createdByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeTypeName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "startDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "terminationReason": {
+            "$ref": "#/components/schemas/TerminationReason"
+          },
+          "episodeStatus": {
+            "type": "string"
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EpisodePhaseView"
+            }
+          },
+          "scheduledTerminationReason": {
+            "$ref": "#/components/schemas/TerminationReason"
+          },
+          "scheduledTerminationDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdByUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "EpisodePhase": {
+        "required": [
+          "phaseId",
+          "startDate"
+        ],
+        "type": "object",
+        "properties": {
+          "phaseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      },
+      "EpisodePhaseView": {
+        "required": [
+          "phaseId",
+          "order",
+          "name",
+          "description",
+          "startDate",
+          "isActive"
+        ],
+        "type": "object",
+        "properties": {
+          "phaseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "order": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "startDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EpisodeResponse": {
+        "required": [
+          "episodeId",
+          "episodeTypeId",
+          "episodeTypeName",
+          "startDate",
+          "endDate",
+          "diagnosisCodes",
+          "phases",
+          "providerId",
+          "locationId",
+          "terminationReason",
+          "episodeStatus",
+          "scheduledTerminationDate"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeTypeName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "startDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "diagnosisCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DiagnosisCodeHeader"
+            }
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EpisodePhaseView"
+            }
+          },
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "terminationReason": {
+            "$ref": "#/components/schemas/TerminationReason"
+          },
+          "episodeStatus": {
+            "type": "string"
+          },
+          "scheduledTerminationReason": {
+            "$ref": "#/components/schemas/TerminationReason"
+          },
+          "scheduledTerminationDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      },
+      "EpisodeSearchResponse": {
+        "required": [
+          "episodeId",
+          "episodeTypeId",
+          "episodeTypeName",
+          "startDate",
+          "endDate",
+          "providerId",
+          "locationId",
+          "terminationReason",
+          "episodeStatus",
+          "createdDate",
+          "createdByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeTypeName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "startDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "terminationReason": {
+            "$ref": "#/components/schemas/TerminationReason"
+          },
+          "episodeStatus": {
+            "type": "string"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdByUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "EpisodeTypeGridItemResponse": {
+        "required": [
+          "episodeTypeId",
+          "isSystemType",
+          "name",
+          "plans",
+          "phases",
+          "status",
+          "createdDate",
+          "createdByUserId",
+          "modifiedDate",
+          "modifiedByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isSystemType": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "plans": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EpisodeTypePhase"
+            }
+          },
+          "status": {
+            "$ref": "#/components/schemas/EpisodeTypeStatus"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdByUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "modifiedDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "modifiedByUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "EpisodeTypeHeaderResponse": {
+        "required": [
+          "episodeTypeId",
+          "isSystemType",
+          "name",
+          "planQualifiers",
+          "phases",
+          "status",
+          "createdDate",
+          "createdByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isSystemType": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "planQualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifierView"
+            }
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EpisodeTypePhase"
+            }
+          },
+          "status": {
+            "$ref": "#/components/schemas/EpisodeTypeStatus"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdByUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "EpisodeTypePhase": {
+        "required": [
+          "phaseId",
+          "order",
+          "name",
+          "description"
+        ],
+        "type": "object",
+        "properties": {
+          "phaseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "order": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      },
+      "EpisodeTypeResponse": {
+        "required": [
+          "episodeTypeId",
+          "isSystemType",
+          "name",
+          "status",
+          "plans",
+          "planQualifiers",
+          "phases",
+          "terminationCriteria",
+          "createdDate",
+          "createdByUserId",
+          "modifiedDate",
+          "modifiedByUserId"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isSystemType": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "status": {
+            "$ref": "#/components/schemas/EpisodeTypeStatus"
+          },
+          "plans": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanQualifierHeader"
+            }
+          },
+          "planQualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifierView"
+            }
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EpisodeTypePhase"
+            }
+          },
+          "terminationCriteria": {
+            "$ref": "#/components/schemas/TerminationReason"
+          },
+          "createdDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdByUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "modifiedDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "modifiedByUserId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "EpisodeTypeStatus": {
+        "type": "integer"
+      },
+      "IcdCodeIdentity": {
+        "required": [
+          "code",
+          "icdCodeType"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "icdCodeType": {
+            "$ref": "#/components/schemas/IcdCodeType"
+          },
+          "isInvalidIcdCode": {
+            "type": "boolean"
+          }
+        }
+      },
+      "IcdCodeType": {
+        "type": "integer"
+      },
+      "IFormFile": {
+        "type": "string",
+        "format": "binary"
+      },
+      "PatientActiveEpisodeSummary": {
+        "required": [
+          "activeEpisodes",
+          "hasOnlyInactiveEpisodes"
+        ],
+        "type": "object",
+        "properties": {
+          "activeEpisodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EpisodeHeaderResponse"
+            }
+          },
+          "hasOnlyInactiveEpisodes": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PlanQualifierHeader": {
+        "required": [
+          "payerNames",
+          "qualifierName",
+          "exclusionary"
+        ],
+        "type": "object",
+        "properties": {
+          "payerNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "qualifierName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "exclusionary": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "title": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "status": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "null",
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "detail": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "instance": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ProcessRemittancePhaseChangeRequest": {
+        "required": [
+          "patientId",
+          "episodeId",
+          "phaseId",
+          "phaseStartDate"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "phaseId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "phaseStartDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "remittanceId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "claimPaymentId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "ProcessRemittancePhaseChangeResponse": {
+        "required": [
+          "updateSuccessful"
+        ],
+        "type": "object",
+        "properties": {
+          "updateSuccessful": {
+            "type": "boolean"
+          }
+        }
+      },
+      "RestoreEpisodeRequest": {
+        "required": [
+          "currentDate",
+          "episodeId",
+          "patientId",
+          "episodeTypeId"
+        ],
+        "type": "object",
+        "properties": {
+          "currentDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "episodeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "RomDiagnosisCrosswalk": {
+        "required": [
+          "icdCode",
+          "mCode",
+          "split",
+          "disease",
+          "rate"
+        ],
+        "type": "object",
+        "properties": {
+          "icdCode": {
+            "$ref": "#/components/schemas/IcdCodeIdentity"
+          },
+          "mCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "split": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "disease": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "rate": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "ScheduledTerminationRequest": {
+        "type": "object",
+        "properties": {
+          "scheduledTerminationReason": {
+            "$ref": "#/components/schemas/TerminationReason"
+          },
+          "scheduledTerminationDate": {
+            "$ref": "#/components/schemas/Date"
+          }
+        }
+      },
+      "SearchEpisodesRequest": {
+        "required": [
+          "patientId",
+          "currentDate"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "currentDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "fromDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "toDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      },
+      "SearchValidEpisodeTypesRequest": {
+        "required": [
+          "patientId",
+          "startDate"
+        ],
+        "type": "object",
+        "properties": {
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "$ref": "#/components/schemas/Date"
+          }
+        }
+      },
+      "SetQualifier": {
+        "required": [
+          "setId",
+          "isFactorySet"
+        ],
+        "type": "object",
+        "properties": {
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isFactorySet": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SetQualifierView": {
+        "required": [
+          "setId",
+          "setName",
+          "isFactorySet"
+        ],
+        "type": "object",
+        "properties": {
+          "setId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "setName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isFactorySet": {
+            "type": "boolean"
+          }
+        }
+      },
+      "TerminateEpisodeRequest": {
+        "required": [
+          "currentDate",
+          "episodeId",
+          "patientId",
+          "episodeTypeId",
+          "terminationReason"
+        ],
+        "type": "object",
+        "properties": {
+          "currentDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "episodeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "terminationReason": {
+            "$ref": "#/components/schemas/TerminationReason"
+          }
+        }
+      },
+      "TerminationReason": {
+        "type": "integer"
+      },
+      "UpdateEpisodeDatesRequest": {
+        "required": [
+          "currentDate",
+          "episodeId",
+          "patientId",
+          "episodeTypeId",
+          "startDate"
+        ],
+        "type": "object",
+        "properties": {
+          "currentDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "episodeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "endDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "scheduledTerminationRequest": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ScheduledTerminationRequest"
+              }
+            ]
+          }
+        }
+      },
+      "UpdateEpisodeDetailsRequest": {
+        "required": [
+          "episodeId",
+          "patientId",
+          "episodeTypeId",
+          "providerId",
+          "locationId"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "providerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "locationId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "UpdateEpisodeDiagnosisCodesRequest": {
+        "required": [
+          "episodeId",
+          "patientId",
+          "episodeTypeId",
+          "diagnosisCodes"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "diagnosisCodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IcdCodeIdentity"
+            }
+          }
+        }
+      },
+      "UpdateEpisodePhasesRequest": {
+        "required": [
+          "currentDate",
+          "episodeId",
+          "patientId",
+          "episodeTypeId"
+        ],
+        "type": "object",
+        "properties": {
+          "currentDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "episodeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EpisodePhase"
+            }
+          },
+          "scheduledTerminationRequest": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/ScheduledTerminationRequest"
+              }
+            ]
+          }
+        }
+      },
+      "UpdateEpisodeTypeNameRequest": {
+        "required": [
+          "episodeTypeId",
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "UpdateEpisodeTypePhasesRequest": {
+        "required": [
+          "episodeTypeId"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EpisodeTypePhase"
+            }
+          }
+        }
+      },
+      "UpdateEpisodeTypePlanQualifiersRequest": {
+        "required": [
+          "episodeTypeId"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "planQualifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AttributeQualifier"
+            }
+          }
+        }
+      },
+      "UpdateEpisodeTypeStatusRequest": {
+        "required": [
+          "episodeTypeId",
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "$ref": "#/components/schemas/EpisodeTypeStatus"
+          }
+        }
+      },
+      "UpdateEpisodeTypeTerminationCriteriaRequest": {
+        "required": [
+          "episodeTypeId"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "terminationCriteria": {
+            "$ref": "#/components/schemas/TerminationReason"
+          }
+        }
+      },
+      "ValidateEpisodeRequest": {
+        "required": [
+          "patientId",
+          "episodeTypeId",
+          "startDate"
+        ],
+        "type": "object",
+        "properties": {
+          "episodeId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "patientId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "episodeTypeId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "startDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "endDate": {
+            "$ref": "#/components/schemas/Date"
+          }
+        }
+      },
+      "ValidateEpisodeResponse": {
+        "required": [
+          "isEpisodeTypeValid",
+          "isDateRangeValid",
+          "isProjectionValid"
+        ],
+        "type": "object",
+        "properties": {
+          "isEpisodeTypeValid": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "isDateRangeValid": {
+            "type": "boolean"
+          },
+          "isProjectionValid": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Crosswalk"
+    },
+    {
+      "name": "Episodes"
+    },
+    {
+      "name": "EpisodeTypes"
+    },
+    {
+      "name": "Signalr"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+# Instance-local project memories: never committed, not present in a new instance created from GitHub.
+# (If these rules move to the repo-level .gitignore, prefix the paths with "AI Ticket Assistant/".)
+memories/*
+!memories/.gitkeep
+
+# Per-user settings (name, squad): local to this instance.
+local/

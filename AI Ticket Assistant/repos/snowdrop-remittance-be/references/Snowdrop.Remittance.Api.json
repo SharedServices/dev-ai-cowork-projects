@@ -1,0 +1,4200 @@
+{
+  "openapi": "3.1.1",
+  "info": {
+    "title": "Snowdrop Remittance API",
+    "description": "Snowdrop Remittance API",
+    "version": "v1"
+  },
+  "paths": {
+    "/remittance/tests/company/{companyId}/taxid": {
+      "get": {
+        "tags": [
+          "RecordProjectionTests"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/tests/company/{taxid}/companyId": {
+      "get": {
+        "tags": [
+          "RecordProjectionTests"
+        ],
+        "parameters": [
+          {
+            "name": "taxid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/tests/company/active": {
+      "get": {
+        "tags": [
+          "RecordProjectionTests"
+        ],
+        "parameters": [
+          {
+            "name": "taxid",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "format": "uuid"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/eob/regenerate/{remittanceId}": {
+      "post": {
+        "tags": [
+          "RemittanceEob"
+        ],
+        "parameters": [
+          {
+            "name": "remittanceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/eob/claims/regenerate/{remittanceId}": {
+      "post": {
+        "tags": [
+          "RemittanceEob"
+        ],
+        "parameters": [
+          {
+            "name": "remittanceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/eob/claims/{remittanceId}": {
+      "get": {
+        "tags": [
+          "RemittanceEob"
+        ],
+        "parameters": [
+          {
+            "name": "remittanceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClaimEobRemittancePdfAttachment"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClaimEobRemittancePdfAttachment"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClaimEobRemittancePdfAttachment"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/eob/claims/download/{attachmentId}": {
+      "get": {
+        "tags": [
+          "RemittanceEob"
+        ],
+        "parameters": [
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/eob/claims/download/{attachmentId}/test-temp-redirect": {
+      "get": {
+        "tags": [
+          "RemittanceEob"
+        ],
+        "parameters": [
+          {
+            "name": "attachmentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/eob/claims/claim/{claimId}": {
+      "get": {
+        "tags": [
+          "RemittanceEob"
+        ],
+        "parameters": [
+          {
+            "name": "claimId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClaimEob"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClaimEob"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ClaimEob"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/message-blob/{remittanceId}": {
+      "get": {
+        "tags": [
+          "RemittanceMessageBlob"
+        ],
+        "parameters": [
+          {
+            "name": "remittanceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemittanceMessage"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemittanceMessage"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemittanceMessage"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/pending-checks": {
+      "get": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RemittanceCheckGridItem"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RemittanceCheckGridItem"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RemittanceCheckGridItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/reconciled-checks": {
+      "get": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RemittanceCheckGridItem"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RemittanceCheckGridItem"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/RemittanceCheckGridItem"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/validate-checknumber": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateCheckNumberRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateCheckNumberRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateCheckNumberRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateCheckNumberRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateCheckNumberResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateCheckNumberResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateCheckNumberResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/company-can-close/{companyId}": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MonthYear"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MonthYear"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MonthYear"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MonthYear"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyCanCloseResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyCanCloseResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompanyCanCloseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/unposted-checks/{companyId}": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "companyId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MonthYear"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MonthYear"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MonthYear"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MonthYear"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UnpostedCheckResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UnpostedCheckResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/UnpostedCheckResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/discarded-check": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FindDiscardedCheckRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FindDiscardedCheckRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FindDiscardedCheckRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FindDiscardedCheckRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscardedRemittanceResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscardedRemittanceResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DiscardedRemittanceResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/discarded-checks": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FindDiscardedCheckRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FindDiscardedCheckRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FindDiscardedCheckRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/FindDiscardedCheckRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DiscardedRemittanceResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DiscardedRemittanceResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/DiscardedRemittanceResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/check-number": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckNumberRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckNumberRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckNumberRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckNumberRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/check-date": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckDateRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckDateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckDateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckDateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/check-amount": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckAmountRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckAmountRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckAmountRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckAmountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/payer-id": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePayerIdRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePayerIdRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePayerIdRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePayerIdRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/company-id": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCompanyIdRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCompanyIdRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCompanyIdRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCompanyIdRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/deposit-date": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepositDateRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepositDateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepositDateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepositDateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/deposit-amount": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepositAmountRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepositAmountRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepositAmountRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateDepositAmountRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/check-received": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckReceivedRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckReceivedRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckReceivedRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCheckReceivedRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/payment-type": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePaymentTypeRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePaymentTypeRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePaymentTypeRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdatePaymentTypeRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/financial-batch": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFinancialBatchRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFinancialBatchRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFinancialBatchRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFinancialBatchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/eob-attachment": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetEobAttachmentRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetEobAttachmentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetEobAttachmentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetEobAttachmentRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/reconcile": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReconcileRemittanceRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReconcileRemittanceRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReconcileRemittanceRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ReconcileRemittanceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/add-check": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCheckRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCheckRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCheckRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddCheckRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/add-assistance-check": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAssistanceRequestWithDetails"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAssistanceRequestWithDetails"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAssistanceRequestWithDetails"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AddAssistanceRequestWithDetails"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "uuid"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/get-totals": {
+      "get": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompanyTotalsResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompanyTotalsResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CompanyTotalsResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/discard": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscardRemittanceRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscardRemittanceRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscardRemittanceRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscardRemittanceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/delete-discarded": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteDiscardedRemittanceRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteDiscardedRemittanceRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteDiscardedRemittanceRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteDiscardedRemittanceRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/discard-multiple": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscardRemittancesRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscardRemittancesRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscardRemittancesRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DiscardRemittancesRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/recreate-eob": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecreateEobRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecreateEobRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecreateEobRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RecreateEobRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/remittance-snapshot/{remittanceId}": {
+      "get": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "remittanceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Remittance"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Remittance"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Remittance"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/force-posted": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForcePostedRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForcePostedRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForcePostedRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForcePostedRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/reconciliation/ledger-date": {
+      "post": {
+        "tags": [
+          "RemittanceReconciliation"
+        ],
+        "parameters": [
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLedgerDateRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLedgerDateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLedgerDateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLedgerDateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/support/move/{sourcequeue}/{destinationqueue}/{messages}": {
+      "post": {
+        "tags": [
+          "Support"
+        ],
+        "parameters": [
+          {
+            "name": "sourcequeue",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "destinationqueue",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "messages",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/remittance/support/remittance/{remittanceId}/restore-discarded": {
+      "post": {
+        "tags": [
+          "Support"
+        ],
+        "parameters": [
+          {
+            "name": "remittanceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "org-id",
+            "in": "header",
+            "description": "Organization Id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AddAssistanceRequestWithDetails": {
+        "required": [
+          "checkNumber",
+          "checkAmount",
+          "checkDate",
+          "paymentType"
+        ],
+        "type": "object",
+        "properties": {
+          "checkNumber": {
+            "type": "string"
+          },
+          "checkAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "checkDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          },
+          "fullAmount": {
+            "type": "boolean",
+            "default": false
+          },
+          "flatRateAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double",
+            "default": 0
+          },
+          "transferRemainingBalance": {
+            "type": "boolean",
+            "default": false
+          },
+          "claims": {
+            "type": [
+              "null",
+              "array"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/AssistanceClaim"
+            }
+          }
+        }
+      },
+      "AddCheckRequest": {
+        "required": [
+          "checkNumber",
+          "checkDate",
+          "checkAmount",
+          "payerId",
+          "companyId",
+          "depositDate",
+          "depositAmount",
+          "paymentType"
+        ],
+        "type": "object",
+        "properties": {
+          "checkNumber": {
+            "type": "string"
+          },
+          "checkDate": {
+            "$ref": "#/components/schemas/Date"
+          },
+          "checkAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "payerId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "depositDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "depositAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          }
+        }
+      },
+      "Adjustment": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "groupCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "reasonCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "AssistanceClaim": {
+        "required": [
+          "claimId",
+          "appliedAmount",
+          "remainingBalance"
+        ],
+        "type": "object",
+        "properties": {
+          "claimId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appliedAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "remainingBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "CheckSource": {
+        "type": "integer"
+      },
+      "Claim": {
+        "type": "object",
+        "properties": {
+          "claimId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "claimPaymentId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "accountNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "asg": {
+            "type": "boolean"
+          },
+          "forwardedTo": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "patientHIC": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "secondHIC": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "insuredHIC": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "icn": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "moaRemarkCode1": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "moaRemarkCode2": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "moaRemarkCode3": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "moaRemarkCode4": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "moaRemarkCode5": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "patientNameFirst": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "patientNameLast": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "patientNameMiddle": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "patientNameSuffix": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "insuredNameFirst": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "insuredNameLast": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "insuredNameMiddle": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "insuredNameSuffix": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "statusCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "totalBilled": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "totalPatientResponsibility": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "totalPayment": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "serviceProviderID": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "claimDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "adjustments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Adjustment"
+            }
+          },
+          "supplementalAmounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SupplementalAmount"
+            }
+          },
+          "services": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Service"
+            }
+          },
+          "totalPatientResponsibilityFromClp05": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ClaimEob": {
+        "required": [
+          "remittanceId",
+          "remittanceReceived",
+          "payerId",
+          "claimPaymentId",
+          "claimId",
+          "eobAttachment"
+        ],
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "remittanceReceived": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "payerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "claimPaymentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "claimId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eobAttachment": {
+            "$ref": "#/components/schemas/EobRemittancePdfAttachment"
+          }
+        }
+      },
+      "ClaimEobRemittancePdfAttachment": {
+        "required": [
+          "claimIdentifier",
+          "eobAttachment"
+        ],
+        "type": "object",
+        "properties": {
+          "claimIdentifier": {
+            "$ref": "#/components/schemas/EobClaimIdentifier"
+          },
+          "eobAttachment": {
+            "$ref": "#/components/schemas/EobRemittancePdfAttachment"
+          }
+        }
+      },
+      "ClaimIdentifier": {
+        "type": "object",
+        "properties": {
+          "claimPaymentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "claimNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "claimId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "appliedAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "remainingBalance": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "CompanyCanCloseResponse": {
+        "required": [
+          "canClose"
+        ],
+        "type": "object",
+        "properties": {
+          "canClose": {
+            "type": "boolean"
+          }
+        }
+      },
+      "CompanyTotalsResponse": {
+        "type": "object",
+        "properties": {
+          "companyId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "unreconciledTotal": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "unpostedTotal": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "postingTotal": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "postedTotal": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "Date": {
+        "title": "Sharp.Date",
+        "type": "string",
+        "format": "date",
+        "example": "2024-12-11"
+      },
+      "DeleteDiscardedRemittanceRequest": {
+        "required": [
+          "remittanceId"
+        ],
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isDiscardedDeleted": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "DiscardedRemittanceResponse": {
+        "required": [
+          "remittanceId",
+          "checkNumber",
+          "checkDate",
+          "checkAmount",
+          "paymentType",
+          "payerId",
+          "companyId",
+          "receivedDate"
+        ],
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "checkNumber": {
+            "type": "string"
+          },
+          "checkDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "checkAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "paymentType": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PaymentType"
+              }
+            ]
+          },
+          "payerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "companyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "receivedDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "DiscardRemittanceRequest": {
+        "required": [
+          "remittanceId"
+        ],
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "DiscardRemittancesRequest": {
+        "required": [
+          "remittanceIds"
+        ],
+        "type": "object",
+        "properties": {
+          "remittanceIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "isDeleted": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      },
+      "EditableFieldOfDate": {
+        "required": [
+          "currentValue",
+          "displayValue",
+          "isInvalid",
+          "custom",
+          "originalValue",
+          "lastModifiedBy"
+        ],
+        "type": "object",
+        "properties": {
+          "currentValue": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "displayValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isInvalid": {
+            "type": "boolean"
+          },
+          "custom": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": { }
+            }
+          },
+          "originalValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastModifiedBy": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "isFixed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EditableFieldOfDateTimeOffset": {
+        "required": [
+          "currentValue",
+          "displayValue",
+          "isInvalid",
+          "custom",
+          "originalValue",
+          "lastModifiedBy"
+        ],
+        "type": "object",
+        "properties": {
+          "currentValue": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "displayValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isInvalid": {
+            "type": "boolean"
+          },
+          "custom": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": { }
+            }
+          },
+          "originalValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastModifiedBy": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "isFixed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EditableFieldOfdecimal": {
+        "required": [
+          "currentValue",
+          "displayValue",
+          "isInvalid",
+          "custom",
+          "originalValue",
+          "lastModifiedBy"
+        ],
+        "type": "object",
+        "properties": {
+          "currentValue": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "displayValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isInvalid": {
+            "type": "boolean"
+          },
+          "custom": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": { }
+            }
+          },
+          "originalValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastModifiedBy": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "isFixed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EditableFieldOfGuid": {
+        "required": [
+          "currentValue",
+          "displayValue",
+          "isInvalid",
+          "custom",
+          "originalValue",
+          "lastModifiedBy"
+        ],
+        "type": "object",
+        "properties": {
+          "currentValue": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "displayValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isInvalid": {
+            "type": "boolean"
+          },
+          "custom": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": { }
+            }
+          },
+          "originalValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastModifiedBy": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "isFixed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EditableFieldOfPaymentType": {
+        "required": [
+          "currentValue",
+          "displayValue",
+          "isInvalid",
+          "custom",
+          "originalValue",
+          "lastModifiedBy"
+        ],
+        "type": "object",
+        "properties": {
+          "currentValue": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PaymentType"
+              }
+            ]
+          },
+          "displayValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isInvalid": {
+            "type": "boolean"
+          },
+          "custom": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": { }
+            }
+          },
+          "originalValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastModifiedBy": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "isFixed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EditableFieldOfstring": {
+        "required": [
+          "currentValue",
+          "displayValue",
+          "isInvalid",
+          "custom",
+          "originalValue",
+          "lastModifiedBy"
+        ],
+        "type": "object",
+        "properties": {
+          "currentValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "displayValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "isInvalid": {
+            "type": "boolean"
+          },
+          "custom": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": { }
+              }
+            }
+          },
+          "originalValue": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "lastModifiedBy": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "isFixed": {
+            "type": "boolean"
+          }
+        }
+      },
+      "EobAttachment": {
+        "type": "object",
+        "properties": {
+          "noteId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "attachmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fileName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "EobClaimIdentifier": {
+        "required": [
+          "claimNumber",
+          "claimPaymentId"
+        ],
+        "type": "object",
+        "properties": {
+          "claimNumber": {
+            "type": "string"
+          },
+          "claimPaymentId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "EobRemittancePdfAttachment": {
+        "required": [
+          "attachmentId",
+          "fileName"
+        ],
+        "type": "object",
+        "properties": {
+          "attachmentId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "fileName": {
+            "type": "string"
+          }
+        }
+      },
+      "FindDiscardedCheckRequest": {
+        "required": [
+          "checkNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "checkNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "ForcePostedRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceIDs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
+      },
+      "Header": {
+        "type": "object",
+        "properties": {
+          "checkDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "checkNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "checkAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "payeeAddressLine1": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payeeAddressLine2": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payeeAddressLine3": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payeeIdCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payeeTaxId": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payeeName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payerAddressLine1": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payerAddressLine2": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payerAddressLine3": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "payerName": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "Month": {
+        "type": "integer"
+      },
+      "MonthYear": {
+        "required": [
+          "month",
+          "year"
+        ],
+        "type": "object",
+        "properties": {
+          "month": {
+            "$ref": "#/components/schemas/Month"
+          },
+          "year": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "PaymentType": {
+        "type": "integer"
+      },
+      "PostingStatus": {
+        "type": "integer"
+      },
+      "ProviderAdjustment": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "fiscalPeriodDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "providerIdentifier": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "reason": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "adjustmentIdentifier": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ReconcileRemittanceRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceIds": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "depositDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      },
+      "RecreateEobRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      },
+      "Reference": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "idQualifier": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "Remark": {
+        "type": "object",
+        "properties": {
+          "qualifierCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "remarkCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "Remittance": {
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "postingStatus": {
+            "$ref": "#/components/schemas/PostingStatus"
+          },
+          "checkNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "checkDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "checkAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "payerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "companyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "depositDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "depositAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "remittanceCheckReceivedDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          },
+          "payerLiteral": {
+            "type": "string"
+          },
+          "eobAttachment": {
+            "$ref": "#/components/schemas/EobAttachment"
+          },
+          "remittanceMessage": {
+            "$ref": "#/components/schemas/RemittanceMessage"
+          },
+          "claimIdentifiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ClaimIdentifier"
+            }
+          },
+          "ledgerDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "checkSource": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/CheckSource"
+              }
+            ]
+          },
+          "paymentType": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/PaymentType"
+              }
+            ]
+          },
+          "reportId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          },
+          "remittanceMessageStoredInBlobStorage": {
+            "type": "boolean"
+          },
+          "hasPostedClaimPayments": {
+            "type": "boolean"
+          },
+          "financialBatch": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "RemittanceCheckGridItem": {
+        "required": [
+          "organizationId",
+          "remittanceId",
+          "postingStatus",
+          "checkNumber",
+          "checkDate",
+          "checkAmount",
+          "payerId",
+          "companyId",
+          "depositDate",
+          "depositAmount",
+          "remittanceCheckReceivedDate",
+          "payerLiteral",
+          "eobAttachment",
+          "ledgerDate",
+          "paymentType",
+          "hasPostedClaimPayments",
+          "hasPostedReservedFunds",
+          "financialBatch",
+          "isDiscarded",
+          "isDiscardedDeleted",
+          "percentageInUF",
+          "postedAmount",
+          "discardedAmount",
+          "unappliedAmount",
+          "eTag"
+        ],
+        "type": "object",
+        "properties": {
+          "organizationId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "postingStatus": {
+            "$ref": "#/components/schemas/PostingStatus"
+          },
+          "checkNumber": {
+            "$ref": "#/components/schemas/EditableFieldOfstring"
+          },
+          "checkDate": {
+            "$ref": "#/components/schemas/EditableFieldOfDate"
+          },
+          "checkAmount": {
+            "$ref": "#/components/schemas/EditableFieldOfdecimal"
+          },
+          "payerId": {
+            "$ref": "#/components/schemas/EditableFieldOfGuid"
+          },
+          "companyId": {
+            "$ref": "#/components/schemas/EditableFieldOfGuid"
+          },
+          "depositDate": {
+            "$ref": "#/components/schemas/EditableFieldOfDate"
+          },
+          "depositAmount": {
+            "$ref": "#/components/schemas/EditableFieldOfdecimal"
+          },
+          "remittanceCheckReceivedDate": {
+            "$ref": "#/components/schemas/EditableFieldOfDateTimeOffset"
+          },
+          "payerLiteral": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "eobAttachment": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EobAttachment"
+              }
+            ]
+          },
+          "ledgerDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/EditableFieldOfPaymentType"
+          },
+          "hasPostedClaimPayments": {
+            "type": "boolean"
+          },
+          "hasPostedReservedFunds": {
+            "type": "boolean"
+          },
+          "financialBatch": {
+            "$ref": "#/components/schemas/EditableFieldOfstring"
+          },
+          "isDiscarded": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "isDiscardedDeleted": {
+            "type": [
+              "null",
+              "boolean"
+            ]
+          },
+          "percentageInUF": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "checkNumberDuplicates": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          "postedAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "discardedAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "unappliedAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "partition": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "eTag": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "timeToLive": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          }
+        }
+      },
+      "RemittanceMessage": {
+        "type": "object",
+        "properties": {
+          "header": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Header"
+              }
+            ]
+          },
+          "claims": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Claim"
+            }
+          },
+          "providerAdjustments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProviderAdjustment"
+            }
+          }
+        }
+      },
+      "Service": {
+        "type": "object",
+        "properties": {
+          "allowed": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "billed": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "coins": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "deduct": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "modifier1": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modifier2": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modifier3": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "modifier4": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "procedure": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "providerPaid": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "qty": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "renderingProvider": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "sentProcedure": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "sentQuantity": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "serviceDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "servicePeriodStartDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "servicePeriodEndDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          },
+          "adjustments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Adjustment"
+            }
+          },
+          "supplementalAmounts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SupplementalAmount"
+            }
+          },
+          "references": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Reference"
+            }
+          },
+          "remarks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Remark"
+            }
+          }
+        }
+      },
+      "SetEobAttachmentRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "eobAttachment": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/EobAttachment"
+              }
+            ]
+          }
+        }
+      },
+      "SupplementalAmount": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          },
+          "qualifierCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "UnpostedCheckResponse": {
+        "required": [
+          "remittanceId",
+          "postingStatus"
+        ],
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "postingStatus": {
+            "$ref": "#/components/schemas/PostingStatus"
+          }
+        }
+      },
+      "UpdateCheckAmountRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "checkAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "UpdateCheckDateRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "checkDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      },
+      "UpdateCheckNumberRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "checkNumber": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "UpdateCheckReceivedRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "remittanceCheckReceivedDate": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "UpdateCompanyIdRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "companyId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "UpdateDepositAmountRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "depositAmount": {
+            "pattern": "^-?(?:0|[1-9]\\d*)(?:\\.\\d+)?$",
+            "type": [
+              "null",
+              "number",
+              "string"
+            ],
+            "format": "double"
+          }
+        }
+      },
+      "UpdateDepositDateRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "depositDate": {
+            "oneOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/Date"
+              }
+            ]
+          }
+        }
+      },
+      "UpdateFinancialBatchRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "financialBatch": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "UpdateLedgerDateRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "ledgerDate": {
+            "$ref": "#/components/schemas/Date"
+          }
+        }
+      },
+      "UpdatePayerIdRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "payerId": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "format": "uuid"
+          }
+        }
+      },
+      "UpdatePaymentTypeRequest": {
+        "type": "object",
+        "properties": {
+          "remittanceId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "paymentType": {
+            "$ref": "#/components/schemas/PaymentType"
+          }
+        }
+      },
+      "ValidateCheckNumberRequest": {
+        "required": [
+          "checkNumber"
+        ],
+        "type": "object",
+        "properties": {
+          "checkNumber": {
+            "type": "string"
+          }
+        }
+      },
+      "ValidateCheckNumberResponse": {
+        "required": [
+          "isInUse"
+        ],
+        "type": "object",
+        "properties": {
+          "isInUse": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "RecordProjectionTests"
+    },
+    {
+      "name": "RemittanceEob"
+    },
+    {
+      "name": "RemittanceMessageBlob"
+    },
+    {
+      "name": "RemittanceReconciliation"
+    },
+    {
+      "name": "Support"
+    }
+  ]
+}
