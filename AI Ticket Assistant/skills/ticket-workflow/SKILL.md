@@ -14,7 +14,8 @@ is disposable; `tickets/{TICKET-ID}/` is not.
 ```
 tickets/{TICKET-ID}/
   summary.md       — living investigation record, dated log entries (CoWork writes this)
-  downloads/       — raw evidence: Cosmos exports, Splunk exports, etc. (CoWork writes this)
+  downloads/       — raw evidence: Cosmos exports, Splunk exports, blob projections, etc.
+                      (CoWork writes this; Claude Code also writes fetched blobs here)
   code-analysis/   — Claude Code's own notes/artifacts from code-side investigation
                       (Claude Code writes this — see "Write boundary with Claude Code" below)
 ```
@@ -325,10 +326,13 @@ writes only in its own area — this is a hard boundary, not a preference:
 
 - **CoWork writes:** `summary.md` and `downloads/`. Never write into `code-analysis/`.
 - **Claude Code writes:** `code-analysis/` — its own subfolder for code-investigation notes/artifacts,
-  created by Claude Code itself the first time it needs it (don't pre-create it from CoWork).
+  created by Claude Code itself the first time it needs it (don't pre-create it from CoWork). Claude Code
+  also writes fetched evidence into `downloads/` (e.g. blob projections via `blob-projection-fetch`), since
+  only it can reach Azure Blob Storage. It never writes `summary.md`.
 
 This keeps the two sides from clobbering each other's files while still letting each read everything the
-other has produced. When code-level analysis is needed mid-investigation, tell the user to hand off to
+other has produced. Raw evidence stays in `downloads/` and analysis stays in `code-analysis/`, so it is
+clear at a glance which is which. When code-level analysis is needed mid-investigation, tell the user to hand off to
 Claude Code with "reference ticket UF-XXXXX" rather than trying to do code analysis from CoWork — and when
 picking a ticket back up here, check `code-analysis/` for anything Claude Code left before assuming
 `summary.md` alone has the full picture.

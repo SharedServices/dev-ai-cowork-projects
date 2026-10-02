@@ -29,7 +29,7 @@ Each backend repository has its own folder under `repos/`, with the same interna
 repos/snowdrop-payers-api-be/
   CLAUDE.md         — the manifest: identity, streams, and a "where to look for more" list
   README.md         — maintenance notes only, never read during investigation
-  references/       — Events.md, EventEnums.md, cosmos_query.md, *.Api.Dictionary.md, *.Api.json
+  references/       — Events.md, EventEnums.md, cosmos_query.md, blob_projections.md, *.Api.Dictionary.md, *.Api.json
   business-logic/   — confirmed rules, one folder per rule (not every repo has this yet)
   known-failures/   — confirmed defect patterns, one folder per pattern (not every repo has this yet)
 ```
@@ -46,7 +46,7 @@ The `## Repos` table in the root `CLAUDE.md` is what ties this together. It's th
 
 A skill is a folder containing a `SKILL.md` file. The file has two parts: a short description at the top that tells Claude *when* to use it (the trigger phrases — "start a ticket for UF-XXXXX", "get events for", "check instana"), and a body that tells Claude *how* — the exact steps, the response shape, the known gotchas, and the things it must not do. When your message matches a skill's trigger, the body is loaded into the conversation and followed. Skills are not code; they're instructions, and they're written to be edited whenever a step proves wrong or incomplete.
 
-This project's skills are: `ticket-workflow`, `cosmos-query`, `splunk-search`, `snowdrop-api-calls`, `instana-query`, `activate-repo`, `initiate-project`, and the two Claude-Code-only ones, `activate-cowork` and `reference-ticket`. Each skill stays narrow on purpose — `cosmos-query` knows how to build a StreamId query and open Data Explorer, but defers to the repo's own `references/cosmos_query.md` for which streams exist and what their quirks are. That keeps the skill stable while the per-repo knowledge grows.
+This project's skills are: `ticket-workflow`, `cosmos-query`, `splunk-search`, `snowdrop-api-calls`, `instana-query`, `activate-repo`, `initiate-project`, `blob-projection-fetch` (which works on both platforms, with a different role on each), and the two Claude-Code-only ones, `activate-cowork` and `reference-ticket`. Each skill stays narrow on purpose — `cosmos-query` knows how to build a StreamId query and open Data Explorer, but defers to the repo's own `references/cosmos_query.md` for which streams exist and what their quirks are. `blob-projection-fetch` works the same way for blob downloads: it knows how to build the download and hand it off, and defers to the repo's `references/blob_projections.md` for which projections exist and where they are stored. That keeps the skill stable while the per-repo knowledge grows.
 
 There is a distinction between a skill's **source** and its **installed** copy that matters when something doesn't trigger:
 
@@ -65,7 +65,7 @@ Cowork's conversation history lives only on your machine and isn't guaranteed to
 ```
 tickets/UF-12345/
   summary.md       — dated narrative log of what was found and decided
-  downloads/       — raw evidence: Cosmos JSON exports, Splunk extracts, page captures
+  downloads/       — raw evidence: Cosmos JSON exports, Splunk extracts, page captures, blob projections
   code-analysis/   — Claude Code's notes from the code side (created by Claude Code, not Cowork)
 ```
 
@@ -77,7 +77,7 @@ Claude logs to `summary.md` on its own at natural checkpoints — root cause con
 
 The Jira comment is sourced from `summary.md`, not from chat memory. This is deliberate: a conversation can pass through a hypothesis that is later revised, and reconstructing from memory risks reintroducing it. The dated log reflects the final state.
 
-**The write boundary.** Both Cowork and Claude Code read the entire ticket folder. Each writes only to its own area: Cowork writes `summary.md` and `downloads/`; Claude Code writes `code-analysis/` and nothing else. Cowork never pre-creates `code-analysis/`; Claude Code creates it the first time it has something to put there. This is a hard rule rather than a preference, because the alternative — both sides editing `summary.md` — produces conflicting edits that neither side can detect. When Cowork drafts the Technical Summary for a Jira comment and a fix was made, it cites the relevant `code-analysis/` file by name rather than re-deriving the fix.
+**The write boundary.** Both Cowork and Claude Code read the entire ticket folder. Each writes only to its own area: Cowork writes `summary.md` and `downloads/`; Claude Code writes `code-analysis/`, plus fetched evidence that only it can reach (blob projections, via `blob-projection-fetch`) into `downloads/`. Claude Code never writes `summary.md`. Cowork never pre-creates `code-analysis/`; Claude Code creates it the first time it has something to put there. The `summary.md` rule is hard rather than a preference, because the alternative — both sides editing `summary.md` — produces conflicting edits that neither side can detect. Keeping raw evidence in `downloads/` and analysis in `code-analysis/` also keeps it clear at a glance which is which. When Cowork drafts the Technical Summary for a Jira comment and a fix was made, it cites the relevant `code-analysis/` file by name rather than re-deriving the fix.
 
 ---
 
@@ -96,6 +96,8 @@ Two skills bridge them, both Claude-Code-only:
 - **`activate cowork {project}`** resolves the Cowork project's folder on disk (checking a remembered location first, then the Projects folder, then one level down for git-backed containers like this one), reads its root `CLAUDE.md`, and — if the repo Claude Code is currently in matches a row in that project's `## Repos` table — reads that repo's `CLAUDE.md` too. After this, Claude Code knows the same environments, conventions, and repo manifest Cowork does.
 - **`reference ticket UF-XXXXX`** reads the ticket's `summary.md`, inventories `downloads/`, and sets `code-analysis/` as the default destination for anything it writes for the rest of the session. Claude Code starts from the evidence Cowork already gathered rather than cold.
 
+Cowork cannot start or message Claude Code, so any task only Claude Code can do needs a manual hand-off. Fetching a blob projection is the worked example. The `blob-projection-fetch` skill has Cowork do all the resolving — which repo, which storage account, container, blob path, and an absolute save path in the ticket's `downloads/` — and output a self-contained block you paste into Claude Code. The block carries every value needed, so it works in a Claude Code session that isn't attached to this project. Claude Code only has to download and save. Once you say it's saved, Cowork reads the file from `downloads/`.
+
 The handoff in the other direction needs no step at all. Anything Claude Code writes to `code-analysis/` is a plain file in the project folder, and Cowork reads it the next time the ticket is resumed. "Flush anything outstanding to the ticket folder" on the Cowork side just makes sure `summary.md` and `downloads/` are current before you switch.
 
 The same new-session check runs on both platforms. A ticket investigation reads best as its own conversation, but neither platform can open a new session on your behalf — so before starting or resuming a ticket in a conversation that already has unrelated history, Claude asks whether you'd rather start fresh, and waits.
@@ -104,7 +106,7 @@ The same new-session check runs on both platforms. A ticket investigation reads 
 
 ### Data-gathering surfaces
 
-Four external systems supply evidence. Each is reached a different way, and none of them is reached through a shortcut from Claude's sandbox. The sandbox is isolated — it cannot reach Azure, Splunk, Instana, or the service ingresses — so every path either goes through your browser via Claude for Chrome, or hands you something to run yourself.
+Five external systems supply evidence. Each is reached a different way, and none of them is reached through a shortcut from Claude's sandbox. The sandbox is isolated — it cannot reach Azure, Splunk, Instana, or the service ingresses — so every path either goes through your browser via Claude for Chrome, hands you something to run yourself, or hands a block to Claude Code.
 
 **Cosmos DB.** Each environment has one account, `king-{env}-sharp-be-cdb`, with identical databases and containers. The accounts are homed in a different Entra tenant (`sharedsvs.onmicrosoft.com`) than the company's, which is why `az login` tokens from your identity are rejected and why Data Explorer in the portal works anyway — it uses the account key under the hood. Every event container is partitioned on `StreamId`, so the query is always an equality on it: `{namespace}->{organizationId}->{aggregate-type}->{entityId}`, with the exact shape taken from the repo's `CLAUDE.md` because three different conventions exist and the right one isn't predictable from the service's name. When Claude for Chrome is connected, Claude opens Data Explorer for the right account directly using a confirmed per-environment deeplink, then hands you the SQL and an absolute download path as two separate copyable blocks. Typing the query and downloading the result is left to you — the portal editor and the OS save dialog can't be driven reliably — and Claude reads the file from `downloads/` once you say it's there. Every event carries a `Metadata` envelope with `TraceId`, `UserId`, `CorrelationId`, and `TransactionId`, which is how a Cosmos event gets tied back to Splunk.
 
@@ -113,6 +115,8 @@ Four external systems supply evidence. Each is reached a different way, and none
 **Instana.** Also browser only — a single tenant covering all environments, navigated as Kubernetes → cluster → namespace → deployment. The dashboard is a client-rendered single-page app, so there's no JSON endpoint to pull from; tables and summary cards are read as page text, and charts are read from screenshots after waiting for the page to hydrate. The skill has every cluster id and every Herbert namespace id across the production clusters pre-recorded, and it folds in new deployment ids as they're resolved so repeat lookups get faster.
 
 **Snowdrop APIs.** The services sit behind an nginx ingress with two different path patterns — some prefixed `/snowdrop/{service}/...` with the prefix rewritten away, others flat with no prefix — and which pattern a service uses isn't predictable from its name. The skill has the confirmed table, and the per-repo `.Api.Dictionary.md` files have every route. Authentication is a browser session cookie (`SharpAuth`/`SharpOrg`), not a bearer token, and the `SharpOrg` cookie is scoped to whichever org you logged into. In Cowork, a GET is usually just navigating the authenticated browser to the URL. In Claude Code, a PowerShell script makes the call with the cookie, which can be lifted from the logged-in browser if Claude for Chrome is connected.
+
+**Blob Storage.** Many services store JSON projections of their entities in Azure Blob Storage. Each environment has three accounts — standard, premium, and feeschedule — in the Azure subscription `uf-kingdom - {Env}`, with names built by a fixed pattern (the `exchange` environment is the one exception, as with Splunk). Each repo's `references/blob_projections.md` lists its projections by the name people use for them, the account type that holds each, and the path template, container first. Claude resolves the entry and fills in the ids, but never infers a path for a projection with no entry. Unlike Cosmos, blob storage is readable with your own Entra login, so Claude Code downloads with `az storage blob download --auth-mode login`. The Azure MCP storage tool is not used for the download because it returns blob properties only, not content. Account keys, SAS tokens, and connection strings are never used, and production blobs are read-only.
 
 The reason none of these takes a shortcut is partly that the shortcuts don't exist — there's no working Splunk or Instana MCP, the sandbox has no network path to Azure — and partly that the browser path rides your own authenticated session, so Claude never holds credentials. No function keys, account keys, or cookies are stored anywhere in the project.
 

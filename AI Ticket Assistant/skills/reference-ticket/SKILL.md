@@ -20,7 +20,7 @@ directly on real-world findings already gathered there instead of starting cold.
 ```
 {active-cowork-project}\tickets\{TICKET-ID}\
   summary.md       — Claude app writes this. Read-only from here.
-  downloads\        — Claude app writes this. Read-only from here.
+  downloads\        — Claude app writes this. Read-only from here, except fetched blobs (see below).
   code-analysis\    — this skill writes here. Claude app never touches this folder.
 ```
 
@@ -72,8 +72,10 @@ Once a ticket has been referenced this way, it stays "active" for the rest of th
   `downloads/` convention on the Claude app side.
 - If James explicitly asks for output somewhere else (a PR description, a different file, inline chat
   only), that overrides the default — this is a default, not a forced destination.
-- Never write into `summary.md` or `downloads/` from Claude Code. If something belongs in the living
-  narrative record, tell James so he can log it from a Claude app session instead.
+- Never write into `summary.md` from Claude Code. If something belongs in the living narrative record,
+  tell James so he can log it from a Claude app session instead.
+- `downloads/` is written from Claude Code only for fetched evidence the Claude app cannot reach (blob
+  projections, via `blob-projection-fetch`). Analysis documents still go to `code-analysis/`.
 
 ## Multiple tickets in one session
 

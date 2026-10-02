@@ -45,7 +45,7 @@ Shared (scan these):
 - **`business-logic/`** — cross-repo (or not-yet-homed) business facts; see `business-logic/CLAUDE.md`. Not covered by `activate-repo` — check separately.
 - **`known-failures/`** — cross-repo (or not-yet-homed) known-failure patterns; see `known-failures/CLAUDE.md`. Empty so far.
 - **`templates/`** — skeletons for scaffolding new repos, business-logic categories, and known-failure patterns. Maintenance-only — see `documents/project-maintenance.md` before using one.
-- **`skills/`** — skill **sources** (`SKILL.md` folders): currently `splunk-search`, `cosmos-query`, `snowdrop-api-calls`, `ticket-workflow`, `instana-query`, `activate-repo`, `initiate-project`, `activate-cowork`. `skills/README.md` holds the full inventory and Claude Code setup instructions — maintenance-only, don't read it during normal use; the individual `SKILL.md` files auto-trigger on their own. Source, not live — to make a skill auto-trigger in Claude Code, copy its folder into `.claude/skills/`.
+- **`skills/`** — skill **sources** (`SKILL.md` folders): currently `splunk-search`, `cosmos-query`, `snowdrop-api-calls`, `ticket-workflow`, `instana-query`, `activate-repo`, `initiate-project`, `activate-cowork`, `reference-ticket`, `blob-projection-fetch`. `skills/README.md` holds the full inventory and Claude Code setup instructions — maintenance-only, don't read it during normal use; the individual `SKILL.md` files auto-trigger on their own. Source, not live — to make a skill auto-trigger in Claude Code, copy its folder into `.claude/skills/`.
 
 Local (do not scan):
 
@@ -181,10 +181,21 @@ The host pattern `sdsh.unlimitedfinancials.{env}` was confirmed for `ninja` on 2
 
 ## Azure Blob Storage
 
-- **Account naming pattern:** `king{env}feeschedulesstg` (e.g. `kingninjafeeschedulesstg`). Note: no dashes, unlike the Cosmos account pattern.
-- **Container/folder:** varies by which solution stored the fee schedule — seen so far: `snowdrop-payers`, `snowdrop-chargemasters`. Pick the folder matching the producing service (e.g. a `ChargeMasterFeesStored` event → `snowdrop-chargemasters`).
+- **Accounts:** each environment has three blob storage accounts — standard, premium, and feeschedule. Account names have no dashes, unlike the Cosmos account pattern. Each environment's accounts are in the Azure subscription named `uf-kingdom - {Env}` (e.g. `uf-kingdom - Space`); pass that display name as the subscription.
+
+  | Account | Name pattern |
+  |---|---|
+  | Standard | `king{env}sharpsdstg` |
+  | Premium | `king{env}sharpdocpremstg` |
+  | Feeschedule | `king{env}feeschedulesstg` |
+
+  `{env}` is the environment name from the table above, with one exception: for `exchange`, the standard account uses `exchange` (`kingexchangesharpsdstg`), while the premium and feeschedule accounts use `exch` (`kingexchsharpdocpremstg`, `kingexchfeeschedulesstg`).
+- **Projection blobs:** many repos store projections as JSON blobs. A repo's projection blobs are listed in that repo's `references/blob_projections.md`; the repo is resolved through `## Repos`. To locate a projection blob: open that file, find the entry by the name the user uses (e.g. "the remittance projection"), take its storage account type and path template, fill the template's placeholders from known values, and use the account name for that environment from the table above. Each path template begins with the container name, followed by the blob name.
+
+  Many projections share one general pattern: `Organizations/{organizationId}/{type full name with dots replaced by dashes}/{id}.json`, with the ids lowercase. That pattern is not guaranteed for every type, and what `{id}` is (remittance id, claim payment id, composite id, etc.) differs per projection, so some entries are case-by-case knowledge. Do not infer a path for a projection that has no entry; ask.
+- **Container/folder (feeschedule account):** varies by which solution stored the fee schedule — seen so far: `snowdrop-payers`, `snowdrop-chargemasters`. Pick the folder matching the producing service (e.g. a `ChargeMasterFeesStored` event → `snowdrop-chargemasters`).
 - **Path conventions:** first data point confirmed 2026-07-07, via a charge master's `ChargeMasterFeesStored` Cosmos event (see `skills/cosmos-query/SKILL.md`): blob container `snowdrop-chargemasters`, path `Organization/{organizationId}/Schedule/{scheduleId}/Version/{versionGuid}/...`. Only seen for charge masters so far — don't generalize the `Organization/.../Version/...` shape to other entities until confirmed. Large event payloads can be blob-referenced (a pointer in the Cosmos event's `Data`) rather than stored inline — worth checking for on any event whose `Data` looks suspiciously small for what it claims to represent.
-- **Skill:** TODO — will live at `.claude/skills/blob-locate/SKILL.md`
+- **Skill:** `skills/blob-projection-fetch/SKILL.md` — Claude Code downloads the blob with `az storage blob download --auth-mode login` (the Azure MCP storage tool returns blob properties only, not content); the Claude app resolves account/container/blob/destination and outputs a paste block for Claude Code. Claude Code cannot be triggered from the Claude app.
 
 ## Splunk
 

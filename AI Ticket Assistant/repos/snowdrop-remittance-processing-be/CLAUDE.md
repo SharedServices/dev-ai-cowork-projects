@@ -30,6 +30,7 @@
 - `references/cosmos_query.md` — ready-to-run Cosmos queries, gotchas (housekeeping docs, the `RemittanceClaimPaymentPosted` stream gotcha, cross-stream prefix queries).
 - `references/Snowdrop.RemittanceProcessing.Services.Dictionary.md` — condensed route listing (read this before the full spec).
 - `references/Snowdrop.RemittanceProcessing.Services.json` — full API spec, including the cookie-auth-reachable orchestration routes.
+- `references/blob_projections.md` — projection blobs: what each is called, which storage account type holds it, and its path template (container first). Check here before looking for any projection blob.
 - `references/api-calls.md` — cookie-auth orchestration routes, and the remittance fetch/discard workflow (discard itself hits `remittance`-be, not this repo — noted inline). The `snowdrop-api-calls` skill holds the generic call mechanics (URL patterns, auth, troubleshooting) since those apply to every repo, not just this one.
 
 ### Business logic

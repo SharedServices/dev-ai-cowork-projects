@@ -31,6 +31,7 @@ Neither side gets to a root cause alone. The commands below are entry points int
 - *collect the event stream for this payer and summarize the timeline*
 - *check the splunk logs for this payer and show a consolidated timeline*
 - *call the api to get all payers*
+- *fetch the remittance projection from remittance processing blob storage*
 
 ### Example investigation commands
 - *what information is needed to determine root cause?*
@@ -230,6 +231,17 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
   4. Save using the exact file path Claude supplied.
   5. Tell Claude once it's downloaded — not the filename, just that it's done. Claude already gave you the path, and will read from there (or look for whatever new file shows up, if you saved under a different name).
   - The browser tab Claude opened stays open until you confirm the download — it won't get closed out from under you mid-task.
+
+#### Data collection — Blob storage
+
+##### fetch a blob projection
+- *fetch the remittance projection from remittance processing blob storage* / *get the {name} projection* / *blob projection*
+- Many services store a JSON snapshot ("projection") of an entity in Azure Blob Storage. Claude in Cowork cannot reach Azure and cannot trigger Claude Code, so this is a hand-off through a paste block:
+  1. Claude looks the projection up in the repo's `references/blob_projections.md`, works out the storage account, container, blob path, and an absolute save path in the active ticket's `downloads/` (or `scratch/` if no ticket is active), and gives you one copyable block starting with `fetch blob projection`. The environment and ids come from the ticket or a pasted application URL; Claude asks only for what is missing.
+  2. Paste the block into Claude Code. It downloads the blob read-only with `az storage blob download --auth-mode login` and saves it to the path in the block. Claude Code reports the path, size, and top-level fields, and does not print the contents. This needs the Azure CLI (`az`) installed and signed in with `az login`, and the `blob-projection-fetch` skill installed in Claude Code.
+  3. Tell Claude in Cowork it's saved. Claude reads the file from the ticket's `downloads/`.
+- In Claude Code, asking directly ("get the remittance projection for ...") does the whole thing in one step. In an unattached Claude Code session, pasting the block is the way to do it, because the block carries every value needed.
+- If the blob is not found, Claude Code reports the exact account, container, and blob it tried and stops. It does not guess other paths, and it never falls back to account keys or SAS tokens.
 
 #### Data collection — Splunk
 
