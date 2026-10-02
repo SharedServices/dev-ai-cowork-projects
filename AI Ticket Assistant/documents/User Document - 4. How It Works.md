@@ -9,7 +9,7 @@ This document explains the mechanics underneath the commands in *How to Use*: wh
 
 ### The knowledge surface
 
-The project folder is a library, not a prompt. Exactly one file is loaded automatically at the start of every conversation: the root `CLAUDE.md`. Everything else — `references/`, `repos/`, `business-logic/`, `known-failures/`, `skills/`, `tickets/`, and the local `memories/` folder and `local/user.md` (your name and squad) — is on disk waiting to be read when a specific question needs it.
+The project folder is a library, not a prompt. Exactly one file is loaded automatically at the start of every conversation: the root `CLAUDE.md`. Everything else — `references/`, `repos/`, `business-logic/`, `known-failures/`, `skills/`, `tickets/`, and the local `memories/` folder and `local/user.md` (your squad) — is on disk waiting to be read when a specific question needs it.
 
 The root `CLAUDE.md` is deliberately a map rather than a knowledge dump. It holds the things every investigation needs regardless of topic: the environment table, the Cosmos and Splunk account naming patterns, the QA-org id convention, the `## Repos` index, the investigation principles, and pointers to where everything else lives. It does not hold any repo's event documentation, business rules, or API routes. Those live in the repo's own folder and are read only once the conversation has resolved which repo is involved.
 

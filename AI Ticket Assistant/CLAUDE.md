@@ -12,11 +12,11 @@ Avoid metaphor, analogy, idiom, and filler. Prefer plain, literal, concise langu
 
 ## Current user
 
-Name and Squad for this instance are kept in `local/user.md` — git-ignored, one small file per local copy, created by `initiate project`. Read it when a task depends on who the user is or which squad's repos to default to. On Claude Code, read it by the full absolute path of this project, as with repo `CLAUDE.md` files. If the file is missing or Name/Squad are blank, treat them as unset and do not ask unprompted; suggest `initiate project` only when a squad-scoped default would have mattered.
+The user's Squad for this instance is kept in `local/user.md` — git-ignored, one small file per local copy, created by `initiate project`. The file also holds the Claude account's name and email as reference only. Read it when a task depends on which squad's repos to default to, or on who the user is. On Claude Code, read it by the full absolute path of this project, as with repo `CLAUDE.md` files. If the file is missing or Squad is blank, treat it as unset and do not ask unprompted; suggest `initiate project` only when a squad-scoped default would have mattered.
 
 ## Project initiation
 
-**When the user says "initiate project"** (or asks to set up, onboard, or do first-time setup on this project instance) — read `skills/initiate-project/SKILL.md` and follow it exactly. It covers confirming Name/Squad in `local/user.md` when missing or blank, surfacing and offering to install the in-scope skills listed in `skills/README.md`, and smoke-testing Claude for Chrome and Splunk access.
+**When the user says "initiate project"** (or asks to set up, onboard, or do first-time setup on this project instance) — read `skills/initiate-project/SKILL.md` and follow it exactly. It covers recording the user's Squad in `local/user.md` when missing or blank, surfacing and offering to install the in-scope skills listed in `skills/README.md`, and smoke-testing Claude for Chrome and Splunk access.
 
 ## Squads
 
@@ -49,7 +49,7 @@ Shared (scan these):
 
 Local (do not scan):
 
-- **`local/`** — per-user settings for this instance of the project; currently `user.md` (Name, Squad — see `## Current user`). Ignored by git, so never committed and never present in a new instance created from GitHub. Settings, not memories.
+- **`local/`** — per-user settings for this instance of the project; currently `user.md` (Squad, plus the account's name and email for reference — see `## Current user`). Ignored by git, so never committed and never present in a new instance created from GitHub. Settings, not memories.
 - **`memories/`** — memories local to this instance of the project: one `.md` per memory plus a `MEMORY.md` index. Ignored by git, so never committed and never present in a new instance created from GitHub. Read the index and pull the relevant file when a question may depend on something recorded locally. Not Claude's own app memory (which is stored outside the project) and not `references/` (which is published and tracked) — see `documents/project-maintenance.md`.
 - **`scratch/`** — disposable, single-use execution scripts (e.g. a one-off "purge and evaluate these 3 remittances" `.ps1` generated for the user to run locally). These have no lasting value once run and are NOT shared knowledge — never put a reusable template, tool, or anything referenced by a skill here. Any script generated for a one-time action against a specific org/remittance/environment goes in `scratch/`, not the project root, so it never gets confused with real project files or skill templates (`skills/*/scripts/`, `cosmos-access/scripts/`). Cleanup is manual — the user deletes from `scratch/` on their own via the file system whenever they like; Claude does not need to ask permission or track what's still needed, since nothing in this folder is ever load-bearing.
 

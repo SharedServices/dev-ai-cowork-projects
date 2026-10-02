@@ -15,7 +15,7 @@ Open the Claude app, switch to Cowork, and go to **Projects** in the left panel.
 - **Use an existing folder** — points the project at a folder you already have. Use this if you cloned the repository with an IDE: clone it into a folder on your machine first, then create the project pointing at that folder.
 - **Import from an existing project** — brings in an existing claude.ai project's files and instructions; not applicable when setting up from the GitHub content.
 
-Whichever way you start, the project needs a folder Cowork can both read from and write to — that folder is where the knowledge base, skills, and ticket history actually live on disk, and you can attach or change it later from the project's settings. Your name and squad are recorded in `local/user.md` (not tracked by git) when you run "initiate project" — a one-time step per local copy.
+Whichever way you start, the project needs a folder Cowork can both read from and write to — that folder is where the knowledge base, skills, and ticket history actually live on disk, and you can attach or change it later from the project's settings. Your squad is recorded in `local/user.md` (not tracked by git), along with your Claude account's name and email for reference, when you run "initiate project" — a one-time step per local copy.
 
 ### Activating Claude for Chrome
 
@@ -35,9 +35,9 @@ To set it up:
 
 ### Initializing the Project
 
-Before doing anything else in a new local copy — or again after pulling an update from GitHub that adds skills or changes what `CLAUDE.md` expects — say **"initiate project."** This is a one-time (or occasional re-check) step, not something that happens automatically: Claude records your Name and Squad in `local/user.md` if the file is missing or either is blank, checks which of the skills listed in `skills/README.md` are already installed and offers to package up whichever are missing, and smoke-tests both Claude for Chrome and Splunk access so you know on day one whether those surfaces are actually working rather than finding out mid-investigation.
+Before doing anything else in a new local copy — or again after pulling an update from GitHub that adds skills or changes what `CLAUDE.md` expects — say **"initiate project."** This is a one-time (or occasional re-check) step, not something that happens automatically: Claude records your Squad in `local/user.md` (asking only for the squad) if the file is missing or the squad is blank, checks which of the skills listed in `skills/README.md` are already installed and offers to package up whichever are missing, and smoke-tests both Claude for Chrome and Splunk access so you know on day one whether those surfaces are actually working rather than finding out mid-investigation.
 
-Skipping this isn't fatal — most things will still prompt you for what they need — but your Name/Squad may be unset (which affects squad-scoped defaults elsewhere in the project), and a broken Chrome or Splunk connection won't surface until you happen to hit it.
+Skipping this isn't fatal — most things will still prompt you for what they need — but your Squad may be unset (which affects squad-scoped defaults elsewhere in the project), and a broken Chrome or Splunk connection won't surface until you happen to hit it.
 
 ### Targeting a Repo
 

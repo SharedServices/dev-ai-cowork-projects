@@ -172,7 +172,7 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 
 ##### initiate project
 - *initiate project* / *set up this project* / *onboard me* / *first-time setup*
-- One-time setup on a fresh copy of this project: confirms your name/squad, offers to install any missing in-scope skills, and smoke-tests Claude for Chrome and Splunk access.
+- One-time setup on a fresh copy of this project: records your squad, offers to install any missing in-scope skills, and smoke-tests Claude for Chrome and Splunk access.
 
 ##### activate repo
 - *activate repo {name}*

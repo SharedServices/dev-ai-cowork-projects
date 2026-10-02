@@ -1,6 +1,6 @@
 ---
 name: initiate-project
-description: "Run first-time setup on a fresh copy of this Support project instance. Use when the user says \"initiate project\", \"set up this project\", \"onboard me\", \"first-time setup\", or similar — this is the explicit, on-demand counterpart to the old implicit \"on first use, if Name/Squad are blank\" trigger, which proved unreliable. Confirms the user's Name/Squad in the git-ignored local/user.md (asking if the file is missing or either is blank, offering the ## Squads list from root CLAUDE.md), checks which in-scope skills from skills/README.md's inventory are already installed and offers to package/install the rest with plain-language wording on what each does, then smoke-tests Claude for Chrome and a Splunk query so the user knows day-one whether those surfaces are working."
+description: "Run first-time setup on a fresh copy of this Support project instance. Use when the user says \"initiate project\", \"set up this project\", \"onboard me\", \"first-time setup\", or similar — this is the explicit, on-demand counterpart to the old implicit \"on first use, if Name/Squad are blank\" trigger, which proved unreliable. Records the user's Squad in the git-ignored local/user.md (asking only if the file is missing or Squad is blank, offering the ## Squads list from root CLAUDE.md) along with the Claude account's name and email as reference, checks which in-scope skills from skills/README.md's inventory are already installed and offers to package/install the rest with plain-language wording on what each does, then smoke-tests Claude for Chrome and a Splunk query so the user knows day-one whether those surfaces are working."
 ---
 
 # Initiate Project
@@ -16,12 +16,18 @@ Read `local/user.md` in the project root (full absolute path on Claude Code, rel
 ```
 # Current user
 
-- Name: {name}
 - Squad: {squad}
+
+## Account (reference only)
+
+- Name: {account name}
+- Email: {account email}
 ```
 
-- If the file exists and both fields are filled in, state them plainly and move on — don't re-ask.
-- If the file is missing or either field is blank, ask the user for their name and which squad they're on, offering the `## Squads` table in root `CLAUDE.md` as the option list. Once answered, create `local/` if it doesn't exist and write the file in the shape above (update in place if it exists). `local/` is git-ignored — never copy these values into a tracked file.
+- If the file exists and Squad is filled in, state the squad plainly and move on — don't re-ask.
+- If the file is missing or Squad is blank, ask only which squad the user is on, offering the `## Squads` table in root `CLAUDE.md` as the option list. Don't ask for a name. Once answered, create `local/` if it doesn't exist and write the file in the shape above (update in place if it exists).
+- Fill the Account section from the Claude account details already in the session context (the user's name and email). Don't ask the user for them; if a value isn't available in the session, omit that line. These lines are reference only — nothing depends on them — and are refreshed whenever the file is written.
+- `local/` is git-ignored — never copy these values into a tracked file.
 
 ### 2. Check and offer the in-scope skills
 

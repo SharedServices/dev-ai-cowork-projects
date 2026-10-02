@@ -3,5 +3,5 @@
 memories/*
 !memories/.gitkeep
 
-# Per-user settings (name, squad): local to this instance.
+# Per-user settings (squad, account reference): local to this instance.
 local/
