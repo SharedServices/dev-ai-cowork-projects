@@ -12,6 +12,8 @@ A Claude workspace that speeds up diagnostic work on Jira tickets. It helps with
 
 Knowledge is organized by repository and knowledge type, so only the files relevant to a ticket are read.
 
+This repo contains a Claude CoWork project you can start with immediately.  The process is designed to start as a CoWork session about a jira ticket.  Claude Code can be invited into that discussion at any time.
+
 ## Documentation
 
 The user documents are in [`AI Ticket Assistant/documents/`](<AI Ticket Assistant/documents>):
