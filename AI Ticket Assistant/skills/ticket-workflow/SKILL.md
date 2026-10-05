@@ -1,21 +1,21 @@
 ---
 name: ticket-workflow
-description: "Manages a durable case folder at tickets/{TICKET-ID}/ for any Jira ticket (UF-XXXXX) under investigation — summary.md log, downloads/ for Cosmos/Splunk evidence, code-analysis/ written only by Claude Code. Use when the user says \"start/resume/close a ticket for UF-XXXXX\", \"log this for the ticket\", \"draft a jira comment\", \"reference ticket UF-XXXXX\" (Claude Code), or begins sustained investigation on a ticket number. If the current project has no tickets/ folder yet, offer to create one instead of refusing — it can run in any project. Before starting/resuming with unrelated prior history, ask if a new session is wanted — neither platform can open one automatically. Otherwise check whether tickets/{TICKET-ID}/ exists; if so, read summary.md and recap before continuing. CoWork writes summary.md + downloads/; Claude Code writes code-analysis/ only. Jira comments: one comment, Business + Technical Summary, drafted then approved before posting. The folder — not the chat — is the source of truth."
+description: "Manages a durable case folder at tickets/{TICKET-ID}/ for any Jira ticket (UF-XXXXX) under investigation — summary.md log, downloads/ for Cosmos/Splunk evidence, code-analysis/ written only by Claude Code. Use when the user says \"start/resume/close a ticket for UF-XXXXX\", \"log this for the ticket\", \"draft a jira comment\", or begins sustained investigation on a ticket number. If the current project has no tickets/ folder yet, offer to create one instead of refusing — it can run in any project. Before starting/resuming with unrelated prior history, ask if a new session is wanted — neither platform can open one automatically. Otherwise check whether tickets/{TICKET-ID}/ exists; if so, read summary.md and recap before continuing. Either platform writes summary.md + downloads/; only Claude Code writes code-analysis/. Jira comments: one comment, Business + Technical Summary, drafted then approved before posting. The folder — not the chat — is the source of truth."
 ---
 
 # Ticket Workflow
 
 A ticket folder gives an investigation a home that outlives the conversation: readable from a brand-new
-Cowork session, or from Claude Code branching into code analysis on the same ticket. The chat transcript
+Cowork or Claude Code session started in this project, so either can start, resume, or continue the same ticket. The chat transcript
 is disposable; `tickets/{TICKET-ID}/` is not.
 
 ## Folder shape
 
 ```
 tickets/{TICKET-ID}/
-  summary.md       — living investigation record, dated log entries (CoWork writes this)
+  summary.md       — living investigation record, dated log entries (written by whichever platform is working the ticket)
   downloads/       — raw evidence: Cosmos exports, Splunk exports, blob projections, etc.
-                      (CoWork writes this; Claude Code also writes fetched blobs here)
+                      (written by whichever platform is working the ticket, including blobs fetched in Claude Code)
   code-analysis/   — Claude Code's own notes/artifacts from code-side investigation
                       (Claude Code writes this — see "Write boundary with Claude Code" below)
 ```
@@ -301,17 +301,13 @@ references if ever surfaced to the user directly.
 
 ## Claude Code handoff
 
-No special sync step is needed. `tickets/{TICKET-ID}/` is a plain folder in the project repo, so Claude
-Code has direct filesystem access to it the moment it's working in the same directory — unlike
-`skills/`/`references/`, which have an explicit "sync scope" because they're curated portable
-knowledge. When the user tells Claude Code to "reference ticket UF-XXXXX," Claude Code reads `summary.md`
-and `downloads/` directly from this folder for the same grounding available in the Claude app session.
+Claude Code started in this project runs this skill the same way Cowork does: start, resume, log, close, and the Jira comment draft all apply unchanged. `tickets/{TICKET-ID}/` is a plain folder in the project, so Claude Code reads and writes it directly with no sync step. Resuming a ticket in Claude Code reads `summary.md` and `downloads/` (and skims `code-analysis/`) and recaps, exactly as in Cowork.
 
 **Run the same "New-session check" as Cowork before diving in.** The reasoning is identical to the
 Cowork case above: a ticket investigation reads best as its own conversation, and Claude Code sessions
 accumulate unrelated history just as easily as Cowork ones do (a long-running terminal session touching
-several tickets or unrelated code tasks before "reference ticket UF-XXXXX" comes up). Before starting
-code-level work on the referenced ticket, check whether the current Claude Code conversation already
+several tickets or unrelated code tasks before a ticket comes up). Before starting
+work on the ticket, check whether the current Claude Code conversation already
 looks like a fresh, ticket-focused session. If it does, proceed without asking. If it has meaningfully
 unrelated history (a different ticket, an unrelated coding task, a long-running general session), ask
 the user plainly whether they want to start a new session/terminal for this ticket before continuing — same
@@ -319,23 +315,14 @@ as Cowork, Claude Code has no tool to open a new session on the user's behalf, s
 and let them decide. This check applies once per ticket per session; don't re-ask if they've already answered
 it and kept working.
 
-### Write boundary with Claude Code
+### Write boundary between platforms
 
-Both CoWork and Claude Code have full read access to the entire `tickets/{TICKET-ID}/` folder, but each
-writes only in its own area — this is a hard boundary, not a preference:
+Cowork and Claude Code both have full read access to the entire `tickets/{TICKET-ID}/` folder:
 
-- **CoWork writes:** `summary.md` and `downloads/`. Never write into `code-analysis/`.
-- **Claude Code writes:** `code-analysis/` — its own subfolder for code-investigation notes/artifacts,
-  created by Claude Code itself the first time it needs it (don't pre-create it from CoWork). Claude Code
-  also writes fetched evidence into `downloads/` (e.g. blob projections via `blob-projection-fetch`), since
-  only it can reach Azure Blob Storage. It never writes `summary.md`.
+- **Either platform writes:** `summary.md` and `downloads/` — whichever is working the ticket in the current session, with the same log format and fresh-filename discipline on both. Don't work the same ticket in both at once: neither session sees the other's unsaved context, and both append to `summary.md`.
+- **Only Claude Code writes:** `code-analysis/` — its own subfolder for code-investigation notes/artifacts, created by Claude Code itself the first time it needs it (don't pre-create it from Cowork). Cowork never writes into it.
 
-This keeps the two sides from clobbering each other's files while still letting each read everything the
-other has produced. Raw evidence stays in `downloads/` and analysis stays in `code-analysis/`, so it is
-clear at a glance which is which. When code-level analysis is needed mid-investigation, tell the user to hand off to
-Claude Code with "reference ticket UF-XXXXX" rather than trying to do code analysis from CoWork — and when
-picking a ticket back up here, check `code-analysis/` for anything Claude Code left before assuming
-`summary.md` alone has the full picture.
+Raw evidence stays in `downloads/` and analysis stays in `code-analysis/`, so it is clear at a glance which is which. Claude Code is the only platform that can reach Azure Blob Storage (`blob-projection-fetch`) and read the source repositories. When code-level analysis is needed from Cowork, tell the user to continue in Claude Code with "resume ticket UF-XXXXX" rather than trying to do code analysis from Cowork — and when picking a ticket back up on either platform, check `code-analysis/` for anything Claude Code left before assuming `summary.md` alone has the full picture.
 
 ## Generating a Jira comment
 

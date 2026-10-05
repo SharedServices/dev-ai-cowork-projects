@@ -37,7 +37,7 @@ None of this changes *what* you're diagnosing — it just means less of it has t
 
 #### Feature Tickets (Claude Code)
 
-Feature work consists predominantly of working Claude Code against a source branch with little need for support skills. But there is still benefit in starting a ticket in this flow, so ticket work is captured in a consistent location either way. The system distinguishes between diagnostic and feature tickets and minimizes the flow for feature work. Summaries and resolutions are captured in the ticket folder and updated in the ticket.  Also some of Claude CoWork's support skills can be useful when live testing.
+Feature work consists predominantly of working Claude Code against a source branch with little need for support skills. But there is still benefit in starting a ticket in this flow, so ticket work is captured in a consistent location either way. The system distinguishes between diagnostic and feature tickets and minimizes the flow for feature work. Summaries and resolutions are captured in the ticket folder and updated in the ticket.  Also some of Ticket Assistant's' support skills can be useful when live testing.
 
 #### Organized for Efficiency
 

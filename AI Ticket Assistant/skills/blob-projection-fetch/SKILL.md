@@ -61,9 +61,10 @@ Input is either a pasted block or a direct request ("get the remittance projecti
 **From a pasted block:** use the values as given. Do not re-derive or second-guess them.
 
 **From a direct request:** resolve the way the Claude app does (steps 1–4 above), reading root
-`CLAUDE.md` and the repo's `references/blob_projections.md` from the active Cowork project folder (see
-`activate-cowork`; if none is active, ask which project). Destination defaults to the active ticket's
-`downloads/` (see `reference-ticket`), otherwise that project's `scratch/`.
+`CLAUDE.md` and the repo's `references/blob_projections.md` from the AI Ticket Assistant project folder (the
+working directory, or the attached folder when Claude Code was started in another repo; if neither is
+this project, ask for its path). Destination defaults to the `downloads/` of the ticket being worked in
+this session (see `ticket-workflow`), otherwise the project's `scratch/`.
 
 Then:
 

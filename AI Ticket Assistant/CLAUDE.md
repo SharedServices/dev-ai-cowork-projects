@@ -12,11 +12,15 @@ Avoid metaphor, analogy, idiom, and filler. Prefer plain, literal, concise langu
 
 ## Current user
 
-The user's Squad for this instance is kept in `local/user.md` — git-ignored, one small file per local copy, created by `initiate project`. The file also holds the Claude account's name and email as reference only. Read it when a task depends on which squad's repos to default to, or on who the user is. On Claude Code, read it by the full absolute path of this project, as with repo `CLAUDE.md` files. If the file is missing or Squad is blank, treat it as unset and do not ask unprompted; suggest `initiate project` only when a squad-scoped default would have mattered.
+The user's Squad and Source path for this instance are kept in `local/user.md` — git-ignored, one small file per local copy, created by `initiate project`. The file also holds the Claude account's name and email as reference only. Read it when a task depends on which squad's repos to default to, where the source code is, or who the user is. On Claude Code started in this project, read it by relative path. If the file is missing or a setting is blank, treat it as unset and do not ask unprompted; suggest `initiate project` only when a squad-scoped default or a source lookup would have mattered.
+
+## Source Code
+
+The source code for the repos this project describes is in the folder set as Source path in `local/user.md`, in subfolders with the same name as the repos in this project. If Source path is unset, say so and suggest `initiate project`; do not guess a location.
 
 ## Project initiation
 
-**When the user says "initiate project"** (or asks to set up, onboard, or do first-time setup on this project instance) — read `skills/initiate-project/SKILL.md` and follow it exactly. It covers recording the user's Squad in `local/user.md` when missing or blank, surfacing and offering to install the in-scope skills listed in `skills/README.md`, and smoke-testing Claude for Chrome and Splunk access.
+**When the user says "initiate project"** (or asks to set up, onboard, or do first-time setup on this project instance) — read `skills/initiate-project/SKILL.md` and follow it exactly. It covers recording the user's Squad and Source path in `local/user.md` when missing or blank, packaging the skills in `skills/README.md` as cards to save to the account (account skills load in both Cowork and Claude Code), listing duplicate personal skills to remove, and smoke-testing Claude for Chrome and Splunk access. It runs in Cowork only and refuses in Claude Code. Optional arguments: `initiate project {squad} {source-path}`.
 
 ## Squads
 
@@ -45,11 +49,11 @@ Shared (scan these):
 - **`business-logic/`** — cross-repo (or not-yet-homed) business facts; see `business-logic/CLAUDE.md`. Not covered by `activate-repo` — check separately.
 - **`known-failures/`** — cross-repo (or not-yet-homed) known-failure patterns; see `known-failures/CLAUDE.md`. Empty so far.
 - **`templates/`** — skeletons for scaffolding new repos, business-logic categories, and known-failure patterns. Maintenance-only — see `documents/project-maintenance.md` before using one.
-- **`skills/`** — skill **sources** (`SKILL.md` folders): currently `splunk-search`, `cosmos-query`, `snowdrop-api-calls`, `ticket-workflow`, `instana-query`, `activate-repo`, `initiate-project`, `activate-cowork`, `reference-ticket`, `blob-projection-fetch`. `skills/README.md` holds the full inventory and Claude Code setup instructions — maintenance-only, don't read it during normal use; the individual `SKILL.md` files auto-trigger on their own. Source, not live — to make a skill auto-trigger in Claude Code, copy its folder into `.claude/skills/`.
+- **`skills/`** — skill **sources** (`SKILL.md` folders): currently `splunk-search`, `cosmos-query`, `snowdrop-api-calls`, `ticket-workflow`, `instana-query`, `activate-repo`, `initiate-project`, `blob-projection-fetch`. `skills/README.md` holds the full inventory and Claude Code setup instructions — maintenance-only, don't read it during normal use; the individual `SKILL.md` files auto-trigger on their own. Source, not live — a skill reaches the Claude account when its card, presented by `initiate project`, is saved; account skills then load in both Cowork and Claude Code (desktop app).
 
 Local (do not scan):
 
-- **`local/`** — per-user settings for this instance of the project; currently `user.md` (Squad, plus the account's name and email for reference — see `## Current user`). Ignored by git, so never committed and never present in a new instance created from GitHub. Settings, not memories.
+- **`local/`** — per-user settings for this instance of the project; currently `user.md` (Squad and Source path, plus the account's name and email for reference — see `## Current user`). Ignored by git, so never committed and never present in a new instance created from GitHub. Settings, not memories.
 - **`memories/`** — memories local to this instance of the project: one `.md` per memory plus a `MEMORY.md` index. Ignored by git, so never committed and never present in a new instance created from GitHub. Read the index and pull the relevant file when a question may depend on something recorded locally. Not Claude's own app memory (which is stored outside the project) and not `references/` (which is published and tracked) — see `documents/project-maintenance.md`.
 - **`scratch/`** — disposable, single-use execution scripts (e.g. a one-off "purge and evaluate these 3 remittances" `.ps1` generated for the user to run locally). These have no lasting value once run and are NOT shared knowledge — never put a reusable template, tool, or anything referenced by a skill here. Any script generated for a one-time action against a specific org/remittance/environment goes in `scratch/`, not the project root, so it never gets confused with real project files or skill templates (`skills/*/scripts/`, `cosmos-access/scripts/`). Cleanup is manual — the user deletes from `scratch/` on their own via the file system whenever they like; Claude does not need to ask permission or track what's still needed, since nothing in this folder is ever load-bearing.
 
@@ -119,7 +123,7 @@ Index of repo folders under `repos/` — keep this table current whenever a repo
 
 ## Repo activation
 
-**When the user says "activate repo {name}"** — including multiple names in one request, or a squad-level request like "activate repos for all squad {squad} repos" — read `skills/activate-repo/SKILL.md` and follow it exactly. It handles resolving the name(s) against the `## Repos` index table above (folder name or nickname, spacing/hyphen/case-insensitive), reading each resolved repo's `CLAUDE.md` (full Windows path on Claude Code, relative path on Cowork — see that file's Steps section), and setting scope for the rest of the conversation. This skill is the sole trigger path for repo activation on both platforms. A skill only auto-triggers in Claude Code once its folder is copied into that project's `.claude/skills/` — until that copy step happens, invoke it by reading the file directly. See `documents/workspace-plan.md`'s "Not yet decided" section for what's deliberately deferred until repo count grows enough to revisit (typo tolerance, an explicit alias table).
+**When the user says "activate repo {name}"** — including multiple names in one request, or a squad-level request like "activate repos for all squad {squad} repos" — read `skills/activate-repo/SKILL.md` and follow it exactly. It handles resolving the name(s) against the `## Repos` index table above (folder name or nickname, spacing/hyphen/case-insensitive), reading each resolved repo's `CLAUDE.md` (see that file's Steps section for the path on each platform), and setting scope for the rest of the conversation. This skill is the sole trigger path for repo activation on both platforms. On both platforms the skill loads from the account once its card is saved; if it is not listed in `/skills` on Claude Code, read the file directly. See `documents/workspace-plan.md`'s "Not yet decided" section for what's deliberately deferred until repo count grows enough to revisit (typo tolerance, an explicit alias table).
 
 ## Ticket folders
 
@@ -204,11 +208,6 @@ The host pattern `sdsh.unlimitedfinancials.{env}` was confirmed for `ninja` on 2
 - **Field conventions & result extraction:** documented in the `splunk-search` skill (installed account-wide)
 - **Service → namespace mapping:** see `references/namespaces.md`
 - **Skill:** `splunk-search` (installed) — SPL templates, field conventions, investigation workflow
-
-## .NET code
-
-- **Repo location:** TODO
-- **Skill:** TODO — will live at `.claude/skills/dotnet-search/SKILL.md`
 
 ## Investigation principles
 

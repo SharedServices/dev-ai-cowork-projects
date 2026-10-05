@@ -172,8 +172,8 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 #### Project & repo setup
 
 ##### initiate project
-- *initiate project* / *set up this project* / *onboard me* / *first-time setup*
-- One-time setup on a fresh copy of this project: records your squad, offers to install any missing in-scope skills, and smoke-tests Claude for Chrome and Splunk access.
+- *initiate project* / *initiate project {squad} {source-path}* / *set up this project* / *onboard me* / *first-time setup*
+- Cowork only. Setup on a fresh copy of this project, and re-sync after skill changes: records your squad and source path, packages the skills as cards to save (they then load in Cowork and Claude Code), lists duplicate personal Claude Code skills to delete, and smoke-tests Claude for Chrome and Splunk access.
 
 ##### activate repo
 - *activate repo {name}*
@@ -181,10 +181,6 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 - *activate repos for all squad {squad name} repos*
 - Sets the investigation scope to one or more repo folders under `repos/`, matched by folder name or nickname from the `## Repos` table in the root `CLAUDE.md`.
 - Activations accumulate for the rest of the session — activating another repo adds it to scope, it does not replace the repo(s) already active.
-
-##### activate cowork *(Claude Code only)*
-- *activate cowork {name}* / *activate cowork project {name}*
-- Loads a Cowork project's shared knowledge folder into a Claude Code session, and auto-activates the matching repo if one is found.
 
 #### Ticket workflow
 
@@ -194,11 +190,7 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 
 ##### resume a ticket
 - *resume/continue work on UF-XXXXX*, or naming a ticket number that already has a folder
-- Reads `summary.md` (and `code-analysis/` if present), recaps status/category/last entry, and checks whether Jira shows any status change since.
-
-##### reference ticket *(Claude Code only)*
-- *reference ticket UF-XXXXX* / *pull up UF-XXXXX* / *load ticket UF-XXXXX*
-- Loads a CoWork ticket's `summary.md` and inventories its `downloads/` so Claude Code can build on the investigation already done. Analysis documents default to `tickets/{TICKET-ID}/code-analysis/` for the rest of the session.
+- Reads `summary.md` (and `code-analysis/` if present), recaps status/category/last entry, and checks whether Jira shows any status change since. Works the same in Cowork and in Claude Code started in this project.
 
 ##### log progress
 - *log this for the ticket* / *summarize this for the ticket*
@@ -218,7 +210,7 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 
 ##### flush to Claude Code
 - *flush anything outstanding to the ticket folder for Claude Code for further investigation*
-- Writes any outstanding findings into the ticket's `summary.md`/`downloads/` so a Claude Code session can pick up code-level analysis via "reference ticket."
+- Writes any outstanding findings into the ticket's `summary.md`/`downloads/` so a Claude Code session can pick up code-level analysis via "resume ticket UF-XXXXX."
 
 #### Data collection — Cosmos DB
 

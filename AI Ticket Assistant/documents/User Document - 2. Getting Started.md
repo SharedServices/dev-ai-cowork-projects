@@ -35,7 +35,7 @@ To set it up:
 
 ### Initializing the Project
 
-Before doing anything else in a new local copy — or again after pulling an update from GitHub that adds skills or changes what `CLAUDE.md` expects — say **"initiate project."** This is a one-time (or occasional re-check) step, not something that happens automatically: Claude records your Squad in `local/user.md` (asking only for the squad) if the file is missing or the squad is blank, checks which of the skills listed in `skills/README.md` are already installed and offers to package up whichever are missing, and smoke-tests both Claude for Chrome and Splunk access so you know on day one whether those surfaces are actually working rather than finding out mid-investigation.
+Before doing anything else in a new local copy — or again after pulling an update from GitHub that adds skills or changes what `CLAUDE.md` expects — say **"initiate project."** This is a one-time (or occasional re-check) step, not something that happens automatically: Claude records your Squad and Source path in `local/user.md` (from the arguments if you give them — **"initiate project {squad} {source-path}"** — otherwise by asking), packages the skills for you to save (saved skills load in both Cowork and Claude Code), lists any personal Claude Code skills you should delete because they duplicate them, and smoke-tests both Claude for Chrome and Splunk access so you know on day one whether those surfaces are actually working rather than finding out mid-investigation.
 
 Skipping this isn't fatal — most things will still prompt you for what they need — but your Squad may be unset (which affects squad-scoped defaults elsewhere in the project), and a broken Chrome or Splunk connection won't surface until you happen to hit it.
 
@@ -64,25 +64,21 @@ Starting a ticket also creates its own folder — `tickets/{TICKET-ID}/` — and
 
 Once a Diagnostics/Analysis ticket is confirmed, Claude looks for an application link (`sd.unlimitedfinancials.*`) on the ticket itself and, if it finds one, offers to capture that page directly — no copy/paste needed, and it'll ask you to log in if the page requires it. If no such link exists, or the page you need depends on unsaved state a fresh navigation can't reproduce (a filter or search result you've already built up by hand), Claude falls back to the Claude for Chrome side-panel prompt described above. From there, the typical flow follows the steps laid out in the Introduction document: extracting the actual problem statement, collecting the environment/organization/entity references, pulling Cosmos/Splunk/API data, checking it against business logic and known failures, correcting the code if a fix is needed, and drafting the two-part Jira comment. Everything found along the way — evidence, analysis, conclusions — is retained automatically in the ticket's own folder, so none of it depends on the conversation surviving.
 
-### Syncing Skills to Claude Code
+### Using Claude Code
 
-Some of this project's skills only take effect on the Cowork side until you copy them into Claude Code — the two stores are separate and don't sync automatically, and Claude Code only discovers skills from your local filesystem. Do this once per machine, and again after pulling an update from GitHub that adds or changes a skill:
+Start Claude Code (desktop app) in this project's folder ("AI Ticket Assistant"). It then works the same way Cowork does, using the same skills: skills saved to your Claude account load in both products.
 
-1. Open Claude Code from inside this project's folder — this matters, because it lets the step below use a plain relative path instead of you having to figure out and type an absolute one.
-2. Cut and paste the following into Claude Code:
+1. Run **"initiate project"** once in Cowork and save the skill cards it presents.
+2. Start Claude Code in this folder and run `/skills` to confirm the `anthropic-skills:` entries are listed (the desktop app lists them; the terminal may not, so invoke one to check).
+3. After pulling an update that adds or changes a skill, run **"initiate project"** in Cowork again and save the re-presented cards.
 
-   ```
-   Copy every skill folder under skills/ into ~/.claude/skills/ — create that folder if it doesn't
-   exist, and ask before overwriting anything already there.
-   ```
-
-This installs them to your personal, cross-project Claude Code skills folder. That's needed (rather than a copy scoped to just this project) because most of these skills — including the one used in the next section — have to trigger while Claude Code is sitting in some other repo's checkout during actual ticket work, not this project's own folder.
+This was checked in the desktop app and the terminal. In the terminal, `/skills` did not list the account skills, but they loaded when invoked. The IDE extensions have not been checked.
 
 ### Working a Feature Ticket
 
-Feature tickets keep the Cowork side light on purpose — there's no Chrome-capture prompt, since the actual work happens in Claude Code. Start or confirm the ticket as **Feature** in Cowork first, so it has a home and a folder to hand off from. Then switch over to Claude Code:
+Feature tickets keep the Cowork side light on purpose — there's no Chrome-capture prompt, since the actual work happens in Claude Code. Start or confirm the ticket as **Feature** (in Cowork or in Claude Code), then continue in Claude Code started in this folder:
 
-1. Say **"activate cowork {name}"** (e.g. "activate cowork AI Ticket Assistant") — the `activate-cowork` skill, which loads this project's root `CLAUDE.md` and auto-activates the matching repo (from the `## Repos` table) if Claude Code happens to already be sitting in one.
-2. Say **"reference ticket UF-XXXXX."** Claude Code reads the ticket's `summary.md` and `downloads/` directly, does the implementation work, and writes its own notes into `code-analysis/` — leaving the files Cowork owns untouched.
+1. Say **"activate repo {name}"** for the service you're changing.
+2. Say **"resume ticket UF-XXXXX."** Claude Code reads the ticket's `summary.md` and `downloads/` directly, does the implementation work, and writes its own notes into `code-analysis/`.
 
-Anything Claude Code finds is visible back in Cowork the next time that ticket is opened there, and vice versa — each side writes only to its own area of the folder, but both can read everything.
+Anything Claude Code finds is visible back in Cowork the next time that ticket is opened there, and vice versa. Either side can write `summary.md` and `downloads/`; only Claude Code writes `code-analysis/`. Work a ticket in one place at a time.

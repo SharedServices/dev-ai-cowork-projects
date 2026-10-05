@@ -2,7 +2,7 @@
 
 This is the companion `README.md` for `skills/` — maintenance-only documentation, never read during normal investigative use (see root `CLAUDE.md`'s "Folder layout" section). It follows the annotation-placement policy in `documents/project-maintenance.md`: `SKILL.md` files stay plainly stated, and historical color lives here instead.
 
-This folder holds the editable **source** for the Unlimited Systems support-investigation skills. A skill is a folder containing a `SKILL.md` (YAML frontmatter + instructions). The same format works in the Claude app, Claude Code, and the Agent SDK — but the stores are separate and **do not sync**, so to use these in Claude Code you copy the folders in (see [Using these in Claude Code](#using-these-in-claude-code)).
+This folder holds the editable **source** for the Unlimited Systems support-investigation skills. A skill is a folder containing a `SKILL.md` (YAML frontmatter + instructions). The same format works in the Claude app, Claude Code, and the Agent SDK — but the project's `skills/` folder is only the source. A skill reaches the Claude account when its `.skill` card is saved (`initiate project`, run in Cowork, presents the cards), and account skills load in both Cowork and Claude Code (desktop app). See [Using these in Claude Code](#using-these-in-claude-code).
 
 ## Scope: what counts as "a skill to sync"
 
@@ -22,13 +22,11 @@ To bring a new skill into scope: add a row to the table below, then either copy 
 | `splunk-search/` | Skill (source) | Search Splunk, trace requests, download logs, cache a QA org. Mature. |
 | `cosmos-query/` | Skill (source) | Query Cosmos DB / build Data Explorer deeplinks / event-feed StreamId lookups. Scaffold — has `{TODO-confirm}` placeholders. |
 | `snowdrop-api-calls/` | Skill (source) | Call authenticated Snowdrop/Unlimited Financials APIs (cookie auth, ingress URL mapping) from Claude Code (PowerShell) or the Claude app (browser) — genuinely cross-repo mechanics, kept here. Two remittance-processing-specific call recipes live in that repo's `references/api-calls.md` instead; the per-service ingress table stays here, with the remittance-processing row annotated as a mirror of that repo's canonical `CLAUDE.md`. |
-| `ticket-workflow/` | Skill (source) | Manages the `tickets/{TICKET-ID}/` durable case-folder convention — start/resume/log/close a ticket, redirect Cosmos/Splunk downloads into it. Supports multiple projects: offers to create `tickets/` instead of refusing when absent, and derives the absolute download path from the session's own project path rather than a hardcoded one. |
+| `ticket-workflow/` | Skill (source) | Manages the `tickets/{TICKET-ID}/` durable case-folder convention — start/resume/log/close a ticket, redirect Cosmos/Splunk downloads into it. Supports multiple projects: offers to create `tickets/` instead of refusing when absent, and derives the absolute download path from the session's own project path rather than a hardcoded one. Runs the same on Claude Code started in this project; either platform writes `summary.md` and `downloads/`, only Claude Code writes `code-analysis/`. |
 | `instana-query/` | Skill (source) | Look up Kubernetes/APM data (CPU, memory, pod health) in IBM Instana. Browser-only, no MCP/API path. All 15 cluster IDs + all 9 Squad Herbert namespace IDs (7 prod envs) recorded; deployment-level IDs cached opportunistically. Auto-updates as new IDs are resolved. |
-| `activate-repo/` | Skill (source) | Sets the current investigation scope to one or more `repos/` folders — single, multi, or squad-level activation, resolved against root `CLAUDE.md`'s `## Repos` table, ask-don't-guess on no/multiple matches. Full Windows path on Claude Code, relative path on Cowork. Sole source for this behavior on both platforms — no separate Claude Code slash command exists. No automatic Claude Code trigger yet, though — that needs this folder copied into that project's own `.claude/skills/`, not yet done. |
-| `initiate-project/` | Skill (source) | First-time setup on a fresh project instance — records the user's Squad (plus the account's name and email for reference) in the git-ignored `local/user.md`, checks which in-scope skills (this table) are already installed and packages/presents the rest with plain-language wording, and smoke-tests Claude for Chrome and a Splunk query. Explicit, on-demand trigger ("initiate project") — replaced an earlier implicit "on first use" trigger that proved unreliable. |
-| `activate-cowork/` | Skill (source) | **Claude-Code-only** — the Claude-Code-side counterpart to `activate-repo`: activates a Cowork project's shared knowledge folder (e.g. this one) from within a Claude Code session, and auto-activates whichever repo inside it matches the repo Claude Code is currently sitting in. Backfilled here from an installed Claude Code copy — has no Cowork-side equivalent (Cowork already knows what project it's in) and never needs packaging into a `.skill` for the Claude app. |
-| `reference-ticket/` | Skill (source) | **Claude-Code-only** — loads a Claude app (CoWork) `tickets/{TICKET-ID}/` case folder into a Claude Code session so code analysis builds on findings already gathered there, then defaults any generated analysis doc to that ticket's `code-analysis/` folder. Resolves the ticket's base path against whichever Cowork project is active in the current session (set by `activate-cowork` or an explicit project activation) rather than a fixed workspace — updated 2026-09-30 after it was found hardcoded to `Consolidated` and missed tickets living under this project instead. Backfilled here from an installed Claude Code copy; no Cowork-side equivalent (Cowork already knows what ticket folder it's in). |
-| `blob-projection-fetch/` | Skill (source) | Fetch a projection blob (e.g. the remittance projection) from Azure Blob Storage into a ticket's `downloads/`. Claude Code downloads via `az storage blob download --auth-mode login` (the Azure MCP storage tool returns properties only, not content); the Claude app resolves the account/container/blob/destination from the repo's `blob_projections.md` and outputs a self-contained "fetch blob projection" paste block, since it cannot reach Azure or trigger Claude Code. Authored fresh. Also moved Claude Code into the `downloads/` write scope for fetched evidence (`ticket-workflow`, `reference-ticket` updated to match). |
+| `activate-repo/` | Skill (source) | Sets the current investigation scope to one or more `repos/` folders — single, multi, or squad-level activation, resolved against root `CLAUDE.md`'s `## Repos` table, ask-don't-guess on no/multiple matches. Relative path on Cowork and on Claude Code started in this project; full path of the attached folder on Claude Code started in another repo. Sole source for this behavior on both platforms. |
+| `initiate-project/` | Skill (source) | First-time setup and re-sync, run in Cowork only (refuses in Claude Code). Optional arguments `{squad} {source-path}`. Records Squad and Source path (plus the account's name and email for reference) in the git-ignored `local/user.md`, packages the skills in this table as `.skill` cards, lists personal Claude Code skills that duplicate them, and smoke-tests Claude for Chrome and a Splunk query. Explicit, on-demand trigger ("initiate project"). |
+| `blob-projection-fetch/` | Skill (source) | Fetch a projection blob (e.g. the remittance projection) from Azure Blob Storage into a ticket's `downloads/`. Claude Code downloads via `az storage blob download --auth-mode login` (the Azure MCP storage tool returns properties only, not content); the Claude app resolves the account/container/blob/destination from the repo's `blob_projections.md` and outputs a self-contained "fetch blob projection" paste block, since it cannot reach Azure or trigger Claude Code. Authored fresh. Also moved Claude Code into the `downloads/` write scope for fetched evidence (`ticket-workflow` updated to match). |
 
 > Related, outside `skills/`: reference docs live in `references/` (`namespaces.md`, `cowork-flow-analysis.md`); PowerShell tooling in `cosmos-access/`; instance-local memories in `memories/` (git-ignored).
 
@@ -56,54 +54,43 @@ Covers: browser-only access via Claude for Chrome (no MCP/API path exists), the 
 
 ### activate-repo
 Sets the current investigation scope to one or more repo folders under `repos/`. Triggers: "activate repo {name}", "activate repo {name} and {name}", "activate repos for all squad {squad name} repos".
-Covers: resolution against root `CLAUDE.md`'s `## Repos` table (folder name or nickname, case/spacing/hyphen-insensitive), ask-don't-guess on no match or multiple matches, reading only the resolved repo's own `CLAUDE.md` (not `references/`/`business-logic/` yet) — full Windows path on Claude Code, relative path on Cowork. This skill is the sole source for this behavior on both platforms; there is no separate Claude Code slash command. No automatic Claude Code trigger yet, though — that needs this folder copied into that project's own `.claude/skills/`, not yet done.
+Covers: resolution against root `CLAUDE.md`'s `## Repos` table (folder name or nickname, case/spacing/hyphen-insensitive), ask-don't-guess on no match or multiple matches, reading only the resolved repo's own `CLAUDE.md` (not `references/`/`business-logic/` yet) — relative path on Cowork and on Claude Code started in this project, full path of the attached folder on Claude Code started in another repo. This skill is the sole source for this behavior on both platforms; there is no separate Claude Code slash command.
 
 ### initiate-project
-First-time setup on a fresh project instance. Triggers: "initiate project", "set up this project", "onboard me", "first-time setup".
-Covers: recording the user's Squad in the git-ignored `local/user.md` (asking and offering the `## Squads` list if the file is missing or Squad is blank; the Claude account's name and email are filled in as reference without asking), diffing this table's in-scope skills against what's already installed in the session and packaging/presenting the rest via `skill-creator` with a plain-language line per skill, and smoke-testing Claude for Chrome (tab/navigate/screenshot round-trip) and Splunk (one small, cheap, known-good search against `ninja`) so connectivity gaps surface on day one instead of mid-investigation.
-
-### activate-cowork
-**Claude-Code-only.** Loads a Cowork project's shared knowledge folder into a Claude Code session, and auto-activates whichever repo inside it matches the repo Claude Code is currently working in. Triggers: "activate cowork {name}", "activate cowork project {name}".
-Covers: resolving `{cowork-folder}` against the subfolders of `C:\Users\JamesMoorhouse\Claude\Projects\`, matching the current Claude Code repo's folder name against a project's `## Repos` table (same case/spacing/hyphen-insensitive rule `activate-repo` uses), and degrading gracefully for a Cowork project with no repo index at all. Exists because Claude Code — unlike Cowork — has no built-in awareness that a Cowork project exists or that the repo it's sitting in has curated content there.
-
-### reference-ticket
-**Claude-Code-only.** Loads a Claude app (CoWork) `tickets/{TICKET-ID}/` case folder into a Claude Code session. Triggers: "reference ticket UF-XXXXX", "pull up UF-XXXXX", "load ticket UF-XXXXX".
-Covers: resolving the ticket's base path against whichever Cowork project is active in the session (`{active-cowork-project}\tickets\{TICKET-ID}\`) rather than a hardcoded workspace, reading `summary.md` + inventorying `downloads/` for grounding, and defaulting any generated analysis doc to that ticket's `code-analysis/` folder for the rest of the session without re-asking. Asks rather than guessing when no project has been activated yet, since more than one project can hold a matching ticket folder.
+**Cowork only** — first-time setup and re-sync. Triggers: "initiate project", "initiate project {squad} {source-path}", "set up this project", "onboard me", "first-time setup". Refuses when run from Claude Code.
+Covers: recording Squad and Source path in the git-ignored `local/user.md` (from arguments if given, else asking; the Claude account's name and email are filled in as reference without asking), packaging/presenting the skills via `skill-creator` with a plain-language line per skill, giving the user a one-time block that removes same-named personal skills from `~/.claude/skills/` (they would load as duplicates of the account copies), and smoke-testing Claude for Chrome (tab/navigate/screenshot round-trip) and Splunk (one small, cheap, known-good search against `ninja`) so connectivity gaps surface on day one instead of mid-investigation.
 
 ## Using these in Claude Code
 
-Claude Code discovers skills from the local filesystem only. Copy the **skill folder** (not the `.skill` zip) into one of:
+Skills saved to the Claude account (Settings → Capabilities) load in Claude Code in the desktop app as well as in Cowork, shown as `anthropic-skills:{name}`. Observed in the desktop app's Code tab and in the terminal CLI, where the skill loads when invoked even though `/skills` did not list it. IDE extensions have not been checked.
 
-- **Personal — available in every project:** `~/.claude/skills/`
-- **Project — committed to a repo, shared with the squad:** `<repo>/.claude/skills/`
-
-**Use the personal location for this workspace's skills, not project-scoped.** Most of these (`ticket-workflow`, `activate-repo`, `cosmos-query`, `splunk-search`, `snowdrop-api-calls`, `instana-query`, `reference-ticket`) need to trigger while Claude Code is sitting in some *other* repo's checkout during actual ticket work (e.g. `snowdrop-payers-api-be`), not this project — a copy scoped to a single repo's `.claude/skills/` wouldn't be visible from there.
-
-Copy **every** folder under `skills/` (not a hand-picked subset — a fixed list here just goes stale as new skills are added, which is exactly what happened to this section before this note was added):
-
-```bash
-mkdir -p ~/.claude/skills
-cp -r "<this-folder>"/*/ ~/.claude/skills/
-```
-
-Run this from inside the project folder (so `<this-folder>` is just `skills/`, no absolute path needed) — simplest as the very first Claude Code action when setting up a new machine, before switching into any service repo.
-
-Claude Code picks them up automatically (verify with `/skills` or by triggering one). Editing the copied `SKILL.md` updates Claude Code immediately — no reinstall step, unlike the app.
+- **One publish path.** `initiate project`, run in Cowork, presents `.skill` cards. Saving them serves both products. Nothing is copied into Claude Code by hand.
+- **Re-run `initiate project` in Cowork after any edit under `skills/`**, then save the re-presented cards. Edits to `skills/` are not live in Claude Code until the card is saved.
+- **Verify** by starting Claude Code and running `/skills`; the `anthropic-skills:` entries should be listed.
+- **Personal copies duplicate account skills.** A folder in `~/.claude/skills/` with the same name loads alongside the account copy and may be older. `initiate project` gives the user a one-time block that removes them.
+- Claude Code skill folders (`~/.claude/skills/`, `<repo>/.claude/skills/`) still work for a skill that should exist only in Claude Code. None of this workspace's skills are in that category.
 
 ## Important: dependencies these skills assume
 
-These skills were written for the Claude app, where they can draw on app memory and local project files. **Claude Code's memory is a separate store and its sessions are not rooted in this project**, so plain copies can lose context. To make them fully functional in Claude Code, also provide:
+These skills were written for the Claude app, where they can draw on app memory and local project files. **Claude Code's memory is a separate store**, so a skill that relied on app memory can lose context. With Claude Code started in this project, the project files below load normally; the items to provide are:
 
 1. **Referenced facts.** `no-truncate-guids` and `qa-org-identification` live in root `CLAUDE.md` (`## Language` and `## Environments`); `snowdrop-event-type-field` lives in `skills/cosmos-query/SKILL.md`'s Conventions section; `chargepayment-maps-to-charge` and `nimbus-system-user-id` live in `repos/snowdrop-remittance-processing-be/business-logic/ChargePaymentCardinality/CLAUDE.md` and top-level `business-logic/CLAUDE.md` respectively. None of these are a Claude Code dependency gap — all load as ordinary project files, no memory store needed.
 2. **`references/namespaces.md`.** The skills point to it for service↔namespace mapping. Copy it alongside (or into the repo) and keep the `references/namespaces.md` path, or update the references.
 3. **`cosmos-access/` tooling.** `cosmos-query` hands the user `Query-Remittance.ps1` (project root) as a remittance-processing-specific alternative to Data Explorer. That script must exist locally for it to work.
 4. **Environment access.** All of these note the sandbox can't reach Azure/Splunk; queries run on the user's machine (PowerShell / Data Explorer / browser). That holds in Claude Code too.
 
+## Retired skills
+
+`initiate project` adds these names to the list of personal Claude Code skills to remove. Add a name here whenever a skill leaves the inventory.
+
+- `activate-cowork` — loaded a Cowork project's `CLAUDE.md` into a Claude Code session started elsewhere. Retired when Claude Code started in this project folder became the primary mode, since the project is then already the working directory.
+- `reference-ticket` — loaded a ticket folder into a Claude Code session. Retired for the same reason; `ticket-workflow` now runs on Claude Code directly ("resume ticket UF-XXXXX").
+
 ## Source-of-truth reminder
 
 This folder is the **master**. From here you publish two ways, none auto-syncing:
 
 - **Claude app:** package the folder into a `.skill` (via the `skill-creator` flow — see `documents/project-maintenance.md`'s "Updating skills" section) → present it → click **Save skill**. The installed copy in the account only matches this source once that Save click has happened — assume it's stale otherwise, and re-present after any source edit.
-- **Claude Code:** copy folder → `~/.claude/skills/` (personal) or `<repo>/.claude/skills/` (project).
+- **Claude Code (desktop app):** loads the same account skills, so saving the card publishes to both.
 
-Edit here, then re-push to whichever surface you use. If a correction surfaces on either the Claude Code or Claude app side, check both the source here and the installed copy before assuming which one is stale — they can drift in either direction.
+Edit here, then re-run `initiate project` in Cowork. If a correction surfaces on either the Claude Code or Claude app side, check both the source here and the installed copy before assuming which one is stale — they can drift in either direction.

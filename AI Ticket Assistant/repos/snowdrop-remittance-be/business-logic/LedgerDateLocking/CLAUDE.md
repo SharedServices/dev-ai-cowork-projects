@@ -37,3 +37,6 @@ hard-closed through July 2022, leaving that check unable to reach Posted.
 - `../../references/cosmos_query.md` — the mechanical detail (which event fires `LedgerDate`,
   `PostingStatus` enum values). This entry is the business-rule interpretation of that data, true
   independent of which system it's read from.
+- `../../../snowdrop-remittance-processing-be/business-logic/CheckPostingStatus/CLAUDE.md` — how a check's
+  status (Building, Posted, ...) is derived, and why one unposted claim payment keeps the whole check out
+  of Posted.
