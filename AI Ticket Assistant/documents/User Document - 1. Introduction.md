@@ -23,7 +23,7 @@ Here's how this workspace helps with each one.
 
 **Determining what did happen.** Claude orchestrates the data collection — generating Cosmos queries, blob paths, and API URLs, and seamlessly tying in Splunk data it reaches out for on its own. It then analyzes those results, focusing on the issue reported but also catching data anomalies and seemingly unrelated Splunk errors that would otherwise go unnoticed.
 
-**Determining what should have happened.** Every repository's business rules and confirmed known issues are already organized and waiting, so "is this actually broken, or is it working as designed" often has an answer on file rather than requiring a teammate's memory. And when it doesn't — when someone corrects an assumption on the spot — that correction is captured immediately in the right place, so it's answered on file for the *next* ticket too, instead of being re-explained from scratch again.
+**Determining what should have happened.** Every repository's business rules and confirmed known issues are already organized and waiting, so "is this actually broken, or is it working as designed" often has an answer on file rather than requiring a teammate's memory. And when it doesn't — when someone corrects an assumption on the spot — that correction is captured immediately in the right place, so the answer is on file for the *next* ticket too, instead of being re-explained from scratch.
 
 **Correcting the problem in code.** Not every ticket ends with just an explanation — some need an actual fix. When that's the case, Claude Code steps directly into the same investigation: reading the full analysis gathered so far from the ticket folder, working through the fix itself, and leaving its own summary behind. That summary feeds straight back into the Jira report, so the technical write-up reflects the real fix that was made rather than a guess at what one might look like.
 
@@ -35,20 +35,29 @@ None of this changes *what* you're diagnosing — it just means less of it has t
 
 ### Other Key Features
 
-#### Feature Tickets (Claude Code)
+#### Platforms
 
-Feature work consists predominantly of working Claude Code against a source branch with little need for support skills. But there is still benefit in starting a ticket in this flow, so ticket work is captured in a consistent location either way. The system distinguishes between diagnostic and feature tickets and minimizes the flow for feature work. Summaries and resolutions are captured in the ticket folder and updated in the ticket.  Also some of Ticket Assistant's' support skills can be useful when live testing.
+The Assistant supports three main configurations:
+
+- Claude Cowork, launched against this project with source repos attached
+- Claude Code, launched against this project with source repos attached
+- Claude Code, launched against a source repository with this project attached
+
+In Claude Cowork, the source code is only available if you choose to attach it to the project (see Getting Started). Claude Code reads the same folder from the path that `initiate project` records. The first two configurations focus on knowledge access while the third focuses on source changes.
+
 
 #### Organized for Efficiency
 
 One key objective is to minimize reading knowledge files unrelated to the ticket. Knowledge is organized hierarchically by repository and knowledge type, including:
 
 - Repository details: squad, namespace, repo-path
-- Business rules & Known failures
-- Cosmos storage access & Event documentation
-- Ingress navigation & API documentation
+- Business rules and known failures
+- Cosmos storage access and event documentation
+- Ingress navigation and API documentation
 - Blob storage access
 - Others
 
-It's worth calling this out, every backend repository resides in its own folder. This not only isolates knowledge for efficiency but means repositories can be maintained by the owning squad with little overlap between repositories.
+This mechanism works best in the first two platform configurations above with Claude Cowork following the hiearchy more faithfully than Claude Code.
+
+It's worth calling out that every backend repository resides in its own folder. This isolates knowledge for efficiency, and it also means each repository can be maintained by its owning squad with little overlap between repositories.
 

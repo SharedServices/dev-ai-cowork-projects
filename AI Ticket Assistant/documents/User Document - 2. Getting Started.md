@@ -7,35 +7,35 @@
 
 The content can be downloaded from GitHub here: [https://github.com/SharedServices/dev-ai-cowork-projects](https://github.com/SharedServices/dev-ai-cowork-projects). Either download it as a zip, or clone it with an IDE — either way, transfer the content into your project as described in the next section.
 
-### Create a CoWork Project
+### Platforms
 
-Open the Claude app, switch to Cowork, and go to **Projects** in the left panel. Click **+** and pick one of three ways to start:
+This project was created as a Claude Cowork project, but you can also use Claude Code against it, both for knowledge extraction and for code development. To start, run "initiate project" in Claude Cowork (see Initializing the Project below). When you launch Claude Code against the "AI Ticket Assistant" folder, it works the same way as Claude Cowork. You can also launch Claude Code against a source repository and attach the "AI Ticket Assistant" folder as a second folder to use its knowledge. Sessions launched directly against the Assistant tend to answer from the knowledge base first and add code detail as needed, while Claude Code launched against a repository tends to answer from the code first. Claude Code launched against the source code is also set up for project updates such as builds and commits.
 
-- **Start from scratch** — creates an empty project with a new, empty folder. Use this if you downloaded a zip: create the project, then copy the downloaded content as-is into the new project folder.
-- **Use an existing folder** — points the project at a folder you already have. Use this if you cloned the repository with an IDE: clone it into a folder on your machine first, then create the project pointing at that folder.
-- **Import from an existing project** — brings in an existing claude.ai project's files and instructions; not applicable when setting up from the GitHub content.
+If you open Visual Studio (or, presumably, another IDE) on the dev-ai-cowork-projects folder, you can check in changes to the AI Ticket Assistant project itself.
 
-Whichever way you start, the project needs a folder Cowork can both read from and write to — that folder is where the knowledge base, skills, and ticket history actually live on disk, and you can attach or change it later from the project's settings. Your squad is recorded in `local/user.md` (not tracked by git), along with your Claude account's name and email for reference, when you run "initiate project" — a one-time step per local copy.
+### Create a Cowork Project
+
+Open the Claude app, switch to Cowork, and go to **Projects** in the left panel. Click **+**, select **Use an existing folder**, and point it at the **AI Ticket Assistant** folder.
+
+Then attach your source code. In the project settings, add the **parent folder that contains your source repositories** (for example `C:\unlimited\repositories`, with one subfolder per repository, named as the repository). Attach the parent folder, not a single repository: Cowork can only read what is attached. You can attach it now or later, but a folder attached after a session starts is only visible to new sessions. Without it, Cowork cannot read source code and `initiate project` will say so.
 
 ### Activating Claude for Chrome
 
-**This is optional — but most of this documentation describes work assuming you have it.** Claude for Chrome gives Claude direct control of your browser — not just reading a page, but navigating to URLs, clicking, filling in forms, and extracting page content, network requests, or console output. This shows up in two different ways in this workspace:
+Claude for Chrome gives Claude direct control of your browser — not just reading a page, but navigating to URLs, clicking, filling in forms, and extracting page content, network requests, or console output. This shows up in two different ways in this workspace:
 
 - **Direct, in-session control** — Claude drives the browser itself, in the same conversation you're having (used for the ticket workflow's page-capture step and for Splunk searches). This can navigate to a URL and read what loads there, but it can only act on tabs it opens itself — it cannot reach into a tab you already have open and read whatever's currently on screen. If a page needs a login, Claude will notice the redirect and ask you to sign in before continuing.
 - **The standalone Claude for Chrome side panel** — a separate chat that runs against whatever tab is currently active in your browser. Because it operates on your actual open tab, this is the way to capture a page's exact on-screen state — unsaved form input, a specific filter or search result you've already built up by hand — that a fresh navigation elsewhere can't reproduce.
-
-It's not required to use any of this — the ticket workflow, repo activation, and data collection all work without it — but the diagnostic flow in particular is written with the assumption that it's available.
 
 To set it up:
 
 1. If you use Claude Desktop, click your initials in the lower-left corner, open **Settings**, and toggle the Chrome connector on — this will prompt you to install the extension if you haven't already.
 2. Otherwise, go to the Chrome Web Store, search for "Claude," and add the extension — double-check the publisher is Anthropic, since lookalike extensions exist.
-3. Sign in with your Claude account. Note this requires a paid plan (Pro, Max, Team, or Enterprise), and only works in Chrome itself, not other Chromium browsers.
+3. Sign in with your Claude account. Note that this requires a paid plan (Pro, Max, Team, or Enterprise), and only works in Chrome itself, not other Chromium browsers.
 4. Pin the extension to your toolbar so the side panel is easy to open, and grant it permission on the sites you'll use it with.
 
 ### Initializing the Project
 
-Before doing anything else in a new local copy — or again after pulling an update from GitHub that adds skills or changes what `CLAUDE.md` expects — say **"initiate project."** This is a one-time (or occasional re-check) step, not something that happens automatically: Claude records your Squad and Source path in `local/user.md` (from the arguments if you give them — **"initiate project {squad} {source-path}"** — otherwise by asking), packages the skills for you to save (saved skills load in both Cowork and Claude Code), lists any personal Claude Code skills you should delete because they duplicate them, and smoke-tests both Claude for Chrome and Splunk access so you know on day one whether those surfaces are actually working rather than finding out mid-investigation.
+Before doing anything else in a new local copy — or again after pulling an update from GitHub that adds skills or changes what `CLAUDE.md` expects — say **"initiate project."** This is a one-time (or occasional re-check) step, not something that happens automatically: Claude records your Squad (from the argument if you give one — **"initiate project {squad}"** — otherwise by asking) and the location of your source code in `local/user.md`. It finds the source by looking at the folders attached to the project: it reports how many of the project's repos it can see, asks you to choose if more than one folder is attached, and warns if none is. Claude Code reads the recorded location, so it must stay accurate. Claude then packages the skills for you to save (saved skills load in both Cowork and Claude Code), lists any personal Claude Code skills you should delete because they duplicate the saved ones, and smoke-tests both Claude for Chrome and Splunk access so you know on day one whether those surfaces are actually working rather than finding out mid-investigation.
 
 Skipping this isn't fatal — most things will still prompt you for what they need — but your Squad may be unset (which affects squad-scoped defaults elsewhere in the project), and a broken Chrome or Splunk connection won't surface until you happen to hit it.
 
@@ -62,7 +62,9 @@ Starting a ticket also creates its own folder — `tickets/{TICKET-ID}/` — and
 
 ### Working a Diagnostic Ticket
 
-Once a Diagnostics/Analysis ticket is confirmed, Claude looks for an application link (`sd.unlimitedfinancials.*`) on the ticket itself and, if it finds one, offers to capture that page directly — no copy/paste needed, and it'll ask you to log in if the page requires it. If no such link exists, or the page you need depends on unsaved state a fresh navigation can't reproduce (a filter or search result you've already built up by hand), Claude falls back to the Claude for Chrome side-panel prompt described above. From there, the typical flow follows the steps laid out in the Introduction document: extracting the actual problem statement, collecting the environment/organization/entity references, pulling Cosmos/Splunk/API data, checking it against business logic and known failures, correcting the code if a fix is needed, and drafting the two-part Jira comment. Everything found along the way — evidence, analysis, conclusions — is retained automatically in the ticket's own folder, so none of it depends on the conversation surviving.
+Once a Diagnostics/Analysis ticket is confirmed, Claude looks for an application link (`sd.unlimitedfinancials.*`) on the ticket itself and, if it finds one, offers to capture that page directly — no copy/paste needed, and it'll ask you to log in if the page requires it. If no such link exists, or the page you need depends on unsaved state a fresh navigation can't reproduce (a filter or search result you've already built up by hand), Claude falls back to the Claude for Chrome side-panel prompt described above.
+
+From there, the typical flow follows the steps laid out in the Introduction document: extracting the actual problem statement, collecting the environment/organization/entity references, pulling Cosmos/Splunk/API data, checking it against business logic and known failures, correcting the code if a fix is needed, and drafting the two-part Jira comment. Everything found along the way — evidence, analysis, conclusions — is retained automatically in the ticket's own folder, so none of it depends on the conversation surviving.
 
 ### Using Claude Code
 

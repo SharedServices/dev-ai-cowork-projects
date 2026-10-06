@@ -12,15 +12,19 @@ Avoid metaphor, analogy, idiom, and filler. Prefer plain, literal, concise langu
 
 ## Current user
 
-The user's Squad and Source path for this instance are kept in `local/user.md` — git-ignored, one small file per local copy, created by `initiate project`. The file also holds the Claude account's name and email as reference only. Read it when a task depends on which squad's repos to default to, where the source code is, or who the user is. On Claude Code started in this project, read it by relative path. If the file is missing or a setting is blank, treat it as unset and do not ask unprompted; suggest `initiate project` only when a squad-scoped default or a source lookup would have mattered.
+The user's Squad and Source path (the Windows path of the attached source folder, recorded by `initiate project`) for this instance are kept in `local/user.md` — git-ignored, one small file per local copy, created by `initiate project`. The file also holds the Claude account's name and email as reference only. Read it when a task depends on which squad's repos to default to, where the source code is, or who the user is. On Claude Code started in this project, read it by relative path. If the file is missing or a setting is blank, treat it as unset and do not ask unprompted; suggest `initiate project` only when a squad-scoped default or a source lookup would have mattered.
 
 ## Source Code
 
-The source code for the repos this project describes is in the folder set as Source path in `local/user.md`, in subfolders with the same name as the repos in this project. If Source path is unset, say so and suggest `initiate project`; do not guess a location.
+The source code for the repos this project describes is in a parent folder, in subfolders with the same name as the repos in this project. The user attaches that parent folder to the Cowork project in the project settings; `initiate project` records its Windows path as Source path in `local/user.md`.
+
+- **Cowork** can read source only if that folder is attached to the project (and, for a folder attached after a session started, only in a new session). Look for it among the session's attached folders first. Cowork cannot run `dotnet build` or `dotnet test`; those go through Claude Code.
+- **Claude Code** reads source at the Source path in `local/user.md`, provided that path is accurate.
+- If no source is attached and Source path is unset, say so and suggest attaching the folder and running `initiate project`; do not guess a location. Searching one level of the source folder is fine; a recursive sweep of the whole tree times out, so search within a named repo's subfolder.
 
 ## Project initiation
 
-**When the user says "initiate project"** (or asks to set up, onboard, or do first-time setup on this project instance) — read `skills/initiate-project/SKILL.md` and follow it exactly. It covers recording the user's Squad and Source path in `local/user.md` when missing or blank, packaging the skills in `skills/README.md` as cards to save to the account (account skills load in both Cowork and Claude Code), listing duplicate personal skills to remove, and smoke-testing Claude for Chrome and Splunk access. It runs in Cowork only and refuses in Claude Code. Optional arguments: `initiate project {squad} {source-path}`.
+**When the user says "initiate project"** (or asks to set up, onboard, or do first-time setup on this project instance) — read `skills/initiate-project/SKILL.md` and follow it exactly. It covers recording the user's Squad, and the Source path read from the attached source folder, in `local/user.md` (warning when no source folder is attached), packaging the skills in `skills/README.md` as cards to save to the account (account skills load in both Cowork and Claude Code), listing duplicate personal skills to remove, and smoke-testing Claude for Chrome and Splunk access. It runs in Cowork only and refuses in Claude Code. Optional argument: `initiate project {squad}`. The Source path is read from the project's attached source folder, not typed.
 
 ## Squads
 
@@ -180,7 +184,7 @@ The host pattern `sdsh.unlimitedfinancials.{env}` was confirmed for `ninja` on 2
 - **Account naming pattern:** `king-{env}-sharp-be-cdb`
 - **Structure:** identical across all environments — same databases, same containers. Within an account, one dedicated database per service is the default (e.g. `snowdrop-guarantors`, `snowdrop-patients`, `snowdrop-payers`); a shared `snowdrop` database (charge masters, episodes, intake, invoices, etc.) is the exception — see the skill for the confirmed map, don't guess a new entity's database.
 - **Tenant:** accounts are homed in Entra tenant `sharedsvs.onmicrosoft.com` (NOT the org's own `unlimitedsystems.com` tenant). Portal/Data Explorer work cross-tenant, but data-plane AAD tokens and ARM `listKeys` from the org's tenant are rejected (except ninja, which grants `listKeys`).
-- **Skill:** `skills/cosmos-query/SKILL.md` (built — StreamId query model, master-key REST auth, per-env access, gotchas, Data Explorer deeplinks). **Project-local only — not yet installed account-wide** (install via Settings → Capabilities to use in other projects).
+- **Skill:** `skills/cosmos-query/SKILL.md` (built — StreamId query model, master-key REST auth, per-env access, gotchas, Data Explorer deeplinks). Installed to the account through the card presented by `initiate project`.
 - **Tooling:** `cosmos-access/scripts/Query-Remittance.ps1` (ninja, key auth, remittance-processing only) writes JSON to `cosmos-access/results/`. For anything else — a different entity, or any non-ninja env — run the StreamId SQL in Data Explorer, export JSON into `cosmos-access/results/`, Claude reads it.
 
 ## Azure Blob Storage
@@ -210,6 +214,8 @@ The host pattern `sdsh.unlimitedfinancials.{env}` was confirmed for `ninja` on 2
 - **Skill:** `splunk-search` (installed) — SPL templates, field conventions, investigation workflow
 
 ## Investigation principles
+
+**Check that a file or folder exists with a directory listing (`ls` in bash, or Read on the path), never with Glob alone.** Glob matches files, not folders, so a pattern like `tickets/*` returns nothing when the folder holds only subfolders. An empty Glob result is not evidence that something is missing; confirm with a second method before saying so or asking the user to create it.
 
 **When something should have happened per the event history but didn't, don't jump to "no explanation" or "it's a bug."** Resolve the repo(s) involved (see `## Repos` above), then check that repo's own `business-logic/CLAUDE.md` — if the documented rules explain the result exactly as configured, that's expected behavior, not a defect. Only if the rules don't explain it — every condition satisfied but the effect still never landed — check that repo's own `known-failures/CLAUDE.md` for a matching confirmed defect before concluding there's no cause.
 

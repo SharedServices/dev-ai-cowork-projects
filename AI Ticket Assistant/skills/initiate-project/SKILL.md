@@ -1,6 +1,6 @@
 ---
 name: initiate-project
-description: "Run first-time setup, or re-sync, for this AI Ticket Assistant project instance. Cowork only. Use when the user says \"initiate project\", optionally with arguments (\"initiate project {squad} {source-path}\", e.g. \"initiate project Financial Ledger C:\\unlimited\\repositories\"), or \"set up this project\", \"onboard me\", \"first-time setup\". Records the Squad and the Source path (folder containing the source repositories) in the git-ignored local/user.md, packages the skills listed in skills/README.md as .skill cards for the user to save (account skills load in both Cowork and Claude Code), lists personal Claude Code skills that duplicate them and should be removed, then smoke-tests Claude for Chrome and a Splunk query. Re-run after any edit under skills/. If run from Claude Code, stop and tell the user to run it in Cowork."
+description: "Run first-time setup, or re-sync, for this AI Ticket Assistant project instance. Cowork only. Use when the user says \"initiate project\", optionally with a squad (\"initiate project {squad}\", e.g. \"initiate project Financial Ledger\"), or \"set up this project\", \"onboard me\", \"first-time setup\". Records the Squad, and the Source path read from the project's attached source folder (parent folder containing the source repositories; warns if none is attached), in the git-ignored local/user.md, packages the skills listed in skills/README.md as .skill cards for the user to save (account skills load in both Cowork and Claude Code), lists personal Claude Code skills that duplicate them and should be removed, then smoke-tests Claude for Chrome and a Splunk query. Re-run after any edit under skills/. If run from Claude Code, stop and tell the user to run it in Cowork."
 ---
 
 # Initiate Project
@@ -15,13 +15,9 @@ Skills saved to the Claude account load in both Cowork and Claude Code (desktop 
 
 If this is a Claude Code session, stop now. Do none of the steps below. Say plainly: "`initiate project` runs in Cowork only. Open this project in Cowork and run it there. Skills saved to the account there are also available in Claude Code."
 
-### 1. Confirm identity
+### 1. Confirm identity and source access
 
-The request may carry arguments: `initiate project {squad} {source-path}`.
-
-- The Source path is the part of the arguments that starts with a drive letter and colon, a `\`, a `/`, or `~`, up to the end (quoted paths with spaces are fine). The Squad is the text before it.
-- Match the Squad against the `## Squads` table in root `CLAUDE.md`, by Squad name or Alias, case-insensitive. If it matches nothing, ask, offering that table as the option list.
-- Arguments that were supplied replace the stored values. Arguments that were not supplied fall back to the stored value, then to asking.
+The request may carry one argument: `initiate project {squad}`. The Squad argument replaces the stored value; without it, fall back to the stored value, then to asking. Match a Squad against the `## Squads` table in root `CLAUDE.md`, by Squad name or Alias, case-insensitive. If it matches nothing, ask, offering that table as the option list.
 
 Read `local/user.md` (relative path). The file has this shape:
 
@@ -29,7 +25,7 @@ Read `local/user.md` (relative path). The file has this shape:
 # Current user
 
 - Squad: {squad}
-- Source path: {path to the folder containing the source repositories}
+- Source path: {full Windows path of the attached folder that contains the source repositories}
 
 ## Account (reference only)
 
@@ -37,12 +33,19 @@ Read `local/user.md` (relative path). The file has this shape:
 - Email: {account email}
 ```
 
-- For each of Squad and Source path: if no argument was given and the file has a value, state it plainly and move on — don't re-ask.
-- If the file is missing or Squad is blank (and no argument was given), ask which squad the user is on, offering the `## Squads` table as the option list.
-- If the file is missing or Source path is blank (and no argument was given), ask for the full path to the folder that contains the source repositories (each repo in a subfolder named the same as its folder under `repos/`). Store the path as given; Cowork cannot check it.
-- Ask only for the settings that are missing or blank, and don't ask for a name. Create `local/` if it doesn't exist and write the file in the shape above (update in place if it exists, keeping any setting that was already filled in).
-- Fill the Account section from the Claude account details already in the session context. Don't ask the user for them; if a value isn't available, omit that line. These lines are reference only and are refreshed whenever the file is written.
-- `local/` is git-ignored — never copy these values into a tracked file.
+**Squad.** If the file has a value and no argument was given, state it plainly and move on. If it is missing or blank, ask which squad the user is on, offering the `## Squads` table as the option list.
+
+**Source path comes from the project's attached folders, not from the user.** The user attaches the folder in the project settings (before or after this step). Do not ask for a path.
+
+1. List the attached folders: the session's working directories and connected folders (the file-tool paths, e.g. `C:\unlimited\repositories`). Exclude the project folder itself and non-source folders (the outputs folder, `uploads`, `.claude`, and similar).
+2. **None left:** say plainly that no source folder is attached, so Cowork has no access to source code in this project. Explain how to fix it: attach the parent folder containing the repositories in the project settings, then start a new session (a folder attached after a session starts is not visible to that session) and re-run `initiate project`. Leave Source path as it is (it may still serve Claude Code), do not invent one, and continue with the remaining steps.
+3. **More than one left:** list them and ask which one holds the source repositories. Record only the chosen one.
+4. **Exactly one:** use it.
+5. The attached folder must be the **parent** folder, with one subfolder per repository named as in `repos/` (the `## Repos` table). If the folder's own name matches a `repos/` folder, it is a single repo: warn that Cowork will see only that repo and ask the user to attach its parent instead.
+6. Check the attachment. List one level only (a recursive search over the tree times out) and compare the subfolder names to the `## Repos` table. Report "N of M project repos found in source; K other folders ignored". A project repo with no source folder is informational, not an error (OpenAPI-only repos have no checkout).
+7. Record the **Windows path** (the file-tool path), never the `/sessions/.../mnt/...` path that bash sees. If `local/user.md` already holds a different Source path, say so and replace it with the attached path (the attachment is what Cowork can actually read). If the file holds a path and nothing is attached, keep the stored path and say it is unverified.
+
+Create `local/` if it doesn't exist and write the file in the shape above (update in place if it exists, keeping any setting that was already filled in). Fill the Account section from the Claude account details already in the session context. Don't ask the user for them; if a value isn't available, omit that line. These lines are reference only and are refreshed whenever the file is written. `local/` is git-ignored: never copy these values into a tracked file.
 
 ### 2. Publish the skills
 
@@ -82,4 +85,4 @@ Report plainly: working (found N results, or zero results but no error — still
 
 ### 6. Summarize
 
-Give one short, plain summary: identity (squad and source path), skills (installed, or cards to save), the personal-skill removal block, Chrome, Splunk. State what passed, what didn't, and what the user needs to do next. The last next step is: after saving the cards, start Claude Code in this project folder and run `/skills` to confirm the `anthropic-skills:` entries are listed.
+Give one short, plain summary: identity (squad), source access (attached folder and repo match count, or "no source attached"), skills (installed, or cards to save), the personal-skill removal block, Chrome, Splunk. State what passed, what didn't, and what the user needs to do next. The last next step is: after saving the cards, start Claude Code in this project folder and run `/skills` to confirm the `anthropic-skills:` entries are listed.

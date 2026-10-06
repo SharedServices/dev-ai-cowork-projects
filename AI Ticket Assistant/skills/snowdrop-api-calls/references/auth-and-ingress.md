@@ -82,7 +82,7 @@ leaving it to be rediscovered by `ls`.
 
 ## Finding the path for a service not yet in the table above
 
-**From the repo** (development / Claude Code, most reliable): read
+**From the repo** (most reliable; in Cowork through the attached source folder, in Claude Code through the Source path in `local/user.md`): read
 `k8s-config/**/templates/ingress*.yaml` in that service's repo. The `path:` under
 `spec.rules[].http.paths[]` is the literal external path; the presence of `rewrite-target` tells you
 Pattern A vs B. Check for **more than one** ingress file — several Herbert repos have 2-5 of them, each

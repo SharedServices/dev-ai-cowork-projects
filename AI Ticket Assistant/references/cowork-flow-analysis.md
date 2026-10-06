@@ -1,10 +1,10 @@
-# Snowdrop Log Flow Analysis (CoWork edition)
+# Snowdrop Log Flow Analysis (Cowork edition)
 
 Conversational analysis of Snowdrop logs in Splunk, focused on **following one action end-to-end**
 across services — an API call, the events it writes to Cosmos, and the consumers that process them —
 by their shared W3C `TraceId`.
 
-> This is a **self-contained, portable copy** for use in CoWork (where the Splunk connector works).
+> This is a **self-contained, portable copy** for use in Cowork (where the Splunk connector works).
 > The canonical source is `flow-analysis.md` in the `logging-correlation` Claude Code skill, located at
 > `C:\Users\JamesMoorhouse\.claude\skills\logging-correlation` (confirmed 2026-09-21). This copy and the
 > canonical file are expected to differ in places — how Splunk is reached (connector here vs. Claude

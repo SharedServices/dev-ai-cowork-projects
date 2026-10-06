@@ -37,7 +37,7 @@ These aren't exclusive: in Claude Code with the Claude-in-Chrome MCP connected, 
 
 **There are two ingress patterns, and which one a service uses is not predictable from its name.**
 Always check the per-service table in `references/auth-and-ingress.md` (or the repo's own
-`k8s-config/**/templates/ingress*.yaml`) before assuming either shape.
+`k8s-config/**/templates/ingress*.yaml` in the source folder: the attached folder in Cowork, the Source path in `local/user.md` in Claude Code) before assuming either shape.
 
 - **Pattern A — prefix-rewrite.** External path is `/snowdrop/<service>/<route>`; an
   `nginx.ingress.kubernetes.io/rewrite-target: /$1` annotation strips that prefix before the backend
@@ -83,7 +83,7 @@ How to find the real path for a service you haven't confirmed yet, in priority o
    they apply, `enum values: ...` for enum schemas, `(no properties)` for empty ones). Add the new file to
    the repo's own `CLAUDE.md` "Where to look for more" list in the same turn — that list is a generated
    rollup, not independently maintained.
-3. Read the repo's own ingress template(s): `k8s-config/**/templates/ingress*.yaml`. The `path:` under
+3. Read the repo's own ingress template(s) from the source folder: `k8s-config/**/templates/ingress*.yaml`. The `path:` under
    `spec.rules[].http.paths[]` is the answer, and whether `rewrite-target` is present tells you which
    pattern it is. Watch for repos with **multiple** ingress files (resources, ledger, patients, and
    payers all have more than one) — each can route to a different backend or use a different pattern.

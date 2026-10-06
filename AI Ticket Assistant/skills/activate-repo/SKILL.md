@@ -35,7 +35,7 @@ Don't offer to scaffold a new repo folder if nothing matches — creating repo c
 
 The `repos/{repo}/` tree (`CLAUDE.md`, `references/`, `business-logic/`, `known-failures/`) is a curated knowledge surface, not the repo's actual source code. It's built so a question resolves by following a chain of pointers — this repo's `CLAUDE.md` → e.g. `business-logic/CLAUDE.md` → a specific reference file — not by searching. When answering a question in scope of an activated repo, follow that pointer chain rather than running a Grep/Glob sweep across the knowledge folder for a term, even when a keyword search would probably find it. A sweep can still land on the right file, but it defeats the reason these files are pointer-based, and it papers over a gap in the manifest that should instead be flagged and fixed.
 
-This is about which tree is being searched, not a blanket restriction on search tools. If a Claude Code session is also rooted in that repo's actual source-code checkout (the real source tree, distinct from this knowledge folder), Grep/Glob over that checkout is the normal, expected way to work — this note doesn't apply there. It only governs navigating the Support project's own `repos/{repo}/` folder.
+This is about which tree is being searched, not a blanket restriction on search tools. If the repo's actual source code is reachable (the attached source folder in Cowork, or the Source path in `local/user.md` in Claude Code — distinct from this knowledge folder), Grep/Glob within that repo's subfolder is the normal, expected way to work — this note doesn't apply there. It only governs navigating the Support project's own `repos/{repo}/` folder.
 
 ## Note on platforms
 

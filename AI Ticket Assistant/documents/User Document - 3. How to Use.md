@@ -18,19 +18,19 @@ Neither side gets to a root cause alone. The commands below are entry points int
 
 ---
 
-*Note: Some of these commands are overly verbose for your understanding, not Claude's*  
+*Note: Some of these example commands are more verbose than Claude needs. They are worded for your understanding, not Claude's.*  
 
 ### Example ticket commands
 - *Start/Resume Ticket UF-12345*
-- *Draft a comment to post this conclusion to the jira ticket*  
+- *Draft a comment to post this conclusion to the Jira ticket*  
 - *post it*
 - *Flush anything outstanding to the ticket folder for Claude Code for further investigation*
 
 ### Example data collection commands
 - *activate the repo payers*  
 - *collect the event stream for this payer and summarize the timeline*
-- *check the splunk logs for this payer and show a consolidated timeline*
-- *call the api to get all payers*
+- *check the Splunk logs for this payer and show a consolidated timeline*
+- *call the API to get all payers*
 - *fetch the remittance projection from remittance processing blob storage*
 
 ### Example investigation commands
@@ -45,11 +45,11 @@ Neither side gets to a root cause alone. The commands below are entry points int
 ### Fixing Claude
 - *No, that's not right. blah blah blah is how that works.*  
   Be sure you're right! Claude will generally suggest adding it as a new business rule.
-  If not just ask
+  If it doesn't, just ask.
 - *That is a business rule, add it*
 - *Record this as a known failure*  
-  At the end of a diagnostic ticket where you discovered the system did something wrong.
-  Claude has event and splunk details that it will record to help identify recurrences.
+  Use this at the end of a diagnostic ticket where you found that the system did something wrong.
+  Claude records the event and Splunk details it has gathered so recurrences can be identified.
   
 ### Sample conversation
 
@@ -172,8 +172,8 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 #### Project & repo setup
 
 ##### initiate project
-- *initiate project* / *initiate project {squad} {source-path}* / *set up this project* / *onboard me* / *first-time setup*
-- Cowork only. Setup on a fresh copy of this project, and re-sync after skill changes: records your squad and source path, packages the skills as cards to save (they then load in Cowork and Claude Code), lists duplicate personal Claude Code skills to delete, and smoke-tests Claude for Chrome and Splunk access.
+- *initiate project* / *initiate project {squad}* / *set up this project* / *onboard me* / *first-time setup*
+- Cowork only. Sets up a fresh copy of this project and re-syncs after skill changes: records your squad and the location of the attached source folder (warning if none is attached), packages the skills as cards to save (they then load in Cowork and Claude Code), lists duplicate personal Claude Code skills to delete, and smoke-tests Claude for Chrome and Splunk access.
 
 ##### activate repo
 - *activate repo {name}*
@@ -238,7 +238,7 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 #### Data collection — Splunk
 
 ##### search Splunk
-- *search Splunk* / *check logs* / *look in Splunk* / *find errors in* / *trace this request*, or any mention of an environment name (ninja, team, one, exch, cloud, app, care, space, uno) together with a log/error/exception/trace signal
+- *search Splunk* / *check logs* / *look in Splunk* / *find errors in* / *trace this request*, or any mention of an environment name (for example ninja, team, or space) together with a log/error/exception/trace signal
 - Builds and runs an SPL query via Claude for Chrome, then extracts and summarizes results.
 
 ##### download splunk logs
@@ -246,11 +246,11 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 - Walks through exporting a bulk/whole-org Splunk pull to a file for Claude to read and process locally.
 
 ##### cache org
-- *cache org <id>* / *cache QA org <id>*
+- *cache org {id}* / *cache QA org {id}*
 - Pulls an entire QA organization's Splunk messages into a local file so later questions about that org are answered from the cache instead of re-querying.
 
 ##### recache org
-- *recache org <id>*
+- *recache org {id}*
 - Forces a fresh pull of a previously cached org.
 
 #### Data collection — Instana
@@ -265,14 +265,14 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 - *call the remittance-processing API* / *test the guarantors API in team* / *hit the transfer-targets endpoint* / *why is this API returning 404*, pasting an `api.unlimitedfinancials.*` URL, or pasting a `SharpAuth`/`SharpOrg` cookie
 - Resolves the correct ingress path and auth, then runs (or hands you a ready-to-run) authenticated call against a Snowdrop service.
 
-##### give me the prompt for [some API]
-- *give me the prompt for [some API]*
+##### give me the prompt for {API name}
+- *give me the prompt for {API name}*
 - Gives you the copy-paste text for the Claude for Chrome side panel to call that API and return raw JSON.
 
 #### Fixing Claude
 
 ##### correct a conclusion
-- *No, that's not right. [correction]*
+- *No, that's not right. {correction}*
 - Claude revises its understanding; if the correction reflects a standing rule rather than a one-off, it will generally suggest recording it as a business rule.
 
 ##### add it as a business rule

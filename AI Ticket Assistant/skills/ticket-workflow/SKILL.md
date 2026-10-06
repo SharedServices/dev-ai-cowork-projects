@@ -27,6 +27,13 @@ project — so it can't assume the current project is already set up for ticket 
 else (starting, resuming, logging, closing, or generating a Jira comment), check whether the current
 project already has a `tickets/` folder at its root.
 
+**How to check — directory listing only.** Run `ls` on the project root in bash (or `test -d tickets`),
+using the project's bash path. Do not use Glob for this: Glob matches files, not folders, so a pattern
+like `tickets/*` returns nothing when `tickets/` contains only subfolders. An empty Glob result is never
+evidence that a folder is missing. If bash is unavailable, use Read on the folder path or Glob with
+`tickets/**/summary.md`, and treat any "not found" result as unconfirmed until a second method agrees.
+The same rule applies to every existence check in this skill, including `tickets/{TICKET-ID}/` below.
+
 - If `tickets/` exists: proceed normally.
 - If `tickets/` does not exist: **stop before creating anything.** Tell the user plainly that this project
   doesn't currently look set up for ticket work — no `tickets/` folder at the root — and ask whether they'd
@@ -113,8 +120,8 @@ Trigger: "start a ticket for UF-XXXXX", or the user begins clearly sustained inv
 that doesn't have a folder yet.
 
 0. Run the "New-session check" above first.
-1. Check whether `tickets/{TICKET-ID}/` already exists. If it does, this is a resume, not a fresh start —
-   go to "Resuming a ticket" instead.
+1. Check whether `tickets/{TICKET-ID}/` already exists, using `ls` per the Precondition's "How to check"
+   (never Glob alone). If it does, this is a resume, not a fresh start — go to "Resuming a ticket" instead.
 2. Create `tickets/{TICKET-ID}/` and `tickets/{TICKET-ID}/downloads/`. Do not create `code-analysis/` —
    that folder is Claude Code's to create on its own when it first needs it.
 3. Look up the ticket (Jira `getJiraIssue`) to seed the header: title, URL, current status, a short
@@ -225,7 +232,7 @@ working that ticket number.
 
 0. Run the "New-session check" above first.
 1. Read `summary.md` in full. If `code-analysis/` exists, skim it too — Claude Code may have left findings
-   there since the last CoWork session that `summary.md` doesn't yet reflect.
+   there since the last Cowork session that `summary.md` doesn't yet reflect.
 2. Recap it back to the user before continuing — state the current status, **category**, and the gist of
    the last entry (from both `summary.md` and, if present, `code-analysis/`), so both sides are
    re-grounded. Don't silently resume as if no time had passed.
@@ -322,7 +329,7 @@ Cowork and Claude Code both have full read access to the entire `tickets/{TICKET
 - **Either platform writes:** `summary.md` and `downloads/` — whichever is working the ticket in the current session, with the same log format and fresh-filename discipline on both. Don't work the same ticket in both at once: neither session sees the other's unsaved context, and both append to `summary.md`.
 - **Only Claude Code writes:** `code-analysis/` — its own subfolder for code-investigation notes/artifacts, created by Claude Code itself the first time it needs it (don't pre-create it from Cowork). Cowork never writes into it.
 
-Raw evidence stays in `downloads/` and analysis stays in `code-analysis/`, so it is clear at a glance which is which. Claude Code is the only platform that can reach Azure Blob Storage (`blob-projection-fetch`) and read the source repositories. When code-level analysis is needed from Cowork, tell the user to continue in Claude Code with "resume ticket UF-XXXXX" rather than trying to do code analysis from Cowork — and when picking a ticket back up on either platform, check `code-analysis/` for anything Claude Code left before assuming `summary.md` alone has the full picture.
+Raw evidence stays in `downloads/` and analysis stays in `code-analysis/`, so it is clear at a glance which is which. Claude Code is the only platform that can reach Azure Blob Storage (`blob-projection-fetch`). Both platforms can read the source repositories (Cowork through the attached source folder, Claude Code through the Source path in `local/user.md`). Only Claude Code writes `code-analysis/`, so when code-level analysis needs to be recorded there, tell the user to continue in Claude Code with "resume ticket UF-XXXXX" — and when picking a ticket back up on either platform, check `code-analysis/` for anything Claude Code left before assuming `summary.md` alone has the full picture.
 
 ## Generating a Jira comment
 
