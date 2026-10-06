@@ -4,6 +4,7 @@
 <!-- hand-authored: confirmed once via ingress/Helm/Cosmos investigation. No infra-scanning tool exists yet to derive these automatically. -->
 - Repo: `snowdrop-remittance-processing-be`
 - Squad: Financial Ledger (Herbert)
+- Pod: Remittance (guess)
 - Nickname: Remittance Processing
 - Cosmos namespace / database: `snowdrop-remittanceprocessing`
 - API ingress segment: `remittanceprocessing` (single segment — this repo isn't a multi-spec/sub-service repo the way `ledger-be`, `payers-api-be`, `resources-be` are)

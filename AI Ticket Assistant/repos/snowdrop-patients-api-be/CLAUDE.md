@@ -4,6 +4,7 @@
 <!-- hand-authored: confirmed once via ingress/Helm/Cosmos investigation. No infra-scanning tool exists yet to derive these automatically. -->
 - Repo: `snowdrop-patients-api-be` — confirmed exception in `references/namespaces.md`'s "Repository naming convention" table: namespace equals repo name, no additional `-be` appended.
 - Squad: Financial Ledger (Herbert)
+- Pod: Quality (guess)
 - Nickname: Patients API (BE)
 - Cosmos namespace / database: `snowdrop-patients` (dedicated) — confirmed via the `cosmos-query` skill's entity/database map. **Distinct from the Splunk namespace value below** — `references/namespaces.md` already documents that this service's Splunk `namespace` (`snowdrop-patients-api-be`) and `Properties.Application` (`snowdrop-patients-api`) differ; the Cosmos database name is a third, further-differing value. Don't assume any two of these three strings are interchangeable.
 - API ingress segment: not confirmed. Sample route seen in the checked-in spec: `/population/patients` — doesn't obviously map to a `patients` or `patients-api` ingress segment; not verified against actual ingress/nginx config.

@@ -4,6 +4,7 @@
 <!-- hand-authored: confirmed once via ingress/Helm/Cosmos investigation. No infra-scanning tool exists yet to derive these automatically. -->
 - Repo: `snowdrop-charge-master-be` — confirmed correct as the singular form, despite the plural namespace value below; not a naming-convention violation.
 - Squad: Financial Ledger (Herbert)
+- Pod: Ledger (guess)
 - Nickname: Charge Masters
 - Cosmos namespace / database: `snowdrop` — **confirmed exception, not the presumed dedicated database.** This service's events live in the shared `snowdrop` database (container `snowdrop-chargemasters-events`), per the `cosmos-query` skill's confirmed entity/database map — don't assume `snowdrop-charge-masters` is the database name just because it's the Splunk namespace value.
 - API ingress segment: not confirmed. Sample route seen in the checked-in spec: `/charge-masters` (flat, no `/snowdrop/` prefix) — consistent with a `charge-masters` ingress segment, but this is inferred from the OpenAPI paths, not verified against actual ingress/nginx config.

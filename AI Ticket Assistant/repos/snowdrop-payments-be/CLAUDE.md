@@ -1,11 +1,12 @@
 ## Instructions specific to Payments
 
-This repo is **Financial Clearance** squad.
+This repo is **Financial Clearance** squad, **Payments & Security** pod (guess).
 
 ### Identity (machine-facing — this is the canonical source; `references/namespaces.md` and any generated index are downstream of this, not the other way around)
-<!-- hand-authored: only the repo name, nickname, squad and spec-derived server URLs are filled in. No ingress/Helm/Cosmos investigation has been done for this repo. -->
+<!-- hand-authored: only the repo name, nickname, squad, pod and spec-derived server URLs are filled in. No ingress/Helm/Cosmos investigation has been done for this repo. -->
 - Repo: `snowdrop-payments-be`
 - Squad: Financial Clearance
+- Pod: Payments & Security (guess)
 - Nickname: Payments
 - Cosmos namespace / database: not confirmed.
 - API ingress segment: not confirmed. Server URL(s) listed in the checked-in specs: `https://api.unlimitedfinancials.ninja/snowdrop/payments-vendor`, `https://api.unlimitedfinancials.ninja/snowdrop/payments/payment-plan`, `https://api.unlimitedfinancials.ninja/snowdrop/payments-reporting`, `https://api.unlimitedfinancials.ninja/snowdrop/payments` — not verified against actual ingress/nginx config.

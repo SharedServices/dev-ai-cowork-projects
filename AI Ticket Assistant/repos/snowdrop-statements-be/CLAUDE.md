@@ -1,11 +1,12 @@
 ## Instructions specific to Statements
 
-This repo is **Billing & AR (Shelby)** squad.
+This repo is **Billing & AR (Shelby)** squad, **Activity & Charge Processing** pod (guess).
 
 ### Identity (machine-facing — this is the canonical source; `references/namespaces.md` and any generated index are downstream of this, not the other way around)
-<!-- hand-authored: only the repo name, nickname, squad and spec-derived server URLs are filled in. No ingress/Helm/Cosmos investigation has been done for this repo. -->
+<!-- hand-authored: only the repo name, nickname, squad, pod and spec-derived server URLs are filled in. No ingress/Helm/Cosmos investigation has been done for this repo. -->
 - Repo: `snowdrop-statements-be`
 - Squad: Billing & AR (Shelby)
+- Pod: Activity & Charge Processing (guess)
 - Nickname: Statements
 - Cosmos namespace / database: not confirmed.
 - API ingress segment: not confirmed. The checked-in specs list no server URL.

@@ -1,11 +1,12 @@
 ## Instructions specific to Custom Fields
 
-This repo is **Platform** squad.
+This repo is **Platform** squad, **Quality** pod (guess).
 
 ### Identity (machine-facing — this is the canonical source; `references/namespaces.md` and any generated index are downstream of this, not the other way around)
-<!-- hand-authored: only the repo name, nickname, squad and spec-derived server URLs are filled in. No ingress/Helm/Cosmos investigation has been done for this repo. -->
+<!-- hand-authored: only the repo name, nickname, squad, pod and spec-derived server URLs are filled in. No ingress/Helm/Cosmos investigation has been done for this repo. -->
 - Repo: `snowdrop-custom-fields-be`
 - Squad: Platform
+- Pod: Quality (guess)
 - Nickname: Custom Fields
 - Cosmos namespace / database: not confirmed.
 - API ingress segment: not confirmed. Server URL(s) listed in the checked-in specs: `https://api.unlimitedfinancials.ninja/snowdrop/custom-fields/configuration`, `https://api.unlimitedfinancials.ninja/snowdrop/custom-fields/public` — not verified against actual ingress/nginx config.

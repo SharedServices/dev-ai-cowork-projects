@@ -50,7 +50,7 @@ In Claude Cowork, the source code is only available if you choose to attach it t
 
 One key objective is to minimize reading knowledge files unrelated to the ticket. Knowledge is organized hierarchically by repository and knowledge type, including:
 
-- Repository details: squad, namespace, repo-path
+- Repository details: squad, pod, namespace, repo-path
 - Business rules and known failures
 - Cosmos storage access and event documentation
 - Ingress navigation and API documentation

@@ -1,11 +1,12 @@
 ## Instructions specific to Notes V2
 
-This repo is **Platform** squad.
+This repo is **Platform** squad, **Notes & Attachments** pod (guess).
 
 ### Identity (machine-facing — this is the canonical source; `references/namespaces.md` and any generated index are downstream of this, not the other way around)
-<!-- hand-authored: only the repo name, nickname, squad and spec-derived server URLs are filled in. No ingress/Helm/Cosmos investigation has been done for this repo. -->
+<!-- hand-authored: only the repo name, nickname, squad, pod and spec-derived server URLs are filled in. No ingress/Helm/Cosmos investigation has been done for this repo. -->
 - Repo: `snowdrop-notes-v2-be`
 - Squad: Platform
+- Pod: Notes & Attachments (guess)
 - Nickname: Notes V2
 - Cosmos namespace / database: not confirmed.
 - API ingress segment: not confirmed. Server URL(s) listed in the checked-in specs: `https://api.unlimitedfinancials.ninja/snowdrop/notes/v2/public`, `https://api.unlimitedfinancials.ninja/snowdrop/notes/unlimitedapi` — not verified against actual ingress/nginx config.

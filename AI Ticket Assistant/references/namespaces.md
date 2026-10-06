@@ -28,8 +28,8 @@ Confirmed exceptions / details:
 
 | Service | namespace | `Properties.Application` | container / notes |
 |---|---|---|---|
-| Charge masters | `snowdrop-charge-masters` | (same) | container `snowdrop-charge-masters-api`; CQRS write/projection pattern (`CompanyProjectionWriter` updates read projections) |
-| Patients API | `snowdrop-patients-api-be` | `snowdrop-patients-api` | namespace and Application **differ** — check both when scoping by service |
+| Charge masters | `snowdrop-charge-masters` | (same) | container `snowdrop-charge-masters-api`; CQRS write/projection pattern (`CompanyProjectionWriter` updates read projections) | Ledger |
+| Patients API | `snowdrop-patients-api-be` |
 
 ## Activity-tracing (TraceId) rollout
 
@@ -39,60 +39,62 @@ Instana/`TraceId` instrumentation is being rolled out namespace-by-namespace and
 - **Adherence is monotonic per namespace+environment** — once a namespace is confirmed to carry `TraceId`/`SpanId` in a given environment, that's permanent; it doesn't regress. Record confirmations forward-only in the skill.
 - **Always start an investigation with the cross-service `TraceId` pattern**, even in an environment/namespace not yet confirmed — that's how newly-rolled-out coverage gets noticed rather than assumed absent.
 
-## Namespaces by squad
+## Namespaces by service
 
 Namespaces other than the Financial Ledger rows were confirmed from Splunk ninja index 2026-06-08, except **Code systems** and **Command center** — those were confirmed 2026-07-07 as Cosmos DB database names (`king-ninja-sharp-be-cdb`), not yet seen directly in Splunk; the Splunk `namespace` value is presumed identical but unconfirmed.
 
+Squad and pod ownership is kept only in root `CLAUDE.md`'s `## Repos` table (and, for services without a repo folder, the rows there with `—` as the repo folder). It is not repeated here.
+
 **Cosmos database name vs Splunk namespace can differ in dashing.** Confirmed exception: Charge assemblies is `snowdrop-charge-assemblies` in Splunk but `snowdrop-chargeassemblies` (no dash before "assemblies") as a Cosmos database name (2026-07-07). Don't assume the two are always byte-identical — verify the Cosmos database name in Data Explorer rather than reusing the Splunk namespace string as-is.
 
-| Service / area            | namespace value                    | Squad |
-|---------------------------|------------------------------------|-------|
-| Activities                | `snowdrop-activities`              | Billing & AR |
-| Audit log                 | `snowdrop-audit-log`               | Platform |
-| Catalogs                  | `snowdrop-catalogs`                | Billing & AR |
-| Change healthcare         | `snowdrop-change-healthcare`       | Billing & AR |
-| Charge assemblies         | `snowdrop-charge-assemblies`       | Billing & AR |
-| Charge interventions      | `snowdrop-chargeinterventions`     | Billing & AR |
-| Charge masters            | `snowdrop-charge-masters`          | Financial Ledger |
-| Code systems              | `snowdrop-code-systems`            | Platform |
-| Command center            | `snowdrop-commandcenter`           | Platform |
-| Custom fields             | `snowdrop-custom-fields` *(unconfirmed — derived from repo name `snowdrop-custom-fields-be` via the default naming convention, not yet seen directly in Splunk/Cosmos; added 2026-09-21 at James's request)* | Platform |
-| Engagement brands         | `unlimited-engagement-brands` *(unconfirmed — derived from repo name `unlimited-engagement-brands-be` via the default naming convention)* | Financial Clearance |
-| Engagement communication  | `unlimited-engagement-communication` *(unconfirmed — repo name has no `-be` suffix; namespace not yet seen directly)* | Financial Clearance |
-| Engagement patient portal | `unlimited-engagement-patient-portal` *(unconfirmed — derived from repo name `unlimited-engagement-patient-portal-be` via the default naming convention)* | Financial Clearance |
-| Episodes                  | `snowdrop-episodes`                | Billing & AR |
-| Financial counselor       | `snowdrop-financial-counselor`     | Financial Clearance |
-| Graph API                 | `snowdrop-graphapi`                | Platform |
-| Guarantors                | `snowdrop-guarantors`              | Financial Ledger |
-| Identifiers               | `snowdrop-identifiers`             | Platform |
-| Intake                    | `snowdrop-intake`                  | Financial Clearance |
-| Interventions             | `snowdrop-interventions`           | Platform |
-| Invoices                  | `snowdrop-invoices`                | Billing & AR |
-| Ledgers                   | `snowdrop-ledger`                  | Financial Ledger |
-| Notes (Unlimited API)     | `snowdrop-notes-unlimitedapi`      | Platform |
-| Notes v2                  | `snowdrop-notes-v2`                | Platform |
-| Patient agreements        | `snowdrop-patientagreements`       | Financial Clearance |
-| Patient encounters        | `snowdrop-patientencounters`       | Billing & AR |
-| Patient providers         | `snowdrop-patient-providers`       | Financial Clearance |
-| Patients API (BE)         | `snowdrop-patients-api-be`         | Financial Ledger |
-| Payer portfolios v2       | `snowdrop-payer-portfolios-v2`     | Billing & AR |
-| Payers                    | `snowdrop-payers`                  | Financial Ledger |
-| Payments                  | `snowdrop-payments`                | Financial Clearance |
-| Phoenix                   | `phoenix` *(unconfirmed — derived from repo name `phoenix-be` via the default naming convention)* | Platform |
-| Plans search              | `snowdrop-plans-search`            | Financial Ledger |
-| Policies                  | `snowdrop-policies`                | Financial Clearance |
-| Policy authorizations     | `snowdrop-policyauthorizations`    | Financial Clearance |
-| Policy referrals          | `snowdrop-policyreferrals`         | Financial Clearance |
-| Pre-visit validation      | `snowdrop-previsit-validation`     | Financial Clearance |
-| Remittance (BE)           | `snowdrop-remittance`              | Financial Ledger |
-| Remittance processing     | `snowdrop-remittanceprocessing`    | Financial Ledger |
-| Resources                 | `snowdrop-resources`               | Financial Ledger |
-| RTE                       | `snowdrop-rte`                     | Financial Clearance |
-| Scheduling                | `snowdrop-scheduling`              | Financial Clearance |
-| Security                  | `snowdrop-security`                | Platform |
-| Security (functional)     | `snowdrop-security-functional`     | Platform |
-| Sets                      | `snowdrop-sets`                    | Billing & AR |
-| Statements                | `snowdrop-statements`              | Billing & AR |
-| Unlimited connectors      | `snowdrop-unlimited-connectors` *(unconfirmed — derived from repo name `snowdrop-unlimited-connectors-be` via the default naming convention)* | Financial Clearance |
-| Waypoints                 | `snowdrop-waypoints`               | Billing & AR |
-| Workflows                 | `snowdrop-workflows`               | Billing & AR |
+| Service / area            | namespace value                    |
+|---------------------------|------------------------------------|
+| Activities                | `snowdrop-activities`              |
+| Audit log                 | `snowdrop-audit-log`               |
+| Catalogs                  | `snowdrop-catalogs`                |
+| Change healthcare         | `snowdrop-change-healthcare`       |
+| Charge assemblies         | `snowdrop-charge-assemblies`       |
+| Charge interventions      | `snowdrop-chargeinterventions`     |
+| Charge masters            | `snowdrop-charge-masters`          |
+| Code systems              | `snowdrop-code-systems`            |
+| Command center            | `snowdrop-commandcenter`           |
+| Custom fields             | `snowdrop-custom-fields` *(unconfirmed — derived from repo name `snowdrop-custom-fields-be` via the default naming convention, not yet seen directly in Splunk/Cosmos; added 2026-09-21 at James's request)* |
+| Engagement brands         | `unlimited-engagement-brands` *(unconfirmed — derived from repo name `unlimited-engagement-brands-be` via the default naming convention)* |
+| Engagement communication  | `unlimited-engagement-communication` *(unconfirmed — repo name has no `-be` suffix; namespace not yet seen directly)* |
+| Engagement patient portal | `unlimited-engagement-patient-portal` *(unconfirmed — derived from repo name `unlimited-engagement-patient-portal-be` via the default naming convention)* |
+| Episodes                  | `snowdrop-episodes`                |
+| Financial counselor       | `snowdrop-financial-counselor`     |
+| Graph API                 | `snowdrop-graphapi`                |
+| Guarantors                | `snowdrop-guarantors`              |
+| Identifiers               | `snowdrop-identifiers`             |
+| Intake                    | `snowdrop-intake`                  |
+| Interventions             | `snowdrop-interventions`           |
+| Invoices                  | `snowdrop-invoices`                |
+| Ledgers                   | `snowdrop-ledger`                  |
+| Notes (Unlimited API)     | `snowdrop-notes-unlimitedapi`      |
+| Notes v2                  | `snowdrop-notes-v2`                |
+| Patient agreements        | `snowdrop-patientagreements`       |
+| Patient encounters        | `snowdrop-patientencounters`       |
+| Patient providers         | `snowdrop-patient-providers`       |
+| Patients API (BE)         | `snowdrop-patients-api-be`         |
+| Payer portfolios v2       | `snowdrop-payer-portfolios-v2`     |
+| Payers                    | `snowdrop-payers`                  |
+| Payments                  | `snowdrop-payments`                |
+| Phoenix                   | `phoenix` *(unconfirmed — derived from repo name `phoenix-be` via the default naming convention)* |
+| Plans search              | `snowdrop-plans-search`            |
+| Policies                  | `snowdrop-policies`                |
+| Policy authorizations     | `snowdrop-policyauthorizations`    |
+| Policy referrals          | `snowdrop-policyreferrals`         |
+| Pre-visit validation      | `snowdrop-previsit-validation`     |
+| Remittance (BE)           | `snowdrop-remittance`              |
+| Remittance processing     | `snowdrop-remittanceprocessing`    |
+| Resources                 | `snowdrop-resources`               |
+| RTE                       | `snowdrop-rte`                     |
+| Scheduling                | `snowdrop-scheduling`              |
+| Security                  | `snowdrop-security`                |
+| Security (functional)     | `snowdrop-security-functional`     |
+| Sets                      | `snowdrop-sets`                    |
+| Statements                | `snowdrop-statements`              |
+| Unlimited connectors      | `snowdrop-unlimited-connectors` *(unconfirmed — derived from repo name `snowdrop-unlimited-connectors-be` via the default naming convention)* |
+| Waypoints                 | `snowdrop-waypoints`               |
+| Workflows                 | `snowdrop-workflows`               |

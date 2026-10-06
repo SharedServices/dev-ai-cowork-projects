@@ -1,11 +1,12 @@
 ## Instructions specific to Command Center
 
-This repo is **Platform** squad.
+This repo is **Platform** squad, **Quality** pod (guess).
 
 ### Identity (machine-facing — this is the canonical source; `references/namespaces.md` and any generated index are downstream of this, not the other way around)
 <!-- hand-authored: confirmed once via ingress/Helm/Cosmos investigation. No infra-scanning tool exists yet to derive these automatically. -->
 - Repo: `snowdrop-commandcenter-be`
 - Squad: Platform
+- Pod: Quality (guess)
 - Nickname: Command center
 - Cosmos namespace / database: `snowdrop-commandcenter` — confirmed 2026-07-07 as a Cosmos DB database name (`king-ninja-sharp-be-cdb`), per `references/namespaces.md`. Not yet seen directly in Splunk; the Splunk `namespace` value is presumed identical but unconfirmed.
 - API ingress segment: not confirmed. Sample route seen in the checked-in spec: `/bulkactions` (flat, no `/snowdrop/` prefix) — not verified against actual ingress/nginx config.

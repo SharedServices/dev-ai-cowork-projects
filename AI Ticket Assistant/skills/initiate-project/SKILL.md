@@ -1,6 +1,6 @@
 ---
 name: initiate-project
-description: "Run first-time setup, or re-sync, for this AI Ticket Assistant project instance. Cowork only. Use when the user says \"initiate project\", optionally with a squad (\"initiate project {squad}\", e.g. \"initiate project Financial Ledger\"), or \"set up this project\", \"onboard me\", \"first-time setup\". Records the Squad, and the Source path read from the project's attached source folder (parent folder containing the source repositories; warns if none is attached), in the git-ignored local/user.md, packages the skills listed in skills/README.md as .skill cards for the user to save (account skills load in both Cowork and Claude Code), lists personal Claude Code skills that duplicate them and should be removed, then smoke-tests Claude for Chrome and a Splunk query. Re-run after any edit under skills/. If run from Claude Code, stop and tell the user to run it in Cowork."
+description: "Run first-time setup, or re-sync, for this AI Ticket Assistant project instance. Cowork only. Use when the user says \"initiate project\", or \"set up this project\", \"onboard me\", \"first-time setup\". Asks for and records the Squad and Pod, and the Source path read from the project's attached source folder (parent folder containing the source repositories; warns if none is attached), in the git-ignored local/user.md, packages the skills listed in skills/README.md as .skill cards for the user to save (account skills load in both Cowork and Claude Code), lists personal Claude Code skills that duplicate them and should be removed, then smoke-tests Claude for Chrome and a Splunk query. Re-run after any edit under skills/. If run from Claude Code, stop and tell the user to run it in Cowork."
 ---
 
 # Initiate Project
@@ -17,14 +17,13 @@ If this is a Claude Code session, stop now. Do none of the steps below. Say plai
 
 ### 1. Confirm identity and source access
 
-The request may carry one argument: `initiate project {squad}`. The Squad argument replaces the stored value; without it, fall back to the stored value, then to asking. Match a Squad against the `## Squads` table in root `CLAUDE.md`, by Squad name or Alias, case-insensitive. If it matches nothing, ask, offering that table as the option list.
-
 Read `local/user.md` (relative path). The file has this shape:
 
 ```
 # Current user
 
 - Squad: {squad}
+- Pod: {pod}
 - Source path: {full Windows path of the attached folder that contains the source repositories}
 
 ## Account (reference only)
@@ -33,7 +32,7 @@ Read `local/user.md` (relative path). The file has this shape:
 - Email: {account email}
 ```
 
-**Squad.** If the file has a value and no argument was given, state it plainly and move on. If it is missing or blank, ask which squad the user is on, offering the `## Squads` table as the option list.
+**Squad and Pod.** The request takes no arguments; both are asked for. If the file has a value, state it plainly and ask whether it is still correct. If it is missing or blank, ask which squad the user is on, offering the `## Squads` table as the option list (Squad name or Alias, case-insensitive), then ask which pod, offering the `## Pods` table as the option list. Squads are being retired; keep asking for both until they are. Write the chosen names exactly as listed in those tables.
 
 **Source path comes from the project's attached folders, not from the user.** The user attaches the folder in the project settings (before or after this step). Do not ask for a path.
 
@@ -85,4 +84,4 @@ Report plainly: working (found N results, or zero results but no error — still
 
 ### 6. Summarize
 
-Give one short, plain summary: identity (squad), source access (attached folder and repo match count, or "no source attached"), skills (installed, or cards to save), the personal-skill removal block, Chrome, Splunk. State what passed, what didn't, and what the user needs to do next. The last next step is: after saving the cards, start Claude Code in this project folder and run `/skills` to confirm the `anthropic-skills:` entries are listed.
+Give one short, plain summary: identity (squad, pod), source access (attached folder and repo match count, or "no source attached"), skills (installed, or cards to save), the personal-skill removal block, Chrome, Splunk. State what passed, what didn't, and what the user needs to do next. The last next step is: after saving the cards, start Claude Code in this project folder and run `/skills` to confirm the `anthropic-skills:` entries are listed.

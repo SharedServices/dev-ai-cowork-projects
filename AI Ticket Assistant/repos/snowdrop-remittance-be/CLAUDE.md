@@ -4,6 +4,7 @@
 <!-- hand-authored: confirmed once via ingress/Helm/Cosmos investigation. No infra-scanning tool exists yet to derive these automatically. -->
 - Repo: `snowdrop-remittance-be`
 - Squad: Financial Ledger (Herbert)
+- Pod: Remittance (guess)
 - Nickname: Remittance (BE) — deliberately distinct from "Remittance Processing," a different repo/database entirely. Don't shorten either to just "Remittance" in a context where both could be meant.
 - Cosmos namespace / database: `snowdrop-remittance` (dedicated — confirmed distinct from `snowdrop-remittanceprocessing` 2026-07-07, do not conflate)
 - API ingress segment: `remittance` — **Pattern B (flat passthrough, no `/snowdrop/` prefix)**, external path `/remittance/<route>`, unlike remittance-processing's Pattern A. A sibling `/remittance/swagger` ingress has no `auth-url` annotation at all — reachable with no cookie, useful as a no-auth reachability probe.

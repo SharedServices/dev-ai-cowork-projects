@@ -35,9 +35,9 @@ To set it up:
 
 ### Initializing the Project
 
-Before doing anything else in a new local copy — or again after pulling an update from GitHub that adds skills or changes what `CLAUDE.md` expects — say **"initiate project."** This is a one-time (or occasional re-check) step, not something that happens automatically: Claude records your Squad (from the argument if you give one — **"initiate project {squad}"** — otherwise by asking) and the location of your source code in `local/user.md`. It finds the source by looking at the folders attached to the project: it reports how many of the project's repos it can see, asks you to choose if more than one folder is attached, and warns if none is. Claude Code reads the recorded location, so it must stay accurate. Claude then packages the skills for you to save (saved skills load in both Cowork and Claude Code), lists any personal Claude Code skills you should delete because they duplicate the saved ones, and smoke-tests both Claude for Chrome and Splunk access so you know on day one whether those surfaces are actually working rather than finding out mid-investigation.
+Before doing anything else in a new local copy — or again after pulling an update from GitHub that adds skills or changes what `CLAUDE.md` expects — say **"initiate project."** This is a one-time (or occasional re-check) step, not something that happens automatically: Claude asks for your Squad and Pod and records them, along with the location of your source code in `local/user.md`. It finds the source by looking at the folders attached to the project: it reports how many of the project's repos it can see, asks you to choose if more than one folder is attached, and warns if none is. Claude Code reads the recorded location, so it must stay accurate. Claude then packages the skills for you to save (saved skills load in both Cowork and Claude Code), lists any personal Claude Code skills you should delete because they duplicate the saved ones, and smoke-tests both Claude for Chrome and Splunk access so you know on day one whether those surfaces are actually working rather than finding out mid-investigation.
 
-Skipping this isn't fatal — most things will still prompt you for what they need — but your Squad may be unset (which affects squad-scoped defaults elsewhere in the project), and a broken Chrome or Splunk connection won't surface until you happen to hit it.
+Skipping this isn't fatal — most things will still prompt you for what they need — but your Squad and Pod may be unset (which affects squad- and pod-scoped defaults elsewhere in the project), and a broken Chrome or Splunk connection won't surface until you happen to hit it.
 
 ### Targeting a Repo
 
@@ -46,7 +46,7 @@ Before asking about a specific service, tell Claude which repo you're working in
 A few things worth knowing:
 - Once a repo is activated, it stays in scope for the rest of the conversation.
 - Activating a second repo adds it alongside the first rather than replacing it — you can have more than one active at a time.
-- You can activate several repos, or a whole squad's worth, in one request — e.g. "activate repo Guarantors and Resources" or "activate repos for all squad Herbert repos."
+- You can activate several repos, or a whole squad's or pod's worth, in one request — e.g. "activate repo Guarantors and Resources", "activate repos for all squad Herbert repos" or "activate repos for all pod Quality repos." Pod activation uses each repo's primary pod only.
 - When you start a ticket that seems to be talking about a repo or you even ask a question that seem to indicate one, the system will automatically activate that repo. So activate repo isn't always needed but it does provide a confirmed way to insure a repo has been included.
 
 ### Starting a New Ticket

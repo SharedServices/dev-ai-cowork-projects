@@ -4,6 +4,7 @@
 <!-- hand-authored: confirmed once via ingress/Helm/Cosmos investigation. No infra-scanning tool exists yet to derive these automatically. -->
 - Repo: `snowdrop-guarantors-be`
 - Squad: Financial Ledger (Herbert)
+- Pod: Quality (guess)
 - Nickname: Guarantors
 - Cosmos namespace / database: `snowdrop-guarantors` (dedicated) — confirmed via the `cosmos-query` skill's entity/database map.
 - API ingress segment: not confirmed. Sample route seen in the checked-in spec: `/guarantors/patient/{patientId}` (flat, no `/snowdrop/` prefix) — consistent with a `guarantors` ingress segment, but this is inferred from the OpenAPI paths, not verified against actual ingress/nginx config.

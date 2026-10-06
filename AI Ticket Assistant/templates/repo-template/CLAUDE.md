@@ -16,6 +16,7 @@ Each tag is left in as an HTML comment in the real file — it's for whoever (hu
 <!-- hand-authored: confirmed once per repo via ingress/Helm/Cosmos investigation. No infra-scanning tool exists yet to derive these automatically — until one does, treat every field here as a fact that was confirmed, not assumed, and note how/when it was confirmed if that's not obvious. -->
 - Repo: `{repo-folder-name}`
 - Squad: {squad name} ({program name, e.g. Herbert, if applicable})
+- Pod: {pod name}
 - Nickname: {short human name used in conversation}
 - Cosmos namespace / database: `{cosmos-namespace}`
 - API ingress segment: `{ingress-segment}` (note here if this repo is a multi-spec/sub-service repo, the way `ledger-be`, `payers-api-be`, `resources-be` are — that changes how the ingress segment maps to routes)

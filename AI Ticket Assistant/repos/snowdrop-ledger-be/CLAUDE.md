@@ -4,6 +4,7 @@
 <!-- hand-authored: confirmed once via ingress/Helm/Cosmos investigation. No infra-scanning tool exists yet to derive these automatically. -->
 - Repo: `snowdrop-ledger-be` — confirmed exception in `references/namespaces.md`'s "OpenAPI document location" table: namespace `snowdrop-ledger`'s OpenAPI folder is the repository name `snowdrop-ledger-be`, not the bare namespace.
 - Squad: Financial Ledger (Herbert)
+- Pod: Ledger (guess)
 - Nickname: Ledgers
 - Cosmos namespace / database: `snowdrop-ledger` (dedicated) — confirmed via the `cosmos-query` skill as Ledgers' only database, fully toured. **Container names break the usual convention** — see Streams below.
 - API ingress segment: not confirmed. This is a **multi-spec repo** (main Api, Api.Administration, Api.Internal). Sample route seen in the main spec's dictionary: `/armw/{patientId}/adjustment` (tag `Adjustment`) — doesn't obviously map to a `/ledger` ingress segment; not verified against actual ingress/nginx config.

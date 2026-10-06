@@ -172,13 +172,14 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 #### Project & repo setup
 
 ##### initiate project
-- *initiate project* / *initiate project {squad}* / *set up this project* / *onboard me* / *first-time setup*
-- Cowork only. Sets up a fresh copy of this project and re-syncs after skill changes: records your squad and the location of the attached source folder (warning if none is attached), packages the skills as cards to save (they then load in Cowork and Claude Code), lists duplicate personal Claude Code skills to delete, and smoke-tests Claude for Chrome and Splunk access.
+- *initiate project* / *set up this project* / *onboard me* / *first-time setup*
+- Cowork only. Sets up a fresh copy of this project and re-syncs after skill changes: asks for and records your squad and pod, and the location of the attached source folder (warning if none is attached), packages the skills as cards to save (they then load in Cowork and Claude Code), lists duplicate personal Claude Code skills to delete, and smoke-tests Claude for Chrome and Splunk access.
 
 ##### activate repo
 - *activate repo {name}*
 - *activate repo {name} and {name}*
 - *activate repos for all squad {squad name} repos*
+- *activate repos for all pod {pod name} repos* (primary pod only)
 - Sets the investigation scope to one or more repo folders under `repos/`, matched by folder name or nickname from the `## Repos` table in the root `CLAUDE.md`.
 - Activations accumulate for the rest of the session — activating another repo adds it to scope, it does not replace the repo(s) already active.
 

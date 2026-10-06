@@ -1,6 +1,6 @@
 ---
 name: activate-repo
-description: "Set the current investigation scope to one or more repo folders under repos/ in the Support project. Use when the user says \"activate repo {name}\", \"activate repo {name} and {name}\" (multiple named repos), or \"activate repos for all squad {squad name} repos\" (squad-level bulk activation). This is the explicit, deterministic counterpart to automatic repo-inference (e.g. ticket-workflow guessing a repo from ticket context) — trigger it directly when starting ad hoc work, or as a manual override if the automatic path picked the wrong repo or ignored one that should apply. Resolves the name against root CLAUDE.md's ## Repos index table (folder name or nickname column, case/spacing/hyphen-insensitive), asking rather than guessing on no match or multiple matches, then reads only that repo's own CLAUDE.md (not references/ or business-logic/ yet)."
+description: "Set the current investigation scope to one or more repo folders under repos/ in the Support project. Use when the user says \"activate repo {name}\", \"activate repo {name} and {name}\" (multiple named repos), \"activate repos for all squad {squad name} repos\" (squad-level bulk activation), or \"activate repos for all pod {pod name} repos\" (pod-level bulk activation). This is the explicit, deterministic counterpart to automatic repo-inference (e.g. ticket-workflow guessing a repo from ticket context) — trigger it directly when starting ad hoc work, or as a manual override if the automatic path picked the wrong repo or ignored one that should apply. Resolves the name against root CLAUDE.md's ## Repos index table (folder name or nickname column, case/spacing/hyphen-insensitive), asking rather than guessing on no match or multiple matches, then reads only that repo's own CLAUDE.md (not references/ or business-logic/ yet)."
 ---
 
 # Activate Repo
@@ -9,11 +9,12 @@ Sets the current investigation scope to one or more repo folders under `repos/` 
 
 ## Resolution
 
-Match the requested name(s) against root `CLAUDE.md`'s `## Repos` index table — both the **folder name** and the **nickname** column count, case/spacing/hyphen-insensitive (e.g. `snowdrop-remittance-processing-be`, `remittance processing be`, and `Remittance Processing` should all resolve to the same row). **Validated 2026-09-18** against two real repos — see `documents/repo-activation-prototype-plan.md`'s closing section for the test record. Three request shapes are all supported:
+Match the requested name(s) against root `CLAUDE.md`'s `## Repos` index table — both the **folder name** and the **nickname** column count, case/spacing/hyphen-insensitive (e.g. `snowdrop-remittance-processing-be`, `remittance processing be`, and `Remittance Processing` should all resolve to the same row). **Validated 2026-09-18** against two real repos — see `documents/repo-activation-prototype-plan.md`'s closing section for the test record. Four request shapes are all supported:
 
 - **Single repo:** `activate repo {name}` — resolve to one row.
 - **Multiple named repos:** `activate repo {name} and {name}` (and so on) — resolve each independently; treat unresolved names in the list the same as a single unresolved name (ask, don't drop silently).
 - **Squad-level bulk activation:** `activate repos for all squad {squad name} repos` — resolve every row in the index table whose Squad column matches, and activate all of them.
+- **Pod-level bulk activation:** `activate repos for all pod {pod name} repos` — match the name against the `## Pods` table in root `CLAUDE.md` (case-insensitive), then resolve every row in the `## Repos` table whose Pod column has that pod as its **primary** pod, and activate all of them. A row whose Pod column notes an alternative (`(alt: …)`) matches only its primary pod, not the alternative. Rows with `—` as the repo folder have no folder and are skipped; say which were skipped. Pod assignments are initial guesses; say so in the confirmation.
 
 **If a name matches more than one row, or matches nothing, ask — don't guess.** For no match, list the folder names/nicknames that exist in the index table. For multiple matches, list the candidates and ask which was meant. This is the same resolution rule root `CLAUDE.md`'s `## Repos` section states generally; this skill is just its explicit, on-demand trigger.
 

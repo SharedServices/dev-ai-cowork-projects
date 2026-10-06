@@ -4,6 +4,7 @@
 <!-- hand-authored: confirmed once via ingress/Helm/Cosmos investigation. No infra-scanning tool exists yet to derive these automatically. -->
 - Repo: `snowdrop-resources-be`
 - Squad: Financial Ledger (Herbert)
+- Pod: Quality (guess)
 - Nickname: Resources
 - Cosmos namespace / database: `snowdrop-resources` (dedicated) — confirmed via the `cosmos-query` skill's entity/database map.
 - API ingress segment: not confirmed. This is a **multi-spec repo** — the Ledger sub-service's own OpenAPI paths bake the full prefix into the route itself (sample: `/snowdrop/resources/ledger/divisions/{divisionId}`), unlike the flatter-looking paths seen in this workspace's other services' specs. The two Services specs (`Snowdrop.Resources.Services.json`, `Snowdrop.Resources.Services.Administration.json`) weren't sampled for their path style. None of this is verified against actual ingress/nginx config.

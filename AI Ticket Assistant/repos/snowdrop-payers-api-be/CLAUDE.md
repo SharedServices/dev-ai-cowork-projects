@@ -4,6 +4,7 @@
 <!-- hand-authored: confirmed once via ingress/Helm/Cosmos investigation. No infra-scanning tool exists yet to derive these automatically. -->
 - Repo: `snowdrop-payers-api-be` — **naming anomaly:** the namespace value below is `snowdrop-payers` (no `-api-`), so the repository-naming convention (namespace + `-be`) would predict `snowdrop-payers-be`. This folder's actual name has `-api-` inserted, the same way `snowdrop-patients-api-be` does — but unlike that repo, this exception isn't recorded in `references/namespaces.md`'s "Repository naming convention" table. Flagged there; add a row once confirmed.
 - Squad: Financial Ledger (Herbert)
+- Pod: Quality (guess)
 - Nickname: Payers
 - Cosmos namespace / database: `snowdrop-payers` (dedicated) — confirmed via the `cosmos-query` skill's entity/database map. **Two event containers in this one database**, not one — see Streams below.
 - API ingress segment: not confirmed. This is a **multi-spec repo** — three separate OpenAPI documents (Payers, Payers.Assistance, Payers.FeeSchedules), each likely with its own ingress path. Sample route seen in the main spec: `/payers` (flat, no `/snowdrop/` prefix). None of this is verified against actual ingress/nginx config.

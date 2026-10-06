@@ -12,7 +12,7 @@ Avoid metaphor, analogy, idiom, and filler. Prefer plain, literal, concise langu
 
 ## Current user
 
-The user's Squad and Source path (the Windows path of the attached source folder, recorded by `initiate project`) for this instance are kept in `local/user.md` — git-ignored, one small file per local copy, created by `initiate project`. The file also holds the Claude account's name and email as reference only. Read it when a task depends on which squad's repos to default to, where the source code is, or who the user is. On Claude Code started in this project, read it by relative path. If the file is missing or a setting is blank, treat it as unset and do not ask unprompted; suggest `initiate project` only when a squad-scoped default or a source lookup would have mattered.
+The user's Squad, Pod and Source path (the Windows path of the attached source folder, recorded by `initiate project`) for this instance are kept in `local/user.md` — git-ignored, one small file per local copy, created by `initiate project`. The file also holds the Claude account's name and email as reference only. Read it when a task depends on which squad's or pod's repos to default to, where the source code is, or who the user is. On Claude Code started in this project, read it by relative path. If the file is missing or a setting is blank, treat it as unset and do not ask unprompted; suggest `initiate project` only when a squad- or pod-scoped default or a source lookup would have mattered.
 
 ## Source Code
 
@@ -24,11 +24,11 @@ The source code for the repos this project describes is in a parent folder, in s
 
 ## Project initiation
 
-**When the user says "initiate project"** (or asks to set up, onboard, or do first-time setup on this project instance) — read `skills/initiate-project/SKILL.md` and follow it exactly. It covers recording the user's Squad, and the Source path read from the attached source folder, in `local/user.md` (warning when no source folder is attached), packaging the skills in `skills/README.md` as cards to save to the account (account skills load in both Cowork and Claude Code), listing duplicate personal skills to remove, and smoke-testing Claude for Chrome and Splunk access. It runs in Cowork only and refuses in Claude Code. Optional argument: `initiate project {squad}`. The Source path is read from the project's attached source folder, not typed.
+**When the user says "initiate project"** (or asks to set up, onboard, or do first-time setup on this project instance) — read `skills/initiate-project/SKILL.md` and follow it exactly. It covers recording the user's Squad and Pod (asked for, not passed as arguments), and the Source path read from the attached source folder, in `local/user.md` (warning when no source folder is attached), packaging the skills in `skills/README.md` as cards to save to the account (account skills load in both Cowork and Claude Code), listing duplicate personal skills to remove, and smoke-testing Claude for Chrome and Splunk access. It runs in Cowork only and refuses in Claude Code. The Source path is read from the project's attached source folder, not typed.
 
 ## Squads
 
-Index of squads this workspace supports — the counterpart to `## Repos`' Squad column, and the list the Squad in `local/user.md` is chosen from. Keep current as squads are added or renamed.
+Squads are being replaced by pods; both are kept until squads are retired. Index of squads this workspace supports — the counterpart to `## Repos`' Squad column, and the list the Squad in `local/user.md` is chosen from. Keep current as squads are added or renamed.
 
 | Squad | Alias |
 |---|---|
@@ -36,6 +36,25 @@ Index of squads this workspace supports — the counterpart to `## Repos`' Squad
 | Financial Clearance | — |
 | Billing & AR | Shelby |
 | Platform | — |
+
+## Pods
+
+Index of pods — the counterpart to `## Repos`' Pod column, and the list the Pod in `local/user.md` is chosen from. Source: Confluence "Pod Ownership" (https://sharpfm.atlassian.net/wiki/spaces/PE/pages/5536514058/Pod+Ownership), which lists functionality per pod, not repositories; repo-to-pod assignments are initial guesses. Names are the bare pod names, without the lead.
+
+| Pod |
+|---|
+| Ledger |
+| Remittance |
+| Quality |
+| Activity & Charge Processing |
+| AR Management |
+| Portals |
+| Financial Clearance |
+| Payments & Security |
+| Scheduling & Intake |
+| Auth & Data Framework |
+| Interoperability |
+| Notes & Attachments |
 
 ## Folder layout (shared knowledge surface)
 
@@ -57,7 +76,7 @@ Shared (scan these):
 
 Local (do not scan):
 
-- **`local/`** — per-user settings for this instance of the project; currently `user.md` (Squad and Source path, plus the account's name and email for reference — see `## Current user`). Ignored by git, so never committed and never present in a new instance created from GitHub. Settings, not memories.
+- **`local/`** — per-user settings for this instance of the project; currently `user.md` (Squad, Pod and Source path, plus the account's name and email for reference — see `## Current user`). Ignored by git, so never committed and never present in a new instance created from GitHub. Settings, not memories.
 - **`memories/`** — memories local to this instance of the project: one `.md` per memory plus a `MEMORY.md` index. Ignored by git, so never committed and never present in a new instance created from GitHub. Read the index and pull the relevant file when a question may depend on something recorded locally. Not Claude's own app memory (which is stored outside the project) and not `references/` (which is published and tracked) — see `documents/project-maintenance.md`.
 - **`scratch/`** — disposable, single-use execution scripts (e.g. a one-off "purge and evaluate these 3 remittances" `.ps1` generated for the user to run locally). These have no lasting value once run and are NOT shared knowledge — never put a reusable template, tool, or anything referenced by a skill here. Any script generated for a one-time action against a specific org/remittance/environment goes in `scratch/`, not the project root, so it never gets confused with real project files or skill templates (`skills/*/scripts/`, `cosmos-access/scripts/`). Cleanup is manual — the user deletes from `scratch/` on their own via the file system whenever they like; Claude does not need to ask permission or track what's still needed, since nothing in this folder is ever load-bearing.
 
@@ -73,61 +92,66 @@ Case records (open directly when working a specific ticket — not part of the g
 
 Index of repo folders under `repos/` — keep this table current whenever a repo folder is added or a repo's scope changes. This table exists so resolving "which repo is this question about" is a single cheap read of an already-auto-loaded file, not a filesystem search — that stops mattering at one repo but won't stay that way.
 
-| Repo folder | Squad | Nickname | Scope |
-|---|---|---|---|
-| `snowdrop-remittance-processing-be` | Financial Ledger (Herbert) | Remittance Processing | Remittance and claim-payment lifecycle, reserved funds, vendor settings, the rules engine |
-| `snowdrop-remittance-be` | Financial Ledger (Herbert) | Remittance (BE) | Raw remittance/check record, EOB attachments, bank reconciliation and posting status — a different repo from Remittance Processing despite the similar name |
-| `snowdrop-charge-master-be` | Financial Ledger (Herbert) | Charge Masters | Company charge master catalogues (procedure/charge codes) and their fee data |
-| `snowdrop-guarantors-be` | Financial Ledger (Herbert) | Guarantors | Patient guarantors — the party responsible for a patient's account |
-| `snowdrop-patients-api-be` | Financial Ledger (Herbert) | Patients API (BE) | Patient demographic/identity records |
-| `snowdrop-payers-api-be` | Financial Ledger (Herbert) | Payers | Payers, plans, contracts, fee schedules, vendor settings, eligibility |
-| `snowdrop-resources-be` | Financial Ledger (Herbert) | Resources | Companies, facilities, providers, payment devices/vendors, monthly close, division ledgers |
-| `snowdrop-ledger-be` | Financial Ledger (Herbert) | Ledgers | General ledger — patient/account-level charge and payment posting |
-| `snowdrop-commandcenter-be` | Platform | Command Center | Bulk actions. Platform squad, transferred from Financial Ledger (Herbert). |
-| `phoenix-be` | Platform | Phoenix | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-activities-be` | Billing & AR (Shelby) | Activities | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-analytics-be` | Platform | Analytics | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-audit-log-be` | Platform | Audit Log | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-catalogs-be` | Billing & AR (Shelby) | Catalogs | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-change-healthcare-be` | Billing & AR (Shelby) | Change Healthcare | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-charge-assemblies-be` | Billing & AR (Shelby) | Charge Assemblies | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-charge-interventions-be` | Billing & AR (Shelby) | Charge Interventions | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-custom-fields-be` | Platform | Custom Fields | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-episodes-be` | Billing & AR (Shelby) | Episodes | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-financial-counselor-be` | Financial Clearance | Financial Counselor | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-identifiers-be` | Platform | Identifiers | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-intake-be` | Financial Clearance | Intake | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-interventions-be` | Platform | Interventions | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-invoices-be` | Billing & AR (Shelby) | Invoices | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-notes-v2-be` | Platform | Notes V2 | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-patient-providers-be` | Financial Clearance | Patient Providers | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-patientagreements-be` | Financial Clearance | Patientagreements | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-patientencounters-be` | Billing & AR (Shelby) | Patientencounters | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-payer-portfolios-v2-be` | Billing & AR (Shelby) | Payer Portfolios V2 | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-payments-be` | Financial Clearance | Payments | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-plans-search-be` | Financial Ledger (Herbert) | Plans Search | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-policies-be` | Financial Clearance | Policies | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-policyauthorizations-be` | Financial Clearance | Policyauthorizations | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-policyreferrals-be` | Financial Clearance | Policyreferrals | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-previsit-validation-be` | Financial Clearance | Previsit Validation | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-rte-be` | Financial Clearance | Rte | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-scheduling-be` | Financial Clearance | Scheduling | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-security-be` | Platform | Security | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-security-functional-be` | Platform | Security Functional | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-sets-be` | Billing & AR (Shelby) | Sets | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-statements-be` | Billing & AR (Shelby) | Statements | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-unlimited-connectors-be` | Financial Clearance | Unlimited Connectors | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-waypoints-be` | Billing & AR (Shelby) | Waypoints | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `snowdrop-workflows-be` | Billing & AR (Shelby) | Workflows | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `unlimited-engagement-brands-be` | Financial Clearance | Engagement Brands | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `unlimited-engagement-communication` | Financial Clearance | Engagement Communication | OpenAPI documents only (pulled from the release blob container); scope not yet described |
-| `unlimited-engagement-patient-portal-be` | Financial Clearance | Engagement Patient Portal | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| Repo folder | Squad | Pod (guess) | Nickname | Scope |
+|---|---|---|---|---|
+| `snowdrop-remittance-processing-be` | Financial Ledger (Herbert) | Remittance | Remittance Processing | Remittance and claim-payment lifecycle, reserved funds, vendor settings, the rules engine |
+| `snowdrop-remittance-be` | Financial Ledger (Herbert) | Remittance | Remittance (BE) | Raw remittance/check record, EOB attachments, bank reconciliation and posting status — a different repo from Remittance Processing despite the similar name |
+| `snowdrop-charge-master-be` | Financial Ledger (Herbert) | Ledger | Charge Masters | Company charge master catalogues (procedure/charge codes) and their fee data |
+| `snowdrop-guarantors-be` | Financial Ledger (Herbert) | Quality | Guarantors | Patient guarantors — the party responsible for a patient's account |
+| `snowdrop-patients-api-be` | Financial Ledger (Herbert) | Quality | Patients API (BE) | Patient demographic/identity records |
+| `snowdrop-payers-api-be` | Financial Ledger (Herbert) | Quality | Payers | Payers, plans, contracts, fee schedules, vendor settings, eligibility |
+| `snowdrop-resources-be` | Financial Ledger (Herbert) | Quality | Resources | Companies, facilities, providers, payment devices/vendors, monthly close, division ledgers |
+| `snowdrop-ledger-be` | Financial Ledger (Herbert) | Ledger | Ledgers | General ledger — patient/account-level charge and payment posting |
+| `snowdrop-commandcenter-be` | Platform | Quality | Command Center | Bulk actions. Platform squad, transferred from Financial Ledger (Herbert). |
+| `phoenix-be` | Platform | Interoperability | Phoenix | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-activities-be` | Billing & AR (Shelby) | Activity & Charge Processing | Activities | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-analytics-be` | Platform | Auth & Data Framework | Analytics | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-audit-log-be` | Platform | Interoperability | Audit Log | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-catalogs-be` | Billing & AR (Shelby) | Quality | Catalogs | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-change-healthcare-be` | Billing & AR (Shelby) | Quality | Change Healthcare | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-charge-assemblies-be` | Billing & AR (Shelby) | Activity & Charge Processing (alt: Quality) | Charge Assemblies | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-charge-interventions-be` | Billing & AR (Shelby) | Quality | Charge Interventions | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-custom-fields-be` | Platform | Quality | Custom Fields | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-episodes-be` | Billing & AR (Shelby) | Quality | Episodes | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-financial-counselor-be` | Financial Clearance | Financial Clearance | Financial Counselor | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-identifiers-be` | Platform | Quality | Identifiers | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-intake-be` | Financial Clearance | Scheduling & Intake | Intake | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-interventions-be` | Platform | Payments & Security | Interventions | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-invoices-be` | Billing & AR (Shelby) | AR Management | Invoices | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-notes-v2-be` | Platform | Notes & Attachments | Notes V2 | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-patient-providers-be` | Financial Clearance | Quality | Patient Providers | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-patientagreements-be` | Financial Clearance | Quality | Patientagreements | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-patientencounters-be` | Billing & AR (Shelby) | Quality | Patientencounters | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-payer-portfolios-v2-be` | Billing & AR (Shelby) | AR Management | Payer Portfolios V2 | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-payments-be` | Financial Clearance | Payments & Security | Payments | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-plans-search-be` | Financial Ledger (Herbert) | Quality | Plans Search | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-policies-be` | Financial Clearance | Financial Clearance | Policies | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-policyauthorizations-be` | Financial Clearance | Financial Clearance | Policyauthorizations | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-policyreferrals-be` | Financial Clearance | Financial Clearance | Policyreferrals | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-previsit-validation-be` | Financial Clearance | Financial Clearance | Previsit Validation | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-rte-be` | Financial Clearance | Financial Clearance | Rte | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-scheduling-be` | Financial Clearance | Scheduling & Intake | Scheduling | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-security-be` | Platform | Payments & Security | Security | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-security-functional-be` | Platform | Payments & Security | Security Functional | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-sets-be` | Billing & AR (Shelby) | Quality | Sets | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-statements-be` | Billing & AR (Shelby) | Activity & Charge Processing | Statements | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-unlimited-connectors-be` | Financial Clearance | Interoperability | Unlimited Connectors | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-waypoints-be` | Billing & AR (Shelby) | Activity & Charge Processing | Waypoints | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `snowdrop-workflows-be` | Billing & AR (Shelby) | Activity & Charge Processing | Workflows | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `unlimited-engagement-brands-be` | Financial Clearance | Quality | Engagement Brands | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `unlimited-engagement-communication` | Financial Clearance | Quality | Engagement Communication | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| `unlimited-engagement-patient-portal-be` | Financial Clearance | Portals | Engagement Patient Portal | OpenAPI documents only (pulled from the release blob container); scope not yet described |
+| — | Platform | Quality | Code Systems | No repo folder. Namespace `snowdrop-code-systems`. |
+| — | Platform | Payments & Security | Graph API | No repo folder. Namespace `snowdrop-graphapi`. |
+| — | Platform | Notes & Attachments | Notes (Unlimited API) | No repo folder. Namespace `snowdrop-notes-unlimitedapi`. |
+
+Squad and pod are recorded in each repo's own `CLAUDE.md` Identity section, which is the canonical source; this table is a rollup of them. `references/namespaces.md` maps services to Splunk namespaces and does not repeat them. Activation by pod uses the primary pod only; an "alt" pod noted in this table does not match. Rows with `—` as the repo folder are services with no repo folder here and cannot be activated.
 
 **Resolution rule — do not scan to find or guess a repo.** Resolve which repo a question concerns using this table (exact or unambiguous match) or by asking the user — the same exact-match caution `commands/activate-repo.md` uses below. **Never run an exploratory Glob/Grep sweep of `repos/` or the wider project** to answer "which repo is this," to find a repo whose name wasn't given, or to compensate for a manifest that seems incomplete. That doesn't scale as repos are added, costs more with every repo in the folder, and risks pulling in the wrong repo's content. Once a repo is resolved, read only that repo's own `CLAUDE.md` and the specific files it names from there — not sibling repos, not extra reads "just in case" a narrower one might be insufficient. If a repo's manifest genuinely doesn't have enough to answer, that is a gap in the manifest to flag and fix — not a reason to broaden the search.
 
 ## Repo activation
 
-**When the user says "activate repo {name}"** — including multiple names in one request, or a squad-level request like "activate repos for all squad {squad} repos" — read `skills/activate-repo/SKILL.md` and follow it exactly. It handles resolving the name(s) against the `## Repos` index table above (folder name or nickname, spacing/hyphen/case-insensitive), reading each resolved repo's `CLAUDE.md` (see that file's Steps section for the path on each platform), and setting scope for the rest of the conversation. This skill is the sole trigger path for repo activation on both platforms. On both platforms the skill loads from the account once its card is saved; if it is not listed in `/skills` on Claude Code, read the file directly. See `documents/workspace-plan.md`'s "Not yet decided" section for what's deliberately deferred until repo count grows enough to revisit (typo tolerance, an explicit alias table).
+**When the user says "activate repo {name}"** — including multiple names in one request, or a squad- or pod-level request like "activate repos for all squad {squad} repos" or "activate repos for all pod {pod} repos" — read `skills/activate-repo/SKILL.md` and follow it exactly. It handles resolving the name(s) against the `## Repos` index table above (folder name or nickname, spacing/hyphen/case-insensitive), reading each resolved repo's `CLAUDE.md` (see that file's Steps section for the path on each platform), and setting scope for the rest of the conversation. This skill is the sole trigger path for repo activation on both platforms. On both platforms the skill loads from the account once its card is saved; if it is not listed in `/skills` on Claude Code, read the file directly. See `documents/workspace-plan.md`'s "Not yet decided" section for what's deliberately deferred until repo count grows enough to revisit (typo tolerance, an explicit alias table).
 
 ## Ticket folders
 

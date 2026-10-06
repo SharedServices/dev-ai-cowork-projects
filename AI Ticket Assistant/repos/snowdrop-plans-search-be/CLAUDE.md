@@ -1,11 +1,12 @@
 ## Instructions specific to Plans Search
 
-This repo is **Financial Ledger (Herbert)** squad.
+This repo is **Financial Ledger (Herbert)** squad, **Quality** pod (guess).
 
 ### Identity (machine-facing — this is the canonical source; `references/namespaces.md` and any generated index are downstream of this, not the other way around)
-<!-- hand-authored: only the repo name, nickname, squad and spec-derived server URLs are filled in. No ingress/Helm/Cosmos investigation has been done for this repo. -->
+<!-- hand-authored: only the repo name, nickname, squad, pod and spec-derived server URLs are filled in. No ingress/Helm/Cosmos investigation has been done for this repo. -->
 - Repo: `snowdrop-plans-search-be`
 - Squad: Financial Ledger (Herbert)
+- Pod: Quality (guess)
 - Nickname: Plans Search
 - Cosmos namespace / database: not confirmed.
 - API ingress segment: not confirmed. The checked-in specs list no server URL.
