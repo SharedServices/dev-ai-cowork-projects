@@ -3,3 +3,4 @@
 - `event-batch-checkpoint-skip-on-blob-etag-conflict/` — event lands in Cosmos, effect never applies; includes False Credit Balance.
 - `oversized-unreconciled-check-backlog-breaks-payer-for-remittances/` — Bank Rec grid 500s (Cosmos SC3020) on large backlogs.
 - `quiet-failed-read-in-cross-service-event-handler/` — cross-service event silently no-ops, no exception logged.
+- `auto-post-arePosting-append-lost-leaves-claim-payment-initialized/` — claim payment never starts posting after an auto-post; check stays in Posting.

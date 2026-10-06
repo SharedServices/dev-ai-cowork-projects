@@ -9,7 +9,7 @@ The content can be downloaded from GitHub here: [https://github.com/SharedServic
 
 ### Platforms
 
-This project was created as a Claude Cowork project, but you can also use Claude Code against it, both for knowledge extraction and for code development. To start, run "initiate project" in Claude Cowork (see Initializing the Project below). When you launch Claude Code against the "AI Ticket Assistant" folder, it works the same way as Claude Cowork. You can also launch Claude Code against a source repository and attach the "AI Ticket Assistant" folder as a second folder to use its knowledge. Sessions launched directly against the Assistant tend to answer from the knowledge base first and add code detail as needed, while Claude Code launched against a repository tends to answer from the code first. Claude Code launched against the source code is also set up for project updates such as builds and commits.
+This project was created as a Claude Cowork project, but you can also use Claude Code against it, both for knowledge extraction and for code development. To start, run "initiate project" in Claude Cowork (see Initializing the Project below). When you launch Claude Code against the "AI Ticket Assistant" folder, it works the same way as Claude Cowork. You can also launch Claude Code against a source repository and attach the "AI Ticket Assistant" folder as a second folder to use its knowledge. Sessions launched directly against the Assistant tend to answer from the knowledge base first and add code detail as needed. Claude Code launched against a repository will answer from the code first and is also set up for project updates such as builds and commits.
 
 If you open Visual Studio (or, presumably, another IDE) on the dev-ai-cowork-projects folder, you can check in changes to the AI Ticket Assistant project itself.
 
@@ -47,6 +47,7 @@ A few things worth knowing:
 - Once a repo is activated, it stays in scope for the rest of the conversation.
 - Activating a second repo adds it alongside the first rather than replacing it — you can have more than one active at a time.
 - You can activate several repos, or a whole squad's worth, in one request — e.g. "activate repo Guarantors and Resources" or "activate repos for all squad Herbert repos."
+- When you start a ticket that seems to be talking about a repo or you even ask a question that seem to indicate one, the system will automatically activate that repo. So activate repo isn't always needed but it does provide a confirmed way to insure a repo has been included.
 
 ### Starting a New Ticket
 
