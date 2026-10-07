@@ -9,7 +9,7 @@ The content can be downloaded from GitHub here: [https://github.com/SharedServic
 
 ### Platforms
 
-This project was created as a Claude Cowork project, but you can also use Claude Code against it, both for knowledge extraction and for code development. To start, run "initiate project" in Claude Cowork (see Initializing the Project below). When you launch Claude Code against the "AI Ticket Assistant" folder, it works the same way as Claude Cowork. You can also launch Claude Code against a source repository and attach the "AI Ticket Assistant" folder as a second folder to use its knowledge. Sessions launched directly against the Assistant tend to answer from the knowledge base first and add code detail as needed. Claude Code launched against a repository will answer from the code first and is also set up for project updates such as builds and commits.
+This project was created as a Claude Cowork project, but you can also use Claude Code against it, both for knowledge extraction and for code development. To start, run "upgrade project" in Claude Cowork (see Initializing and Upgrading the Project below). When you launch Claude Code against the "AI Ticket Assistant" folder, it works the same way as Claude Cowork. You can also launch Claude Code against a source repository and attach the "AI Ticket Assistant" folder as a second folder to use its knowledge. Sessions launched directly against the Assistant tend to answer from the knowledge base first and add code detail as needed. Claude Code launched against a repository will answer from the code first and is also set up for project updates such as builds and commits.
 
 If you open Visual Studio (or, presumably, another IDE) on the dev-ai-cowork-projects folder, you can check in changes to the AI Ticket Assistant project itself.
 
@@ -17,7 +17,7 @@ If you open Visual Studio (or, presumably, another IDE) on the dev-ai-cowork-pro
 
 Open the Claude app, switch to Cowork, and go to **Projects** in the left panel. Click **+**, select **Use an existing folder**, and point it at the **AI Ticket Assistant** folder.
 
-Then attach your source code. In the project settings, add the **parent folder that contains your source repositories** (for example `C:\unlimited\repositories`, with one subfolder per repository, named as the repository). Attach the parent folder, not a single repository: Cowork can only read what is attached. You can attach it now or later, but a folder attached after a session starts is only visible to new sessions. Without it, Cowork cannot read source code and `initiate project` will say so.
+Then attach your source code. In the project settings, add the **parent folder that contains your source repositories** (for example `C:\unlimited\repositories`, with one subfolder per repository, named as the repository). Attach the parent folder, not a single repository: Cowork can only read what is attached. You can attach it now or later, but a folder attached after a session starts is only visible to new sessions. Without it, Cowork cannot read source code and `upgrade project` will say so.
 
 ### Activating Claude for Chrome
 
@@ -33,9 +33,15 @@ To set it up:
 3. Sign in with your Claude account. Note that this requires a paid plan (Pro, Max, Team, or Enterprise), and only works in Chrome itself, not other Chromium browsers.
 4. Pin the extension to your toolbar so the side panel is easy to open, and grant it permission on the sites you'll use it with.
 
-### Initializing the Project
+### Initializing and Upgrading the Project
 
-Before doing anything else in a new local copy — or again after pulling an update from GitHub that adds skills or changes what `CLAUDE.md` expects — say **"initiate project."** This is a one-time (or occasional re-check) step, not something that happens automatically: Claude asks for your Squad and Pod and records them, along with the location of your source code in `local/user.md`. It finds the source by looking at the folders attached to the project: it reports how many of the project's repos it can see, asks you to choose if more than one folder is attached, and warns if none is. Claude Code reads the recorded location, so it must stay accurate. Claude then packages the skills for you to save (saved skills load in both Cowork and Claude Code), lists any personal Claude Code skills you should delete because they duplicate the saved ones, and smoke-tests both Claude for Chrome and Splunk access so you know on day one whether those surfaces are actually working rather than finding out mid-investigation.
+Before doing anything else in a new local copy — and again after every pull from GitHub — say **"upgrade project."** It is not a skill: Claude reads the instructions for the platform you are in (`upgrade/cowork.md` or `upgrade/code.md`) from the project folder, so a pull always brings the current steps. Run it in both Cowork and Claude Code; each records the project version it last upgraded to in `local/user.md` and tells you when the other one is behind.
+
+In Cowork, Claude asks for your Squad and Pod and records them, along with the location of your source code in `local/user.md`. It finds the source by looking at the folders attached to the project: it reports how many of the project's repos it can see, asks you to choose if more than one folder is attached, and warns if none is. Claude Code reads the recorded location, so it must stay accurate. Claude then packages the skills for you to save (saved skills load in both Cowork and Claude Code) and smoke-tests both Claude for Chrome and Splunk access so you know on day one whether those surfaces are actually working rather than finding out mid-investigation.
+
+In Claude Code, Claude only runs the one-time cleanups that apply to Code, such as removing personal copies of the skills from `~/.claude/skills/` after you approve. It never deletes through a symlink or junction.
+
+If you set up before 2026-10-07, you previously ran "initiate project", which was a skill saved to your Claude account. That old skill still runs the old steps, so `upgrade project` will ask you to delete it (click Customize, select both Skills and Yours in the panel that opens, find `initiate-project`, and delete it), start a new Cowork session, and run `upgrade project` again.
 
 Skipping this isn't fatal — most things will still prompt you for what they need — but your Squad and Pod may be unset (which affects squad- and pod-scoped defaults elsewhere in the project), and a broken Chrome or Splunk connection won't surface until you happen to hit it.
 
@@ -71,9 +77,9 @@ From there, the typical flow follows the steps laid out in the Introduction docu
 
 Start Claude Code (desktop app) in this project's folder ("AI Ticket Assistant"). It then works the same way Cowork does, using the same skills: skills saved to your Claude account load in both products.
 
-1. Run **"initiate project"** once in Cowork and save the skill cards it presents.
+1. Run **"upgrade project"** once in Cowork and save the skill cards it presents, then run it once in Claude Code.
 2. Start Claude Code in this folder and run `/skills` to confirm the `anthropic-skills:` entries are listed (the desktop app lists them; the terminal may not, so invoke one to check).
-3. After pulling an update that adds or changes a skill, run **"initiate project"** in Cowork again and save the re-presented cards.
+3. After pulling an update that adds or changes a skill, run **"upgrade project"** in Cowork again and save the re-presented cards.
 
 This was checked in the desktop app and the terminal. In the terminal, `/skills` did not list the account skills, but they loaded when invoked. The IDE extensions have not been checked.
 

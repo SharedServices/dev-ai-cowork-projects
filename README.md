@@ -12,7 +12,9 @@ A Claude workspace that speeds up diagnostic work on Jira tickets. It helps with
 
 Knowledge is organized by repository and knowledge type, so only the files relevant to a ticket are read.
 
-This repo contains a Claude CoWork project you can start with immediately.  The process is designed to start as a CoWork session about a jira ticket.  Claude Code can be invited into that discussion at any time.
+This repo contains a Claude CoWork project you can start with immediately.  
+
+You can use Claude Code after initial setup with both platforms fully supported.  
 
 ## Documentation
 
@@ -39,3 +41,9 @@ AI Ticket Assistant/
 ├── memories/        Instance-local memories (git-ignored)
 └── local/           User-specific settings (git-ignored)
 ```
+
+## ATTENTION: Upgrade note if installed prior to 10/7/2026
+
+Previous versions installed skills into the Claude Code skills folder.  Starting with this version that is no longer necessary.
+However, one manual step is necessary so those old skills don't override the initial setup.
+

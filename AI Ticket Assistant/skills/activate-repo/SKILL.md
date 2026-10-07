@@ -40,4 +40,4 @@ This is about which tree is being searched, not a blanket restriction on search 
 
 ## Note on platforms
 
-This `SKILL.md` is the sole source for this behavior on both platforms. It is published to the Claude account as a card by `initiate project` (run in Cowork) and loads in both Cowork and Claude Code from there. Edit only `skills/activate-repo/`, then re-run `initiate project` and save the card. See the path-handling note in Steps above for the per-platform paths.
+This `SKILL.md` is the sole source for this behavior on both platforms. It is published to the Claude account as a card by `upgrade project` (run in Cowork) and loads in both Cowork and Claude Code from there. Edit only `skills/activate-repo/`, then re-run `upgrade project` and save the card. See the path-handling note in Steps above for the per-platform paths.

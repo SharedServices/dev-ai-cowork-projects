@@ -3,7 +3,7 @@
 
 ---
 
-### Expediting the Diagnostic Ticket Workflow
+### Expediting Diagnostic Ticket Workflow
 
 Working a reported issue on a Jira ticket generally follows the same steps — and almost always takes longer than it should, because each one tends to start from scratch:
 
@@ -43,7 +43,7 @@ The Assistant supports three main configurations:
 - Claude Code, launched against this project with source repos attached
 - Claude Code, launched against a source repository with this project attached
 
-In Claude Cowork, the source code is only available if you choose to attach it to the project (see Getting Started). Claude Code reads the same folder from the path that `initiate project` records. The first two configurations focus on knowledge access while the third focuses on source changes.
+In Claude Cowork, the source code is only available if you choose to attach it to the project (see Getting Started). Claude Code reads the same folder from the path that `upgrade project` records. The first two configurations focus on knowledge access while the third focuses on source changes.
 
 
 #### Organized for Efficiency
@@ -57,7 +57,9 @@ One key objective is to minimize reading knowledge files unrelated to the ticket
 - Blob storage access
 - Others
 
-This mechanism works best in the first two platform configurations above with Claude Cowork following the hiearchy more faithfully than Claude Code.
+This mechanism works best in the first two platform configurations above with Claude Cowork following the hiearchy more faithfully than Claude Code 
+but Code having an advantage with MCP connectors.
+The third will more quicky revert to file searches replacing knowledge hits.
 
 It's worth calling out that every backend repository resides in its own folder. This isolates knowledge for efficiency, and it also means each repository can be maintained by its owning squad with little overlap between repositories.
 

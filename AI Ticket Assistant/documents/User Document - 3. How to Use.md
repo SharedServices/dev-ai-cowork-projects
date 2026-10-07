@@ -171,9 +171,9 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 
 #### Project & repo setup
 
-##### initiate project
-- *initiate project* / *set up this project* / *onboard me* / *first-time setup*
-- Cowork only. Sets up a fresh copy of this project and re-syncs after skill changes: asks for and records your squad and pod, and the location of the attached source folder (warning if none is attached), packages the skills as cards to save (they then load in Cowork and Claude Code), lists duplicate personal Claude Code skills to delete, and smoke-tests Claude for Chrome and Splunk access.
+##### upgrade project
+- *upgrade project* / *initiate project* / *set up this project* / *onboard me* / *first-time setup*
+- Cowork and Claude Code. Sets up a fresh copy of this project and brings it up to date after a pull. In Cowork: asks for and records your squad and pod, and the location of the attached source folder (warning if none is attached), packages the skills as cards to save (they then load in Cowork and Claude Code), and smoke-tests Claude for Chrome and Splunk access. In Claude Code: runs the one-time cleanups that apply to Code, such as removing personal copies of the skills. Each platform records the project version it last upgraded to and says when to run it on the other.
 
 ##### activate repo
 - *activate repo {name}*

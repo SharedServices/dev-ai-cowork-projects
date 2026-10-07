@@ -12,19 +12,28 @@ Avoid metaphor, analogy, idiom, and filler. Prefer plain, literal, concise langu
 
 ## Current user
 
-The user's Squad, Pod and Source path (the Windows path of the attached source folder, recorded by `initiate project`) for this instance are kept in `local/user.md` — git-ignored, one small file per local copy, created by `initiate project`. The file also holds the Claude account's name and email as reference only. Read it when a task depends on which squad's or pod's repos to default to, where the source code is, or who the user is. On Claude Code started in this project, read it by relative path. If the file is missing or a setting is blank, treat it as unset and do not ask unprompted; suggest `initiate project` only when a squad- or pod-scoped default or a source lookup would have mattered.
+The user's Squad, Pod and Source path (the Windows path of the attached source folder, recorded by `upgrade project`) for this instance are kept in `local/user.md` — git-ignored, one small file per local copy, created by `upgrade project`. The file also holds the upgrade version for each platform and the Claude account's name and email as reference only. Read it when a task depends on which squad's or pod's repos to default to, where the source code is, or who the user is. On Claude Code started in this project, read it by relative path. If the file is missing or a setting is blank, treat it as unset and do not ask unprompted; suggest `upgrade project` only when a squad- or pod-scoped default or a source lookup would have mattered.
 
 ## Source Code
 
-The source code for the repos this project describes is in a parent folder, in subfolders with the same name as the repos in this project. The user attaches that parent folder to the Cowork project in the project settings; `initiate project` records its Windows path as Source path in `local/user.md`.
+The source code for the repos this project describes is in a parent folder, in subfolders with the same name as the repos in this project. The user attaches that parent folder to the Cowork project in the project settings; `upgrade project` records its Windows path as Source path in `local/user.md`.
 
 - **Cowork** can read source only if that folder is attached to the project (and, for a folder attached after a session started, only in a new session). Look for it among the session's attached folders first. Cowork cannot run `dotnet build` or `dotnet test`; those go through Claude Code.
 - **Claude Code** reads source at the Source path in `local/user.md`, provided that path is accurate.
-- If no source is attached and Source path is unset, say so and suggest attaching the folder and running `initiate project`; do not guess a location. Searching one level of the source folder is fine; a recursive sweep of the whole tree times out, so search within a named repo's subfolder.
+- If no source is attached and Source path is unset, say so and suggest attaching the folder and running `upgrade project`; do not guess a location. Searching one level of the source folder is fine; a recursive sweep of the whole tree times out, so search within a named repo's subfolder.
 
-## Project initiation
+## Project upgrade
 
-**When the user says "initiate project"** (or asks to set up, onboard, or do first-time setup on this project instance) — read `skills/initiate-project/SKILL.md` and follow it exactly. It covers recording the user's Squad and Pod (asked for, not passed as arguments), and the Source path read from the attached source folder, in `local/user.md` (warning when no source folder is attached), packaging the skills in `skills/README.md` as cards to save to the account (account skills load in both Cowork and Claude Code), listing duplicate personal skills to remove, and smoke-testing Claude for Chrome and Splunk access. It runs in Cowork only and refuses in Claude Code. The Source path is read from the project's attached source folder, not typed.
+**When the user says "upgrade project"** (or "initiate project", or asks to set up, onboard, upgrade, or do first-time setup on this project instance) — run the procedure below. It is the same on both platforms; only the platform's own document differs. It is not a skill: the instructions load from this project folder every time, so a pull always brings the current version.
+
+1. **Platform.** Cowork if the session has the Cowork tools (`present_files`, an outputs folder); otherwise Claude Code. The platform's document is `upgrade/cowork.md` or `upgrade/code.md`.
+2. **Read** the platform's document, the project version in `upgrade/version.md`, and this platform's recorded version in `local/user.md` (`Upgrade version (Cowork)` or `Upgrade version (Code)`). A missing file or blank version means never upgraded on this platform. Versions are compared as `upgrade/version.md` describes.
+3. **Release steps.** Run every entry under `## Release steps` whose version is newer than this platform's recorded version and not newer than the project version, oldest first (all of them for a blank version). Ignore `Unreleased` entries. A project version with no entry for this platform runs nothing here. Report each entry's outcome in the response as soon as it finishes, before asking the user anything or starting the every-run steps; do not defer it to the closing summary. Repeat any outstanding action in the closing summary.
+4. **Every-run steps.** Run `## Every-run steps`, unless a release step told you to stop; then end the response after reporting what the user must do.
+5. **Record the version.** Write the project version as this platform's `Upgrade version` in `local/user.md`, only if every release step finished and none is waiting on the user. Otherwise leave it unchanged and say which step to finish, then re-run `upgrade project`. Create `local/` and the file if missing; keep every other setting.
+6. **Other platform.** Read the other platform's recorded version in `local/user.md`. If it is blank or older than the project version, end with: "Run `upgrade project` in {Cowork | Claude Code} too." This does not depend on whether that platform has any new instructions. Warn only; never block on it.
+
+The documents own all mechanics (what is recorded, what is published, what is removed). Add a release to the document of each platform it affects, per `documents/project-maintenance.md`.
 
 ## Squads
 
@@ -62,7 +71,7 @@ This project folder is the shared knowledge surface between the Claude app and C
 
 **Companion `README.md` files are never read or relied on during normal investigative use.** Every `README.md` in this project (this one at the root, each repo's own, `skills/README.md`) is maintenance-only documentation — plain human-facing description plus historical color (what changed, when, and why) kept out of the machine-facing `CLAUDE.md`/`SKILL.md` files. Pull behavior and structure from `CLAUDE.md`/`SKILL.md` files only; open a `README.md` only while doing maintenance work per `documents/project-maintenance.md`.
 
-**Claude Code sync scope:** when asked to sync/scan this project, scan **only** `CLAUDE.md`, `references/`, and `skills/`. Do **not** scan `local/`, `memories/`, `cosmos-access/`, or `documents/` — the first three are local to the instance, the last is maintenance-only; none is shared investigative knowledge.
+**Claude Code sync scope:** when asked to sync/scan this project, scan **only** `CLAUDE.md`, `references/`, and `skills/`. Do **not** scan `local/`, `memories/`, `cosmos-access/`, `upgrade/`, or `documents/` — the first three are local to the instance, `upgrade/` holds the `upgrade project` instructions, the last is maintenance-only; none is shared investigative knowledge.
 
 Shared (scan these):
 
@@ -72,11 +81,12 @@ Shared (scan these):
 - **`business-logic/`** — cross-repo (or not-yet-homed) business facts; see `business-logic/CLAUDE.md`. Not covered by `activate-repo` — check separately.
 - **`known-failures/`** — cross-repo (or not-yet-homed) known-failure patterns; see `known-failures/CLAUDE.md`. Empty so far.
 - **`templates/`** — skeletons for scaffolding new repos, business-logic categories, and known-failure patterns. Maintenance-only — see `documents/project-maintenance.md` before using one.
-- **`skills/`** — skill **sources** (`SKILL.md` folders): currently `splunk-search`, `cosmos-query`, `snowdrop-api-calls`, `ticket-workflow`, `instana-query`, `activate-repo`, `initiate-project`, `blob-projection-fetch`. `skills/README.md` holds the full inventory and Claude Code setup instructions — maintenance-only, don't read it during normal use; the individual `SKILL.md` files auto-trigger on their own. Source, not live — a skill reaches the Claude account when its card, presented by `initiate project`, is saved; account skills then load in both Cowork and Claude Code (desktop app).
+- **`skills/`** — skill **sources** (`SKILL.md` folders): currently `splunk-search`, `cosmos-query`, `snowdrop-api-calls`, `ticket-workflow`, `instana-query`, `activate-repo`, `blob-projection-fetch`. `skills/README.md` holds the full inventory and Claude Code setup instructions — maintenance-only, don't read it during normal use; the individual `SKILL.md` files auto-trigger on their own. Source, not live — a skill reaches the Claude account when its card, presented by `upgrade project` in Cowork, is saved; account skills then load in both Cowork and Claude Code (desktop app).
+- **`upgrade/`** — `version.md` (the project version) and `cowork.md` / `code.md` (the per-platform instructions that `upgrade project` runs; see `## Project upgrade`). Read only when running `upgrade project` or maintaining it; not investigative knowledge.
 
 Local (do not scan):
 
-- **`local/`** — per-user settings for this instance of the project; currently `user.md` (Squad, Pod and Source path, plus the account's name and email for reference — see `## Current user`). Ignored by git, so never committed and never present in a new instance created from GitHub. Settings, not memories.
+- **`local/`** — per-user settings for this instance of the project; currently `user.md` (Squad, Pod, Source path and the upgrade version for each platform, plus the account's name and email for reference — see `## Current user`). Ignored by git, so never committed and never present in a new instance created from GitHub. Settings, not memories.
 - **`memories/`** — memories local to this instance of the project: one `.md` per memory plus a `MEMORY.md` index. Ignored by git, so never committed and never present in a new instance created from GitHub. Read the index and pull the relevant file when a question may depend on something recorded locally. Not Claude's own app memory (which is stored outside the project) and not `references/` (which is published and tracked) — see `documents/project-maintenance.md`.
 - **`scratch/`** — disposable, single-use execution scripts (e.g. a one-off "purge and evaluate these 3 remittances" `.ps1` generated for the user to run locally). These have no lasting value once run and are NOT shared knowledge — never put a reusable template, tool, or anything referenced by a skill here. Any script generated for a one-time action against a specific org/remittance/environment goes in `scratch/`, not the project root, so it never gets confused with real project files or skill templates (`skills/*/scripts/`, `cosmos-access/scripts/`). Cleanup is manual — the user deletes from `scratch/` on their own via the file system whenever they like; Claude does not need to ask permission or track what's still needed, since nothing in this folder is ever load-bearing.
 
@@ -208,7 +218,7 @@ The host pattern `sdsh.unlimitedfinancials.{env}` was confirmed for `ninja` on 2
 - **Account naming pattern:** `king-{env}-sharp-be-cdb`
 - **Structure:** identical across all environments — same databases, same containers. Within an account, one dedicated database per service is the default (e.g. `snowdrop-guarantors`, `snowdrop-patients`, `snowdrop-payers`); a shared `snowdrop` database (charge masters, episodes, intake, invoices, etc.) is the exception — see the skill for the confirmed map, don't guess a new entity's database.
 - **Tenant:** accounts are homed in Entra tenant `sharedsvs.onmicrosoft.com` (NOT the org's own `unlimitedsystems.com` tenant). Portal/Data Explorer work cross-tenant, but data-plane AAD tokens and ARM `listKeys` from the org's tenant are rejected (except ninja, which grants `listKeys`).
-- **Skill:** `skills/cosmos-query/SKILL.md` (built — StreamId query model, master-key REST auth, per-env access, gotchas, Data Explorer deeplinks). Installed to the account through the card presented by `initiate project`.
+- **Skill:** `skills/cosmos-query/SKILL.md` (built — StreamId query model, master-key REST auth, per-env access, gotchas, Data Explorer deeplinks). Installed to the account through the card presented by `upgrade project`.
 - **Tooling:** `cosmos-access/scripts/Query-Remittance.ps1` (ninja, key auth, remittance-processing only) writes JSON to `cosmos-access/results/`. For anything else — a different entity, or any non-ninja env — run the StreamId SQL in Data Explorer, export JSON into `cosmos-access/results/`, Claude reads it.
 
 ## Azure Blob Storage
