@@ -1,6 +1,6 @@
 ---
 name: ticket-workflow
-description: "Manages a durable case folder at tickets/{TICKET-ID}/ for any Jira ticket (UF-XXXXX) under investigation — summary.md log, downloads/ for Cosmos/Splunk evidence, code-analysis/ written only by Claude Code. Use when the user says \"start/resume/close a ticket for UF-XXXXX\", \"log this for the ticket\", \"draft a jira comment\", or begins sustained investigation on a ticket number. If the current project has no tickets/ folder yet, offer to create one instead of refusing — it can run in any project. Before starting/resuming with unrelated prior history, ask if a new session is wanted — neither platform can open one automatically. Otherwise check whether tickets/{TICKET-ID}/ exists; if so, read summary.md and recap before continuing. Either platform writes summary.md + downloads/; only Claude Code writes code-analysis/. Jira comments: one comment, Business + Technical Summary, drafted then approved before posting. The folder — not the chat — is the source of truth."
+description: "Manages a durable case folder at tickets/{TICKET-ID}/ for any Jira ticket (UF-XXXXX) under investigation — summary.md log, downloads/ for Cosmos/Splunk evidence, code-analysis/ written only by Claude Code. Use when the user says \"start/resume/close a ticket for UF-XXXXX\", \"log this for the ticket\", \"log progress\", \"draft a jira comment\", or begins sustained investigation on a ticket number. If the current project has no tickets/ folder yet, offer to create one instead of refusing — it can run in any project. Before starting/resuming with unrelated prior history, ask if a new session is wanted — neither platform can open one automatically. Otherwise check whether tickets/{TICKET-ID}/ exists; if so, read summary.md and recap before continuing. Either platform writes summary.md + downloads/; only Claude Code writes code-analysis/. Jira comments: one comment, Business + Technical Summary, drafted then approved before posting. The folder — not the chat — is the source of truth."
 ---
 
 # Ticket Workflow
@@ -256,7 +256,17 @@ working that ticket number.
 
 Do this proactively at natural checkpoints — a root cause confirmed, a hypothesis ruled out, a decision
 made, a ticket comment posted — not after every single message, and not only when asked. Also do it
-immediately whenever the user explicitly says "log/summarize this for the ticket."
+immediately whenever the user says "log progress" or "log/summarize this for the ticket."
+
+"Log progress" is a complete request. The ticket is the one this session is working on; do not ask which
+(ask once only if the session has worked on more than one ticket). Write an entry covering everything since
+the last entry, and save any evidence not yet in `downloads/`. The user often says it just before moving
+to the other platform, so the entry must stand on its own: current status, what was found, what was ruled
+out, open questions, and the next step.
+
+When the entry is written, reply with the entry heading, then end with one line giving the real ticket
+id: "Logged to tickets/{real ticket id}/summary.md. To continue on the other platform, say: resume ticket
+{real ticket id}."
 
 - Append, don't overwrite. Each entry: `## {YYYY-MM-DD} — {short heading}` followed by a few sentences to
   a short paragraph.
