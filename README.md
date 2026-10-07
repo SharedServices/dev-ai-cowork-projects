@@ -1,3 +1,4 @@
+![Version](https://img.shields.io/badge/version-2027.10.7-blue.svg)
 # Unlimited Financials AI Ticket Assistant
 
 A Claude workspace that speeds up diagnostic work on Jira tickets. It helps with each step of an investigation:
@@ -45,5 +46,6 @@ AI Ticket Assistant/
 ## ATTENTION: Upgrade note if installed prior to 10/7/2026
 
 Previous versions installed skills into the Claude Code skills folder.  Starting with this version that is no longer necessary.
-However, one manual step is necessary so those old skills don't override the initial setup.
+The project now has a structured versioning and upgrade mechanism so it is critical that you read the "Getting Started" document again.
+You will be running "upgrade project" which will clean out some old skills and properly boot strap versioning.
 

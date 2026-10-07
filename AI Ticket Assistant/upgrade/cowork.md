@@ -6,7 +6,7 @@ Instructions for `upgrade project` in a Cowork session. Root `CLAUDE.md` ("Proje
 
 One entry per release that needs this platform to do something, oldest first, headed `### {version} — title` (versions as in `upgrade/version.md`). Changes not yet released are headed `### Unreleased — title` and are ignored until the maintainer gives the version. Each entry is a set of checks that report "nothing found" when there is nothing to do, so running it on a fresh install is harmless. If an entry needs the user to act, say what to do and leave the platform's version unchanged so the next run repeats the entry.
 
-### 2026-10-07 — Remove the account `initiate-project` skill
+### 2026.10.7 — Remove the account `initiate-project` skill
 
 `initiate-project` is no longer a skill. `upgrade project` replaces it and runs from this file. An account copy of `initiate-project` still loads, takes over the phrase "initiate project", and runs an old procedure.
 

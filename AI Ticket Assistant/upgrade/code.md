@@ -6,7 +6,7 @@ Instructions for `upgrade project` in a Claude Code session. Root `CLAUDE.md` ("
 
 One entry per release that needs this platform to do something, oldest first, headed `### {version} — title` (versions as in `upgrade/version.md`). Changes not yet released are headed `### Unreleased — title` and are ignored until the maintainer gives the version. Each entry is a set of checks that report "nothing found" when there is nothing to do, so running it on a fresh install is harmless. If an entry needs the user to act, say what to do and leave the platform's version unchanged so the next run repeats the entry.
 
-### 2026-10-07 — Remove personal copies of the account skills
+### 2026.10.7 — Remove personal copies of the account skills
 
 Skills saved to the Claude account load in Claude Code as `anthropic-skills:{name}`. A folder with the same name in `~/.claude/skills/` loads alongside it as a duplicate and can be an older version.
 
