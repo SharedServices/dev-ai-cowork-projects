@@ -18,6 +18,7 @@ file becomes a collision point once more than one contributor adds a fact here. 
 - [`charge-terminology-three-representations/`](charge-terminology-three-representations/CLAUDE.md) — Activities, Ledger, Remittance Processing all mean something different by "Charge," tied together by `ChargeId`.
 - [`unreconciled-check-backlog-vs-month-close/`](unreconciled-check-backlog-vs-month-close/CLAUDE.md) — `snowdrop-resources` month-close and `snowdrop-remittance` reconciliation are separate conditions; a backlog can grow unbounded regardless of month-close.
 - [`standard-nimbus-system-user-id/`](standard-nimbus-system-user-id/CLAUDE.md) — `daeb914f-1df3-470f-9637-0dae563aa034` on any repo's event feed is background processing, not a person.
+- [`payer-response-to-charge-payment-flow/`](payer-response-to-charge-payment-flow/CLAUDE.md) — brief overview of the 835 → `RemittanceCreatedEvent` → charge payments → ledger flow, with links to each repo's modules.
 
 ## Awaiting a repo home (temporary — single repo, no `repos/` folder yet)
 

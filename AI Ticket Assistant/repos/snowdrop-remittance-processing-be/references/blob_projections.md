@@ -15,3 +15,29 @@ Projection blobs stored by this repo. One entry per projection. See root `CLAUDE
 - **Projection:** `Snowdrop.RemittanceProcessing.Runtime.Contracts.Remittances.RemittanceProjection`
 - **Account:** standard
 - **Path template:** `snowdrop-remittanceprocessing/Organizations/{organizationId}/Snowdrop-RemittanceProcessing-Runtime-Contracts-Remittances-RemittanceProjection/{remittanceId}.json`
+
+---
+
+## The catalog projections
+
+One blob per catalog, per organization. Each holds `Elements`, a dictionary of code name to catalog element id (for example `CO-45`, `PR-3`, `QW`, `N381`), used when building charge payments. Confirmed by download for the four below (space).
+
+- **Called:** the catalog projection for contractual adjustment reasons; the adjustment reasons catalog
+- **Projection:** `Snowdrop.RemittanceProcessing.Runtime.Contracts.Catalogs.CatalogCacheProjection`
+- **Account:** standard
+- **Path template:** `snowdrop-remittanceprocessing/Organizations/{organizationId}/Snowdrop-RemittanceProcessing-Runtime-Contracts-Catalogs-CatalogCacheProjection/contractualadjustmentreasons.json`
+
+- **Called:** the catalog projection for transfer reasons; the transfer reasons catalog
+- **Projection:** `Snowdrop.RemittanceProcessing.Runtime.Contracts.Catalogs.CatalogCacheProjection`
+- **Account:** standard
+- **Path template:** `snowdrop-remittanceprocessing/Organizations/{organizationId}/Snowdrop-RemittanceProcessing-Runtime-Contracts-Catalogs-CatalogCacheProjection/transferreasons.json`
+
+- **Called:** the catalog projection for remark codes; the remark codes catalog
+- **Projection:** `Snowdrop.RemittanceProcessing.Runtime.Contracts.Catalogs.CatalogCacheProjection`
+- **Account:** standard
+- **Path template:** `snowdrop-remittanceprocessing/Organizations/{organizationId}/Snowdrop-RemittanceProcessing-Runtime-Contracts-Catalogs-CatalogCacheProjection/remarkcodes.json`
+
+- **Called:** the catalog projection for modifiers; the modifiers catalog
+- **Projection:** `Snowdrop.RemittanceProcessing.Runtime.Contracts.Catalogs.CatalogCacheProjection`
+- **Account:** standard
+- **Path template:** `snowdrop-remittanceprocessing/Organizations/{organizationId}/Snowdrop-RemittanceProcessing-Runtime-Contracts-Catalogs-CatalogCacheProjection/modifiers.json`
