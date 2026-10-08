@@ -147,6 +147,8 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 *draft a comment for the jira ticket explaining that. Be sure to include the times and the user id*
 
 - Drafts one comment with two headed sections, sourced from `summary.md` rather than chat memory, and shows it to you before anything is posted:
+  > **Summary:** **Not a Defect** — payer phone number was changed by a user and changed back; no system fault.
+  >
   > **Business Summary**
   >
   > We investigated the report that the Aetna payer's phone number changed unexpectedly. The record shows the number was changed by a user in your organization on September 24, 2026 at 3:02 PM UTC, and changed back by the same user on September 26, 2026 at 1:47 PM UTC. Both changes were made through the normal payer edit screen. No automated process modified this payer. **Conclusion: this is not a system defect.** The current value matches what the ticket describes as correct.
@@ -203,7 +205,7 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 
 ##### draft a Jira comment
 - *draft a comment to post this conclusion to the jira ticket* / *comments for the jira ticket*
-- Drafts one Jira comment with a Business Summary (plain language, customer-facing) and a Technical Summary (investigation trail, root cause, fix). Only posts once you confirm.
+- Drafts one Jira comment that opens with a one-line Summary (an outcome label such as Resolved, Known Issue, or Not a Defect, plus a few words on the finding), followed by a Business Summary (plain language, customer-facing) and a Technical Summary (investigation trail, root cause, fix). Only posts once you confirm.
 
 ##### post it
 - *post it*

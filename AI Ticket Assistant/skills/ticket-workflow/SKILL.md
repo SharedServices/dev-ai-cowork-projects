@@ -347,12 +347,28 @@ Trigger: the user asks for "comments for the jira ticket," "a comment explaining
 — a request to turn the investigation into something postable to the ticket itself (confirmed shape
 2026-08-06, UF-15723).
 
-**One comment, two sections, draft-then-approve.** This is always a single Jira comment with two clearly
-headed sections — never two separate comments, and never posted straight to Jira without the user reviewing
+**One comment, a summary line plus two sections, draft-then-approve.** This is always a single Jira comment
+with a one-line summary at the top followed by two clearly headed sections — never two separate comments, and never posted straight to Jira without the user reviewing
 it first. Draft it in the conversation, let the user read and adjust it, and only call
 `addCommentToJiraIssue` once they explicitly confirm. This matters because a comment posted to Jira is
 effectively permanent (visible in the ticket's history even if edited later), and the Business Summary
 section in particular may use customer-facing language worth a second look before it's committed.
+
+**Summary line (first line of the comment, above both sections).** One line, in the form
+`**Summary:** {Outcome} — {what happened, in a few words}`. Audience is casual readers scanning the ticket,
+so it must say what kind of result this is without opening the sections. Rules:
+- `{Outcome}` is one bold label. Use **Resolved** when a fix was made or delivered, or **Known Issue** when
+  the finding matches a documented known failure or a confirmed defect with no fix yet. Otherwise use the
+  label that best categorizes the result, e.g. **Not a Defect**, **Data Correction**, **Configuration**,
+  **Pending**.
+- The rest is a quick reference to the finding: plain language, no GUIDs, event names, or internal service
+  names, one line only.
+- It must agree with the Current status stated in the Business Summary and the final state in `summary.md`.
+
+Examples:
+- `**Summary:** **Not a Defect** — rule did not apply because the payer's remittance omitted the DR modifier.`
+- `**Summary:** **Resolved** — charge master fees were not stored after import; fixed in the next release.`
+- `**Summary:** **Known Issue** — duplicate postings from a retried remittance; matches an existing defect, no fix yet.`
 
 **Section 1 — Business Summary.** Audience is customers and business-oriented stakeholders, not
 engineers. Structure:
@@ -379,6 +395,8 @@ should reflect the final state in `summary.md`, not an intermediate one).
 
 **Example (from UF-15723, case 1 — reproduce this shape, not this wording, for a new ticket):**
 
+> **Summary:** **Not a Defect** — rule did not apply because the payer's remittance omitted the DR modifier.
+>
 > **Business Summary**
 >
 > We investigated why the "DR - Suppress Transfers (Specialty Pharmacy)" rule did not remove the $350
