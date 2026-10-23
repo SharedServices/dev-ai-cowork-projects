@@ -23,6 +23,10 @@ generating an Azure Data Explorer deeplink.
 > 2026-10-01** — see "Auto-launching Data Explorer via Claude-in-Chrome" below; this replaces the older
 > "ask the user to navigate themselves" default. **All 11 envs' Data Explorer deeplinks fully confirmed
 > 2026-10-02** — see the *Azure Data Explorer deeplink* table; no more guessed resource-group names.
+> **Direct query through the Azure MCP `cosmos` tool confirmed 2026-10-12** (uno, read-only, no
+> Data Explorer download) — see "Direct query via the Azure MCP cosmos tool" below. **Claude Code runs
+> the query through that tool. Claude Cowork cannot, so it generates a paste block for Claude Code
+> instead** — see "Platform routing" below.
 > **Not yet fully toured:** Plans search,
 > `snowdrop-charge-assemblies-be` (a different team's service — namespace/StreamId info not yet gathered,
 > source doc available when needed), and every other-squad entity — still `{TODO-confirm}`. Don't present
@@ -46,6 +50,7 @@ Each file below is self-contained: StreamId format, database/container, confirme
 | Payers | `repos/snowdrop-payers-api-be/references/cosmos_query.md` **(migrated out of this skill — repo-scoped)** | payer/plan, contracts, fee schedules, global fee schedules, SNF, delinquency thresholds, vendor settings |
 | Charge Masters | `repos/snowdrop-charge-master-be/references/cosmos_query.md` **(migrated out of this skill — repo-scoped)** | company catalogue stream vs. per-charge-master fee stream |
 | Ledgers | `repos/snowdrop-ledger-be/references/cosmos_query.md` **(migrated out of this skill — repo-scoped)** | charge/balance/insurance events, `ChargePostingFailed` error codes |
+| Change Healthcare | `repos/snowdrop-change-healthcare-be/references/cosmos_query.md` | report files (`ReportFileUploaded`), keyed by organization and report id; source of ERA (835) report files for remittance |
 | Invoices | `services/invoices.md` | claim-invoice stream lookup (not a Herbert service — no `Events.md` source doc; StreamId format confirmed by live sample only) |
 | Activities | `services/activities.md` | charge-level activity stream lookup, keyed by `ChargeId` (not a Herbert service — no `Events.md` source doc; StreamId format confirmed by live sample only) |
 
@@ -59,15 +64,81 @@ Each file below is self-contained: StreamId format, database/container, confirme
   **identical across all environments**; only the account name changes.
 - **Envs/tiers:** see root `CLAUDE.md`'s `## Environments` table — canonical list and the "prod is a
   grouping label, not a peer env" rule live there, not here.
-- **The Cowork shell CANNOT reach Azure endpoints** (same constraint as the Function APIs). Any query
-  that actually hits Cosmos must be run from **the user's local machine** (Azure CLI / PowerShell / SDK) or
-  in the **Azure Portal Data Explorer** in the browser. From here, this skill's job is to *generate* the
-  query, the deeplink, or the local command — not to execute it. (Claude can, however, **launch** the
-  browser to the right place — see "Auto-launching Data Explorer via Claude-in-Chrome" below. That's
-  navigation, not query execution; it doesn't change this constraint.)
+- **Platform routing (read first).** The Cowork shell and Cowork's tools cannot reach Azure endpoints
+  (same constraint as the Function APIs), and Cowork does not have the Azure MCP `cosmos` tool. Claude Code
+  does. So:
+  - **Claude Code, ninja:** use the key-based REST path — see "Generating a runnable command for the user
+    (local)" below, with the account's read-only key. The Azure MCP `cosmos` tool returns 401 on ninja
+    (both the `azure-mcp` and `plugin_azure_azure` servers), so do not try it first there.
+  - **Claude Code, other envs:** query Cosmos through the Azure MCP `cosmos` tool — see "Direct query via the
+    Azure MCP cosmos tool" below. Fall back to Data Explorer only if the tool is missing or a call is denied.
+  - **Claude Cowork:** do not try to query, and do not search for the tool. Generate the paste block in
+    "Handing the query to Claude Code" below and tell the user to run it in Claude Code. Data Explorer is a
+    manual alternative: use it in Cowork only when the user asks for it.
+  - **Which platform this is:** Cowork if the session has the Cowork tools (`present_files`, an outputs
+    folder); otherwise Claude Code.
+  The skill's job in Cowork is to *generate* the query, the paste block, the deeplink, or the local command —
+  not to execute it. (Claude can **launch** the browser to Data Explorer — see "Auto-launching Data
+  Explorer via Claude-in-Chrome" below. That's navigation, not query execution; it doesn't change this
+  constraint.)
 - **Authorization:** the user generally has **read** access for investigation; they may not be authorized to
-  run direct queries against every env. Expect Data Explorer (portal RBAC) to be the reliable path; CLI
-  with keys may be blocked. Generate the query regardless and let them run whichever path works.
+  run direct queries against every env. The Azure MCP tool works on every env except ninja, where the
+  read-only key path is used (see "Per-env access"). If a call is denied, Data Explorer (portal RBAC) is the
+  fallback. Generate the query regardless and let them run whichever path works.
+
+### Direct query via the Azure MCP cosmos tool (confirmed 2026-10-12, uno)
+Claude Code only. Use the Azure MCP server's `cosmos` tool (deferred tools need a ToolSearch `select:`
+first) and run the StreamId query directly instead of launching Data Explorer. If the tool is not listed
+or a call is denied, fall back to the Data Explorer path below and say so.
+- **Command:** `cosmos_database_container_item_query` (through the `cosmos` tool's `command`/`parameters`
+  router; `learn=true` lists commands). Parameters: `subscription` (the env's subscriptionId from the
+  *Azure Data Explorer deeplink* table), `account` (`king-{env}-sharp-be-cdb`), `database`, `container`,
+  `query` (Cosmos SQL). Annotated read-only. `cosmos_list` lists accounts, databases and containers.
+- **Auth:** the signed-in Azure identity (Entra token) — no key handling. It works where that identity has
+  a Cosmos data-plane role on the account (see "Per-env access" below).
+- **Does not work on ninja:** returns 401 "authority [dd0a7738-e5d7-49ed-8a01-42e0fd15076c] not trusted by
+  this database account ... tenant(s) []". The cause is that no Cosmos data-plane role is assigned on the
+  ninja account, so the token is refused. Use the key-based REST path for ninja.
+- **Confirmed on:** every env except ninja — `team`, `one`, `exchange`, `cloud`, `app`, `care`, `space`,
+  `uno`, `blue`, `live` — with `SELECT TOP 1 c.id FROM c` (status 200) against account
+  `king-{env}-sharp-be-cdb`, database `snowdrop-remittanceprocessing`, container
+  `snowdrop-remittanceprocessing-events`; StreamId equality queries ordered by `c._ts` were confirmed on
+  `uno`. **Not yet verified:** other containers/databases, result-size limits. If a call is denied, fall
+  back to the Data Explorer path below.
+- **Result shape:** `results.items[0].Documents` (array) and `_count`.
+- **Keep results small:** project fields (`SELECT c.EventNumber, c.EventType, c.ts, c.Data.ClaimPayments ...`)
+  instead of `SELECT *`; `c.Data.<field>` projections, `ORDER BY c._ts ASC` and `AND c.EventNumber IN (...)`
+  all worked. Pull whole documents only for the few events you need.
+- **Still the same rules:** query by `StreamId` equality only (never `CONTAINS`), read-only queries on
+  production, show GUIDs in full. Any write remains out of scope for this tool and needs explicit user
+  confirmation per the Production safety section.
+- A direct query leaves no file behind. When the evidence should live in a ticket, write the returned
+  JSON into the ticket's `downloads/` folder (fresh filename, full absolute path) the same way a Data
+  Explorer download would.
+
+### Handing the query to Claude Code (Claude Cowork)
+In Cowork, when the user asks to query or get events from Cosmos, resolve the env, subscription, account,
+database, container and StreamId from this skill, then output one self-contained block for the user to
+paste into Claude Code. Claude Code has no access to the Cowork conversation, so the block must carry
+everything it needs. Put the block alone in its own fenced code block, with real values substituted (no
+`{placeholders}` left in it; see root `CLAUDE.md`'s placeholder rule) and the full GUIDs:
+
+```
+query cosmos
+env: {env}
+subscription: {subscriptionId from the Data Explorer deeplink table}
+account: king-{env}-sharp-be-cdb
+database: {database}
+container: {container}
+query: SELECT c.EventNumber, c.EventType, c.ts, c.Data FROM c WHERE c.StreamId = "{StreamId}" AND c.Type = "e" ORDER BY c._ts ASC
+save to: {full absolute path of the output file}
+```
+
+Rules for the block:
+- Use the Azure MCP `cosmos` tool's `cosmos_database_container_item_query` command; read-only.
+- If a ticket is active, `save to` is `{project root}\tickets\{TICKET-ID}\downloads\{env}_{service}_{entityId}_{fresh timestamp}.json`, computed fresh with `date` per the *Filename discipline* section. Without an active ticket, use `cosmos-access/results/` with the same naming. Always the full absolute path.
+- Add the ticket id and one line on what the user wants to learn, so Claude Code can summarize and log to `summary.md`.
+- After the block, one line: run it in Claude Code, then say "resume ticket {TICKET-ID}" (or tell Cowork) once the file is saved so Cowork can read it. Do not ask the user to retype the filename.
 
 ### Auth options (local machine)
 - **Entra ID / RBAC** (preferred, no secrets): `az login`, then the SDK / Data Explorer uses your AD
@@ -195,9 +266,11 @@ specifically, and falling back to a click-through if `dataExplorer` doesn't land
 
 ## Auto-launching Data Explorer via Claude-in-Chrome
 
-**Confirmed 2026-10-01, validated live by the user the same day.** When responding to a request to pull
-Cosmos events (or any Data Explorer query) and the Claude-in-Chrome tools are available, Claude should
-navigate the browser directly to the confirmed deeplink for that env (see above) rather than just telling
+**Confirmed 2026-10-01, validated live by the user the same day.** This section applies when the Data
+Explorer path is in use: Claude Code falling back because the MCP tool is missing or denied, or Cowork
+when the user asks for Data Explorer (see "Platform routing"). When responding to a request to pull
+Cosmos events (or any Data Explorer query) on that path and the Claude-in-Chrome tools are available,
+Claude should navigate the browser directly to the confirmed deeplink for that env (see above) rather than just telling
 the user to go there themselves. This is a single `navigate` call — fast (a few seconds), not subject to
 the slowness problem described below, and it reliably lands on the Data Explorer blade with the
 database/container tree visible and, often, the last-used query tab still open.
@@ -231,6 +304,7 @@ Example:
 > ```sql
 > SELECT * FROM c
 > WHERE c.StreamId = "snowdrop-remittanceprocessing->{organizationId}->remittance-processing->{remittanceId}"
+>   AND c.Type = "e"
 > ORDER BY c._ts ASC
 > ```
 >
@@ -275,6 +349,8 @@ StreamId shape is known, always use partition-key equality (`c.StreamId = "…"`
 - **Dotted/qualified form:** `Snowdrop.Patients->{organizationId}->Snowdrop.Patients.Patient->{patientId}` — namespace and aggregate-type use dots and read like a .NET namespace path. Seen on patients, payers, charge masters.
 - **Hybrid form:** dotted namespace + short aggregate word — `snowdrop.ledger.charges->{organizationId}->charge->{chargeId}` (Ledgers).
 
+**Guid format inside a StreamId.** Where an entity id is a guid, use the form real events use. Change healthcare report streams use the compressed form with no dashes (`2bb6a082c1cbf111bf5b6045bdd5cfcf_r5`); streams with the dashed form in that container come from QA test code, which writes them incorrectly, so they are not the convention (the QA test code is ours to correct; see `ticket-workflow`, "QA tests"). If a StreamId query returns nothing, try the other guid form before concluding the stream does not exist.
+
 Which convention a service uses isn't predictable from its name; pull one real event/log line (or the service's `Events.md` source doc, when available) and copy its actual `StreamId` shape rather than guessing. See the *Service reference files* table above for every confirmed shape.
 
 ### Entity → database / container map
@@ -291,6 +367,7 @@ Which convention a service uses isn't predictable from its name; pull one real e
 | Payers (main + Factory) | `snowdrop-payers` (dedicated) | `snowdrop-payers-events`, `snowdrop-payers-factory-events` | `repos/snowdrop-payers-api-be/references/cosmos_query.md` (migrated, repo-scoped) |
 | Charge masters | `snowdrop` (the shared exception) | `snowdrop-chargemasters-events` | `repos/snowdrop-charge-master-be/references/cosmos_query.md` (migrated, repo-scoped) |
 | Ledgers | `snowdrop-ledger` (dedicated) | six `sd-*`-prefixed containers | `repos/snowdrop-ledger-be/references/cosmos_query.md` (migrated, repo-scoped) |
+| Change Healthcare | `snowdrop` (the shared exception) | `snowdrop-change-healthcare-events` | `repos/snowdrop-change-healthcare-be/references/cosmos_query.md` |
 | Invoices | `snowdrop` (the shared exception) | `snowdrop-invoices-events` | `services/invoices.md` |
 | _(others)_ | `{TODO-confirm}` | `{TODO-confirm}` | — |
 
@@ -299,6 +376,20 @@ Which convention a service uses isn't predictable from its name; pull one real e
 `snowdrop-activities-charges-events` is a real container (confirmed 2026-07-07) but belongs to a **non-Herbert namespace** ("Activities," a different squad). **StreamId format now confirmed 2026-08-06 (UF-15723)** — see `services/activities.md`; entity id = `ChargeId` directly, no discovery step needed (unlike Invoices). Database/container name still not fully verified against a live query. `snowdrop-guarantors` events carry real PII outside ninja — see `repos/snowdrop-guarantors-be/references/cosmos_query.md`.
 
 ---
+
+### Document types in an event feed (`Type`) — filter to `e`
+
+A StreamId in an event container holds more than the events. Every document has a `Type`:
+
+| `Type` | What it is | In a StreamId query |
+|---|---|---|
+| `e` | Entity event: the real event, with `EventType`, `Data` and `Metadata`. | **What you want.** Add `AND c.Type = "e"` to every event query. |
+| `v` | Version record. `id` is `_version_{StreamId}`, same StreamId, `EventNumber` is always the number of the **last** event in the stream, no `EventType` or `Data`. | Appears as an extra document, with an `EventNumber` that repeats the last event's. Expected, not a duplicate or a problem. |
+| `s` | Snapshot and system documents. Seen: `_collection_creator_thumbprint` with StreamId `_system`. There are other types related to snapshotting; their values are not captured here yet. | Not events. Seen in container-wide queries, for example `SELECT TOP 1 c.id FROM c` on a container. |
+
+Confirmed on team: a change healthcare report stream returned one `v` and one `e` document; `snowdrop-remittanceprocessing-events` holds `e`, `s` and `v`. The `e` document `id` is `{EventNumber}+{entity}->{namespace}`.
+
+So a StreamId query without the `Type` filter returns one more document than there are events, with no `EventType`. Do not report that, or a repeated `EventNumber`, as odd. The last event number is the version record's `EventNumber`. Read the first and last event from `e` documents only.
 
 ## Universal event envelope (confirmed across services 2026-07-07)
 
@@ -375,15 +466,13 @@ prefer it.
 **There is NO working `az cosmosdb sql query` data-plane command** — it's not in the stable CLI and the
 preview one returns "query is misspelled or not recognized" (verified 2026-06-25). Don't suggest it.
 
-**AAD/Entra data-plane auth does NOT work for these accounts (confirmed 2026-06-25):** a token minted
-from the user's tenant is rejected with 401 "authority [<tid>] not trusted by this database account …
-tenant(s) []" — even as a correct v2 token from their only tenant. The Cosmos account is homed in a
-**different Entra tenant**. Portal Data Explorer still works because it uses the **account key**, not the
-user's identity. So: **use master-key (HMAC) auth**, same as Data Explorer.
+**Entra data-plane auth works only where a Cosmos data-plane role is assigned.** Without one (ninja), a
+token minted from the user's tenant is rejected with 401 "authority [<tid>] not trusted by this database
+account … tenant(s) []". Portal Data Explorer works there because it uses the **account key**, not the
+user's identity. So where the Azure MCP tool is refused: **use master-key (HMAC) auth**, same as Data
+Explorer. The read-only key is enough for queries.
 
-**Working path: `az` to fetch the account key, REST + master-key auth for the query.** Ready-to-run
-parameterized script: `cosmos-access/scripts/Query-Remittance.ps1` (writes results to
-`cosmos-access/results/`). Core of it:
+**Working path: `az` to fetch the account key, REST + master-key auth for the query.** Core of it:
 
 ```powershell
 $account  = "king-{env}-sharp-be-cdb"; $host_ = "https://$account.documents.azure.com"
@@ -402,7 +491,7 @@ $headers = @{
   "x-ms-documentdb-isquery"    = "True"
   "x-ms-documentdb-partitionkey" = '["' + $streamId + '"]'   # LITERAL array — see gotcha below
 }
-$body = @{ query = "SELECT * FROM c WHERE c.StreamId = '$streamId'" } | ConvertTo-Json -Compress
+$body = @{ query = "SELECT * FROM c WHERE c.StreamId = '$streamId' AND c.Type = 'e'" } | ConvertTo-Json -Compress
 (Invoke-RestMethod -Method Post -ContentType "application/query+json" `
    -Uri "$host_/dbs/snowdrop-remittanceprocessing/colls/snowdrop-remittanceprocessing-events/docs" `
    -Headers $headers -Body $body).Documents | ConvertTo-Json -Depth 25
@@ -414,19 +503,28 @@ $body = @{ query = "SELECT * FROM c WHERE c.StreamId = '$streamId'" } | ConvertT
   or, better, have Claude launch Data Explorer there directly (see "Auto-launching Data Explorer via
   Claude-in-Chrome" above) and hand over the query/path as pastable blocks.
 
-### Why AAD/listKeys fail (root cause, confirmed 2026-06-25 via portal)
-The Cosmos accounts are homed in a **different Entra tenant — `sharedsvs.onmicrosoft.com`** — than the org's own
-`unlimitedsystems.com`. The user's access is cross-tenant/delegated, so the **portal and Data Explorer work**,
-but **data-plane AAD tokens from that tenant are rejected** and **ARM `listKeys` is denied** (except ninja).
-`team` subscription `247c6a4e-97b7-4df7-b9f2-3fe2b56c6bff`, RG `king-team-rg-sharp-becdb-ue`.
+### Why the MCP tool fails on ninja only
+The Cosmos accounts are configured the same on all 11 envs (key auth enabled, public network enabled). The
+difference is role assignments: the Entra group `Sharp Engineers`, which the user belongs to, holds the
+Cosmos DB Built-in Data Reader data-plane role on the account in every env except ninja, where no data-plane
+role is assigned. The accounts are also under the `sharedsvs.onmicrosoft.com` tenant for portal navigation
+(Data Explorer deeplinks use that tenant slug). `team` subscription
+`247c6a4e-97b7-4df7-b9f2-3fe2b56c6bff`, RG `king-team-rg-sharp-becdb-ue`.
 
-### Per-env access (confirmed 2026-06-25)
-- **ninja:** the user has ARM `listKeys` → the key-based script works end-to-end.
-- **team (and presumably all other envs):** the user does **NOT** have `Microsoft.DocumentDB/databaseAccounts/listKeys/action`
-  (`AuthorizationFailed`), and AAD is rejected (different tenant). So the script can't auth there. **Use
-  Data Explorer** (their portal access there is via a data-plane role, not ARM listKeys): run the StreamId
-  SQL, **Download Query Results (JSON)** into `cosmos-access/results/` (fresh filename), and Claude reads
-  that file to summarize — same as a script run. Don't bother running the script for non-ninja envs.
+### Per-env access
+- **Every env except ninja:** the Azure MCP `cosmos` tool works with the signed-in identity (status 200 on
+  all ten). Use it. The user's Cosmos DB Account Reader role also allows `az cosmosdb keys list --type
+  read-only-keys` on every env (tested on all 11), but there is no need to use keys where the MCP tool works.
+- **ninja:** no Cosmos data-plane role, so the MCP tool returns 401. Use the key-based path with the
+  read-only key
+  (`az cosmosdb keys list -n king-ninja-sharp-be-cdb -g king-ninja-rg-sharp-becdb-ue --subscription
+  "uf-kingdom - Ninja" --type read-only-keys --query primaryReadonlyMasterKey -o tsv`), passed to the query
+  through an environment variable; never print it or write it to the project. Confirmed with a StreamId
+  query on `snowdrop-remittance` / `snowdrop-remittance-events` using Python `urllib` with the HMAC signing
+  described above (the PowerShell snippet above was not run). Write the request inline.
+- Primary (read-write) account keys were not tested. Use the read-only key.
+- If a call is denied on any env, use Data Explorer: run the StreamId SQL, **Download Query Results (JSON)**
+  into `cosmos-access/results/` (fresh filename), and Claude reads that file to summarize.
 
 ### Filename discipline for Data Explorer downloads (confirmed 2026-07-30, full-path rule added 2026-08-02)
 The user's Chrome shows a **Save As dialog** when downloading query results — they have to interact with it
@@ -482,7 +580,15 @@ several queries target the same entity across different services. Put the path i
 As dialog with zero editing.
 
 ### Responding to "get events for X"
-When the user asks to "get events for" an entity, **launch Data Explorer for the right account directly**
+**Claude Code:** on ninja, use the key-based REST path (see "Per-env access"); on other envs use the Azure
+MCP `cosmos` tool (see "Direct query via the Azure MCP cosmos tool"
+above): run the StreamId query yourself with a field projection, summarize the result, and skip the Data
+Explorer launch and download steps below. Use the steps below only when that tool is missing or denied.
+
+**Claude Cowork:** output the paste block from "Handing the query to Claude Code" and stop there. Do not
+launch Data Explorer unless the user asks for it.
+
+When the user asks for the Data Explorer path (or Claude Code needs the fallback), **launch Data Explorer for the right account directly**
 (see "Auto-launching Data Explorer via Claude-in-Chrome" above) when the Claude-in-Chrome tools are
 available, then give the database/container context, the query, and the download path exactly per that
 section's response shape: one line confirming the launch, the query in its own fenced block, the download

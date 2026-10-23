@@ -3,7 +3,7 @@ name: blob-projection-fetch
 description: >
   Fetch a projection blob (e.g. "the remittance projection") from Azure Blob Storage for an Unlimited
   Systems environment and save it into a ticket's downloads/ folder. Claude Code downloads the blob with
-  the Azure CLI (`az storage blob download --auth-mode login`). The Claude app (Cowork) cannot reach Azure, so there it resolves the account, container,
+  the Azure CLI (`az storage blob download`, `--auth-mode login`, or `key` on ninja). The Claude app (Cowork) cannot reach Azure, so there it resolves the account, container,
   blob path, and destination, then outputs a self-contained "fetch blob projection" block to paste into
   Claude Code. Use when the user says "get/fetch/pull the {name} projection", "blob projection", or pastes
   a block starting with "fetch blob projection". Works in a Claude Code session that is not attached to
@@ -13,7 +13,7 @@ description: >
 # Blob Projection Fetch
 
 Projection blobs are JSON snapshots stored by services in Azure Blob Storage. Only Claude Code can read
-them (Azure CLI with Entra login). The Azure MCP storage tool cannot download blob content (it returns
+them (Azure CLI with Entra login, or the account key on ninja). The Azure MCP storage tool cannot download blob content (it returns
 properties only), so it is not used for the download. The Claude app resolves everything and hands off; Claude Code downloads and saves.
 
 ## The handoff block
@@ -22,8 +22,8 @@ A block is self-contained: every value needed to download and save is in it. A C
 this skill installed needs no other project knowledge to act on it.
 
 ```
-fetch blob projection (read-only, Entra login)
-tool: az storage blob download --auth-mode login
+fetch blob projection (read-only, Entra login (account key on ninja))
+tool: az storage blob download --auth-mode {login, or key on ninja}
 projection: {name as the user calls it}
 env: {env}
 subscription: uf-kingdom - {Env}
@@ -69,19 +69,37 @@ this session (see `ticket-workflow`), otherwise the project's `scratch/`.
 Then:
 
 1. State the subscription, account, container, and blob name that will be used, then download the blob
-   with `az storage blob download --auth-mode login --account-name {account} --container-name
-   {container} --name "{blob}" --file "{destination}" --no-progress`. The `--subscription` value is
+   with `az storage blob download --auth-mode {mode} --account-name {account} --container-name
+   {container} --name "{blob}" --file "{destination}" --no-progress`, where `{mode}` is `login` for every
+   env except ninja and `key` for ninja (see item 4). The `--subscription` value is
    the block's subscription. Production environments are read-only here; this skill never writes,
    deletes, or overwrites blobs. Optionally call the Azure MCP `storage_blob_get` first to confirm the
-   blob exists and get its size and last-modified time; it cannot download content.
+   blob exists and get its size and last-modified time; it cannot download content (on envs other than
+   ninja it works with the signed-in identity; on ninja it returns 403).
+
+   On ninja, `--auth-mode key` makes `az` look up the account key itself, which can take longer than two
+   minutes. If it is slow, fetch the key once and pass it through the environment instead (never print it
+   or write it to a file in the project):
+   `export AZURE_STORAGE_KEY="$(az storage account keys list --account-name {account} -g {resource-group} --subscription "{subscription}" --query "[0].value" -o tsv)"`,
+   then run the same download command. This took about 3 seconds. The resource group of
+   `kingninjasharpsdstg` is `king-ninja-rg-sharp-snowdrop-ue`; look up another account's with
+   `az storage account list --subscription "{subscription}" --query "[?name=='{account}'].resourceGroup" -o tsv`.
 2. Save the content exactly as downloaded to the destination path. Do not reformat or edit it. Create the
    destination folder if missing. If the filename already exists, add a new timestamp rather than
    overwriting.
 3. Report: the full destination path, size, top-level field names, and blob last-modified time if
    `storage_blob_get` was called. Check the saved file size against the blob size. Do not print the contents unless asked.
-4. `az` with `--auth-mode login` (Entra) is the approved method. If it is unavailable or returns an
-   authorization error, say so plainly and stop. Do not fall back to account keys, SAS tokens,
-   connection strings, `curl`, or other direct HTTP calls.
+4. Auth method by env:
+   - **Every env except ninja:** `--auth-mode login` (Entra). The signed-in account holds Storage Blob Data
+     Reader on the subscription of each of these envs, and a blob listing with login auth succeeded on all
+     ten. Do not use account keys here: `listKeys` on the storage accounts is denied on all ten
+     (`AuthorizationFailed`).
+   - **ninja:** `--auth-mode key`. The signed-in account has no Storage Blob Data role there (login auth and
+     the Azure MCP `storage` tool both fail, 403 `AuthorizationPermissionMismatch`), but it can list the
+     storage account keys. The key is used read-only, only to download.
+   If the method for the env returns an authorization error, say so plainly and stop. Do not fall back to
+   SAS tokens, connection strings, `curl`, or other direct HTTP calls, and do not use a different auth mode
+   than the one listed for the env.
 5. If the blob is not found, report the full account, container, and blob name that was tried. Do not
    guess alternative paths; path shapes differ per projection.
 

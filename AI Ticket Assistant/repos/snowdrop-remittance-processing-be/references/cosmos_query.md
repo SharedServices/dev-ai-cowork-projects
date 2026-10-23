@@ -25,6 +25,7 @@ This service writes **six** streams, all in the one container above — don't as
 ```sql
 SELECT * FROM c
 WHERE c.StreamId = "snowdrop-remittanceprocessing->{organizationId}->remittance-processing-rule->{ruleId}"
+  AND c.Type = "e"
 ORDER BY c._ts ASC
 ```
 
@@ -36,6 +37,7 @@ ORDER BY c._ts ASC
 ```sql
 SELECT * FROM c
 WHERE c.StreamId = "snowdrop-remittanceprocessing->{organizationId}->remittance-processing->{remittanceId}"
+  AND c.Type = "e"
 ORDER BY c._ts ASC
 ```
 Match a specific event class with `(c.EventType = "X" OR c.SubEventType = "X")` (event-type field fallback — see main SKILL.md *Conventions*).
@@ -75,6 +77,7 @@ investigating posting slowness, compare `StatusChanged` (this stream) against `C
 ```sql
 SELECT c.EventType, COUNT(1) AS n FROM c
 WHERE c.StreamId = "snowdrop-remittanceprocessing->{organizationId}->remittance-processing->{remittanceId}"
+  AND c.Type = "e"
 GROUP BY c.EventType
 ```
 

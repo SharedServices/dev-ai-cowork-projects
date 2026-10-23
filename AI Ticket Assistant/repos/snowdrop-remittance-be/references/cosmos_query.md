@@ -14,6 +14,7 @@ Aggregate-type segment: `remittance`.
 ```sql
 SELECT * FROM c
 WHERE c.StreamId = "snowdrop-remittance->{organizationId}->remittance->{remittanceId}"
+  AND c.Type = "e"
 ORDER BY c._ts ASC
 ```
 

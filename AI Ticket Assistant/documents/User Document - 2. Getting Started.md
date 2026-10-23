@@ -81,6 +81,8 @@ Start Claude Code (desktop app) in this project's folder ("AI Ticket Assistant")
 2. Start Claude Code in this folder and run `/skills` to confirm the `anthropic-skills:` entries are listed (the desktop app lists them; the terminal may not, so invoke one to check).
 3. After pulling an update that adds or changes a skill, run **"upgrade project"** in Cowork again and save the re-presented cards.
 
+To bring a Cowork project into a Claude Code session that was started in another folder, say **"activate cowork {name}"**, or just **"activate cowork"** to return to the last one. The first time, Claude asks for the full path of your Cowork projects folder and saves it in your global `~/.claude/CLAUDE.md` (running "upgrade project" in Claude Code can record it too). That file is separate from `local/user.md`: the global file is read before Claude knows where any project is, while `local/user.md` (squad, pod, source path, upgrade versions) sits inside this project and is found only after the project is known. After "activate cowork", "activate repo {name}" works against the activated project. See "activate cowork" in the How to Use document.
+
 This was checked in the desktop app and the terminal. In the terminal, `/skills` did not list the account skills, but they loaded when invoked. The IDE extensions have not been checked.
 
 ### Working a Feature Ticket

@@ -11,7 +11,7 @@ Working a reported issue on a Jira ticket generally follows the same steps — a
 - Collecting key references: environment, organization, entity id.
 - Determining what *did* happen: pulling production detail from Cosmos, Splunk, and the APIs.
 - Determining what *should have* happened: business logic, code review, checking with teammates.
-- Correcting the problem in code, when there is one.
+- Correcting and testing the problem in code, when there is one.
 - Reporting the outcome to Jira.
 - Abandoning the rich context, data, and analysis just collected.
 
@@ -25,7 +25,7 @@ Here's how this workspace helps with each one.
 
 **Determining what should have happened.** Every repository's business rules and confirmed known issues are already organized and waiting, so "is this actually broken, or is it working as designed" often has an answer on file rather than requiring a teammate's memory. And when it doesn't — when someone corrects an assumption on the spot — that correction is captured immediately in the right place, so the answer is on file for the *next* ticket too, instead of being re-explained from scratch.
 
-**Correcting the problem in code.** Not every ticket ends with just an explanation — some need an actual fix. When that's the case, Claude Code steps directly into the same investigation: reading the full analysis gathered so far from the ticket folder, working through the fix itself, and leaving its own summary behind. That summary feeds straight back into the Jira report, so the technical write-up reflects the real fix that was made rather than a guess at what one might look like.
+**Correcting and testing the problem in code.** Not every ticket ends with just an explanation — some need an actual fix. When that's the case, Claude Code steps directly into the same investigation: reading the full analysis gathered so far from the ticket folder, working through the fix itself, testing it, and leaving its own summary behind. Testing covers the unit tests that run against the code and, where the behavior can be reproduced through the deployed services, API tests in a non-production environment. That summary feeds straight back into the Jira report, so the technical write-up reflects the real fix that was made and how it was tested rather than a guess at what one might look like.
 
 **Reporting the outcome to Jira.** Whether the conclusion is "working as designed" or "here's the fix," the write-up doesn't start from a blank page. A two-part summary — plain-language for the business side, technical detail with the exact rule, ids, and root cause for engineering — drafts itself from the investigation trail already logged, tracked against the ticket's status and category as the investigation happens rather than reconstructed at the end from memory. Posting it back to Jira is a review-and-confirm away, not a rewrite.
 
@@ -43,7 +43,12 @@ The Assistant supports three main configurations:
 - Claude Code, launched against this project with source repos attached
 - Claude Code, launched against a source repository with this project attached
 
-In Claude Cowork, the source code is only available if you choose to attach it to the project (see Getting Started). Claude Code reads the same folder from the path that `upgrade project` records. The first two configurations focus on knowledge access while the third focuses on source changes.
+In Claude Cowork, the source code is only available if you choose to attach it to the project (see Getting Started). Claude Code reads the same folder from the Source path that `upgrade project` records in the project's `local/user.md`. The first two configurations focus on knowledge access while the third focuses on source changes.
+
+Two recorded locations serve different purposes and are not interchangeable:
+
+- **Source path** (`local/user.md`, inside this project): the folder holding the source repositories. It is recorded by `upgrade project` and is read once Claude already knows where this project is.
+- **Cowork projects folder** (`~/.claude/CLAUDE.md`, Claude Code only): the folder that holds your Cowork project folders. It is needed before Claude Code knows where this project is, so that in the third configuration "activate cowork {name}" can find the project and read its `CLAUDE.md` instead of having to attach it. Claude Code asks for it the first time, and `upgrade project` in Claude Code can record it.
 
 
 #### Organized for Efficiency

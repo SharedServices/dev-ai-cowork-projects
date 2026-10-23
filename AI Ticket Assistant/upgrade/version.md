@@ -1,6 +1,6 @@
 # Project version
 
-Current version: 2026.10.7
+Current version: 2026.10.21
 
 The single version of this project for `upgrade project`. Each platform records the version it last upgraded to in `local/user.md` (`Upgrade version (Cowork)`, `Upgrade version (Code)`), and is behind when that version is blank or older than the version above. The maintainer sets the version when publishing a release; Claude writes it here when told. Do not change it otherwise.
 

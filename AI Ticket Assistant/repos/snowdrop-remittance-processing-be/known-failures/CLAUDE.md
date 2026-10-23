@@ -5,3 +5,4 @@
 - `quiet-failed-read-in-cross-service-event-handler/` — cross-service event silently no-ops, no exception logged.
 - `auto-post-arePosting-append-lost-leaves-claim-payment-initialized/` — claim payment never starts posting after an auto-post; check stays in Posting.
 - `claim-payments-added-to-check-in-closed-ledger-month/` — claim payments added after month close return a Posted check to Building; fix is a projection edit.
+- `adjust-to-zero-not-in-memory-image-blocks-auto-post/` — claim payment with a balance cleared only by an AdjustToZero rule is not auto-posted.

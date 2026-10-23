@@ -1,0 +1,9 @@
+{
+  "template": {
+    "name": "Empty",
+    "description": "One check with nothing set and no claims. Start here and describe what you want."
+  },
+  "checks": [
+    {}
+  ]
+}

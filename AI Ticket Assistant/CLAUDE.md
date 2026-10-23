@@ -71,24 +71,26 @@ This project folder is the shared knowledge surface between the Claude app and C
 
 **Companion `README.md` files are never read or relied on during normal investigative use.** Every `README.md` in this project (this one at the root, each repo's own, `skills/README.md`) is maintenance-only documentation — plain human-facing description plus historical color (what changed, when, and why) kept out of the machine-facing `CLAUDE.md`/`SKILL.md` files. Pull behavior and structure from `CLAUDE.md`/`SKILL.md` files only; open a `README.md` only while doing maintenance work per `documents/project-maintenance.md`.
 
-**Claude Code sync scope:** when asked to sync/scan this project, scan **only** `CLAUDE.md`, `references/`, and `skills/`. Do **not** scan `local/`, `memories/`, `cosmos-access/`, `upgrade/`, or `documents/` — the first three are local to the instance, `upgrade/` holds the `upgrade project` instructions, the last is maintenance-only; none is shared investigative knowledge.
+**Claude Code sync scope:** when asked to sync/scan this project, scan **only** `CLAUDE.md`, `references/`, and `skills/`. Do **not** scan `local/`, `memories/`, `upgrade/`, or `documents/` — the first two are local to the instance, `upgrade/` holds the `upgrade project` instructions, the last is maintenance-only; none is shared investigative knowledge.
 
 Shared (scan these):
 
 - **`CLAUDE.md`** — this file: the layout map plus the workspace operating rules below.
-- **`references/`** — published, tracked lookup docs shared across repos: `namespaces.md`, `cowork-flow-analysis.md`. Never hand-edited in place — see `documents/project-maintenance.md`. Per-repo reference material (including `Events.md`, ground truth for a repo's events — a curated skill summary being silent on something doesn't mean it doesn't exist) lives inside that repo's own `repos/{repo}/references/` instead, not here.
+- **`references/`** — published, tracked lookup docs shared across repos: `namespaces.md`, `cowork-flow-analysis.md`, `nimbus-organizations.md`. Never hand-edited in place — see `documents/project-maintenance.md`. Per-repo reference material (including `Events.md`, ground truth for a repo's events — a curated skill summary being silent on something doesn't mean it doesn't exist) lives inside that repo's own `repos/{repo}/references/` instead, not here.
 - **`repos/`** — per-repo folders (`CLAUDE.md`, `README.md`, `references/`, `business-logic/`, `known-failures/`). See `documents/project-maintenance.md` before creating a new one.
 - **`business-logic/`** — cross-repo (or not-yet-homed) business facts; see `business-logic/CLAUDE.md`. Not covered by `activate-repo` — check separately.
 - **`known-failures/`** — cross-repo (or not-yet-homed) known-failure patterns; see `known-failures/CLAUDE.md`. Empty so far.
+- **`API Tests/`** — one procedure document per API test scenario (how to repeat a test through the deployed APIs in a non-production environment). Run or write them with the `api-testing` skill, which holds the rules common to every procedure.
 - **`templates/`** — skeletons for scaffolding new repos, business-logic categories, and known-failure patterns. Maintenance-only — see `documents/project-maintenance.md` before using one.
-- **`skills/`** — skill **sources** (`SKILL.md` folders): currently `splunk-search`, `cosmos-query`, `snowdrop-api-calls`, `ticket-workflow`, `instana-query`, `activate-repo`, `blob-projection-fetch`. `skills/README.md` holds the full inventory and Claude Code setup instructions — maintenance-only, don't read it during normal use; the individual `SKILL.md` files auto-trigger on their own. Source, not live — a skill reaches the Claude account when its card, presented by `upgrade project` in Cowork, is saved; account skills then load in both Cowork and Claude Code (desktop app).
+- **`skills/`** — skill **sources** (`SKILL.md` folders): currently `splunk-search`, `cosmos-query`, `snowdrop-api-calls`, `ticket-workflow`, `instana-query`, `activate-repo`, `activate-cowork`, `blob-projection-fetch`, `api-testing`, `era-builder`. `skills/README.md` holds the full inventory and Claude Code setup instructions — maintenance-only, don't read it during normal use; the individual `SKILL.md` files auto-trigger on their own. Source, not live — a skill reaches the Claude account when its card, presented by `upgrade project` in Cowork, is saved; account skills then load in both Cowork and Claude Code (desktop app).
 - **`upgrade/`** — `version.md` (the project version) and `cowork.md` / `code.md` (the per-platform instructions that `upgrade project` runs; see `## Project upgrade`). Read only when running `upgrade project` or maintaining it; not investigative knowledge.
 
 Local (do not scan):
 
 - **`local/`** — per-user settings for this instance of the project; currently `user.md` (Squad, Pod, Source path and the upgrade version for each platform, plus the account's name and email for reference — see `## Current user`). Ignored by git, so never committed and never present in a new instance created from GitHub. Settings, not memories.
 - **`memories/`** — memories local to this instance of the project: one `.md` per memory plus a `MEMORY.md` index. Ignored by git, so never committed and never present in a new instance created from GitHub. Read the index and pull the relevant file when a question may depend on something recorded locally. Not Claude's own app memory (which is stored outside the project) and not `references/` (which is published and tracked) — see `documents/project-maintenance.md`.
-- **`scratch/`** — disposable, single-use execution scripts (e.g. a one-off "purge and evaluate these 3 remittances" `.ps1` generated for the user to run locally). These have no lasting value once run and are NOT shared knowledge — never put a reusable template, tool, or anything referenced by a skill here. Any script generated for a one-time action against a specific org/remittance/environment goes in `scratch/`, not the project root, so it never gets confused with real project files or skill templates (`skills/*/scripts/`, `cosmos-access/scripts/`). Cleanup is manual — the user deletes from `scratch/` on their own via the file system whenever they like; Claude does not need to ask permission or track what's still needed, since nothing in this folder is ever load-bearing.
+- **`ERAs/`** — ERA files saved by the `era-builder` skill (recipe files that hold test data merged from an organization). Ignored by git. Not shared knowledge.
+- **`scratch/`** — disposable, single-use execution scripts (e.g. a one-off "purge and evaluate these 3 remittances" `.ps1` generated for the user to run locally). These have no lasting value once run and are NOT shared knowledge — never put a reusable template, tool, or anything referenced by a skill here. Any script generated for a one-time action against a specific org/remittance/environment goes in `scratch/`, not the project root, so it never gets confused with real project files or skill templates (`skills/*/scripts/`). Cleanup is manual — the user deletes from `scratch/` on their own via the file system whenever they like; Claude does not need to ask permission or track what's still needed, since nothing in this folder is ever load-bearing.
 
 Maintenance (read only per `documents/project-maintenance.md`, not during normal use):
 
@@ -96,7 +98,7 @@ Maintenance (read only per `documents/project-maintenance.md`, not during normal
 
 Case records (open directly when working a specific ticket — not part of the general scan, but not disposable scratch either):
 
-- **`tickets/{TICKET-ID}/`** — one folder per Jira ticket under active or past investigation. See "Ticket folders" below for the full convention. Unlike `cosmos-access/` and `scratch/`, this is durable and meant to outlive any single conversation — the folder, not the chat history, is the source of truth for "what did we find on UF-XXXXX."
+- **`tickets/{TICKET-ID}/`** — one folder per Jira ticket under active or past investigation. See "Ticket folders" below for the full convention. Unlike `scratch/`, this is durable and meant to outlive any single conversation — the folder, not the chat history, is the source of truth for "what did we find on UF-XXXXX."
 
 ## Repos
 
@@ -213,13 +215,17 @@ https://sdsh.unlimitedfinancials.ninja/7516f05b-68d9-4095-9edd-348f4b1788c4/paye
 
 The host pattern `sdsh.unlimitedfinancials.{env}` was confirmed for `ninja` on 2026-05-14. Other envs are presumed to follow the same pattern but haven't been seen yet — if a host suffix doesn't match a known env, ask before guessing.
 
+## Organization name to id
+
+When the user gives an organization name (or tag) and an `organizationId` is needed, look it up in Nimbus; never guess an id or search repos for it. Nimbus has two customer-list APIs, each returning every customer with its organizations: `https://nimbusapi.ucp.ninja/organizations-api/customers` for ninja and team, and `https://nimbusapi.unlimited.systems/organizations-api/customers` for every other environment (exchange, one and the production environments). Open the URL in a tab in Claude for Chrome (the sandbox cannot reach it; the browser must be signed in) and filter the list in the page by tag, organization name or customer name. If several organizations match, list them (full ids, name, tag, kingdom) and ask which; if none match, say so. The organization's `kingdomUrl` host gives its environment and application host, so the environment need not be asked. The filtering script, response fields and gotchas are in the `era-builder` skill's `reference/org-lookup.md`; `references/nimbus-organizations.md` holds the endpoint summary.
+
 ## Azure Cosmos DB
 
 - **Account naming pattern:** `king-{env}-sharp-be-cdb`
 - **Structure:** identical across all environments — same databases, same containers. Within an account, one dedicated database per service is the default (e.g. `snowdrop-guarantors`, `snowdrop-patients`, `snowdrop-payers`); a shared `snowdrop` database (charge masters, episodes, intake, invoices, etc.) is the exception — see the skill for the confirmed map, don't guess a new entity's database.
 - **Tenant:** accounts are homed in Entra tenant `sharedsvs.onmicrosoft.com` (NOT the org's own `unlimitedsystems.com` tenant). Portal/Data Explorer work cross-tenant, but data-plane AAD tokens and ARM `listKeys` from the org's tenant are rejected (except ninja, which grants `listKeys`).
 - **Skill:** `skills/cosmos-query/SKILL.md` (built — StreamId query model, master-key REST auth, per-env access, gotchas, Data Explorer deeplinks). Installed to the account through the card presented by `upgrade project`.
-- **Tooling:** `cosmos-access/scripts/Query-Remittance.ps1` (ninja, key auth, remittance-processing only) writes JSON to `cosmos-access/results/`. For anything else — a different entity, or any non-ninja env — run the StreamId SQL in Data Explorer, export JSON into `cosmos-access/results/`, Claude reads it.
+- **Tooling:** Claude Code queries through the Azure MCP `cosmos` tool (key-based REST on ninja); Cowork hands Claude Code a paste block (see the skill). Data Explorer is the manual alternative: run the StreamId SQL, export JSON into the active ticket's `downloads/` folder, or into `cosmos-access/results/` when no ticket is active, and Claude reads it.
 
 ## Azure Blob Storage
 
@@ -256,6 +262,8 @@ The host pattern `sdsh.unlimitedfinancials.{env}` was confirmed for `ninja` on 2
 **Changing a published event's shape or semantics is a last-ditch effort, not a routine fix option.** Events are cross-team contracts — consumers exist outside the producing solution and outside the producing team's visibility. Any proposal that alters an existing event needs an explicit impact-plus-no-alternative justification and consumer-team sign-off; exhaust read-side/projection-side fix options first. Applies project-wide, to any repo.
 
 **Never hand the user a file path containing a literal placeholder token.** Any time a skill's own documentation shows an example path with a bracketed token like `{timestamp}` or `{TICKET-ID}`, that notation is for describing the pattern — it must never survive into an actual path sent in a message. Compute real values (env, ids already known; date/time via `date` in bash) fresh every single time, not just the first time in a session. Before sending any file path to the user, scan it for a stray `{`/`}` — if found, stop and substitute the real value first.
+
+**QA tests are owned by this team.** When a change to the main solution implies a change to QA tests, make that change; there is no prohibition on editing them. Why: no other group maintains them, so an unchanged test goes stale. Mechanics: `skills/ticket-workflow/SKILL.md`, section "QA tests".
 
 ## Azure Function APIs
 

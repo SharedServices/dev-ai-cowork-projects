@@ -33,6 +33,11 @@ Neither side gets to a root cause alone. The commands below are entry points int
 - *call the API to get all payers*
 - *fetch the remittance projection from remittance processing blob storage*
 
+### Example test commands
+- *build an ERA with two claims for claim COMP1000357A1 and send it to ninja for org Squad Herbert*
+- *run the rule sequence order API test in ninja*
+- *write up how to repeat this test*
+
 ### Example investigation commands
 - *what information is needed to determine root cause?*
 - *does this match what we know of denial rules behavior?*
@@ -121,7 +126,7 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 *query splunk for this payer around the time of any contact info changes and give me a consolidated single timeline*
 
 - Takes the `Metadata.TraceId` from events 31 and 38 and runs the cross-service trace pattern first, in your browser against `sharp-app-aks-space-king` — all three trace fields OR'd, no namespace filter, so any hop into another service shows up. Says plainly if it comes back empty (trace-id coverage in `space` is not confirmed for every namespace) and then falls back to the business key: `namespace="snowdrop-payers" Properties.metadata.EntityId="a48f60ab-4971-441c-a172-faccf7511915"` in a window around each event.
-- Pulls results through the search job's JSON endpoint rather than the on-screen table (the table truncates long values), and keeps to `MessageTemplate` plus a short allow-list of properties, so nothing trips the content filter.
+- Pulls results through the search job's JSON endpoint rather than the on-screen table (the table truncates long values), and keeps to `MessageTemplate` plus a short allow-list of properties, so the results are not blocked by the content filter.
 - Merges Cosmos events and Splunk lines into one timeline ordered by timestamp, labelling the source of each row:
   > | ts (UTC) | Source | What |
   > |---|---|---|
@@ -184,6 +189,16 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 - *activate repos for all pod {pod name} repos* (primary pod only)
 - Sets the investigation scope to one or more repo folders under `repos/`, matched by folder name or nickname from the `## Repos` table in the root `CLAUDE.md`.
 - Activations accumulate for the rest of the session — activating another repo adds it to scope, it does not replace the repo(s) already active.
+
+##### activate cowork
+- *activate cowork {name}* (also *launch*, *reference* or *attach* cowork {name})
+- *activate cowork* (no name)
+- Claude Code only. Reads the `CLAUDE.md` of a Cowork project into a Claude Code session that was started somewhere else, such as in a source repository. The word "cowork" is required; a request that says "repo" is handled by `activate repo` instead.
+- With a name: finds the project folder with that name (a folder containing a `CLAUDE.md`, directly inside your Cowork projects folder or one level below it), case-, spacing- and hyphen-insensitive. If several match it lists the full paths and asks; if none match it lists the projects it found.
+- Without a name: re-activates the last project you activated. If none has been activated yet, or that folder is gone, it lists all candidates and asks.
+- Your Cowork projects folder and the last activated project are kept in two sections of your global `~/.claude/CLAUDE.md`, so they are available from every repo. The first time, Claude asks for the projects folder path (it never guesses) and writes it there.
+- It does not change the project: it reads that one `CLAUDE.md` only. The only file it writes is your global `~/.claude/CLAUDE.md`, where it updates the two sections described above.
+- Afterwards, *activate repo {name}* uses the activated project's `repos/` folder, so you do not need to attach the project to the session.
 
 #### Ticket workflow
 
@@ -266,11 +281,30 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 
 ##### call the API
 - *call the remittance-processing API* / *test the guarantors API in team* / *hit the transfer-targets endpoint* / *why is this API returning 404*, pasting an `api.unlimitedfinancials.*` URL, or pasting a `SharpAuth`/`SharpOrg` cookie
-- Resolves the correct ingress path and auth, then runs (or hands you a ready-to-run) authenticated call against a Snowdrop service.
+- Resolves the correct ingress path and auth, then runs an authenticated call against a Snowdrop service, or hands you a ready-to-run call.
 
 ##### give me the prompt for {API name}
 - *give me the prompt for {API name}*
 - Gives you the copy-paste text for the Claude for Chrome side panel to call that API and return raw JSON.
+
+#### Testing — ERA files and API tests
+
+##### build and send a test ERA
+- *build an ERA with two claims* / *make an ERA like this sample* / *deny the second claim with CO-50* / *make an ERA with 5,000 claims* / *show me the ERA so far* / *send it to ninja for org {name}*, or `/era-builder`
+- Builds an ERA (X12 835) from plain instructions and uploads it to the Remittance ERA upload endpoint from your signed-in browser tab (Claude for Chrome). It starts from an empty ERA, a standard template, a saved file, a pasted ERA, or an earlier upload, and can fill the payee, payer, patient and claims from the organization's real data (organization name, claim number, company, payer, patient name, or random real claims).
+- Before sending, Claude shows the ERA as tables with a balance check (billed minus paid must equal the adjustments). After sending, it reports whether each remittance is live or was discarded, because an upload can report Created and then be discarded (for example when the payee tax id matches no company in the organization).
+- Production environments need your explicit confirmation naming the environment and organization before every upload. A check number that already exists is withheld as a duplicate and nothing is created.
+- Saved ERA files are recipe files (the starting point plus your edits), kept in `ERAs/` when you save them there. They can hold test data from an organization and are not committed to git.
+
+##### run an API test
+- *run the {name} API test* / *repeat the rule order test* / *test this through the API*, or pointing at a file in `API Tests/`
+- Runs a written procedure from the `API Tests/` folder against a non-production environment. Use it to confirm a fix, or to check later that a behavior still holds, by repeating a scenario through the deployed APIs. Each file is one scenario (for example `rule-sequence-order.md`, from UF-16594) with its own background, API calls, steps, expected results and sample data. The general rules are the same for every procedure: non-production environments and organizations only, you approve every write before it is sent, existing data is investigated first, results are read back, and evidence goes into the active ticket's `downloads/` with a `summary.md` entry.
+- Claude states, for each statement in its report, whether it was confirmed in the run, read from code, or inferred. It stops and asks when the environment is unclear or a result differs from the procedure's expectation.
+- Test rules and remittances created by a run stay in the organization until you decide what to do with them. Rule deletion cannot be undone, so control runs switch a rule off by changing a qualifier instead.
+
+##### write up an API test procedure
+- *write up how to repeat this test* / *create an API test procedure*
+- After a test has been run by hand, Claude writes it as a new file in `API Tests/` from the standard template: the original ticket, the fix under test, the API calls and request bodies, ids, expected results, and the sample data from the run. Later runs add dated sample-data blocks to the same file instead of replacing earlier ones.
 
 #### Fixing Claude
 

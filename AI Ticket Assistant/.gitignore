@@ -5,3 +5,6 @@ memories/*
 
 # Per-user settings (squad, account reference): local to this instance.
 local/
+
+# Saved ERA files from the era-builder skill: test data merged from an organization, local to this instance.
+ERAs/

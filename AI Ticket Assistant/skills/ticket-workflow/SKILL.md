@@ -348,8 +348,9 @@ Trigger: the user asks for "comments for the jira ticket," "a comment explaining
 2026-08-06, UF-15723).
 
 **One comment, a summary line plus two sections, draft-then-approve.** This is always a single Jira comment
-with a one-line summary at the top followed by two clearly headed sections — never two separate comments, and never posted straight to Jira without the user reviewing
-it first. Draft it in the conversation, let the user read and adjust it, and only call
+with a one-line summary at the top followed by two clearly headed sections — never split into two comments, and never posted straight to Jira without the user reviewing
+it first. Once it is posted, a second, separate "How To Test" comment follows (see "How To Test comment"
+below). Draft it in the conversation, let the user read and adjust it, and only call
 `addCommentToJiraIssue` once they explicitly confirm. This matters because a comment posted to Jira is
 effectively permanent (visible in the ticket's history even if edited later), and the Business Summary
 section in particular may use customer-facing language worth a second look before it's committed.
@@ -438,6 +439,56 @@ should reflect the final state in `summary.md`, not an intermediate one).
 >
 > Root cause: payer (United Healthcare) did not echo the DR modifier on their remittance response,
 > despite it being present on the original claim submission.
+
+## How To Test comment
+
+Trigger: the resolution comment above has been posted to Jira. Every resolution comment is followed by a
+How To Test comment, with no exceptions. Do not wait for the user to ask for it; draft it right after the
+resolution comment is posted.
+
+**A separate comment, titled "How To Test", draft-then-approve.** It is its own Jira comment, never merged
+into the resolution comment. Its first line is the bold title `**How To Test**`. Draft it in the
+conversation, let the user read and adjust it, and only call `addCommentToJiraIssue` once they explicitly
+confirm, the same as the resolution comment.
+
+**It is always drafted and posted, even when the fix cannot be tested.** If there is nothing a tester can
+do to validate the outcome, the comment says so and gives the reason instead of steps. Typical reasons: the
+condition only occurs after an unreproducible system failure (for example, an Azure Function delayed for
+about four minutes for reasons not fully understood), the case depends on timing that cannot be forced in a
+test environment, or the outcome is "not a defect" or "working as designed" with no change to validate.
+State what was observed and where, so the reader knows what evidence exists in place of a test.
+
+**Content when it can be tested.** Audience is a tester or QA, not the developer. Write numbered,
+step-by-step instructions that can be followed without reading the code:
+- **Environment:** which environment to use and what test data or setup is needed.
+- **One test per scenario**, each with numbered steps and the expected result. Cover the fixed case, the
+  closest unchanged behavior that must still work (regression), and any related path the change could
+  affect (for example bulk versus single).
+- **Optional backend check** (Splunk, Cosmos) when a log or record confirms the result; give the index,
+  namespace, and search text. Only include log wording that has been confirmed against the code.
+- **Limits:** conditions the steps cannot cover, such as asynchronous timing or events that cannot be forced.
+
+**Content when it cannot be tested.** Start with one line stating that the fix cannot be validated by a
+tester and why. Then list what was done instead: what was observed, in which environment, and what
+evidence is recorded (Jira comment, `summary.md`, `code-analysis/`). Add monitoring guidance if the
+condition can be watched for after release, for example the log or metric to check.
+
+**Source the content from `summary.md` and the committed change, not from chat history or from the
+planned design.** Steps and expected results must match what was actually built. If the committed change
+has not been read, say in the draft notes which steps or expected outcomes are assumptions.
+
+**Log it.** After posting, add a dated entry to `summary.md` stating that the How To Test comment was
+posted, with the comment link.
+
+## QA tests
+
+Automated QA tests are owned by this team. When a change to the main solution (a fix, a behavior change, a changed event, API or contract) affects what a QA test checks, update the affected QA tests as part of the same work. Do not leave them for another group and do not treat them as off limits.
+
+- Claude Code makes the test changes. In Cowork, record which tests need to change in `summary.md` and tell the user to continue in Claude Code with "resume ticket UF-XXXXX".
+- Find the affected tests by searching the QA test code for the changed behavior, endpoint, event name or data shape. State which tests were changed and which were checked and left unchanged.
+- Test code that writes data in a form the real service does not (for example dashed guids where the service writes compressed guids) is incorrect; correct it when it is in scope of the change.
+- Record the QA test changes in `code-analysis/` with the other code-side notes, and mention them in the Technical Summary of the resolution comment and in the How To Test comment.
+- A QA test change that is only a guess at what the main change implies is an assumption. Say so in the draft notes, as for the How To Test comment.
 
 ## Growing this skill
 

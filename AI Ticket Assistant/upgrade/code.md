@@ -19,6 +19,22 @@ Names to look for: `splunk-search`, `cosmos-query`, `snowdrop-api-calls`, `ticke
 5. Report, without deleting, any of the same names found in `.claude/skills/` of this project folder or of the first-level folders under the Source path in `local/user.md`. Those may be intentional.
 6. Print what remains in `~/.claude/skills/`, and tell the user to restart Claude Code so the skill list reloads.
 
+### 2026.10.21 — Remove personal copies of era-builder and api-testing
+
+`era-builder` and `api-testing` are account skills and load in Claude Code as `anthropic-skills:era-builder` and `anthropic-skills:api-testing`. A folder with either name in `~/.claude/skills/` loads alongside the account copy as a duplicate and can be older (era-builder was earlier described as a project skill that Claude Code loaded from a checkout).
+
+Apply the same steps as the 2026.10.7 entry, with these names: `era-builder`, `api-testing`. Also report, without deleting, a `.claude/skills/era-builder` or `.claude/skills/api-testing` folder in this project folder or in the first-level folders under the Source path in `local/user.md`.
+
+### Unreleased — Record the Cowork projects folder for activate-cowork
+
+The `activate-cowork` skill reads the folder that holds the user's Cowork projects from a section of the global `~/.claude/CLAUDE.md`. This is separate from the Source path in `local/user.md`: `local/user.md` lives inside a project and is found only once the project is known, while the global `CLAUDE.md` is read before any project is known.
+
+1. Read `~/.claude/CLAUDE.md` (on Windows `$HOME\.claude\CLAUDE.md`). If the file is missing, treat the section as missing.
+2. If it has a section titled "Cowork projects folder" with a path and that path exists as a folder (directory listing), report the path and continue. Nothing to do.
+3. If the section is missing, or its path does not exist, ask the user for the full path of the folder that holds their Cowork project folders. Do not guess it, infer it from the working directory, or search the disk. If the user gives a path, check that it exists, then add or update only the "Cowork projects folder" section in the format given in `skills/activate-cowork/SKILL.md` (create the file if missing; leave every other part unchanged) and report the path written.
+4. If the user does not want to set it now, report that `activate-cowork` will ask for it on first use, and continue.
+5. Do not write the "Last activated Cowork project" section; the skill writes it on activation.
+
 ## Every-run steps
 
 None. Recording identity and source access, publishing skills, and the Chrome and Splunk smoke tests need Cowork. The cross-platform check in root `CLAUDE.md` tells the user to run `upgrade project` in Cowork when its version is behind.

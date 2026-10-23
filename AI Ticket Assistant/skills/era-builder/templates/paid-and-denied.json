@@ -1,0 +1,66 @@
+{
+  "template": {
+    "name": "Paid and denied",
+    "description": "One check with two claims: one paid with contractual and deductible adjustments on two services, one denied (CO-50)."
+  },
+  "checks": [
+    {
+      "payer": {
+        "name": "TEST HEALTH PLAN",
+        "addressLine1": "500 MAIN ST",
+        "city": "PORTLAND",
+        "state": "OR",
+        "zip": "97232"
+      },
+      "payee": {
+        "name": "TEST PROVIDER GROUP",
+        "idCode": "1013953025",
+        "addressLine1": "875 OAK ST",
+        "city": "SALEM",
+        "state": "OR",
+        "zip": "97301"
+      },
+      "claims": [
+        {
+          "status": "1",
+          "patient": { "last": "PARKER", "first": "LISA", "middle": "R", "id": "64224164" },
+          "serviceProviderId": "1417994047",
+          "services": [
+            {
+              "procedure": "99213",
+              "units": 1,
+              "billed": 150,
+              "paid": 100,
+              "allowed": 100,
+              "adjustments": [ { "group": "CO", "reason": "45", "amount": 50 } ]
+            },
+            {
+              "procedure": "96413",
+              "units": 1,
+              "billed": 400,
+              "paid": 300,
+              "allowed": 320,
+              "adjustments": [
+                { "group": "CO", "reason": "45", "amount": 80 },
+                { "group": "PR", "reason": "1", "amount": 20 }
+              ]
+            }
+          ]
+        },
+        {
+          "status": "4",
+          "patient": { "last": "SMITH", "first": "JOHN", "id": "55512345" },
+          "services": [
+            {
+              "procedure": "99214",
+              "units": 1,
+              "billed": 200,
+              "paid": 0,
+              "adjustments": [ { "group": "CO", "reason": "50", "amount": 200 } ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
