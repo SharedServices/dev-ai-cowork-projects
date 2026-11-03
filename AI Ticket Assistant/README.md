@@ -1,25 +1,29 @@
-# Support Investigation Workspace — history and context
+# Support Investigation Workspace — context
 
-Companion to the root `CLAUDE.md`. This file is maintenance-only — never read or relied on during normal investigative use (see `CLAUDE.md`'s "Folder layout" section). It holds plain description and historical color that would otherwise clutter `CLAUDE.md`: what changed, when, and why, kept separate from the plainly-stated current rules and facts `CLAUDE.md` depends on. See `documents/project-maintenance.md` for the policy this follows.
+Companion to the root `CLAUDE.md`. This file is maintenance-only — never read or relied on during normal investigative use (see `CLAUDE.md`'s "Folder layout" section). It holds plain description that would otherwise clutter `CLAUDE.md`. See `documents/project-maintenance.md` for the policy this follows.
 
-## Retired skills
+## Setup
 
-`business-logic-expert`, `function-apis`, `detect-blocked-evaluations`, and `known-failure-patterns` were all removed once the per-repo `CLAUDE.md`/`business-logic/`/`known-failures/` architecture matured — once a repo is activated, its own `CLAUDE.md` manifest routes to business-logic and known-failure content directly, so a dedicated routing skill added no value.
+The required setup is the same for every user:
 
-- `business-logic-expert` and `known-failure-patterns`: former content lives on at `repos/snowdrop-remittance-processing-be/business-logic/Rules/` and each repo's own `known-failures/CLAUDE.md`.
-- `function-apis`: held env/key tables, an API reference, an auto-purge gotcha, and a bulk-scan technique for Remittance Processing Orchestration. Migrated once to `repos/snowdrop-remittance-processing-be/references/function-apis.md`, but that file was itself deleted in a secrets audit — it carried live function keys with no vault replacement. No function app has a documented home in this workspace since, and no function keys should be stored anywhere in this project until a vault-backed alternative exists.
-- `detect-blocked-evaluations`: removed as no longer needed; no replacement content exists.
+1. Clone the repository to a folder (for example `dev-ai-cowork-projects`). Use a clone, not a zip download, so `git pull` brings updates.
+2. Open the Code tab of the Claude app.
+3. Create an environment named "AI Ticket Assistant - Knowledge":
+   - Primary folder: the `AI Ticket Assistant` folder in the clone.
+   - Additional folder: the folder that holds the source repositories, one subfolder per repository.
+   - Environment variable: `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1`.
+4. Start a session in that environment and say `upgrade project`. It checks the setup (the primary folder is an AI Ticket Assistant folder, the additional folder holds repositories, the variable is set), asks for Squad and Pod, and records them with the source path in `local/user.md`.
 
-`office-hours` was removed as a tracked skill in this workspace (personal-productivity, not support-investigation) — its folder no longer exists under `skills/`.
+Nothing needs to be added to `settings.local.json`. Skills and the project `CLAUDE.md` load from the folders attached to the environment.
+
+Optional: create further environments with a source folder (all repositories, or one repository) as primary and the AI Ticket Assistant folder attached as an additional folder. `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1` is required for these, because the project `CLAUDE.md` loads only through it. Project paths are resolved from the project root (root `CLAUDE.md`, "Folder locations"), so they work in every environment.
 
 ## Project upgrade
 
-First-time setup began as the `initiate-project` skill. It was retired on 2026-10-07: a skill saved to the account stays at the version last saved, so users who pulled an update still ran the old procedure, and fixing that took a manual step on every release. Setup is now `upgrade project`, a procedure in root `CLAUDE.md` that runs `upgrade/cowork.md` or `upgrade/code.md` from the project folder. Both platforms run the same procedure; the documents hold the differences. The project has one version, kept in `upgrade/version.md`. Each platform records the version it last upgraded to in `local/user.md`, runs only the release steps newer than that, and tells the user to run `upgrade project` on the other platform whenever that platform's version is behind, whether or not the release has new instructions for it. One-time cleanups, such as removing the retired account skill and the personal copies in `~/.claude/skills/`, are dated release steps in those documents.
+`upgrade project` is a procedure in root `CLAUDE.md` that runs `upgrade/code.md` from the project folder. The project has one version, kept in `upgrade/version.md`. The version last upgraded to is recorded in `local/user.md`, and only the release steps newer than that are run. One-time cleanups, such as removing the personal copies in `~/.claude/skills/`, are dated release steps in `upgrade/code.md`.
 
-History before that: the `## Current user` section in root `CLAUDE.md` used to carry an automatic trigger — "on first use of a project instance, if Name or Squad are blank, ask" — directly inline. In practice that implicit trigger proved unreliable: on a fresh copy of this project it didn't fire until the user explicitly asked for it. Root `CLAUDE.md` now just points to `local/user.md` — a git-ignored file where the user's Squad (and, as reference, the Claude account's name and email) is kept, so personal values never show up as edits to a tracked file — and first-time setup (recording Squad and the Source path of the attached source folder, publishing the skills as cards, smoke-testing Claude for Chrome and Splunk access) moved to an explicit, on-demand trigger ("initiate project", now "upgrade project") rather than an automatic trigger nothing was reliably invoking. This also folded in other first-use checks (skill installation status, Chrome/Splunk connectivity) that had no home before.
+`local/user.md` is a git-ignored file where the user's Squad, Pod and Source path (and, as reference, the Claude account's name and email) are kept, so personal values never show up as edits to a tracked file.
 
 ## Documentation structure
 
-`CLAUDE.md` files (root, per-repo, per-category) and `SKILL.md` files are the machine-facing "production" files Claude depends on during normal use — kept plainly stated, free of attribution annotations and historical narration. Companion `README.md` files (this one, each repo's, `skills/README.md`) hold the human-facing description plus whatever historical color is worth keeping — who decided what, why something was renamed or removed, what was tried and abandoned.
-
-This split (root `CLAUDE.md` for day-to-day use, `documents/project-maintenance.md` for how to change the workspace itself, companion `README.md`s for history) replaced an earlier approach that just deleted attribution annotations outright rather than relocating them.
+`CLAUDE.md` files (root, per-repo, per-category) and `SKILL.md` files are the machine-facing files Claude depends on during normal use — kept plainly stated. Companion `README.md` files (this one, each repo's, `.claude/skills/README.md`) hold the human-facing description.

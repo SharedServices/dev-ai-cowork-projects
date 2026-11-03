@@ -6,7 +6,7 @@ Database: `snowdrop` (the shared database, not a dedicated one). Container: `sno
 
 **StreamId:** `snowdrop-changehealthcare->{organizationId}->report->{reportId}_{fileType}`
 
-- `{reportId}` is the report guid in **compressed form, with no dashes**, for example `2bb6a082c1cbf111bf5b6045bdd5cfcf`. This is the real format. Streams in this container with a dashed report id come from QA test code, which writes them incorrectly; do not treat them as the convention.
+- `{reportId}` is the report guid in **compressed form, with no dashes**, for example `2bb6a082c1cbf111bf5b6045bdd5cfcf`. This is the real format. Streams in this container with a dashed report id come from API test code, which writes them incorrectly; do not treat them as the convention.
 - `{fileType}` is lower case in the stream id (`r5`) and upper case in the event data (`R5`). `R5` is the ERA (835) report file; `snowdrop-remittance-be` only consumes streams whose file type is `R5` (`EraConsumerService.EraFilesOnly`).
 
 ## Look up the report event

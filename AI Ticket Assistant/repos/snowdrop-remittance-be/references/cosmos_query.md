@@ -30,7 +30,7 @@ ORDER BY c._ts ASC
 Posting → Building → Posting → Building over 16+ months. Don't assume a check currently showing Building
 or Posting has never reached Posted before.
 
-**`RemittanceLedgerDateUpdated` fires once, the first time `PostingStatus` reaches Building (6) — not at intake, and not re-fired on any later status change,** confirmed by tracing one remittance end-to-end (UF-16266: fired 3 days after intake, before any claim payment had actually posted, then never fired again across 16+ months of further `PostingStatus` cycling).
+**`RemittanceLedgerDateUpdated` is published by `DepositAndLedgerDateMediator`, not by a change to Building (6).** It is published at creation when the check is created Reconciled with a payer, deposit date and company (UF-17855: event 1, same timestamp as `RemittanceCreatedEvent`), and again whenever the deposit date changes or the status is set to Reconciled (UF-17855: event 8, same timestamp as `RemittanceDepositDateUpdated`). A company change does not publish it. The date is the deposit date, or the company's first open day when the deposit date is in a closed month; see `business-logic/LedgerDateCalculation/CLAUDE.md`. UF-16266 traced one remittance where it fired once, 3 days after intake and before any claim payment posted, and never again over 16+ months of `PostingStatus` cycling. That fits a single Reconciled transition with no later deposit-date change, and does not show a Building trigger.
 
 **Top-level fields confirmed on `RemittanceCreatedEvent`:** `RemittanceId`, `PostingStatus`, `CheckNumber`, `CheckDate`, `CheckAmount`, `PayerId`, `CompanyId`, `DepositDate`, `DepositAmount`, `RemittanceCheckReceivedDate`, `PayerLiteral`, `RemittanceMessage` (full 835-style payload — claims/services/adjustments), `CheckSource`, `PaymentType`, `ReportId`. `CheckAmount` is a **snapshot, set once at creation** — no event updates it later; if it needs to change, look for a `RemittanceCreatedEvent`-adjacent correction event rather than assuming any existing event type carries a revision. `DepositAmount` may stay `null` even after `DepositDate` is set (`RemittanceDepositDateUpdated`) — the two aren't set together.
 
@@ -46,3 +46,17 @@ WHERE root["PostingStatus"] = 1
   AND root["Partition"] = "RemittanceCheckGridItem/{organizationId}"
 ```
 This query result alone doesn't tell you whether a backlog is a problem — month-close status from `snowdrop-resources` matters too.
+
+## Read the grid record (check header) for one remittance
+
+The Bank Rec / Pending Checks / Reconciled lists are served from `snowdrop-remittance-data`, not from the event stream. One document per remittance, id `RemittanceCheckGridItem_{remittanceId}`, partition `RemittanceCheckGridItem/{organizationId}`:
+```sql
+SELECT * FROM c
+WHERE c.Partition = "RemittanceCheckGridItem/{organizationId}"
+  AND c.id = "RemittanceCheckGridItem_{remittanceId}"
+```
+Useful fields: `PostingStatus`, `IsDiscarded`, `LedgerDate`, `PaymentType.CurrentValue`, `DepositDate`/`DepositAmount` (`CurrentValue`, `IsInvalid`, `LastModifiedBy`), `PostedAmount`, `DiscardedAmount`, `UnappliedAmount`.
+
+**Which tab a check is in** (`RemittanceCheckGridItemRepository`): Pending Checks (`GetUnreconciledChecks`) returns only `PostingStatus` 1 (New) that are not discarded. Reconciled (`GetReconciledChecks`) returns `PostingStatus` 2, 5, 7, 6, 3 and 4 (Reconciled, Empty, Ready, Building, Posting, Posted). A check that is reconciled therefore never appears in Pending Checks.
+
+**Ledger date and deposit amount are published by the mediator, not by the status change.** `DepositAndLedgerDateMediator` publishes `RemittanceLedgerDateUpdated` together with the deposit date / Reconciled status on the user Reconcile path, but the credit card (Stripe) path publishes the deposit date, deposit amount and ledger date only when the transaction date differs from the existing deposit date. See the remittance processing known failure `credit-card-payment-reconciles-check-without-ledger-date-or-deposit-amount`.

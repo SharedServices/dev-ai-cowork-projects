@@ -26,3 +26,4 @@ No `Events.md` exists for this repo anywhere in this workspace. No stream/contai
 - `references/Snowdrop.Payments.Services.Reporting.json` — full OpenAPI document.
 - `references/Snowdrop.Payments.Services.Dictionary.md` — condensed API route/method/tag listing for `Snowdrop.Payments.Services.json` (38 paths; read this before the full spec).
 - `references/Snowdrop.Payments.Services.json` — full OpenAPI document.
+- `references/cosmos_query.md` — payments event stream: database/container, StreamId (entity id is the payment specification id), events seen, query.

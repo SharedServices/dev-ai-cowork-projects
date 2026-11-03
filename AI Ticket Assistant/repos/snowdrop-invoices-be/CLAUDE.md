@@ -20,3 +20,4 @@ No `Events.md` exists for this repo anywhere in this workspace. No stream/contai
 <!-- system-generated: one bullet per file actually present under references/, each with a one-line description of what it holds. -->
 - `references/Snowdrop.Invoices.Services.Dictionary.md` — condensed API route/method/tag listing for `Snowdrop.Invoices.Services.json` (212 paths; read this before the full spec).
 - `references/Snowdrop.Invoices.Services.json` — full OpenAPI document.
+- `references/cosmos_query.md` — invoices event stream: database/container, StreamId, the open entity-id question, lookup query.

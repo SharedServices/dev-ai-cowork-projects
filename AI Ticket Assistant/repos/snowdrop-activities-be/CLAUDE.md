@@ -20,3 +20,4 @@ No `Events.md` exists for this repo anywhere in this workspace. No stream/contai
 <!-- system-generated: one bullet per file actually present under references/, each with a one-line description of what it holds. -->
 - `references/Snowdrop.Activities.Services.Dictionary.md` — condensed API route/method/tag listing for `Snowdrop.Activities.Services.json` (219 paths; read this before the full spec).
 - `references/Snowdrop.Activities.Services.json` — full OpenAPI document.
+- `references/cosmos_query.md` — activities event stream: database/container, StreamId (entity id is the `ChargeId`), lookup query.

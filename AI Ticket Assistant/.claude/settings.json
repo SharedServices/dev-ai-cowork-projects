@@ -1,5 +1,5 @@
 {
   "env": {
-    "OTEL_RESOURCE_ATTRIBUTES": "project=AI Ticket Assistant,team=Financial Ledger"
+    "OTEL_RESOURCE_ATTRIBUTES": "project=AI-Ticket-Assistant,team=Remittance"
   }
 }

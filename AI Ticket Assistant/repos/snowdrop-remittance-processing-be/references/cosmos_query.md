@@ -88,3 +88,18 @@ SELECT * FROM c
 WHERE c.OrganizationId = "{organizationId}"
   AND ARRAY_CONTAINS(["{chargePaymentId1}","{chargePaymentId2}"], c.ChargePaymentId)
 ```
+
+## Credit card (ICC) payment: find the payment events and the check header
+
+A credit card payment on a remittance writes to three places: this stream (`RemittanceAssistanceCreditCardPaymentInitiated`, `PaymentId` and `Amount`), the payments stream, and a credit card payments blob. The payments stream is keyed by the payment specification id, not the remittance id, so read it in this order:
+
+1. Download the remittance's credit card payments blob (`references/blob_projections.md`, "The credit card payments blob") and read `Data.Payments[].PaymentSpecificationId`. Claude Code: `az storage blob download --account-name king{env}sharpsdstg --auth-mode login --subscription "uf-kingdom - {Env}"` (confirmed on app).
+2. Query the payments events: database `snowdrop`, container `snowdrop-payments-events`:
+```sql
+SELECT c.EventNumber, c.EventType, c.ts, c.Data FROM c
+WHERE c.StreamId = "snowdrop-payments->{organizationId}->payment-specification->{paymentSpecificationId}"
+  AND c.Type = "e"
+ORDER BY c._ts ASC
+```
+   Events seen: `PaymentSpecificationCreated`, `PaymentSpecificationProcessed`, `StripeTransactionProcessed` (`TransactionAmount`, `TransactionDate`, `LastFour`, `StripePaymentId`; `Data.CorrelationId` = the blob's `PaymentId`), `PaymentPayoutScheduled`.
+3. Remittance (BE) reacts to `StripeTransactionProcessed` and can reconcile the check; see `known-failures/credit-card-payment-reconciles-check-without-ledger-date-or-deposit-amount/CLAUDE.md`.

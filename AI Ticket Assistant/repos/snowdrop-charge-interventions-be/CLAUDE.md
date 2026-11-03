@@ -12,6 +12,9 @@ This repo is **Billing & AR (Shelby)** squad, **Quality** pod (guess).
 - API ingress segment: not confirmed. Server URL(s) listed in the checked-in specs: `https://api.unlimitedfinancials.ninja/snowdrop/chargeinterventions` — not verified against actual ingress/nginx config.
 - Function App code: none confirmed. No Function App content for this service exists anywhere in this workspace.
 
+### Role (from a team discussion; not verified in code)
+Orchestrates intervention handling between several backends. It consumes remittance processing's posting and reversal events, manages interventions from them, and coordinates with other backends. Interventions themselves live in `snowdrop-interventions-be`. See `repos/snowdrop-remittance-processing-be/business-logic/InterventionHandoff/CLAUDE.md`.
+
 ### Streams (none confirmed)
 <!-- system-generated: derived from references/Events.md's stream/entity-id groupings. -->
 No `Events.md` exists for this repo anywhere in this workspace. No stream/container/entity-id data is available; don't infer one from the API spec.

@@ -24,7 +24,7 @@ Neither side gets to a root cause alone. The commands below are entry points int
 - *Start/Resume Ticket UF-12345*
 - *Draft a comment to post this conclusion to the Jira ticket*  
 - *post it*
-- *Flush anything outstanding to the ticket folder for Claude Code for further investigation*
+- *log progress*
 
 ### Example data collection commands
 - *activate the repo payers*  
@@ -85,28 +85,17 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 *get events for that payer*
 
 - Resolves this to the Payers repo from the `## Repos` table and reads `repos/snowdrop-payers-api-be/CLAUDE.md` (if a repo was already activated, it uses that). From there it knows the database is `snowdrop-payers`, the container is `snowdrop-payers-events`, and the stream shape is `Snowdrop.Payers->{OrganizationId}->Snowdrop.Payers.Payer->{PayerId}`.
-- Navigates your browser directly to `king-space-sharp-be-cdb`'s Data Explorer using the confirmed deeplink for `space`. The tab stays open until you say the download is done.
-- Hands over the query and the save path as two separate copyable blocks, nothing else inside either:
-  > I've opened Data Explorer for `king-space-sharp-be-cdb`. Database `snowdrop-payers`, container `snowdrop-payers-events`. Paste this into the query tab:
-  >
+- Runs the query against `king-space-sharp-be-cdb` through the Azure Cosmos tool. There is no browser step and nothing for you to paste or download:
   > ```sql
   > SELECT * FROM c
   > WHERE c.StreamId = "Snowdrop.Payers->e5b8461b-d2c1-41ec-8fad-f01898850707->Snowdrop.Payers.Payer->a48f60ab-4971-441c-a172-faccf7511915"
   > ORDER BY c.EventNumber ASC
   > ```
-  >
-  > Run it, then **Download Query Results (JSON)** into:
-  >
-  > ```
-  > C:\Users\jsmith\Claude\Projects\AI Ticket Assistant\tickets\UF-12345\downloads\space_payer_a48f60ab-4971-441c-a172-faccf7511915_20261001-141530.json
-  > ```
-  >
-  > Tell me once it's downloaded.
-- The path is always absolute and always has a fresh timestamp — it is meant to be pasted whole into the Save As dialog. You don't need to repeat the filename back; Claude already has it.
+- Saves the result to `downloads/space_payer_a48f60ab-4971-441c-a172-faccf7511915_20261001-141530.json` and reports the file name and the event count.
 
 ---
 
-*the events are downloaded, give me a timeline of what happened on this payer*
+*give me a timeline of what happened on this payer*
 
 - Reads the JSON from `downloads/`, reports the count and span ("47 events, 2024-03-11 to 2026-09-28"), and lays out a table: event number, UTC timestamp, event type, the relevant `Data` fields, and the `SourceMetadata.UserId`.
 - Flags what it noticed without being asked:
@@ -170,7 +159,9 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 *post it*
 
 - Posts the single comment to UF-12345 and reports back the comment id and link.
-- Appends a dated entry to `summary.md` noting the comment was posted, and asks whether to close the ticket (which sets the `summary.md` status to Resolved — the folder and its downloads stay in place for later).
+- Appends a dated entry to `summary.md` noting the comment was posted.
+- Drafts the separate Testing comment (unit testing, automated API testing, how to test manually) and shows it to you. It is posted only after you approve it.
+- Asks whether to close the ticket (which sets the `summary.md` status to Resolved — the folder and its downloads stay in place for later).
 
 ### Commands / Actions
 
@@ -180,7 +171,7 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 
 ##### upgrade project
 - *upgrade project* / *initiate project* / *set up this project* / *onboard me* / *first-time setup*
-- Cowork and Claude Code. Sets up a fresh copy of this project and brings it up to date after a pull. In Cowork: asks for and records your squad and pod, and the location of the attached source folder (warning if none is attached), packages the skills as cards to save (they then load in Cowork and Claude Code), and smoke-tests Claude for Chrome and Splunk access. In Claude Code: runs the one-time cleanups that apply to Code, such as removing personal copies of the skills. Each platform records the project version it last upgraded to and says when to run it on the other.
+- Sets up a fresh copy of this project and brings it up to date after a pull. It compares the project version with the version last recorded in `local/user.md` and runs the one-time cleanups for each release you have not applied, such as removing duplicate copies of the project skills (after you approve). It checks the environment (project root, attached source folder, `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD`), asks for and records your squad and pod and the location of your source folder, smoke-tests Claude for Chrome and Splunk access, and records the project version. See "Initializing and Upgrading the Project" in the Getting Started document.
 
 ##### activate repo
 - *activate repo {name}*
@@ -189,30 +180,21 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 - *activate repos for all pod {pod name} repos* (primary pod only)
 - Sets the investigation scope to one or more repo folders under `repos/`, matched by folder name or nickname from the `## Repos` table in the root `CLAUDE.md`.
 - Activations accumulate for the rest of the session — activating another repo adds it to scope, it does not replace the repo(s) already active.
-
-##### activate cowork
-- *activate cowork {name}* (also *launch*, *reference* or *attach* cowork {name})
-- *activate cowork* (no name)
-- Claude Code only. Reads the `CLAUDE.md` of a Cowork project into a Claude Code session that was started somewhere else, such as in a source repository. The word "cowork" is required; a request that says "repo" is handled by `activate repo` instead.
-- With a name: finds the project folder with that name (a folder containing a `CLAUDE.md`, directly inside your Cowork projects folder or one level below it), case-, spacing- and hyphen-insensitive. If several match it lists the full paths and asks; if none match it lists the projects it found.
-- Without a name: re-activates the last project you activated. If none has been activated yet, or that folder is gone, it lists all candidates and asks.
-- Your Cowork projects folder and the last activated project are kept in two sections of your global `~/.claude/CLAUDE.md`, so they are available from every repo. The first time, Claude asks for the projects folder path (it never guesses) and writes it there.
-- It does not change the project: it reads that one `CLAUDE.md` only. The only file it writes is your global `~/.claude/CLAUDE.md`, where it updates the two sections described above.
-- Afterwards, *activate repo {name}* uses the activated project's `repos/` folder, so you do not need to attach the project to the session.
+- Claude normally picks the repos that apply from the ticket or the question. Use this command to force a repo into scope, or when Claude chose the wrong one.
 
 #### Ticket workflow
 
 ##### start a ticket
 - *start a ticket for UF-XXXXX*, or simply beginning sustained investigation on a ticket number with no folder yet
-- Creates `tickets/{TICKET-ID}/`, pulls the Jira ticket's title/status/description, confirms the ticket's category (Diagnostics/Analysis, Speckit, or Feature), and writes the initial `summary.md`.
+- Creates `tickets/{TICKET-ID}/`, pulls the Jira ticket's title/status/description, confirms the ticket's category (Diagnostics/Analysis, Speckit, or Feature), writes the initial `summary.md`, and attributes the session's telemetry to the ticket. See "Ways to Start Work" in the Getting Started document for the environment that suits each category.
 
 ##### resume a ticket
 - *resume/continue work on UF-XXXXX*, or naming a ticket number that already has a folder
-- Reads `summary.md` (and `code-analysis/` if present), recaps status/category/last entry, and checks whether Jira shows any status change since. Works the same in Cowork and in Claude Code started in this project.
+- Reads `summary.md` (and `code-analysis/` if present), recaps status/category/last entry, and checks whether Jira shows any status change since. It works in any environment. To switch environments, say *log progress* in the current session, start a new session from the other environment, and say *resume ticket UF-XXXXX* (see "Switching Environments and Resuming a Ticket" in the Getting Started document).
 
 ##### log progress
-- *log this for the ticket* / *summarize this for the ticket*
-- Appends a dated entry to `summary.md` describing what was found or decided. Happens automatically at natural checkpoints too (root cause confirmed, hypothesis ruled out, a comment posted).
+- *log progress* / *log this for the ticket* / *summarize this for the ticket*
+- Appends a dated entry to `summary.md` that stands on its own: current status, what was found, what was ruled out, open questions and the next step. Evidence not yet in `downloads/` is saved first. "Log progress" is a complete request; Claude does not ask which ticket. The reply ends with the real ticket id and the line to continue in a new session ("resume ticket UF-XXXXX"), so this is the first step when you switch environments. It also happens automatically at natural checkpoints (root cause confirmed, hypothesis ruled out, a comment posted).
 
 ##### close a ticket
 - *the ticket is resolved* / *close out UF-XXXXX*
@@ -221,37 +203,27 @@ A Diagnostics ticket in the `space` production environment: a customer reports t
 ##### draft a Jira comment
 - *draft a comment to post this conclusion to the jira ticket* / *comments for the jira ticket*
 - Drafts one Jira comment that opens with a one-line Summary (an outcome label such as Resolved, Known Issue, or Not a Defect, plus a few words on the finding), followed by a Business Summary (plain language, customer-facing) and a Technical Summary (investigation trail, root cause, fix). Only posts once you confirm.
+- After the resolution comment is posted, Claude drafts a second, separate comment titled **Testing**. It has these sections: Unit testing, Automated API testing, Claude API testing (only if you had Claude test the change through the deployed APIs), and How to Test Manually. The sections are written from `summary.md` and the committed change, not from chat history. If the fix cannot be tested by hand, the comment says so and why. It is also posted only once you confirm.
 
 ##### post it
 - *post it*
-- Posts the previously drafted Jira comment, once you've approved it.
-
-##### flush to Claude Code
-- *flush anything outstanding to the ticket folder for Claude Code for further investigation*
-- Writes any outstanding findings into the ticket's `summary.md`/`downloads/` so a Claude Code session can pick up code-level analysis via "resume ticket UF-XXXXX."
+- Posts the previously drafted Jira comment, once you've approved it. Claude then drafts the separate Testing comment (see "draft a Jira comment").
 
 #### Data collection — Cosmos DB
 
 ##### query cosmos
 - *query cosmos* / *look in cosmos* / *cosmos query* / *data explorer* / *find this remittance/org in cosmos*, or pasting a `sdsh.unlimitedfinancials.{env}/...` remittance URL. *get events for that payer* (or any entity) follows the same path.
-- Cosmos can't be reached from Claude's sandbox, so this is always a hand-off — Claude prepares everything and (when Claude for Chrome is connected) opens the browser to the right place for you. Standard steps:
-  1. Claude navigates your browser directly to that environment's Cosmos account in the Azure portal, landing on Data Explorer — no searching for the right account yourself. (If Claude for Chrome isn't connected, or that environment's account details aren't confirmed yet, Claude falls back to just giving you the URL to open yourself.)
-  2. Paste in the Cosmos query Claude supplied, and run it.
-  3. Click Download Query Results (JSON).
-  4. Save using the exact file path Claude supplied.
-  5. Tell Claude once it's downloaded — not the filename, just that it's done. Claude already gave you the path, and will read from there (or look for whatever new file shows up, if you saved under a different name).
-  - The browser tab Claude opened stays open until you confirm the download — it won't get closed out from under you mid-task.
+- Claude queries Cosmos directly in every environment, with nothing to open, paste or download. In most environments it uses the Azure Cosmos tool. On ninja, which has no data-plane role, it runs Azure commands to get a read-only key and queries with that. Claude resolves the repo's database, container and stream id, runs the query, saves the result to the active ticket's `downloads/` (or `cosmos-access/results/` if no ticket is active), and reports the file name and the number of events or documents returned.
 
 #### Data collection — Blob storage
 
 ##### fetch a blob projection
 - *fetch the remittance projection from remittance processing blob storage* / *get the {name} projection* / *blob projection*
-- Many services store a JSON snapshot ("projection") of an entity in Azure Blob Storage. Claude in Cowork cannot reach Azure and cannot trigger Claude Code, so this is a hand-off through a paste block:
-  1. Claude looks the projection up in the repo's `references/blob_projections.md`, works out the storage account, container, blob path, and an absolute save path in the active ticket's `downloads/` (or `scratch/` if no ticket is active), and gives you one copyable block starting with `fetch blob projection`. The environment and ids come from the ticket or a pasted application URL; Claude asks only for what is missing.
-  2. Paste the block into Claude Code. It downloads the blob read-only with `az storage blob download --auth-mode login` and saves it to the path in the block. Claude Code reports the path, size, and top-level fields, and does not print the contents. This needs the Azure CLI (`az`) installed and signed in with `az login`, and the `blob-projection-fetch` skill installed in Claude Code.
-  3. Tell Claude in Cowork it's saved. Claude reads the file from the ticket's `downloads/`.
-- In Claude Code, asking directly ("get the remittance projection for ...") does the whole thing in one step. In an unattached Claude Code session, pasting the block is the way to do it, because the block carries every value needed.
-- If the blob is not found, Claude Code reports the exact account, container, and blob it tried and stops. It does not guess other paths, and it never falls back to account keys or SAS tokens.
+- Many services store a JSON snapshot ("projection") of an entity in Azure Blob Storage. Claude fetches it directly:
+  1. Claude looks the projection up in the repo's `references/blob_projections.md` and works out the storage account, container and blob path. The environment and ids come from the ticket or a pasted application URL; Claude asks only for what is missing.
+  2. Claude downloads the blob read-only with `az storage blob download --auth-mode login` and saves it to the active ticket's `downloads/` (or `scratch/` if no ticket is active). It reports the path, size and top-level fields, and does not print the contents.
+- This needs the Azure CLI (`az`) installed and signed in with `az login`, and the `blob-projection-fetch` skill installed.
+- If the blob is not found, Claude reports the exact account, container and blob it tried and stops. It does not guess other paths, and it never falls back to account keys or SAS tokens.
 
 #### Data collection — Splunk
 

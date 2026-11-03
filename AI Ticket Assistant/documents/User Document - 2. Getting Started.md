@@ -7,17 +7,47 @@
 
 The content can be downloaded from GitHub here: [https://github.com/SharedServices/dev-ai-cowork-projects](https://github.com/SharedServices/dev-ai-cowork-projects). Either download it as a zip, or clone it with an IDE — either way, transfer the content into your project as described in the next section.
 
-### Platforms
+### Setting Up Claude Code in the Claude App
 
-This project was created as a Claude Cowork project, but you can also use Claude Code against it, both for knowledge extraction and for code development. To start, run "upgrade project" in Claude Cowork (see Initializing and Upgrading the Project below). When you launch Claude Code against the "AI Ticket Assistant" folder, it works the same way as Claude Cowork. You can also launch Claude Code against a source repository and attach the "AI Ticket Assistant" folder as a second folder to use its knowledge. Sessions launched directly against the Assistant tend to answer from the knowledge base first and add code detail as needed. Claude Code launched against a repository will answer from the code first and is also set up for project updates such as builds and commits.
+This project runs in Claude Code, in the **Code** tab of the Claude app. You set it up by creating **environments**. An environment is a saved set of folders and settings. Each session you start from an environment gets those folders.
 
 If you open Visual Studio (or, presumably, another IDE) on the dev-ai-cowork-projects folder, you can check in changes to the AI Ticket Assistant project itself.
 
-### Create a Cowork Project
+#### Choose a configuration
 
-Open the Claude app, switch to Cowork, and go to **Projects** in the left panel. Click **+**, select **Use an existing folder**, and point it at the **AI Ticket Assistant** folder.
+Create one environment for each way you work. The three configurations differ in which folder is primary and which folders are attached as additional folders.
 
-Then attach your source code. In the project settings, add the **parent folder that contains your source repositories** (for example `C:\unlimited\repositories`, with one subfolder per repository, named as the repository). Attach the parent folder, not a single repository: Cowork can only read what is attached. You can attach it now or later, but a folder attached after a session starts is only visible to new sessions. Without it, Cowork cannot read source code and `upgrade project` will say so.
+| Configuration | Primary folder | Additional folder | Use it for |
+|---|---|---|---|
+| **Knowledge Focus** | The **AI Ticket Assistant** project folder | Optional: the source folder that holds your local repositories | Investigating tickets and answering questions. Claude answers from the knowledge base first and reads code as needed. |
+| **General Code Focus** | The source folder that holds your local repositories | The **AI Ticket Assistant** project folder | Work across several repositories. Claude answers from the code first and uses the knowledge base for context. |
+| **Repository Focus** | One specific repository | The **AI Ticket Assistant** project folder | Work in one repository, including builds and commits. |
+
+The primary folder is the working directory. Claude Code reads the git state, runs commands, and resolves relative paths from it. Additional folders are readable and editable, but they are not the working directory.
+
+#### Create an environment
+
+1. Open the **Code** tab in the Claude app.
+2. Open the environment selector under the prompt box and select **New environment** at the bottom of the menu.
+3. Select the **Local** tab.
+4. Under **Folders**, add the folders for the configuration you chose (see the table above). Make sure the primary folder is the one the table lists.
+5. Select **Environment variables** and enter this line:
+
+   ```
+   CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1
+   ```
+
+6. Select **Done**, then **Create environment**.
+
+Name each environment so you can tell the configurations apart, for example "Knowledge", "Code - all repos", or "Code - Guarantors".
+
+To change an environment later, hover over it in the selector and click the gear icon. Only sessions started from an environment receive its variables, so start a new session after you change one.
+
+#### Why the environment variable is required
+
+By default, Claude Code does not load a `CLAUDE.md` file from an additional folder. It only grants file access. Setting `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD` to `1` makes Claude Code load the `CLAUDE.md` of each additional folder.
+
+The project's rules, skills index and repo index are in the `CLAUDE.md` of the **AI Ticket Assistant** folder. In the General Code Focus and Repository Focus configurations that folder is an additional folder, so without the variable Claude does not load those rules. In the Knowledge Focus configuration the variable is needed only if you attach the source folder. Set it in all three environments.
 
 ### Activating Claude for Chrome
 
@@ -35,61 +65,112 @@ To set it up:
 
 ### Initializing and Upgrading the Project
 
-Before doing anything else in a new local copy — and again after every pull from GitHub — say **"upgrade project."** It is not a skill: Claude reads the instructions for the platform you are in (`upgrade/cowork.md` or `upgrade/code.md`) from the project folder, so a pull always brings the current steps. Run it in both Cowork and Claude Code; each records the project version it last upgraded to in `local/user.md` and tells you when the other one is behind.
+Before you do anything else in a new local copy, and again after every pull from GitHub, say **"upgrade project."** It is not a skill. Claude reads the instructions from `upgrade/code.md` in the project folder, so a pull always brings the current steps.
 
-In Cowork, Claude asks for your Squad and Pod and records them, along with the location of your source code in `local/user.md`. It finds the source by looking at the folders attached to the project: it reports how many of the project's repos it can see, asks you to choose if more than one folder is attached, and warns if none is. Claude Code reads the recorded location, so it must stay accurate. Claude then packages the skills for you to save (saved skills load in both Cowork and Claude Code) and smoke-tests both Claude for Chrome and Splunk access so you know on day one whether those surfaces are actually working rather than finding out mid-investigation.
+Run it in a session started from any of the three environments described in "Setting Up Claude Code in the Claude App". **Knowledge Focus** is the usual choice, because the project folder is the primary folder there. In the other two configurations the project folder is an additional folder, so the `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD=1` variable must be set for Claude to find the instructions.
 
-In Claude Code, Claude only runs the one-time cleanups that apply to Code, such as removing personal copies of the skills from `~/.claude/skills/` after you approve. It never deletes through a symlink or junction.
+Claude does the following:
 
-If you set up before 2026-10-07, you previously ran "initiate project", which was a skill saved to your Claude account. That old skill still runs the old steps, so `upgrade project` will ask you to delete it (click Customize, select both Skills and Yours in the panel that opens, find `initiate-project`, and delete it), start a new Cowork session, and run `upgrade project` again.
+1. **Compares versions.** It compares the project version with the version last recorded in `local/user.md`. If the recorded version is blank or older, Claude runs the one-time cleanup steps for each release you have not yet applied.
+2. **Removes duplicate skills.** The project's skills are in the project's `.claude/skills/` folder. A copy with the same name in `~/.claude/skills/` loads as a duplicate and can be older. Claude lists such copies and deletes them only after you approve. It never deletes through a symlink or junction. If a skill list entry named `anthropic-skills:{name}` matches a project skill, Claude tells you to delete it in the Claude settings (**Customize**, then **Skills**), because it cannot do this from Claude Code. Restart Claude Code after any deletion so the skill list reloads.
+3. **Checks the environment.** It reports pass or fail, with the fix, for each of these:
+   - the project root;
+   - whether a source folder is attached;
+   - whether the `CLAUDE_CODE_ADDITIONAL_DIRECTORIES_CLAUDE_MD` variable is in effect.
+4. **Records who you are and where your source is.** Claude asks for your Squad and Pod, or asks whether the recorded values are still correct. It records them in `local/user.md` with the location of your source code. It reports how many of the project's repositories it finds in the source folder. It warns if the source folder is a single repository instead of the parent folder. Later sessions read this location, so it must stay accurate. `local/user.md` is not committed to Git.
+5. **Tests Claude in Chrome and Splunk.** It runs one small check of each, so you know on day one whether they work instead of finding out during an investigation.
+6. **Summarizes.** It lists what passed, what failed, and what you need to do next.
 
-Skipping this isn't fatal — most things will still prompt you for what they need — but your Squad and Pod may be unset (which affects squad- and pod-scoped defaults elsewhere in the project), and a broken Chrome or Splunk connection won't surface until you happen to hit it.
+Claude records the project version in `local/user.md` only when every cleanup step has finished and none is waiting on you. If a step is waiting on you, say "upgrade project" again after you finish it.
+
+If you set up before 2026-10-07, you previously ran "initiate project", which was a skill saved to your Claude account. That skill still runs the old steps. Delete it (click **Customize**, select both **Skills** and **Yours** in the panel that opens, find `initiate-project`, and delete it), start a new session, and run `upgrade project` again.
+
+Skipping this is not fatal, and most things still prompt you for what they need. However, your Squad and Pod may be unset, which affects squad- and pod-scoped defaults elsewhere in the project. A broken Chrome or Splunk connection will not show up until you use it.
 
 ### Targeting a Repo
 
-Before asking about a specific service, tell Claude which repo you're working in: **"activate repo {name}."** You can use the repo's folder name or its plain nickname (e.g. "Guarantors" or "snowdrop-guarantors-be" both work) — Claude resolves it against the repo index in `CLAUDE.md` and asks rather than guesses if the name is ambiguous or unrecognized.
+You usually do not need to tell Claude which repo you are working in. Claude chooses the repos that apply from the context. It does this when you start a ticket that refers to a repo or a service, and when you ask a question that points to one. Claude resolves the name against the repo index in `CLAUDE.md`.
+
+To force this explicitly, say **"activate repo {name}."** Use it when you want to be certain a repo is in scope, or when Claude chose the wrong repo or missed one. You can use the repo's folder name or its plain nickname (for example "Guarantors" or "snowdrop-guarantors-be"). If the name is ambiguous or not recognized, Claude asks instead of guessing.
 
 A few things worth knowing:
 - Once a repo is activated, it stays in scope for the rest of the conversation.
-- Activating a second repo adds it alongside the first rather than replacing it — you can have more than one active at a time.
-- You can activate several repos, or a whole squad's or pod's worth, in one request — e.g. "activate repo Guarantors and Resources", "activate repos for all squad Herbert repos" or "activate repos for all pod Quality repos." Pod activation uses each repo's primary pod only.
-- When you start a ticket that seems to be talking about a repo or you even ask a question that seem to indicate one, the system will automatically activate that repo. So activate repo isn't always needed but it does provide a confirmed way to insure a repo has been included.
+- Activating a second repo adds it alongside the first. More than one repo can be active at a time.
+- You can activate several repos, or a whole squad's or pod's repos, in one request. Examples: "activate repo Guarantors and Resources", "activate repos for all squad Herbert repos", "activate repos for all pod Quality repos". Pod activation uses each repo's primary pod only.
 
 ### Starting a New Ticket
 
-Say **"start ticket UF-XXXXX"**, or just begin investigating a ticket number that doesn't have a folder yet. Claude pulls the ticket's title, link, and current status from Jira and proposes a category:
+Say **"start ticket UF-XXXXX"**, or just begin investigating a ticket number that does not have a folder yet. Claude does the following:
 
-- **Diagnostics/Analysis** (the default) — a reported symptom, no fix assumed yet.
-- **Speckit** — the ticket is already in GitHub Spec Kit's format.
-- **Feature** — the ticket already states the solution to build.
+1. Looks up the ticket in Jira and takes its title, link and status.
+2. Proposes a category and asks you to confirm it before doing anything category-specific:
+   - **Diagnostics/Analysis** (the default): a reported symptom, with no fix assumed yet.
+   - **Speckit**: the ticket is already in GitHub Spec Kit's format.
+   - **Feature**: the ticket already states the solution to build.
+3. Creates the ticket's folder, `tickets/{TICKET-ID}/`, and attributes the session's telemetry to the ticket.
 
-Claude proposes one of these based on the ticket's description and asks you to confirm before doing anything category-specific — this determines how the rest of the flow below behaves.
+If the conversation already contains unrelated work, Claude asks whether you want a new session for the ticket.
 
-Starting a ticket also creates its own folder — `tickets/{TICKET-ID}/` — and everything related to that investigation lives there from this point on, not just in the conversation. At the top level, that folder holds a running summary of the investigation, a place for downloaded evidence like Cosmos and Splunk exports, and, once Claude Code gets involved, its own notes from the code side. That folder, not the chat, is what you or anyone else comes back to later.
+The ticket folder holds the investigation's running summary, downloaded evidence and code notes. That folder, not the chat, is what you or anyone else comes back to later. If the folder already exists, Claude treats the request as a resume. See "Switching Environments and Resuming a Ticket".
+
+### Ways to Start Work
+
+| You want to | Say | Environment to use | What happens |
+|---|---|---|---|
+| Investigate a reported symptom | "start ticket UF-XXXXX" and confirm **Diagnostics/Analysis** | Knowledge Focus | Claude offers to capture the page linked from the ticket, then follows the diagnostic flow. |
+| Build a change the ticket already describes | "start ticket UF-XXXXX" and confirm **Feature** | Repository Focus for the service you are changing | Claude goes straight to scoping and implementation. |
+| Review and implement a ticket written in Spec Kit format | "start ticket UF-XXXXX" and confirm **Speckit** | Repository Focus for the service you are changing | The Spec Kit commands run in Claude Code. Claude reviews the spec, plan and tasks. |
+| Continue a ticket that has a folder | "resume ticket UF-XXXXX" | The one that suits the next piece of work | Claude reads the folder, recaps it, and continues. |
+| Ask a question with no ticket | Ask it. Say "activate repo {name}" to force a repo into scope. | Any | Claude answers from the knowledge base or the code, depending on the environment. |
+
+A ticket can change category part-way. The usual case is Diagnostics becoming a Feature once the cause is found. Say so plainly ("let's fix this by...", "let's turn this into a feature"). Claude asks you to confirm the new category and logs the change in `summary.md`. It does not infer the change from tone.
 
 ### Working a Diagnostic Ticket
 
-Once a Diagnostics/Analysis ticket is confirmed, Claude looks for an application link (`sd.unlimitedfinancials.*`) on the ticket itself and, if it finds one, offers to capture that page directly — no copy/paste needed, and it'll ask you to log in if the page requires it. If no such link exists, or the page you need depends on unsaved state a fresh navigation can't reproduce (a filter or search result you've already built up by hand), Claude falls back to the Claude for Chrome side-panel prompt described above.
+Once a Diagnostics/Analysis ticket is confirmed, Claude looks for an application link (`sd.unlimitedfinancials.*`) on the ticket itself. If it finds one, it offers to capture that page directly. You do not need to copy and paste, and Claude asks you to log in if the page requires it. If no such link exists, or the page you need depends on unsaved state that a fresh navigation cannot reproduce (a filter or search result you built by hand), Claude falls back to the Claude for Chrome side-panel prompt described above.
 
-From there, the typical flow follows the steps laid out in the Introduction document: extracting the actual problem statement, collecting the environment/organization/entity references, pulling Cosmos/Splunk/API data, checking it against business logic and known failures, correcting the code if a fix is needed, and drafting the two-part Jira comment. Everything found along the way — evidence, analysis, conclusions — is retained automatically in the ticket's own folder, so none of it depends on the conversation surviving.
-
-### Using Claude Code
-
-Start Claude Code (desktop app) in this project's folder ("AI Ticket Assistant"). It then works the same way Cowork does, using the same skills: skills saved to your Claude account load in both products.
-
-1. Run **"upgrade project"** once in Cowork and save the skill cards it presents, then run it once in Claude Code.
-2. Start Claude Code in this folder and run `/skills` to confirm the `anthropic-skills:` entries are listed (the desktop app lists them; the terminal may not, so invoke one to check).
-3. After pulling an update that adds or changes a skill, run **"upgrade project"** in Cowork again and save the re-presented cards.
-
-To bring a Cowork project into a Claude Code session that was started in another folder, say **"activate cowork {name}"**, or just **"activate cowork"** to return to the last one. The first time, Claude asks for the full path of your Cowork projects folder and saves it in your global `~/.claude/CLAUDE.md` (running "upgrade project" in Claude Code can record it too). That file is separate from `local/user.md`: the global file is read before Claude knows where any project is, while `local/user.md` (squad, pod, source path, upgrade versions) sits inside this project and is found only after the project is known. After "activate cowork", "activate repo {name}" works against the activated project. See "activate cowork" in the How to Use document.
-
-This was checked in the desktop app and the terminal. In the terminal, `/skills` did not list the account skills, but they loaded when invoked. The IDE extensions have not been checked.
+From there, the flow follows the steps in the Introduction document. Everything found along the way is kept in the ticket's folder, so none of it depends on the conversation surviving.
 
 ### Working a Feature Ticket
 
-Feature tickets keep the Cowork side light on purpose — there's no Chrome-capture prompt, since the actual work happens in Claude Code. Start or confirm the ticket as **Feature** (in Cowork or in Claude Code), then continue in Claude Code started in this folder:
+A Feature ticket already states the solution, so there is nothing to investigate and no page-capture step. Work in a Repository Focus environment for the service you are changing:
 
-1. Say **"activate repo {name}"** for the service you're changing.
-2. Say **"resume ticket UF-XXXXX."** Claude Code reads the ticket's `summary.md` and `downloads/` directly, does the implementation work, and writes its own notes into `code-analysis/`.
+1. Start the session from that environment.
+2. Say **"start ticket UF-XXXXX"** and confirm **Feature**, or say **"resume ticket UF-XXXXX"** if the ticket has a folder.
+3. Claude scopes and implements the change, and writes its notes into `code-analysis/`.
 
-Anything Claude Code finds is visible back in Cowork the next time that ticket is opened there, and vice versa. Either side can write `summary.md` and `downloads/`; only Claude Code writes `code-analysis/`. Work a ticket in one place at a time.
+If a change affects what an API test checks, Claude updates the affected API tests as part of the same work and says which ones changed.
+
+### Working a Speckit Ticket
+
+A Speckit ticket is being run through GitHub Spec Kit. Claude recognizes it when the Jira description is already in the `/specify` output shape (a Feature Specification, Acceptance Scenarios, FR-XXX requirements and `[NEEDS CLARIFICATION]` markers), or when you say so.
+
+Work in a Repository Focus environment for the service you are changing. The Spec Kit commands (`/specify`, `/clarify`, `/plan`, `/tasks`, `/implement`) run in Claude Code. Claude's role is research and review:
+- flag gaps in `spec.md`, `plan.md` and `tasks.md`;
+- help resolve the `[NEEDS CLARIFICATION]` markers;
+- keep the ticket's `summary.md` current.
+
+There is no page-capture step.
+
+### Switching Environments and Resuming a Ticket
+
+A ticket often needs more than one environment. For example, you investigate in Knowledge Focus, then move to Repository Focus once the fix is clear. You can also move the other way, from a repository back to the knowledge base. The primary folder is set when a session starts, so you switch by starting a new session from the other environment. The ticket folder carries the work across.
+
+1. **In the current session, say "log progress."** Claude writes a dated entry that stands on its own: current status, what was found, what was ruled out, open questions and the next step. It ends with a line giving the real ticket id and the command to continue. Evidence is saved in `downloads/` first.
+2. **Start a new session** from the environment you want. Select it in the environment selector under the prompt box.
+3. **Say "resume ticket UF-XXXXX."** If the new environment's primary folder is a repository, you can also say "activate repo {name}", although Claude usually picks the repo from the ticket.
+
+Claude reads the ticket folder and recaps where the ticket stands before it continues. It adds a new dated section for the session and never rewrites earlier entries.
+
+Rules for working across sessions:
+- Work a ticket in one session at a time. A second session does not see the first one's unsaved context, and both append to `summary.md`.
+- Any session may write `summary.md` and `downloads/`. Notes about code go in `code-analysis/`.
+- When the project folder is an additional folder, Claude gives you file paths built from that session's project root. Use the path it gives you now, not one from an earlier session.
+
+Resuming also works when you come back days later, or when someone else picks up the ticket from the same project copy.
+
+### Closing a Ticket
+
+Say **"close out UF-XXXXX"** when the ticket is resolved. Claude adds a final dated entry and sets the status to `Resolved`. It does not delete the folder, so you can reopen the ticket with "resume ticket".
+
+When you ask for the Jira comments, Claude drafts one comment with a summary line, a Business Summary and a Technical Summary. After it is posted, Claude drafts a second, separate "Testing" comment. Claude posts each only after you approve it. See "draft a Jira comment" and "post it" in the How to Use document.

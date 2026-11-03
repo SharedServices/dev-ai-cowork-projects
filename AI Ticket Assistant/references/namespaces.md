@@ -47,6 +47,8 @@ Squad and pod ownership is kept only in root `CLAUDE.md`'s `## Repos` table (and
 
 **Cosmos database name vs Splunk namespace can differ in dashing.** Confirmed exception: Charge assemblies is `snowdrop-charge-assemblies` in Splunk but `snowdrop-chargeassemblies` (no dash before "assemblies") as a Cosmos database name (2026-07-07). Don't assume the two are always byte-identical — verify the Cosmos database name in Data Explorer rather than reusing the Splunk namespace string as-is.
 
+**Audit log:** its Splunk `namespace` is `snowdrop-audit-log` (seen on `app`). `snowdrop-audit-log-api` is not a value in that field, so excluding it from a search does not remove audit log lines.
+
 | Service / area            | namespace value                    |
 |---------------------------|------------------------------------|
 | Activities                | `snowdrop-activities`              |

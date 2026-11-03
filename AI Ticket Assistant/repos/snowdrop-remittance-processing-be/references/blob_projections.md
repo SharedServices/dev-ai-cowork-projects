@@ -41,3 +41,14 @@ One blob per catalog, per organization. Each holds `Elements`, a dictionary of c
 - **Projection:** `Snowdrop.RemittanceProcessing.Runtime.Contracts.Catalogs.CatalogCacheProjection`
 - **Account:** standard
 - **Path template:** `snowdrop-remittanceprocessing/Organizations/{organizationId}/Snowdrop-RemittanceProcessing-Runtime-Contracts-Catalogs-CatalogCacheProjection/modifiers.json`
+
+---
+
+## The credit card payments blob
+
+One blob per remittance that has had an insurance credit card payment (taken in the Remittance workspace Payments card). Holds the payment string response: `Data.Payments[]` with `PaymentId`, `PaymentSpecificationId`, `StashDate`, `StashUserId`, `LedgerDate`, `DepositDate`, `DepositAmount`, `CardLogo`, `LastFour`, `FeeAmount`, and `Data.Refunds[]`. The `PaymentSpecificationId` is the entity id of the payment event stream (`snowdrop-payments->{organizationId}->payment-specification->{paymentSpecificationId}`, database `snowdrop`, container `snowdrop-payments-events`; see `repos/snowdrop-payments-be/references/cosmos_query.md`). Confirmed by download on app.
+
+- **Called:** the credit card payments blob; the ICC payments blob; the insurance credit card payments blob
+- **Projection:** `Snowdrop.RemittanceProcessing.Contracts.InsuranceCreditCards.RemittanceICCPayments`
+- **Account:** standard
+- **Path template:** `snowdrop-remittanceprocessing/Organizations/{organizationId}/Snowdrop-RemittanceProcessing-Contracts-InsuranceCreditCards-RemittanceICCPayments/{remittanceId}.json`

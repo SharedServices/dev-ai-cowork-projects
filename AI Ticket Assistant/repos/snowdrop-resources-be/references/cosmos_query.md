@@ -29,11 +29,13 @@ Database: `snowdrop-resources` (dedicated). Container: `snowdrop-resources-event
 
 ## Look up a company's monthly closes
 
-Cross-partition filter on `Data.CompanyId`, with a `StreamId LIKE` prefix filter (same namespace/org/aggregate-type segments, wildcard the entity) to at least scope the scan to one org's monthly-close records instead of the whole container:
+Cross-partition filter on `Data.CompanyId`, with a `StreamId` prefix filter (same namespace/org/aggregate-type segments) to at least scope the scan to one org's monthly-close records instead of the whole container. Use `STARTSWITH` and no `ORDER BY`; sort the rows on the client:
 ```sql
-SELECT * FROM c
-WHERE c.StreamId LIKE "snowdrop-resources->{organizationId}->monthly-close->%"
+SELECT c.EventNumber, c.ts, c.Data.CompanyId, c.Data.Year, c.Data.Month, c.Data.ClosedOn
+FROM c
+WHERE STARTSWITH(c.StreamId, "snowdrop-resources->{organizationId}->monthly-close->")
+  AND c.EventType = "MonthClosed"
   AND c.Data.CompanyId = "{companyId}"
-ORDER BY c.Data.Year ASC, c.Data.Month ASC
 ```
+Through the Azure MCP tool, `LIKE` or `STARTSWITH` with `ORDER BY c.Data.Year` returned status 400 (`Value cannot be null (Parameter 'utf8Json')`); the same filter without `ORDER BY` worked on `app`. To compare companies, use `c.Data.CompanyId IN ("{companyA}", "{companyB}")`. The company's cutoff is the first day of the month after its most recent closed month.
 `MonthClosed` events can be closed live (as of the close date) or retroactively in a batch (seen: five months closed within the same minute, ~8 months after the fact) — check `c.ts`/`c._ts` (write time) against `Data.Year`/`Data.Month` rather than assuming a close happened when its period ended.

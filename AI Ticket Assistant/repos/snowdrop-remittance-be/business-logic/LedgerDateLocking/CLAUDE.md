@@ -34,6 +34,7 @@ invoice UFHMSD102905) was repeatedly reworked and ultimately discarded. The divi
 hard-closed through July 2022, leaving that check unable to reach Posted.
 
 ### Where to look for more
+- `../LedgerDateCalculation/CLAUDE.md` — how the ledger date is calculated and which actions recalculate it.
 - `../../references/cosmos_query.md` — the mechanical detail (which event fires `LedgerDate`,
   `PostingStatus` enum values). This entry is the business-rule interpretation of that data, true
   independent of which system it's read from.
