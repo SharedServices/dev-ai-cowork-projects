@@ -83,7 +83,7 @@ This project folder is the knowledge surface Claude Code works from. This `CLAUD
 Shared (scan these):
 
 - **`CLAUDE.md`** — this file: the layout map plus the workspace operating rules below.
-- **`references/`** — published, tracked lookup docs shared across repos: `namespaces.md`, `org-lookup.md`. Never hand-edited in place — see `documents/project-maintenance.md`. Per-repo reference material (including `Events.md`, ground truth for a repo's events — a curated skill summary being silent on something doesn't mean it doesn't exist) lives inside that repo's own `repos/{repo}/references/` instead, not here.
+- **`references/`** — published, tracked lookup docs shared across repos: `namespaces.md`, `org-lookup.md`, `api-tests-prerequisites.md` (what must be in place to run API tests locally, such as the VPN; read it before running any API test). Never hand-edited in place — see `documents/project-maintenance.md`. Per-repo reference material (including `Events.md`, ground truth for a repo's events — a curated skill summary being silent on something doesn't mean it doesn't exist) lives inside that repo's own `repos/{repo}/references/` instead, not here.
 - **`repos/`** — per-repo folders (`CLAUDE.md`, `README.md`, `references/`, `business-logic/`, `known-failures/`). See `documents/project-maintenance.md` before creating a new one.
 - **`business-logic/`** — cross-repo (or not-yet-homed) business facts; see `business-logic/CLAUDE.md`. Not covered by `activate-repo` — check separately.
 - **`known-failures/`** — cross-repo (or not-yet-homed) known-failure patterns; see `known-failures/CLAUDE.md`. Empty so far.

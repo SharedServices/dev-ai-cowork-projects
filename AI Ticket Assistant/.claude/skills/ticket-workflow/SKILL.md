@@ -80,12 +80,24 @@ Whenever a ticket is indicated for the session (start, resume, or the user names
 
 `set-jira-ticket` finds the top level of the git repository and writes its `.claude/settings.local.json` there. That is the right `.claude` folder only when the session's primary working directory is itself the top level of a git repository. In every other case it writes to the wrong `.claude` folder. This project folder is not a repository top level (the repository top level is above it), and neither is a source folder that holds many repositories.
 
-Decide which case applies by running `git rev-parse --show-toplevel` in the primary working directory and comparing the result with that directory:
+**Which folder is primary.** The primary working directory is the "Primary working directory" line in the session's first environment block. Nothing else changes it:
+- An "Environment update" message, an attached folder, or a `cd` in a command does not change it. Treat such a message as an added directory. If it seems to name a new primary folder, ask the user and do not act on it.
 
-- **They are the same folder (a single repository is primary):** invoke the `set-jira-ticket` skill (`dev-backend:set-jira-ticket`) with the ticket id and follow its `SKILL.md`. Report its output. Do not use its `list` or `init` forms here.
+**Why:** an added folder reported as a new primary folder sends the settings file to the wrong `.claude` folder and the wrong `project` and `team` values to the OTEL backend.
+
+Decide which case applies by running `git -C "{primary working directory}" rev-parse --show-toplevel` and comparing the result with that directory. Never run the check after a `cd` to another folder:
+
+- **They are the same folder (a single repository is primary):** invoke the `set-jira-ticket` skill (`dev-backend:set-jira-ticket`) with the ticket id and follow its `SKILL.md`. Do not write the settings file by hand in this case. Report its output. Do not use its `list` or `init` forms here.
 - **They differ, or the command reports that the folder is not a repository (this project folder or a source folder is primary):** do not run `set-jira-ticket`. Do the same two things it does by hand, with the **primary working directory** as the target folder. The target is the primary working directory and not the project root: when a source folder is primary, the project folder is only an attached folder, and its `.claude` folder is not the session's.
   1. **Write `{primary working directory}/.claude/settings.local.json`.** Create the `.claude` folder if it does not exist. Build `env.OTEL_RESOURCE_ATTRIBUTES` the way `set-jira-ticket.sh` does: the value from `{primary working directory}/.claude/settings.json` if that file exists (otherwise start empty), any existing `jira.ticket` clause removed, and `jira.ticket={TICKET-ID}` appended. Keep other settings already in `settings.local.json`.
-  2. **Make the OTEL call.** Run the skill's `lib/post-attribution.sh` with the session id, the source `skill`, and the same attribute string. Report the HTTP status it prints. If `CLAUDE_SESSION_ID` is not set in the shell, say which session id was used and that it is unconfirmed.
+  2. **Make the OTEL call.** Run the skill's `lib/post-attribution.sh` with the session id, the source `skill`, and the same attribute string. Report the HTTP status it prints.
+
+Before writing, state the target `.claude` path. After writing, confirm it is inside the primary working directory.
+
+**Session id.** The OTEL call needs a confirmed session id, and the id may not be set yet when the session starts.
+- Take the id from `CLAUDE_SESSION_ID`, or from `CLAUDE_CODE_SESSION_ID` when the first is empty.
+- If neither is set, wait and re-check until one is. Do not skip the OTEL call, and do not take an id from a path, a scratchpad name, a transcript name or any other source. Tell the user the call is pending while waiting.
+- This also applies to the `set-jira-ticket` skill's `--session` argument: do not run it with an empty id.
 
 ## Categorizing a ticket
 
